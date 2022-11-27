@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include "libft/includes/libft.h"
+#include "parsing.h"
 
 typedef enum s_state{Noquote = 0, Quote = 1, SingleQuote = 2} t_state;
 
