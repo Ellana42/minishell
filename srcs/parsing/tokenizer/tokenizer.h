@@ -1,5 +1,8 @@
-#include <stdio.h>
-#include "../../../libft/includes/libft.h"
+#ifndef TOKENIZER_H
+# define TOKENIZER_H
+
+# include <stdio.h>
+# include "../../../libft/includes/libft.h"
 
 typedef enum s_state{Noquote = 0, Quote = 1, SingleQuote = 2} t_state;
 
@@ -22,8 +25,8 @@ int tokenizer_push_string(t_tokenizer *tokenizer);
 char tokenizer_get_char(t_tokenizer *tokenizer);
 char tokenizer_get_next_char(t_tokenizer *tokenizer, int s);
 int tokenizer_eol(t_tokenizer *tokenizer);
-int tokenize_noquote(t_tokenizer *tokenizer);
-int tokenize(t_tokenizer *tokenizer);
 void reset_acc(t_tokenizer *tokenizer);
 int tokenizer_is_empty_acc(t_tokenizer *tokenizer);
 int tokenizer_accumulate(t_tokenizer *tokenizer);
+
+#endif
