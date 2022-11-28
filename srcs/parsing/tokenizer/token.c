@@ -20,6 +20,7 @@ int	token_init(t_token *token, t_token_type type, char *str)
 	{
 		size = ft_strlen(str);
 		str_cpy = (char *)malloc(sizeof(char) * (size + 1));
+		ft_strlcpy(str_cpy, str, size + 1);
 		token->str = str_cpy;
 	}
 	return (0); // TODO errors

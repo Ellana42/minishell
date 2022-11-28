@@ -14,7 +14,7 @@ t_token	*token_alloc(void);
 int		token_init(t_token *token, t_token_type type, char *str);
 void	token_dispose(t_token *token);
 void	token_free(t_token *token);
-/* void	token_destroy(t_token *token); */
 void	token_destroy(void *token);
+void	token_print(t_token *token);
 
 #endif

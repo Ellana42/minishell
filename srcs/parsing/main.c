@@ -17,6 +17,7 @@ int	main(void)
 	}
 	if (!tokenizer_is_empty_acc(tokenizer))
 		tokenizer_push_string(tokenizer);
+	tokenizer_print_tokens(tokenizer);
 	tokenizer_dispose(tokenizer);
 	tokenizer_free(tokenizer);
 }

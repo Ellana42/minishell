@@ -33,5 +33,6 @@ int tokenizer_eol(t_tokenizer *tokenizer);
 void reset_acc(t_tokenizer *tokenizer);
 int tokenizer_is_empty_acc(t_tokenizer *tokenizer);
 int tokenizer_accumulate(t_tokenizer *tokenizer);
+void	tokenizer_print_tokens(t_tokenizer *tokenizer);
 
 #endif
