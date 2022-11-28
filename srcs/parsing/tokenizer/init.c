@@ -21,7 +21,8 @@ int	tokenizer_init(t_tokenizer *tokenizer, char *cmd)
 	tokenizer->cmd_i = 0;
 	tokenizer->acc = (char *)malloc(sizeof(char) * (tokenizer->size + 1));
 	reset_acc(tokenizer);
-	tokenizer->state = Noquote;
+	tokenizer->acc_size = tokenizer->size;
+	tokenizer->state = NoQuote;
 	tokenizer->tokens = ft_lstinit();
 	return (0); // errors
 }

@@ -26,3 +26,22 @@ int	tokenizer_accumulate(t_tokenizer *tokenizer)
 	tokenizer_move_accumulator(tokenizer);
 	return (0);
 }
+
+int	tokenizer_acc_concat(t_tokenizer *tokenizer, char *str)
+{
+	char	*tmp;
+	size_t len_acc;
+
+	if (!str)
+		return (0);
+	len_acc = ft_strlen(tokenizer->acc);
+	tokenizer->acc_size += ft_strlen(str);
+	tmp = (char *)malloc(sizeof(char) * (tokenizer->acc_size + 1)); // TODO check malloc
+	ft_strlcpy(tmp, tokenizer->acc, len_acc + 1);	
+	free(tokenizer->acc);
+	ft_strlcat(tmp, str, tokenizer->acc_size + 1);
+	tokenizer->acc = tmp;
+	tokenizer->acc_i += ft_strlen(str);
+	tokenizer->acc_ptr = &(tokenizer->acc[tokenizer->acc_i]);
+	return (0);
+}

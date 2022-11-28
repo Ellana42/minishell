@@ -5,14 +5,20 @@
 # include "../../../libft/includes/libft.h"
 # include "token.h"
 
-typedef enum s_state{Noquote = 0, Quote = 1, SingleQuote = 2} t_state;
+// NoQuote -> Quote, NoQuoteV, SingleQuote
+// Quote -> NoQuote, QuoteV
+// SingleQuote -> NoQuote
+// NoQuoteV -> NoQuote
+// QuoteV -> Quote
+typedef enum s_state{NoQuote = 0, Quote = 1, SingleQuote = 2, NoQuoteV = 3, QuoteV = 4} t_state;
 
 typedef struct s_tokenizer{
 	char *command;
-	int	size;
+	size_t	size;
 	char *cmd_ptr;
 	int	cmd_i;
 	char *acc;
+	size_t acc_size;
 	char *acc_ptr;
 	int acc_i;
 	t_state state;
@@ -34,5 +40,6 @@ void reset_acc(t_tokenizer *tokenizer);
 int tokenizer_is_empty_acc(t_tokenizer *tokenizer);
 int tokenizer_accumulate(t_tokenizer *tokenizer);
 void	tokenizer_print_tokens(t_tokenizer *tokenizer);
+int	tokenizer_acc_concat(t_tokenizer *tokenizer, char *str);
 
 #endif
