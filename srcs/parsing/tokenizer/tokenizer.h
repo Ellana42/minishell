@@ -2,7 +2,8 @@
 # define TOKENIZER_H
 
 # include <stdio.h>
-# include "../../../libft/srcs/libft.h"
+# include "../../../libft/includes/libft.h"
+# include "token.h"
 
 typedef enum s_state{Noquote = 0, Quote = 1, SingleQuote = 2} t_state;
 
@@ -15,6 +16,7 @@ typedef struct s_tokenizer{
 	char *acc_ptr;
 	int acc_i;
 	t_state state;
+	t_list **tokens;
 } t_tokenizer;
 
 t_tokenizer	*tokenizer_alloc(void);

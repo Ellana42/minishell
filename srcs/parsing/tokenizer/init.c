@@ -22,6 +22,7 @@ int	tokenizer_init(t_tokenizer *tokenizer, char *cmd)
 	tokenizer->acc = (char *)malloc(sizeof(char) * (tokenizer->size + 1));
 	reset_acc(tokenizer);
 	tokenizer->state = Noquote;
+	tokenizer->tokens = ft_lstinit();
 	return (0); // errors
 }
 
@@ -29,6 +30,8 @@ void tokenizer_dispose(t_tokenizer *tokenizer)
 {
 	free(tokenizer->command);
 	free(tokenizer->acc);
+	ft_lstclear(tokenizer->tokens, &token_destroy); // TODO cast (void *)token_destroy(void *)
+	free(tokenizer->tokens);
 }
 
 void tokenizer_free(t_tokenizer *tokenizer)
