@@ -22,3 +22,13 @@ int	tokenizer_push_string(t_tokenizer *tokenizer)
 	/* printf("string : %s\n", tokenizer->acc->acc); */
 	return (0);
 }
+
+int	tokenizer_push_eol(t_tokenizer *tokenizer)
+{
+	t_token	*token;
+
+	token = token_alloc();
+	token_init(token, Eol, NULL);
+	ft_lstadd_back(tokenizer->tokens, ft_lstnew((void *)token));
+	return (0);
+}

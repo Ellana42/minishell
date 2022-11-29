@@ -44,9 +44,11 @@ int	tokenizer_push_out(t_tokenizer *tokenizer);
 int	tokenizer_push_outa(t_tokenizer *tokenizer);
 int	tokenizer_push_in(t_tokenizer *tokenizer);
 int	tokenizer_push_ina(t_tokenizer *tokenizer);
+int	tokenizer_push_eol(t_tokenizer *tokenizer);
 int	tokenize_noquotev(t_tokenizer *tokenizer);
 int	tokenizer_accumulate_var(t_tokenizer *tokenizer);
 void reset_acc_var(t_tokenizer *tokenizer);
 int	tokenizer_is_empty_acc_var(t_tokenizer *tokenizer);
+t_token	*tokenizer_get_token(t_tokenizer *tokenizer, int i);
 
 #endif
