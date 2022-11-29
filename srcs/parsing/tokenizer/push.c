@@ -8,7 +8,7 @@ int	tokenizer_push_pipe(t_tokenizer *tokenizer)
 	token_init(token, Pipe, NULL);
 	ft_lstadd_back(tokenizer->tokens, ft_lstnew((void *)token));
 
-	printf("pipe\n");
+	/* printf("pipe\n"); */
 	return (0);
 }
 
@@ -20,6 +20,6 @@ int	tokenizer_push_string(t_tokenizer *tokenizer)
 	token_init(token, Str, tokenizer->acc->acc);
 	ft_lstadd_back(tokenizer->tokens, ft_lstnew((void *)token));
 
-	printf("string : %s\n", tokenizer->acc->acc);
+	/* printf("string : %s\n", tokenizer->acc->acc); */
 	return (0);
 }
