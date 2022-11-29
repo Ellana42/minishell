@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:13:54 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/29 16:43:01 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:44:25 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	redirecting_stdin(t_command *data)
 		file_in = dup2(file, STDIN_FILENO);
 
 		close(file);
+		
 	}
 }
 
