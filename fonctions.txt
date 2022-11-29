@@ -1,0 +1,21 @@
+-----------------------------------------------------------------------------------------------------
+int dup2(int oldfd, int newfd);
+
+Transforme newfd en une copie de oldfd et renvoie le nouveau fd, ou (-1) si echec 
+(dans ce ca errno contient le code d'erreur).
+
+- Si oldfd pas valide --> appel echoue et newfd n'est pas close
+- Si oldfd valide et que newfd a la meme valeur que oldfd -->dup2() ne fait rien et renvoie newfd
+
+-----------------------------------------------------------------------------------------------------
+int execve(const char *file, char *const argv[], char *const envp[]);
+
+Execute un programme depuis notre programme actuel.
+Le processus existant est remplacé par le nouveau appelé.
+
+- pathname : path de la commande qu’on veut executer
+- argv[] : arguments possibles de la commande
+- envp[] : pointeur vers les variables d’environnement de notre ordi
+
+Ne retourne rien si succes, sinon (-1)
+
