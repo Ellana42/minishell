@@ -8,13 +8,6 @@ OBJ_PATH = obj/
 SRC		= pipex.c \
 		paths.c \
 		utils.c \
-		ft_split.c \
-		ft_strdup.c \
-		ft_strjoin.c \
-		ft_strlcpy.c \
-		ft_strlen.c \
-		ft_strnstr.c \
-		ft_substr.c \
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)
