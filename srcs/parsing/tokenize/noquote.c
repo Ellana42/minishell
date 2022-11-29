@@ -31,6 +31,18 @@ int	tokenize_noquote(t_tokenizer *tokenizer)
 		tokenizer_move_cursor(tokenizer);
 		return (0);
 	}
+	if (tokenizer_get_char(tokenizer) == '"')
+	{
+		tokenizer->state = Quote;
+		tokenizer_move_cursor(tokenizer);
+		return (0);
+	}
+	if (tokenizer_get_char(tokenizer) == '\'')
+	{
+		tokenizer->state = SingleQuote;
+		tokenizer_move_cursor(tokenizer);
+		return (0);
+	}
 	if (tokenizer_get_char(tokenizer) == '|' && tokenizer_is_empty_acc(tokenizer))
 	{
 		tokenizer_push_pipe(tokenizer);
