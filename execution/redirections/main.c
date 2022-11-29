@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:13:54 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/29 16:44:25 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/29 17:00:12 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	redirecting_stdin(t_command *data)
 		file_in = dup2(file, STDIN_FILENO);
 
 		close(file);
-		
 	}
 }
 
@@ -76,6 +75,29 @@ int	redirecting_stdout(t_command *data)
 
 		file_out = dup2(file, STDOUT_FILENO); // file_out = prends la place de la stdout
 											// si on printf() ca s'affichera dans notre file_out !
+
+		close(file);
+	}
+}
+
+int	redirecting_stdout_append(t_command *data)
+{
+	int	pid;
+	int	file;
+	int	file_out_append;
+	pid = fork();
+
+	if (pid == -1)
+		return (1);
+
+	if (pid == 0)
+	{
+		file = open("file.txt", O_CREAT | O_WRONLY | O_APPEND, 0777);
+
+		if (file == 1)
+			return (2);
+
+		file_out_append = dup2(file, STDOUT_FILENO);
 
 		close(file);
 	}

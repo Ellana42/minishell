@@ -31,3 +31,13 @@ Si pas de n, rediriger sur sortie standard
 
 Si le fichier mot n'existe pas --> creation (et donc creation d'un fd)
 Sinon il est ecrase pour etre un fichier vide apres avoir ete ouvert
+
+-------------------------------------------------------------------------------------------------------
+Rediriger la sortie en mode append (ajoute) (>>)
+
+[n] >> mot
+
+Provoque l'ouverture en lecture du fichier mot.
+Le fichier est ouvert comme si open() etait call avec le O_APPEND
+Cree le fichier s'il n'existe pas
+
