@@ -13,6 +13,8 @@ sortie d'erreur (2) (stderr)
 
 Si echec ouverture/creation fichier --> echec redirection
 
+Lorsqu'on launch/cree un processus, Linux va ouvrir un certain descripteur de fichier pour nous
+
 -------------------------------------------------------------------------------------------------------
 Rediriger la sortie (>)
 
@@ -20,5 +22,5 @@ Rediriger la sortie (>)
 
 Si pas de n, rediriger sur sortie standard
 
-Si le fichier mot n'existe pas --> creation
+Si le fichier mot n'existe pas --> creation (et donc creation d'un fd)
 Sinon il est ecrase pour etre un fichier vide apres avoir ete ouvert
