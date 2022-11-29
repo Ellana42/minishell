@@ -6,11 +6,11 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:19:30 by lsalin            #+#    #+#             */
-/*   Updated: 2022/10/06 11:42:51 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/29 14:37:51 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "pipex.h"
 
 void	first_child(char **argv, char **envp, int pipefd[2], int fd[2])
 {

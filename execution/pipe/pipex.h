@@ -6,13 +6,14 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 10:39:58 by lsalin            #+#    #+#             */
-/*   Updated: 2022/10/06 11:43:29 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/29 14:37:35 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
+# include "libft.h"
 # include <sys/wait.h>
 # include <stdlib.h>
 # include <stdio.h>
