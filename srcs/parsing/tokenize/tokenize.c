@@ -2,20 +2,20 @@
 
 int	tokenize_noquotev(t_tokenizer *tokenizer)
 {
+
 	// TODO check what ends variable
-	// TODO acc name variable
 	char	c;
 
 	c = tokenizer_get_char(tokenizer);
 	if (ft_isalnum(c) || c == '_')
 	{
-		// TODO acc var name
+		acc_accumulate(tokenizer->acc_var, *(tokenizer->cmd_ptr));
 		tokenizer_move_cursor(tokenizer);
 		return (0);
 	}
 	// TODO get content variable, add to acc
 	tokenizer->state = NoQuote;
-	tokenizer_acc_concat(tokenizer, "%variable%"); 
+	tokenizer_acc_concat(tokenizer, acc_get(tokenizer->acc_var)); 
 	return (0);
 }
 

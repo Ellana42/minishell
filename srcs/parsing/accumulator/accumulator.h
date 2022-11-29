@@ -20,5 +20,6 @@ void acc_dispose(t_acc *acc);
 void acc_free(t_acc *acc);
 void	acc_destroy(t_acc *acc);
 int	acc_move(t_acc *acc);
+char	*acc_get(t_acc	*acc);
 
 #endif

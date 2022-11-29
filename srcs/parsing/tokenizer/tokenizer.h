@@ -19,6 +19,7 @@ typedef struct s_tokenizer{
 	char *cmd_ptr;
 	int	cmd_i;
 	t_acc	*acc;
+	t_acc	*acc_var;
 	t_state state;
 	t_list **tokens;
 } t_tokenizer;
