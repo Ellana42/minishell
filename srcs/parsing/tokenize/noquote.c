@@ -12,6 +12,7 @@ int	tokenize_noquotev(t_tokenizer *tokenizer)
 	}
 	tokenizer->state = NoQuote;
 	tokenizer_acc_concat(tokenizer, getenv(acc_get(tokenizer->acc_var))); 
+	reset_acc_var(tokenizer);
 	return (0);
 }
 

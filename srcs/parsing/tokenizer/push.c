@@ -7,6 +7,7 @@ int	tokenizer_push_pipe(t_tokenizer *tokenizer)
 	token = token_alloc();
 	token_init(token, Pipe, NULL);
 	ft_lstadd_back(tokenizer->tokens, ft_lstnew((void *)token));
+	/* printf("pipe\n"); */
 	return (0);
 }
 

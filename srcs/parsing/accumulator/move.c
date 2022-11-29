@@ -35,19 +35,19 @@ int	acc_accumulate(t_acc *acc, char c)
 
 int	acc_concat(t_acc *acc, char *str)
 {
+	size_t	new_size;
+	size_t	len_str;
 	char	*tmp;
-	size_t len_acc;
 
-	if (!str)
-		return (0);
-	len_acc = ft_strlen(acc->acc);
-	acc->size += ft_strlen(str);
-	tmp = (char *)malloc(sizeof(char) * (acc->size + 1)); // TODO check malloc
-	ft_strlcpy(tmp, acc->acc, len_acc + 1);	
-	free(acc->acc);
-	ft_strlcat(tmp, str, acc->size + 1);
+	len_str = ft_strlen(str);
+	new_size = acc->size + len_str;
+
+	tmp = (char *)malloc(sizeof(char) * (new_size + 1)); // TODO check malloc
+	str_cpy(acc->acc, tmp);
+	str_cat(str, tmp);
 	acc->acc = tmp;
-	acc->i += ft_strlen(str);
+	acc->size = new_size;
+	acc->i += len_str;
 	acc->ptr = &(acc->acc[acc->i]);
 	return (0);
 }

@@ -3,7 +3,12 @@
 
 int	tokenize_single_quote(t_tokenizer *tokenizer)
 {
-	printf(":single_quote:\n");
-	tokenizer->state = NoQuote;
+	if (tokenizer_get_char(tokenizer) == '\'')
+	{
+		tokenizer->state = NoQuote;
+		tokenizer_move_cursor(tokenizer);
+		return (0);
+	}
+	tokenizer_accumulate(tokenizer);
 	return (0);
 }

@@ -46,5 +46,7 @@ int	tokenizer_push_in(t_tokenizer *tokenizer);
 int	tokenizer_push_ina(t_tokenizer *tokenizer);
 int	tokenize_noquotev(t_tokenizer *tokenizer);
 int	tokenizer_accumulate_var(t_tokenizer *tokenizer);
+void reset_acc_var(t_tokenizer *tokenizer);
+int	tokenizer_is_empty_acc_var(t_tokenizer *tokenizer);
 
 #endif

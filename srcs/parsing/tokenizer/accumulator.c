@@ -17,13 +17,6 @@ int	tokenizer_accumulate(t_tokenizer *tokenizer)
 	return (0);
 }
 
-int	tokenizer_accumulate_var(t_tokenizer *tokenizer)
-{
-	acc_accumulate(tokenizer->acc_var, *(tokenizer->cmd_ptr));
-	tokenizer_move_cursor(tokenizer);
-	return (0);
-}
-
 int	tokenizer_acc_concat(t_tokenizer *tokenizer, char *str)
 {
 	acc_concat(tokenizer->acc, str);

@@ -2,6 +2,7 @@
 # define ACCUMULATOR_H
 
 # include "../../../libft/includes/libft.h"
+# include "../utils/utils.h"
 
 typedef struct s_acc {
 	char	*acc;
