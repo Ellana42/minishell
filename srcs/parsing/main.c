@@ -17,14 +17,10 @@ int	main(int ac, char **av)
 	{
 		tokenize(tokenizer);
 	}
+	if (!tokenizer_is_empty_acc_var(tokenizer))
+		tokenizer_acc_concat(tokenizer, getenv(acc_get(tokenizer->acc_var))); 
 	if (!tokenizer_is_empty_acc(tokenizer))
 		tokenizer_push_string(tokenizer);
-	if (!tokenizer_is_empty_acc_var(tokenizer))
-	{
-		printf("here\n");
-		tokenizer_acc_concat(tokenizer, getenv(acc_get(tokenizer->acc_var))); 
-		tokenizer_push_string(tokenizer);
-	}
 	// TODO check if quotes closed (if state is quotesmth)
 	tokenizer_print_tokens(tokenizer);
 	tokenizer_dispose(tokenizer);
