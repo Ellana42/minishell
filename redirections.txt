@@ -16,6 +16,13 @@ Si echec ouverture/creation fichier --> echec redirection
 Lorsqu'on launch/cree un processus, Linux va ouvrir un certain descripteur de fichier pour nous
 
 -------------------------------------------------------------------------------------------------------
+Rediriger l'entree (<)
+
+[n] < mot
+
+Provoque l'ouverture en lecture du fichier mot
+
+-------------------------------------------------------------------------------------------------------
 Rediriger la sortie (>)
 
 [n] > mot

@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:13:54 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/29 16:28:38 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:43:01 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,34 @@ int	main(int argc, char **argv, char **envp)
 	printf("Done\n");
 }
 
+int	redirecting_stdin(t_command *data)
+{
+	int	pid;
+	int	file;
+	int	file_in;
+	pid = fork();
+
+	if (pid == -1)
+		return (1);
+
+	if (pid == 0)
+	{
+		file = open("file.txt", O_CREAT | O_WRONLY, 0777);
+
+		if (file == 1)
+			return (2);
+
+		file_in = dup2(file, STDIN_FILENO);
+
+		close(file);
+	}
+}
+
 int	redirecting_stdout(t_command *data)
 {
 	int	pid;
 	int	file;
-	int	file_2;
+	int	file_out;
 	pid = fork();
 
 	if (pid == -1)
@@ -50,10 +73,9 @@ int	redirecting_stdout(t_command *data)
 		if (file == 1)
 			return (2);
 
-		file_2 = dup2(file, STDOUT_FILENO); // file_2 = prends la place de la stdout
-											// si on printf() ca s'affichera dans notre file_2 !
+		file_out = dup2(file, STDOUT_FILENO); // file_out = prends la place de la stdout
+											// si on printf() ca s'affichera dans notre file_out !
 
 		close(file);
 	}
 }
-
