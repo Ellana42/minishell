@@ -17,9 +17,9 @@ int	tokenizer_push_string(t_tokenizer *tokenizer)
 	t_token	*token;
 
 	token = token_alloc();
-	token_init(token, Str, tokenizer->acc);
+	token_init(token, Str, tokenizer->acc->acc);
 	ft_lstadd_back(tokenizer->tokens, ft_lstnew((void *)token));
 
-	printf("string : %s\n", tokenizer->acc);
+	printf("string : %s\n", tokenizer->acc->acc);
 	return (0);
 }

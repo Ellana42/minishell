@@ -19,9 +19,8 @@ int	tokenizer_init(t_tokenizer *tokenizer, char *cmd)
 	tokenizer->command = cmd_cpy;
 	tokenizer->cmd_ptr = tokenizer->command;
 	tokenizer->cmd_i = 0;
-	tokenizer->acc = (char *)malloc(sizeof(char) * (tokenizer->size + 1));
-	reset_acc(tokenizer);
-	tokenizer->acc_size = tokenizer->size;
+	tokenizer->acc = acc_alloc();
+	acc_init(tokenizer->acc, tokenizer->size);
 	tokenizer->state = NoQuote;
 	tokenizer->tokens = ft_lstinit();
 	return (0); // errors
@@ -30,7 +29,7 @@ int	tokenizer_init(t_tokenizer *tokenizer, char *cmd)
 void tokenizer_dispose(t_tokenizer *tokenizer)
 {
 	free(tokenizer->command);
-	free(tokenizer->acc);
+	acc_destroy(tokenizer->acc);
 	ft_lstclear(tokenizer->tokens, &token_destroy); // TODO cast (void *)token_destroy(void *)
 	free(tokenizer->tokens);
 }

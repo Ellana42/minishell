@@ -4,6 +4,7 @@
 # include <stdio.h>
 # include "../../../libft/includes/libft.h"
 # include "token.h"
+# include "../accumulator/accumulator.h"
 
 // NoQuote -> Quote, NoQuoteV, SingleQuote
 // Quote -> NoQuote, QuoteV
@@ -17,10 +18,7 @@ typedef struct s_tokenizer{
 	size_t	size;
 	char *cmd_ptr;
 	int	cmd_i;
-	char *acc;
-	size_t acc_size;
-	char *acc_ptr;
-	int acc_i;
+	t_acc	*acc;
 	t_state state;
 	t_list **tokens;
 } t_tokenizer;

@@ -1,4 +1,6 @@
 #include "parsing.h"
+// TODO check unfinished quotes
+// TODO all cases tokens
 
 int	main(void)
 {

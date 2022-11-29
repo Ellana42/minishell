@@ -3,6 +3,7 @@
 int	tokenize_noquotev(t_tokenizer *tokenizer)
 {
 	// TODO check what ends variable
+	// TODO acc name variable
 	char	c;
 
 	c = tokenizer_get_char(tokenizer);
@@ -14,7 +15,7 @@ int	tokenize_noquotev(t_tokenizer *tokenizer)
 	}
 	// TODO get content variable, add to acc
 	tokenizer->state = NoQuote;
-	tokenizer_acc_concat(tokenizer, "%variable%");
+	tokenizer_acc_concat(tokenizer, "%variable%"); 
 	return (0);
 }
 

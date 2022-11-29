@@ -9,7 +9,6 @@ int	tokenizer_move_cursor(t_tokenizer *tokenizer)
 
 int	tokenizer_move_accumulator(t_tokenizer *tokenizer)
 {
-	(tokenizer->acc_ptr)++;
-	(tokenizer->acc_i)++;
+	acc_move(tokenizer->acc);
 	return (0);
 }
