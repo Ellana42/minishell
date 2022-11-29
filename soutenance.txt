@@ -1,0 +1,43 @@
+Compilation
+- Minishell compile sans erreurs si les flags ne sont pas utilises
+
+Commandes simples
+- executer une commande simple avec un path absolue comme /bin/ls ou n'importe quelle autre commande
+  sans options
+- commande vide
+- commande avec seulement espaces ou tabs
+
+Arguments & historiques
+- executer une commande simple avec un path absolue comme /bin/ls ou n'importe quelle autre commande avec
+  arguments mais sans quotes et guillemets
+- tester plusieurs fois avec differents argcs & commandes
+
+echo
+- executer la commande avec ou sans arguments ou -n
+- repeter plusieurs fois avec differents arguments
+
+exit
+- executer la commande avec ou sans arguments
+- repeter plusieurs fois avec differents arguments
+- relaunch le minishell
+
+Valeurs de retours d'un processus
+- executer une commande simple avec un path absolue comme /bin/ls ou n'importe quelle autre commande avec
+  arguments mais sans quotes et guillemets puis executer echo $?
+- Verifier la valeur affichee. Refaire la meme chose dans bash et comparer
+- Repeter plusieurs fois avec differentes commandes & argcs, utiliser des commandes fails comme 
+  /bin/ls/fichier_qui_nexiste_pas
+- expr $? + $?
+
+Signaux
+- ctrl-C dans un prompt vide doit montrer une nouvelle ligne avec un new prompt
+- ctrl-\ ne fait rien dans un prompt vide
+- ctrl-D dans un prompt vide doit quitter Minishell --> relaunch
+- ctrl-C dans un prompt apres avoir ecrit qqch doit montrer une nouvelle ligne avec un nouveau prompt
+- ctrl-C apres une commande bloquante comme cat ou grep sans arguments
+- ctrl-\ apres une commande bloquante comme cat ou grep sans arguments
+- ctrl-D apres une commande bloquante comme cat ou grep sans arguments
+
+Guillemets
+- Executer une commande simple 
+- 
