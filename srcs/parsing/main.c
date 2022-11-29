@@ -6,6 +6,7 @@ int	main(int ac, char **av)
 {
 	t_tokenizer *tokenizer;
 	t_parser	*parser;
+	int			error;
 
 	char *command = av[1];
 	printf("\nThe command : %s\n\n", command);
@@ -32,6 +33,10 @@ int	main(int ac, char **av)
 	if (!parser)
 		return (1);
 	parser_init(parser, tokenizer);
+	error = 0;
+	while ((!parser_is_eol(parser)) && (!error))
+		error = parse(parser);
+	command_print(parser->command);
 
 	// Cleaning
 	parser_dispose(parser);

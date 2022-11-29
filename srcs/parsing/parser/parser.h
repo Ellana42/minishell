@@ -13,7 +13,7 @@ typedef struct s_parser{
 	t_list			**commands;
 	t_parser_state	state;
 	t_tokenizer		*tokenizer;
-	int				*token_i;
+	int				token_i;
 } t_parser;
 
 t_parser	*parser_alloc(void);
@@ -23,5 +23,9 @@ void	_free_command(void *command);
 void parser_dispose(t_parser *parser);
 void parser_free(t_parser *parser);
 void	parser_destroy(t_parser *parser);
+t_token	*parser_get_token(t_parser *parser);
+void	parser_move_cursor(t_parser *parser);
+int	parser_is_eol(t_parser *parser);
+int	parse(t_parser *parser);
 
 #endif

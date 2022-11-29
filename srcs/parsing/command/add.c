@@ -7,7 +7,7 @@ char	*_new_str(char *str)
 
 	size = ft_strlen(str);
 	tmp = (char *)malloc(sizeof(char) * (size + 1));
-	str_cpy(tmp, str);
+	str_cpy(str, tmp);
 	return (tmp);
 }
 
@@ -18,7 +18,7 @@ int	command_add_arg(t_command *command, char *str)
 	tmp = _new_str(str); 
 	if (!tmp)
 		return (1);
-	ft_lstadd_back(command->args, ft_lstnew(tmp));
+	ft_lstadd_back(command->args, ft_lstnew((void *)tmp));
 	return (0);
 }
 

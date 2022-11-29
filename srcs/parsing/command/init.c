@@ -15,7 +15,7 @@ int	command_init(t_command *command, char *cmd)
 
 	size = ft_strlen(cmd);
 	cmd_cpy = (char *)malloc(sizeof(char) * (size + 1));
-	str_cpy(cmd_cpy, cmd);
+	str_cpy(cmd, cmd_cpy);
 	command->command = cmd_cpy;
 	command->args = ft_lstinit();
 	command->out = ft_lstinit();

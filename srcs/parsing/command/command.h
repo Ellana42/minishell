@@ -27,5 +27,6 @@ int	command_add_out(t_command *command, char *str);
 int	command_add_out_a(t_command *command, char *str);
 int	command_add_in(t_command *command, char *str);
 int	command_add_in_a(t_command *command, char *str);
+void	command_print(t_command *command);
 
 #endif
