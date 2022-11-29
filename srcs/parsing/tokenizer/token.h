@@ -3,7 +3,7 @@
 
 # include "../../../libft/includes/libft.h"
 
-typedef enum s_token_type{Str = 0, Pipe = 1}	t_token_type;
+typedef enum s_token_type{Str = 0, Pipe = 1, Out = 2, Outa = 3, In = 4, Ina = 5}	t_token_type;
 
 typedef struct s_token{
 	t_token_type	type;

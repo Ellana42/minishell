@@ -45,6 +45,22 @@ int	tokenize_noquote(t_tokenizer *tokenizer)
 		tokenizer_move_cursor(tokenizer);
 		return (0);
 	}
+	if (tokenizer_get_char(tokenizer) == '>' && tokenizer_get_next_char(tokenizer, 1) == '>' && tokenizer_is_empty_acc(tokenizer))
+	{
+		tokenizer_push_outa(tokenizer);
+		tokenizer_move_cursor(tokenizer);
+		tokenizer_move_cursor(tokenizer);
+		return (0);
+	}
+	if (tokenizer_get_char(tokenizer) == '>' && tokenizer_get_next_char(tokenizer, 1) == '>')
+	{
+		tokenizer_push_string(tokenizer);
+		reset_acc(tokenizer);
+		tokenizer_push_outa(tokenizer);
+		tokenizer_move_cursor(tokenizer);
+		tokenizer_move_cursor(tokenizer);
+		return (0);
+	}
 	if (tokenizer_get_char(tokenizer) == '>' && tokenizer_is_empty_acc(tokenizer))
 	{
 		tokenizer_push_out(tokenizer);
@@ -59,37 +75,10 @@ int	tokenize_noquote(t_tokenizer *tokenizer)
 		tokenizer_move_cursor(tokenizer);
 		return (0);
 	}
-	if (tokenizer_get_char(tokenizer) == '>' && tokenizer_get_next_char(tokenizer, 1) == '>' && tokenizer_is_empty_acc(tokenizer))
-	{
-		tokenizer_push_out(tokenizer);
-		tokenizer_move_cursor(tokenizer);
-		return (0);
-	}
-	if (tokenizer_get_char(tokenizer) == '>' && tokenizer_get_next_char(tokenizer, 1) == '>')
-	{
-		tokenizer_push_string(tokenizer);
-		reset_acc(tokenizer);
-		tokenizer_push_out(tokenizer);
-		tokenizer_move_cursor(tokenizer);
-		return (0);
-	}
-	if (tokenizer_get_char(tokenizer) == '<' && tokenizer_is_empty_acc(tokenizer))
-	{
-		tokenizer_push_out(tokenizer);
-		tokenizer_move_cursor(tokenizer);
-		return (0);
-	}
-	if (tokenizer_get_char(tokenizer) == '<')
-	{
-		tokenizer_push_string(tokenizer);
-		reset_acc(tokenizer);
-		tokenizer_push_out(tokenizer);
-		tokenizer_move_cursor(tokenizer);
-		return (0);
-	}
 	if (tokenizer_get_char(tokenizer) == '<' && tokenizer_get_next_char(tokenizer, 1) == '<' && tokenizer_is_empty_acc(tokenizer))
 	{
-		tokenizer_push_out(tokenizer);
+		tokenizer_push_ina(tokenizer);
+		tokenizer_move_cursor(tokenizer);
 		tokenizer_move_cursor(tokenizer);
 		return (0);
 	}
@@ -97,7 +86,22 @@ int	tokenize_noquote(t_tokenizer *tokenizer)
 	{
 		tokenizer_push_string(tokenizer);
 		reset_acc(tokenizer);
-		tokenizer_push_out(tokenizer);
+		tokenizer_push_ina(tokenizer);
+		tokenizer_move_cursor(tokenizer);
+		tokenizer_move_cursor(tokenizer);
+		return (0);
+	}
+	if (tokenizer_get_char(tokenizer) == '<' && tokenizer_is_empty_acc(tokenizer))
+	{
+		tokenizer_push_in(tokenizer);
+		tokenizer_move_cursor(tokenizer);
+		return (0);
+	}
+	if (tokenizer_get_char(tokenizer) == '<')
+	{
+		tokenizer_push_string(tokenizer);
+		reset_acc(tokenizer);
+		tokenizer_push_in(tokenizer);
 		tokenizer_move_cursor(tokenizer);
 		return (0);
 	}

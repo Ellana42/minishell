@@ -6,7 +6,7 @@ int	main(void)
 {
 	t_tokenizer *tokenizer;
 
-	char *command = "echo $PATH|lala";
+	char *command = "echo <$PATH>> <<lala<< >";
 	printf("The command : %s\n", command);
 	
 	tokenizer = tokenizer_alloc();
