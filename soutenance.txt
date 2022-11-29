@@ -107,4 +107,3 @@ Variables d'environnement
 - les guillemets interpolent le $
 - check si $USER existe ou le set
 - echo "$USER" doit print la valeur de $USER
-
