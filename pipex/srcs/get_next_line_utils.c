@@ -6,11 +6,11 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:00:35 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 16:00:59 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 16:26:51 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "main.h"
 
 int	contains_newline(const char *s)
 {

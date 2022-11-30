@@ -6,11 +6,11 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 15:19:58 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 16:05:59 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 16:28:19 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "main.h"
 
 char	*get_before_newline(const char *s)
 {

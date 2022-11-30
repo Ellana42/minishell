@@ -6,11 +6,11 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:09:10 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 15:57:35 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 16:27:09 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex/includes/pipex.h"
+#include "main.h"
 
 void	error(void)
 {

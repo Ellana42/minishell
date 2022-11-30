@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 13:15:38 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 15:52:35 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 16:29:14 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft/includes/libft.h"
 # include "pipex/includes/pipex.h"
+# include "pipex/includes/get_next_line.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -75,7 +76,6 @@ char	*ft_parse_line(char **keep, char **tmp);
 char	*get_before_newline(const char *s);
 char	*get_after_newline(const char *s);
 int		contains_newline(const char *s);
-char	*ft_strdup(const char *s1);
 char	*join_strs(const char *s1, const char *s2);
 void	*ft_malloc_zero(size_t count, size_t size);
 void	ft_free_strs(char **str, char **str2, char **str3);
