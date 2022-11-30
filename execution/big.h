@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   big.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/01 10:39:58 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 13:15:19 by lsalin           ###   ########.fr       */
+/*   Created: 2022/11/30 13:15:38 by lsalin            #+#    #+#             */
+/*   Updated: 2022/11/30 13:23:29 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef BIG_H
+# define BIG_H
 
 # include "libft.h"
+# include "libft/includes/ft_printf.h"
+# include "libft/includes/libft.h"
+# include "execution/pipe/pipex.h"
 # include <sys/wait.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -21,15 +24,23 @@
 # include <errno.h>
 # include <fcntl.h>
 
+typedef struct s_parser{
+	t_command		*command;
+	t_list			**commands;
+	t_parser_state	state;
+	t_tokenizer		*tokenizer;
+	int				token_i;
+} t_parser;
+
 typedef struct s_command{
 	char *command;
-	char **args;
-	char **out; // pour > 
-	char **out_a; // pour >>
-	char **in; // pour < 
-	char **in_a; // pour <<
+	t_list **args;
+	t_list **out; // pour > 
+	t_list **out_a; // pour >>
+	t_list **in; // pour < 
+	t_list **in_a; // pour <<
 	int	piped; // est-ce que tu passes à la suivante
-}   t_command;
+} t_command;
 
 char	*find_path(char *cmd, char **envp);
 void	first_child(char **argv, char **envp, int pipefd[2], int fd[2]);

@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:13:54 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/29 17:00:12 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 13:12:06 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,44 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+// Echec valeur renvoie pas gere
+
+int	redirections(t_command *command)
+{
+	int	pid;
+	int	redirect_fd;
+	int	redirect_fd;
+	int	redirect_fd;
+	pid = fork();
+
+	if (pid == -1)
+		return (1);
+
+	if (pid == 0)
+	{
+		if (data->in) // '<'
+		{
+			redirect_fd = open("file.txt", O_RDONLY, 0);
+			dup2(redirect_fd, STDIN_FILENO);
+			close(redirect_fd);
+		}
+
+		else if (data->out) // '>'
+		{
+			redirect_fd = open("file.txt", O_CREAT | O_TRUNC);
+			dup2(redirect_fd, STDOUT_FILENO);
+			close(redirect_fd);
+		}
+
+		else if (data->in) // >>
+		{
+			redirect_fd = open("file.txt", O_CREAT | O_APPEND);
+			dup2(redirect_fd, STDOUT_FILENO);
+			close(redirect_fd);
+		}
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	char	*cmd[] = {"ls" "-l", 0};
@@ -31,74 +69,4 @@ int	main(int argc, char **argv, char **envp)
 		printf("Error executing %s\n", file);
 
 	printf("Done\n");
-}
-
-int	redirecting_stdin(t_command *data)
-{
-	int	pid;
-	int	file;
-	int	file_in;
-	pid = fork();
-
-	if (pid == -1)
-		return (1);
-
-	if (pid == 0)
-	{
-		file = open("file.txt", O_CREAT | O_WRONLY, 0777);
-
-		if (file == 1)
-			return (2);
-
-		file_in = dup2(file, STDIN_FILENO);
-
-		close(file);
-	}
-}
-
-int	redirecting_stdout(t_command *data)
-{
-	int	pid;
-	int	file;
-	int	file_out;
-	pid = fork();
-
-	if (pid == -1)
-		return (1);
-
-	if (pid == 0) // processus fils
-	{
-		file = open("file.txt", O_CREAT | O_WRONLY, 0777); // file = int du fd
-
-		if (file == 1)
-			return (2);
-
-		file_out = dup2(file, STDOUT_FILENO); // file_out = prends la place de la stdout
-											// si on printf() ca s'affichera dans notre file_out !
-
-		close(file);
-	}
-}
-
-int	redirecting_stdout_append(t_command *data)
-{
-	int	pid;
-	int	file;
-	int	file_out_append;
-	pid = fork();
-
-	if (pid == -1)
-		return (1);
-
-	if (pid == 0)
-	{
-		file = open("file.txt", O_CREAT | O_WRONLY | O_APPEND, 0777);
-
-		if (file == 1)
-			return (2);
-
-		file_out_append = dup2(file, STDOUT_FILENO);
-
-		close(file);
-	}
 }
