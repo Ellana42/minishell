@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:13:54 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 15:55:15 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 15:56:18 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,5 @@ int	main(int argc, char **argv, char **envp)
 	if (execve("/usr/bin/ls", cmd, envp) ==  -1)
 		printf("Error executing %s\n", file);
 
-	printf("Done\n");s
+	printf("Done\n");
 }

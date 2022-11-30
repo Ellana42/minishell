@@ -6,11 +6,11 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:45:04 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/29 14:42:52 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 15:57:23 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex/includes/pipex.h"
 
 char	*find_path(char *cmd, char **envp)
 {
