@@ -6,11 +6,11 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 15:19:58 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 16:28:19 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 16:36:25 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "minishell.h"
 
 char	*get_before_newline(const char *s)
 {

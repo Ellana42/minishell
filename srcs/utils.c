@@ -6,11 +6,11 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:09:10 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 16:27:09 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 16:51:10 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "minishell.h"
 
 void	error(void)
 {
@@ -29,12 +29,12 @@ void	ft_print_putstr(void)
 	ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
 }
 
-void	close_fd(int pipefd[2], int fd[2])
+void	close_fd(t_data *data)
 {
-	close(pipefd[0]);
-	close(pipefd[1]);
-	close(fd[0]);
-	close(fd[1]);
+	close(data->pipefd[0]);
+	close(data->pipefd[1]);
+	close(data->fd[0]);
+	close(data->fd[1]);
 }
 
 void	free_strs(char *str, char **strs)

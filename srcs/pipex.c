@@ -6,62 +6,63 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:19:30 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 16:28:43 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 16:51:32 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "minishell.h"
 
-void	first_child(char **argv, char **envp, int pipefd[2], int fd[2])
+void	first_child(t_data *data)
 {
 	char	**cmd_and_options;
 	char	*path_ultime;
 	int		pid1;
 
-	cmd_and_options = ft_split(argv[2], ' ');
-	path_ultime = find_path(cmd_and_options[0], envp);
+	cmd_and_options = ft_split(data->argv[2], ' ');
+	path_ultime = find_path(data);
 	pid1 = fork();
 	if (pid1 == -1)
 		error();
 	if (pid1 == 0)
 	{
-		dup2(pipefd[1], STDOUT_FILENO);
-		dup2(fd[0], STDIN_FILENO);
-		close(pipefd[0]);
-		close(pipefd[1]);
-		close(fd[0]);
-		close(fd[1]);
-		execve(path_ultime, cmd_and_options, envp);
+		dup2(data->pipefd[1], STDOUT_FILENO);
+		dup2(data->fd[0], STDIN_FILENO);
+		close(data->pipefd[0]);
+		close(data->pipefd[1]);
+		close(data->fd[0]);
+		close(data->fd[1]);
+		execve(path_ultime, cmd_and_options, data->envp);
 	}
 	free_strs(path_ultime, cmd_and_options);
 }
 
-void	second_child(char **argv, char **envp, int pipefd[2], int fd[2])
+void	second_child(t_data *data)
 {
 	char	**cmd_and_options;
 	char	*path_ultime;
 	int		pid2;
 
-	cmd_and_options = ft_split(argv[3], ' ');
-	path_ultime = find_path(cmd_and_options[0], envp);
+	cmd_and_options = ft_split(data->argv[3], ' ');
+	path_ultime = find_path(data);
 	pid2 = fork();
 	if (pid2 == -1)
 		error();
 	if (pid2 == 0)
 	{
-		dup2(pipefd[0], STDIN_FILENO);
-		dup2(fd[1], STDOUT_FILENO);
-		close(pipefd[1]);
-		close(pipefd[0]);
-		close(fd[1]);
-		close(fd[0]);
-		execve(path_ultime, cmd_and_options, envp);
+		dup2(data->pipefd[0], STDIN_FILENO);
+		dup2(data->fd[1], STDOUT_FILENO);
+		close(data->pipefd[1]);
+		close(data->pipefd[0]);
+		close(data->fd[1]);
+		close(data->fd[0]);
+		execve(path_ultime, cmd_and_options, data->envp);
 	}
 	free_strs(path_ultime, cmd_and_options);
 }
 
 int	main(int argc, char *argv[], char **envp)
 {
+	t_data	*data;
 	int		pipefd[2];
 	int		fd[2];
 
@@ -77,9 +78,9 @@ int	main(int argc, char *argv[], char **envp)
 			error();
 		if (pipe(pipefd) == -1)
 			error();
-		first_child(argv, envp, pipefd, fd);
-		second_child(argv, envp, pipefd, fd);
-		close_fd(pipefd, fd);
+		first_child(data);
+		second_child(data);
+		close_fd(data);
 		waitpid(-1, NULL, 0);
 		waitpid(-1, NULL, 0);
 	}

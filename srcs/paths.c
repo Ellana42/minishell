@@ -6,13 +6,13 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:45:04 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 16:27:04 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 16:44:49 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "minishell.h"
 
-char	*find_path(char *cmd, char **envp)
+char	*find_path(t_data *data)
 {
 	char		**array_of_paths;
 	char		*path_ultime;
@@ -20,14 +20,14 @@ char	*find_path(char *cmd, char **envp)
 	char		*temp;
 
 	i = 0;
-	while (ft_strnstr(envp[i], "PATH=", 5) == 0)
+	while (ft_strnstr(data->envp[i], "PATH=", 5) == 0)
 		i++;
-	array_of_paths = ft_split(envp[i] + 5, ':');
+	array_of_paths = ft_split(data->envp[i] + 5, ':');
 	i = 0;
 	while (array_of_paths[i])
 	{
 		temp = ft_strjoin(array_of_paths[i], "/");
-		path_ultime = ft_strjoin(temp, cmd);
+		path_ultime = ft_strjoin(temp, data->cmd);
 		free_strs(temp, NULL);
 		if (access(path_ultime, F_OK | X_OK) == 0)
 		{
