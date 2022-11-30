@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:19:30 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 16:51:32 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 17:06:04 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	first_child(t_data *data)
 		close(data->fd[1]);
 		execve(path_ultime, cmd_and_options, data->envp);
 	}
-	free_strs(path_ultime, cmd_and_options);
+	free_strs(path_ultime, cmd_and_options, NULL);
 }
 
 void	second_child(t_data *data)
@@ -57,7 +57,7 @@ void	second_child(t_data *data)
 		close(data->fd[0]);
 		execve(path_ultime, cmd_and_options, data->envp);
 	}
-	free_strs(path_ultime, cmd_and_options);
+	free_strs(path_ultime, cmd_and_options, NULL);
 }
 
 int	main(int argc, char *argv[], char **envp)

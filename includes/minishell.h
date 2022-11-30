@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:31:12 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 16:44:45 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 17:06:10 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,8 @@ char	*find_path(t_data *data);
 void	first_child(t_data *data);
 void	second_child(t_data *data);
 void	error(void);
-void	ft_putstr_fd(char *s, int fd);
 void	ft_print_putstr(void);
-void	free_strs(char *str, char **strs);
+void	free_strs(char **str1, char **str2, char **str3);
 void	close_fd(t_data *data);
 
 // GNL
@@ -84,9 +83,7 @@ char	*ft_parse_line(char **keep, char **tmp);
 char	*get_before_newline(const char *s);
 char	*get_after_newline(const char *s);
 int		contains_newline(const char *s);
-char	*ft_strdup(const char *s1);
 char	*join_strs(const char *s1, const char *s2);
 void	*ft_malloc_zero(size_t count, size_t size);
-void	ft_free_strs(char **str, char **str2, char **str3);
 
 #endif

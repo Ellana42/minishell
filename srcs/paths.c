@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:45:04 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 16:44:49 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 17:05:42 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ char	*find_path(t_data *data)
 	{
 		temp = ft_strjoin(array_of_paths[i], "/");
 		path_ultime = ft_strjoin(temp, data->cmd);
-		free_strs(temp, NULL);
+		free_strs(temp, NULL, NULL);
 		if (access(path_ultime, F_OK | X_OK) == 0)
 		{
-			free_strs(NULL, array_of_paths);
+			free_strs(NULL, array_of_paths, NULL);
 			return (path_ultime);
 		}
-		free_strs(path_ultime, NULL);
+		free_strs(path_ultime, NULL, NULL);
 		i++;
 	}
-	free_strs(NULL, array_of_paths);
+	free_strs(NULL, array_of_paths, NULL);
 	return (0);
 }

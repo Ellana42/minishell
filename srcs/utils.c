@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:09:10 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 16:51:10 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 17:04:48 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,21 @@ void	close_fd(t_data *data)
 	close(data->fd[1]);
 }
 
-void	free_strs(char *str, char **strs)
+void	free_strs(char **str, char **str2, char **str3)
 {
-	int	i;
-
-	if (str != NULL)
+	if (str && *str)
 	{
-		free(str);
-		str = NULL;
+		free(*str);
+		*str = NULL;
 	}
-	if (strs != NULL)
+	if (str2 && *str2)
 	{
-		i = 0;
-		while (strs[i])
-		{
-			free(strs[i]);
-			i++;
-		}
-		free(strs);
-		strs = NULL;
+		free(*str2);
+		*str2 = NULL;
+	}
+	if (str3 && *str3)
+	{
+		free(*str3);
+		*str3 = NULL;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 15:19:58 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 16:36:25 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 17:05:30 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,18 @@ void	ft_read_line(int fd, char **keep, char **tmp)
 		r = read(fd, buf, BUFFER_SIZE);
 		if (r == -1)
 		{
-			ft_free_strs(&buf, keep, tmp);
+			free_strs(&buf, keep, tmp);
 			return ;
 		}
 		buf[r] = '\0';
 		*tmp = ft_strdup(*keep);
-		ft_free_strs(keep, 0, 0);
+		free_strs(keep, 0, 0);
 		*keep = join_strs(*tmp, buf);
-		ft_free_strs(tmp, 0, 0);
+		free_strs(tmp, 0, 0);
 		if (contains_newline(*keep))
 			break ;
 	}
-	ft_free_strs(&buf, 0, 0);
+	free_strs(&buf, 0, 0);
 }
 
 char	*ft_parse_line(char **keep, char **tmp)
@@ -98,10 +98,10 @@ char	*ft_parse_line(char **keep, char **tmp)
 	char	*line;
 
 	*tmp = ft_strdup(*keep);
-	ft_free_strs(keep, 0, 0);
+	free_strs(keep, 0, 0);
 	*keep = get_after_newline(*tmp);
 	line = get_before_newline(*tmp);
-	ft_free_strs(tmp, 0, 0);
+	free_strs(tmp, 0, 0);
 	return (line);
 }
 
@@ -120,7 +120,7 @@ char	*get_next_line(int fd)
 		line = ft_parse_line(&keep, &tmp);
 	if (!line || *line == '\0')
 	{
-		ft_free_strs(&keep, &line, &tmp);
+		free_strs(&keep, &line, &tmp);
 		return (NULL);
 	}
 	return (line);

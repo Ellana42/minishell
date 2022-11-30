@@ -1,0 +1,22 @@
+-------------------------------------------------------------------------------------------------
+Pipe : rediriger la sortie standard d'un processus vers l'entree standard d'un autre
+
+cat test.txt | wc -l : redirection de la stdout de cat vers la stdin de wc
+
+Normalement cat test.txt affiche le contenu dans la stdout (terminal) mais ici le resultat sera
+envoye dans un tube où wc ira piocher ses donnes plutot que dans la stdin
+
++::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::+
+|                       Entrée standard                      |
++::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::+
+                                        |
+                                        X
+[=======]          +===============+    |    [=======]
+[  cat  ] ---+---> |  Tube (Pipe)  | ---+--> [  wc   ] ---+
+[=======]    |     +===============+         [=======]    |
+             X                                            |
+             |                                            v
++::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::+
+|                       Sortie standard                      |
++::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::+
+
