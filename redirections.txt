@@ -40,4 +40,3 @@ Rediriger la sortie en mode append (ajoute) (>>)
 Provoque l'ouverture en lecture du fichier mot.
 Le fichier est ouvert comme si open() etait call avec le O_APPEND
 Cree le fichier s'il n'existe pas
-
