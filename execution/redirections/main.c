@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:13:54 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 13:12:06 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 15:23:58 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@
 
 // 1 --> file.txt
 
-#include "execution/pipe/pipex.h"
+#include "main.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
 
 // Echec valeur renvoie pas gere
 
-int	redirections(t_command *command)
+int	redirections(t_command *data)
 {
 	int	pid;
 	int	redirect_fd;
 	int	redirect_fd;
 	int	redirect_fd;
-	pid = fork();
+	data->piped = fork();
 
 	if (pid == -1)
 		return (1);

@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   big.h                                              :+:      :+:    :+:   */
+/*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 13:15:38 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 13:23:29 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/11/30 15:22:20 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BIG_H
-# define BIG_H
+#ifndef MAIN_H
+# define MAIN_H
 
-# include "libft.h"
 # include "libft/includes/ft_printf.h"
 # include "libft/includes/libft.h"
 # include "execution/pipe/pipex.h"
@@ -41,6 +40,12 @@ typedef struct s_command{
 	t_list **in_a; // pour <<
 	int	piped; // est-ce que tu passes à la suivante
 } t_command;
+
+typedef struct s_exe
+{
+	int	pid;
+	t_command	*command;
+}	t_exe;
 
 char	*find_path(char *cmd, char **envp);
 void	first_child(char **argv, char **envp, int pipefd[2], int fd[2]);
