@@ -27,3 +27,7 @@ access() pour verifier les permissions a un fichier
 fork() pour creer des processus
 waitpid() pour suspendre l'exe du proessus appelant en attendant qu'un fils change d'etat
 pipe() pour faire communiquer deux processus
+dup2() pour rediriger les descripteurs de fichiers (faire en sorte que le processus fils ecrive
+dans l'extremite ecriture du tube (fd[1]) plutot que dans la sortie standard (stdout) afin que le processus pere
+puisse lire dans l'extremite lecture du tube (fd[0]) a la place de l'entree standard (stdin)
+
