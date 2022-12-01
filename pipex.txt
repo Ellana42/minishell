@@ -19,6 +19,20 @@ envoye dans un tube où wc ira piocher ses donnes plutot que dans la stdin
 |                       Sortie standard                      |
 +::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::+
 
+                [========]
+           +--> [  Père  ] -->---------+
+           |    [========]             |
+           |                           |
+           |                           |
+           |    +=================+    |
+pipefd[0]  +<-- |   Tube (Pipe)   | <--+  pipefd[1]
+(lecture)  |    +=================+    |  (écriture)
+           |                           |
+           |                           |
+           |    [========]             |
+           +--> [  Fils  ] -->---------+
+                [========]
+
 Chaque commande shell = un programme
 
 •execve() pour executer un programme depuis le programme actuel
@@ -107,4 +121,10 @@ Fichier entrée
                      V
                 ==============
                 Fichier sortie
+
+INDEX FILS	FD LECTURE	FD ECRITURE
+	0			File		1
+	1			 0			3
+	2			 2			5
+	3			 4			File
 
