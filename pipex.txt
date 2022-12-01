@@ -77,7 +77,7 @@ pipe()
 				+-- waitpid(pid2, status, 0)
 
 ----------------------------------------------------------------------------------------------------------------
-BONUS
+MULTIPIPE
 
 Boucle qui creer des processus fils tant qu'on arrive pas a la fin des arguments entres par l'user.
 
@@ -128,3 +128,40 @@ INDEX FILS	FD LECTURE	FD ECRITURE
 	2			 2			5
 	3			 4			File
 
+Chaque fils, sauf le 1er, lit depuis le pipefd[2 * index - 2]
+Tous les fils, sauf le dernier, ecrivent sur le pipedfd[2 * index + 1]
+
+A ne pas oublier : close tous les fd non utilises dans chaque childs
+
+----------------------------------------------------------------------------------------------------------------
+HEREDOC
+
+On ecrit une string dans la ligne de commande qui est passee dans l'entree standard.
+<<EOF cat file.txt | wc -l >> outfile
+
+Le fichier de sortie n'est pas ecrase s'il existe deja, on rajoute le resultat.
+
+Si here doc specifie, ouvrir le fichier de sortie en mode O_APPEND et non en O_TRUNC
+
+get_next_line() pour recuperer les lignes du here doc, en lisant sur l'entree standard (fd[0])
+
+Creer un fichier temporaire, y copier les lignes lues par get_next_line() et utiliser ce fichier temporaire
+comme fichier d'entree.
+
+Plan : 
+- Ouvrir un fichier tempo en O_CREAT | O_WRONLY | O_TRUNC et 644
+- Lire chaque ligne de l'entree standard en boucle
+- Comparer chaque ligne avec le DELIMITEUR (2e argument fourni)
+	- si la ligne == DELIMITEUR --> break ;
+	- si la ligne != DELIMITEUR --> l'ecrire dans notre fichier tempo
+- Close le fichier tempo
+- Ouvrir le fichier tempo en O_RDONLY
+- dup2() le fd du fichier tempo sur l'entree standard
+- launch ./pipex
+
+NE PAS OUBLIER DE DETRUIRE LE FICHIER TEMPO QUAND PIPEX SE TERMINE
+
+int	unlink(const char *pathname);
+
+Detruit le fichier si aucun processus ne l'a d'ouvert.
+Renvoie 0 si reussis ou (-1) si erreur.
