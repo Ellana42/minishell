@@ -1,13 +1,3 @@
------------------------------------------------------------------------------------------------------
-int dup2(int oldfd, int newfd);
-
-Transforme newfd en une copie de oldfd et renvoie le nouveau fd, ou (-1) si echec 
-(dans ce ca errno contient le code d'erreur).
-
-- Si oldfd pas valide --> appel echoue et newfd n'est pas close
-- Si oldfd valide et que newfd a la meme valeur que oldfd -->dup2() ne fait rien et renvoie newfd
-
------------------------------------------------------------------------------------------------------
 int execve(const char *file, char *const argv[], char *const envp[]);
 
 Execute un programme depuis notre programme actuel.
@@ -18,4 +8,39 @@ Le processus existant est remplacé par le nouveau appelé.
 - envp[] : pointeur vers les variables d’environnement de notre ordi
 
 Ne retourne rien si succes, sinon (-1)
+
+-----------------------------------------------------------------------------------------------------
+int access(const char *pathname, int mode);
+
+Verifie l'acces a un fichier.
+- F_OK : teste si le fichier existe
+- R_OK : teste si le fichier est accessible en lecture
+- W_OK : teste si le fichier est accessible en ecriture
+- X_OK : teste si le fichier est accessible pour l'execution
+
+Renvoie 0 si succes, -1 si echec (errno contient le code d'erreur)
+
+-----------------------------------------------------------------------------------------------------
+pid_t fork(void);
+
+Creer un processus fils, clone du processus pere.
+
+Valeur de retour : pid de type int.
+Vaut -1 si echec, retourne 0 chez le fils et retourne le pid du fils au pere si succes
+
+-----------------------------------------------------------------------------------------------------
+pid_t waitpid(pid_t pid, int *status, int options);
+
+Suspend l'execution du processus appelant jusqu'a ce que le fils specifie par le pid change d'etat.
+
+Valeurs possibles du pid :
+- 
+-----------------------------------------------------------------------------------------------------
+int dup2(int oldfd, int newfd);
+
+Transforme newfd en une copie de oldfd et renvoie le nouveau fd, ou (-1) si echec 
+(dans ce ca errno contient le code d'erreur).
+
+- Si oldfd pas valide --> appel echoue et newfd n'est pas close
+- Si oldfd valide et que newfd a la meme valeur que oldfd -->dup2() ne fait rien et renvoie newfd
 

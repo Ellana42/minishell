@@ -20,3 +20,10 @@ envoye dans un tube où wc ira piocher ses donnes plutot que dans la stdin
 |                       Sortie standard                      |
 +::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::+
 
+Chaque commande shell = un programme
+
+execve() pour executer un programme depuis le programme actuel
+access() pour verifier les permissions a un fichier
+fork() pour creer des processus
+waitpid() pour suspendre l'exe du proessus appelant en attendant qu'un fils change d'etat
+pipe() pour faire communiquer deux processus
