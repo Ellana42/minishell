@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:35:10 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/01 20:55:14 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/01 21:28:55 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,35 @@ void	clean_init_structure(void)
 	t_structure	structure;
 	
 	structure.argc = -1;
+	structure.child = -1;
 	structure.input = -1;
 	structure.output = -1;
+	structure.fd_in = -1;
+	structure.fd_out = -1;
 	structure.nbr_commands = -1;
 	structure.argc = NULL;
 	structure.envp = NULL;
-	structure.pipe = NULL;
+	structure.pipefd = NULL;
 	structure.cmd = NULL;
 }
 
 // Redirige les fd d'entrée et de sortie transmis vers l'entrée / la sortie standard
 
-void	redirection_in_out(t_structure *structure)
+void	redirection_in_out(int input, int output)
 {
-	if (dup2(structure->input, STDIN_FILENO) == -1)
+	if (dup2(input, STDIN_FILENO) == -1)
 		return (-1); // à remplacer par msg d'erreur
 
-	if (dup2(structure->output, STDOUT_FILENO) == -1)
+	if (dup2(output, STDOUT_FILENO) == -1)
 		return(-1);
+}
+
+// Définis les inputs & outputs des processus fils en fonction de leur index
+// Tous les fils sauf le premier lit depuis le pipefd[2 * index - 2]
+// Tous les fils sauf le dernier écrivent sur le pipedfd[2 * index + 1]
+
+void	child(t_structure *structure)
+{
+	if (structure->child == 0)
+		redirection_in_out(structure->fd_in, structure->pipefd[1]);
 }

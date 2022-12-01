@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:31:12 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/01 20:52:54 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/01 21:34:41 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ typedef struct s_parser{
 } t_parser;
 
 typedef struct s_command{
-	char *command;
-	t_list **args;
-	t_list **out; // pour > 
-	t_list **out_a; // pour >>
-	t_list **in; // pour < 
-	t_list **in_a; // pour <<
-	int	piped; // est-ce que tu passes à la suivante
+	char	*command;
+	t_list	**args;
+	t_list	**out; // pour > 
+	t_list	**out_a; // pour >>
+	t_list	**in; // pour < 
+	t_list	**in_a; // pour <<
+	int		piped; // est-ce que tu passes à la suivante
 } t_command;
 
 typedef struct s_exe
@@ -50,17 +50,18 @@ typedef struct s_exe
 
 typedef struct s_structure
 {
-    int     argc;
-	int		*pipe;
+	int		argc;
+	int		*pipefd;
+	int		fd_in;
+	int		fd_out;
+	int		child;
 	int		input;
 	int		output;
-    char    **argv;
-    char    **envp;
-    char    *cmd;
+	char	**argv;
+	char	**envp;
+	char	*cmd;
 	int		nbr_commands;
-    int     fd[2];
-    int     pipefd[2];
-}   t_structure;
+}	t_structure;
 
 // MANDATORY
 
@@ -75,7 +76,7 @@ void	close_fd(t_data *data);
 // BONUS
 void	create_pipes(t_structure *structure);
 void	clean_init_structure(void);
-void	redirection_in_out(t_structure *structure);
+void	redirection_in_out(int input, int output);
 
 // GNL
 
