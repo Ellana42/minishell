@@ -81,3 +81,10 @@ Transforme newfd en une copie de oldfd et renvoie le nouveau fd, ou (-1) si eche
 
 - Si oldfd pas valide --> appel echoue et newfd n'est pas close
 - Si oldfd valide et que newfd a la meme valeur que oldfd -->dup2() ne fait rien et renvoie newfd
+
+-----------------------------------------------------------------------------------------------------
+char *strerror(int errnum);
+
+On va fournir la variable errno en parametre, et le code d'erreur sera traduit en string.
+Renvoie la string.
+
