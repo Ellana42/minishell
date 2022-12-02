@@ -58,6 +58,14 @@ int	parse_params(t_parser *parser)
 		parser_move_cursor(parser);
 		return (0);
 	}
+	if (token->type == Pipe) 
+	{
+		parser->state = pStart;
+		parser_move_cursor(parser);
+		commands_push(parser->commands, parser->command);
+		parser->command = NULL;
+		return (0);
+	}
 	return (1);
 }
 

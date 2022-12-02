@@ -5,12 +5,13 @@
 # include "../../../libft/includes/libft.h"
 # include "../tokenizer/tokenizer.h"
 # include "../command/command.h"
+# include "../commands/commands.h"
 
 typedef enum s_parser_state{pStart = 0, pParams = 1, pOut = 2, pOuta = 3, pIn = 4, pIna = 5} t_parser_state;
 
 typedef struct s_parser{
 	t_command		*command;
-	t_list			**commands;
+	t_commands		*commands;
 	t_parser_state	state;
 	t_tokenizer		*tokenizer;
 	int				token_i;

@@ -25,5 +25,6 @@ void	command_print(t_command *command)
 	printf("\n- ina : ");
 	_print_str_chain(command->in_a);
 	printf("\n");
+	printf("\n");
 }
 

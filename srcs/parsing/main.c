@@ -36,7 +36,12 @@ int	main(int ac, char **av)
 	error = 0;
 	while ((!parser_is_eol(parser)) && (!error))
 		error = parse(parser);
-	command_print(parser->command);
+	if (parser->command)
+	{
+		commands_push(parser->commands, parser->command);
+		parser->command = NULL;
+	}
+	commands_print(parser->commands);
 
 	// Cleaning
 	parser_dispose(parser);
