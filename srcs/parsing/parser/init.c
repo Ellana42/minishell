@@ -8,8 +8,14 @@ t_parser	*parser_alloc(void)
 	return (parser);
 }
 
-int	parser_init(t_parser *parser, t_tokenizer *tokenizer)
+int	parser_init(t_parser *parser, char *str)
 {
+	t_tokenizer *tokenizer;
+
+	tokenizer = tokenizer_alloc();
+	if (!tokenizer)
+		return (1);
+	tokenizer_init(tokenizer, str);
 	parser->command = NULL;
 	parser->commands = commands_alloc();
 	commands_init(parser->commands);

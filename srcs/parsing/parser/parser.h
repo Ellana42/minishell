@@ -4,6 +4,7 @@
 # include <stdio.h>
 # include "../../../libft/includes/libft.h"
 # include "../tokenizer/tokenizer.h"
+# include "../tokenize/tokenize.h"
 # include "../command/command.h"
 # include "../commands/commands.h"
 
@@ -18,7 +19,7 @@ typedef struct s_parser{
 } t_parser;
 
 t_parser	*parser_alloc(void);
-int	parser_init(t_parser *parser, t_tokenizer *tokenizer);
+int	parser_init(t_parser *parser, char *str);
 void	_free_string(void *str);
 void	_free_command(void *command);
 void parser_dispose(t_parser *parser);
@@ -28,5 +29,6 @@ t_token	*parser_get_token(t_parser *parser);
 void	parser_move_cursor(t_parser *parser);
 int	parser_is_eol(t_parser *parser);
 int	parse(t_parser *parser);
+int	parser_tokenize_string(t_parser *parser);
 
 #endif
