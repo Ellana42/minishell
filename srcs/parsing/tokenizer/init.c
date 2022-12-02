@@ -41,3 +41,9 @@ void tokenizer_free(t_tokenizer *tokenizer)
 {
 	free(tokenizer);
 }
+
+void	tokenizer_destroy(t_tokenizer *tokenizer)
+{
+	tokenizer_dispose(tokenizer);
+	tokenizer_free(tokenizer);
+}

@@ -50,5 +50,6 @@ int	tokenizer_accumulate_var(t_tokenizer *tokenizer);
 void reset_acc_var(t_tokenizer *tokenizer);
 int	tokenizer_is_empty_acc_var(t_tokenizer *tokenizer);
 t_token	*tokenizer_get_token(t_tokenizer *tokenizer, int i);
+void	tokenizer_destroy(t_tokenizer *tokenizer);
 
 #endif

@@ -5,4 +5,6 @@
 #include "parser/parser.h"
 #include "tokenize/tokenize.h"
 
+t_parser	*parse_string(char *str);
+
 #endif

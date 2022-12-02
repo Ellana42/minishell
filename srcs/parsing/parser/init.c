@@ -23,6 +23,7 @@ void parser_dispose(t_parser *parser)
 {
 	free(parser->command);
 	commands_destroy(parser->commands);
+	tokenizer_destroy(parser->tokenizer);
 }
 
 void parser_free(t_parser *parser)
