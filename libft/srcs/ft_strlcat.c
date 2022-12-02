@@ -6,10 +6,10 @@
 /*   By: mkaploun <mtmrkaploun@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 09:03:46 by mkaploun          #+#    #+#             */
-/*   Updated: 2022/11/28 22:31:49 by mkaploun         ###   ########.fr       */
+/*   Updated: 2021/11/05 14:09:52 by ellana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../includes/libft.h"
+#include "libft.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
