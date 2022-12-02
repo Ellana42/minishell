@@ -12,7 +12,6 @@ typedef struct s_command{
 	t_list **out_a; // pour >>
 	t_list **in; // pour < 
 	t_list **in_a; // pour <<
-	int	piped; // est-ce que tu passes à la suivante
 } t_command;
 
 t_command	*command_alloc(void);
