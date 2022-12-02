@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:35:10 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/01 21:28:55 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/01 22:03:09 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,21 @@ void	create_pipes(t_structure *structure)
 
 	while (i < structure->nbr_commands - 1) // On boucle tant qu'on n'a pas atteint le nombre d'arguments entrés par l'user
 	{
-		if (pipe(structure->pipe + 2 * i) == -1) // Création d'une paire de fd (pipe) pour chaque fils
+		if (pipe(structure->pipefd + 2 * i) == -1) // Création d'une paire de fd (pipe) pour chaque fils
 			return (-1); // remplacer par msg d'erreur
 		i++;
 	}
+}
+
+// Ferme tous les fd ouverts
+
+void	close_fds(t_structure *structure)
+{
+	if (structure->fd_in != -1)
+		close(structure->fd_in);
+	if (structure->fd_in != -1)
+		close(structure->fd_out);
+	
 }
 
 void	clean_init_structure(void)
@@ -44,7 +55,7 @@ void	clean_init_structure(void)
 
 // Redirige les fd d'entrée et de sortie transmis vers l'entrée / la sortie standard
 
-void	redirection_in_out(int input, int output)
+void	redirection_in_out(int input, int output, t_structure *structure)
 {
 	if (dup2(input, STDIN_FILENO) == -1)
 		return (-1); // à remplacer par msg d'erreur
@@ -60,5 +71,13 @@ void	redirection_in_out(int input, int output)
 void	child(t_structure *structure)
 {
 	if (structure->child == 0)
-		redirection_in_out(structure->fd_in, structure->pipefd[1]);
+		redirection_in_out(structure->fd_in, structure->pipefd[1], structure);
+
+	else if (structure->child = structure->nbr_commands - 1)
+		redirection_in_out(structure->pipefd[2 * structure->child - 2], structure->fd_out, structure);
+
+	else
+		redirect_io(structure->pipefd[2 * structure->child - 2], structure->pipefd[2 * structure->child + 1], structure);
+
+	close_fds();
 }

@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:31:12 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/01 21:34:41 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/01 21:40:19 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	close_fd(t_data *data);
 // BONUS
 void	create_pipes(t_structure *structure);
 void	clean_init_structure(void);
-void	redirection_in_out(int input, int output);
+void	redirection_in_out(int input, int output, t_structure *structure)
 
 // GNL
 

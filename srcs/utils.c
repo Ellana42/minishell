@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:09:10 by lsalin            #+#    #+#             */
-/*   Updated: 2022/11/30 17:04:48 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/02 10:38:43 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_putstr_fd(char *s, int fd)
 
 void	ft_print_putstr(void)
 {
-	ft_putstr_fd("\033[31mError: Bad arguments\n\e[0m", 2);
+	ft_putstr_fd("\033[31mError: bad arguments\n\e[0m", 2);
 	ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
 }
 
