@@ -20,7 +20,6 @@ int	command_init(t_command *command, char *cmd)
 	command->out_a = ft_lstinit();
 	command->in = ft_lstinit();
 	command->in_a = ft_lstinit();
-	command->piped = 0;
 	return (0); // errors
 }
 

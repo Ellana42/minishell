@@ -28,7 +28,8 @@ int	main(int ac, char **av)
 		reset_acc(tokenizer);
 	}
 	tokenizer_push_eol(tokenizer);
-	// TODO check if quotes closed (if state is quotesmth)
+	if (tokenizer->state == Quote || tokenizer->state == SingleQuote || tokenizer->state == QuoteV)
+		return (1);
 	tokenizer_print_tokens(tokenizer);
 
 	// Parsing
