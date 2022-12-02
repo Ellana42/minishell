@@ -11,9 +11,11 @@ t_acc	*acc_alloc(void)
 int	acc_init(t_acc *acc, size_t size)
 {
 	acc->size = size;
-	acc->acc = (char *)malloc(sizeof(char) * (acc->size + 1)); // TODO malloc error
+	acc->acc = (char *)malloc(sizeof(char) * (acc->size + 1));
+	if (!acc->acc)
+		return (1);
 	acc_reset(acc);
-	return (0); // errors
+	return (0);
 }
 
 void acc_dispose(t_acc *acc)

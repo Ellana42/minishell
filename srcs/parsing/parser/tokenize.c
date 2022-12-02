@@ -15,6 +15,9 @@ int	parser_tokenize_string(t_parser *parser)
 	}
 	tokenizer_push_eol(parser->tokenizer);
 	if (parser->tokenizer->state == Quote || parser->tokenizer->state == SingleQuote || parser->tokenizer->state == QuoteV)
+	{
+		parser->error = ParserQuotesUnclosed;
 		return (1);
+	}
 	return (0);
 }

@@ -12,19 +12,24 @@ int	tokenizer_init(t_tokenizer *tokenizer, char *cmd)
 {
 	char	*cmd_cpy;
 
-	// TODO mallocs rate
 	tokenizer->size = ft_strlen(cmd);
 	cmd_cpy = (char *)malloc(sizeof(char) * (tokenizer->size + 1));
+	tokenizer->acc = acc_alloc();
+	tokenizer->acc_var = acc_alloc();
+	if (!cmd_cpy || !tokenizer->acc || !tokenizer->acc_var)
+		return (1);
 	ft_strlcpy(cmd_cpy, cmd, tokenizer->size + 1);
 	tokenizer->command = cmd_cpy;
 	tokenizer->cmd_ptr = tokenizer->command;
 	tokenizer->cmd_i = 0;
-	tokenizer->acc = acc_alloc();
-	acc_init(tokenizer->acc, tokenizer->size);
-	tokenizer->acc_var = acc_alloc();
-	acc_init(tokenizer->acc_var, tokenizer->size);
+	if (acc_init(tokenizer->acc, tokenizer->size))
+		return (1);
+	if (acc_init(tokenizer->acc_var, tokenizer->size))
+		return (1);
 	tokenizer->state = NoQuote;
 	tokenizer->tokens = ft_lstinit();
+	if (!tokenizer->tokens)
+		return (1);
 	return (0); // errors
 }
 

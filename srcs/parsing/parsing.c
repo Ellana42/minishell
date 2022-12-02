@@ -1,6 +1,4 @@
 #include "parsing.h"
-// TODO all cases tokens
-// TODO clean if return 1
 
 t_parser	*parse_string(char *str)
 {
@@ -10,8 +8,10 @@ t_parser	*parse_string(char *str)
 	parser = parser_alloc();	
 	if (!parser)
 		return (NULL);
-	parser_init(parser, str);
-	parser_tokenize_string(parser);
+	if (parser_init(parser, str))
+		return (parser);
+	if (parser_tokenize_string(parser))
+		return (parser);
 	error = 0;
 	while ((!parser_is_eol(parser)) && (!error))
 		error = parse(parser);
@@ -22,4 +22,3 @@ t_parser	*parse_string(char *str)
 	}
 	return (parser);
 }
-
