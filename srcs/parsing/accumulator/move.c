@@ -10,9 +10,9 @@ int	acc_move(t_acc *acc)
 void	acc_reset(t_acc *acc)
 {
 	int	i;
-	
+
 	i = 0;
-	while (i < acc->size)
+	while (i <= acc->size)
 	{
 		(acc->acc)[i] = '\0';
 		i++;
@@ -43,8 +43,10 @@ int	acc_concat(t_acc *acc, char *str)
 	new_size = acc->size + len_str;
 
 	tmp = (char *)malloc(sizeof(char) * (new_size + 1)); // TODO check malloc
+	mem_clean(tmp, new_size + 1);
 	str_cpy(acc->acc, tmp);
 	str_cat(str, tmp);
+	free(acc->acc);
 	acc->acc = tmp;
 	acc->size = new_size;
 	acc->i += len_str;

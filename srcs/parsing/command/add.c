@@ -3,10 +3,8 @@
 char	*_new_str(char *str)
 {
 	char	*tmp;
-	size_t	size;
 
-	size = ft_strlen(str);
-	tmp = (char *)malloc(sizeof(char) * (size + 1));
+	tmp = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
 	str_cpy(str, tmp);
 	return (tmp);
 }

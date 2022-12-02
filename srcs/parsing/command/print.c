@@ -27,4 +27,3 @@ void	command_print(t_command *command)
 	printf("\n");
 	printf("\n");
 }
-

@@ -2,6 +2,7 @@
 # define TOKEN_H
 
 # include "../../../libft/includes/libft.h"
+# include "../utils/utils.h"
 
 typedef enum s_token_type{Str = 0, Pipe = 1, Out = 2, Outa = 3, In = 4, Ina = 5, Eol = 6}	t_token_type;
 

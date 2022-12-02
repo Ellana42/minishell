@@ -10,18 +10,15 @@ t_token	*token_alloc(void)
 
 int	token_init(t_token *token, t_token_type type, char *str)
 {
-	char	*str_cpy;
-	size_t		size;
+	char	*dst;
 
-	size = 0;
 	token->type = type;
 	token->str = NULL;
 	if (token->type == Str)
 	{
-		size = ft_strlen(str);
-		str_cpy = (char *)malloc(sizeof(char) * (size + 1));
-		ft_strlcpy(str_cpy, str, size + 1);
-		token->str = str_cpy;
+		dst = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
+		str_cpy(str, dst);
+		token->str = dst;
 	}
 	return (0); // TODO errors
 }

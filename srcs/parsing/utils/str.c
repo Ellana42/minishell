@@ -14,15 +14,9 @@ void	str_clean(char *str, size_t len)
 
 int str_cpy(char *str, char *dst)
 {
-	if (!str || !dst)
-		return (0);
-	while (*str)
-	{
-		*dst = *str;
-		str++;
-		dst++;
-	}
-	dst = 0;
+	if (!str)
+		return (1);
+	ft_strlcpy(dst, str, ft_strlen(str) + 1);
 	return (0);
 }
 
