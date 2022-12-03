@@ -1,6 +1,4 @@
 #include "parsing.h"
-// TODO all cases tokens
-// TODO clean if return 1
 
 int	main(int ac, char **av)
 {
