@@ -42,7 +42,9 @@ int	acc_concat(t_acc *acc, char *str)
 	len_str = ft_strlen(str);
 	new_size = acc->size + len_str;
 
-	tmp = (char *)malloc(sizeof(char) * (new_size + 1)); // TODO check malloc
+	tmp = (char *)malloc(sizeof(char) * (new_size + 1));
+	if (!tmp)
+		return (1);
 	mem_clean(tmp, new_size + 1);
 	str_cpy(acc->acc, tmp);
 	str_cat(str, tmp);

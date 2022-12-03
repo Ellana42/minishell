@@ -11,7 +11,8 @@ int	tokenize_quotev(t_tokenizer *tokenizer)
 		return (0);
 	}
 	tokenizer->state = Quote;
-	tokenizer_acc_concat(tokenizer, getenv(acc_get(tokenizer->acc_var))); 
+	if (tokenizer_acc_concat(tokenizer, getenv(acc_get(tokenizer->acc_var)))) 
+		return (1);
 	reset_acc_var(tokenizer);
 	return (0);
 }

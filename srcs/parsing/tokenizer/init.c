@@ -30,7 +30,7 @@ int	tokenizer_init(t_tokenizer *tokenizer, char *cmd)
 	tokenizer->tokens = ft_lstinit();
 	if (!tokenizer->tokens)
 		return (1);
-	return (0); // errors
+	return (0);
 }
 
 void tokenizer_dispose(t_tokenizer *tokenizer)
@@ -38,7 +38,7 @@ void tokenizer_dispose(t_tokenizer *tokenizer)
 	free(tokenizer->command);
 	acc_destroy(tokenizer->acc);
 	acc_destroy(tokenizer->acc_var);
-	ft_lstclear(tokenizer->tokens, &token_destroy); // TODO cast (void *)token_destroy(void *)
+	ft_lstclear(tokenizer->tokens, &token_destroy);
 	free(tokenizer->tokens);
 }
 

@@ -19,6 +19,7 @@ int	tokenizer_accumulate(t_tokenizer *tokenizer)
 
 int	tokenizer_acc_concat(t_tokenizer *tokenizer, char *str)
 {
-	acc_concat(tokenizer->acc, str);
+	if (acc_concat(tokenizer->acc, str))
+		return (1);
 	return (0);
 }
