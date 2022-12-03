@@ -15,8 +15,12 @@ t_parser	*parse_string(char *str)
 		return (parser);
 	parser->error = ParserNoError;
 	error = 0;
+	if (parser_is_eol(parser))
+		return (parser);
 	while ((!parser_is_eol(parser)) && (!error))
 		error = parse(parser);
+	if (parser->error == ParserNoError && parser->state != pParams)
+		parser->error = ParserSyntaxError;
 	if (parser->command)
 	{
 		commands_push(parser->commands, parser->command);
