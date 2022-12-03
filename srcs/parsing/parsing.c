@@ -23,7 +23,11 @@ t_parser	*parse_string(char *str)
 		parser->error = ParserSyntaxError;
 	if (parser->command)
 	{
-		commands_push(parser->commands, parser->command);
+		if (commands_push(parser->commands, parser->command))
+		{
+			parser->error = ParserAllocError;
+			return (parser);
+		}
 		parser->command = NULL;
 	}
 	return (parser);
