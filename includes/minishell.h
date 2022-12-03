@@ -6,14 +6,14 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:31:12 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/02 16:30:40 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/03 12:20:59 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft/includes/libft.h"
+# include "libft.h"
 
 # include <unistd.h>
 # include <stdio.h>
@@ -24,17 +24,21 @@
 
 // PIPEX
 
-typedef struct	s_structure
+typedef struct	s_data
 {
 	int		argc;
 	char	**argv;
 	char	**envp;
+	char	**array_of_paths;
+	char	*path_ultime;
 	int		*pipefd;
 	int		nbr_commands;
 	int		fd_in;
 	int		fd_out;
 	int		child;
-}	t_structure;
+	int		*pids;
+	int		here_doc;
+}	t_data;
 
 // GNL
 

@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:45:04 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/01 21:27:24 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/03 12:05:37 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 char	*find_path(t_data *data)
 {
-	char		**array_of_paths;
-	char		*path_ultime;
 	int			i;
 	char		*temp;
 

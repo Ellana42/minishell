@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 16:07:40 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/02 16:30:17 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/03 12:34:48 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,67 @@
 
 // Créer un pipe (cad une paire de fds) pour chaque commande
 
-void	create_pipes(t_structure *structure)
+void	create_pipes(t_data *data)
 {
 	int	i;
 	i = 0;
 
-	while (i < structure->nbr_commands - 1) // On boucle tant qu'on n'a pas atteint le nombre d'arguments entrés par l'user
+	while (i < data->nbr_commands - 1) // On boucle tant qu'on n'a pas atteint le nombre d'arguments entrés par l'user
 	{
-		if (pipe(structure->pipefd + 2 * i) == -1) // Création d'une paire de fd (pipe) pour chaque fils
+		if (pipe(data->pipefd + 2 * i) == -1) // Création d'une paire de fd (pipe) pour chaque fils
 			return (-1); // remplacer par msg d'erreur
 		i++;
 	}
 }
 
-// Initialisation "propre" de notre structure
-// On pourra call cette fonction avant d'utiliser les valeurs de notre structure
+// Initialisation "propre" de notre data
+// On pourra call cette fonction avant d'utiliser les valeurs de notre data
 // -1 pour les variables qui ne sont pas des strings car 0 est une valeur possible de fd
 
-void	clean_init_structure(void)
+void	clean_init_data(void)
 {
-	t_structure	structure;
+	t_data	data;
 	
-	structure.argc = -1;
-	structure.argv = NULL;
-	structure.envp = NULL;
-	structure.pipefd = NULL;
-	structure.nbr_commands = -1;
-	structure.input = -1;
-	structure.output = -1;
-	structure.fd_in = -1;
-	structure.fd_out = -1;
-	structure.child = -1;
-	structure.cmd = NULL;
+	data.argc = -1;
+	data.argv = NULL;
+	data.envp = NULL;
+	data.path_ultime = NULL;
+	data.array_of_paths = NULL;
+	data.pipefd = NULL;
+	data.nbr_commands = -1;
+	data.input = -1;
+	data.output = -1;
+	data.fd_in = -1;
+	data.fd_out = -1;
+	data.child = -1;
+	data.pids = NULL;
+	data.cmd = NULL;
+	data.heredoc = 0;
 
-	return (structure);
+	return (data);
 }
 
-t_structure	init_structure(int argc, char **argv, char **envp)
+t_data	init_data(int argc, char **argv, char **envp)
 {
-	t_structure	structure;
-	structure = clean_init_structure;
+	t_data	data;
+	data = clean_init_data;
 
-	structure.argc = argc;
-	structure.argv = argv;
-	structure.envp = envp;
+	data.argc = argc;
+	data.argv = argv;
+	data.envp = envp;
 
-	if (!ft_strncmp())
+	if (ft_strncmp("here_doc", argv[1], 9) == 0) // Si here_doc == argv[1]
+		data.heredoc = 1;
+	get_input_file(&data);
+	get_output_file(&data);
+
+	data.nbr_commands = argc - 3 - data.heredoc;
+	data.pids = malloc(sizeof * data.pipe * 2 * (data.nbr_commands - 1));
+
+	if (!data.pipe)
+		error(msg("Pipe error", "", "", 1), &data);
+
+	create_pipes(&data);
+
+	return (data);
 }
