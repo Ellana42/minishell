@@ -6,6 +6,8 @@ int	tokenizer_push_pipe(t_tokenizer *tokenizer)
 	t_list	*lst;
 
 	token = token_alloc();
+	if (!token)
+		return (1);
 	if (token_init(token, Pipe, NULL))
 		return (1);
 	lst = ft_lstnew((void *)token);
@@ -21,6 +23,8 @@ int	tokenizer_push_string(t_tokenizer *tokenizer)
 	t_list	*lst;
 
 	token = token_alloc();
+	if (!token)
+		return (1);
 	if (token_init(token, Str, tokenizer->acc->acc))
 		return (1);
 	lst = ft_lstnew((void *)token);
@@ -33,6 +37,8 @@ int	tokenizer_push_string(t_tokenizer *tokenizer)
 int	tokenizer_push_eol(t_tokenizer *tokenizer)
 {
 	t_token	*token;
+	if (!token)
+		return (1);
 	t_list	*lst;
 
 	token = token_alloc();
