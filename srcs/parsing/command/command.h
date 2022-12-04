@@ -8,10 +8,10 @@
 typedef struct s_command{
 	char *command;
 	t_list **args;
-	t_list **out; // pour > 
-	t_list **out_a; // pour >>
-	t_list **in; // pour < 
-	t_list **in_a; // pour <<
+	t_list **out;
+	t_list **out_a;
+	t_list **in;
+	t_list **in_a;
 } t_command;
 
 t_command	*command_alloc(void);

@@ -7,6 +7,7 @@ char tokenizer_get_char(t_tokenizer *tokenizer)
 
 char tokenizer_get_next_char(t_tokenizer *tokenizer, int s)
 {
-	// TODO Gestion d'erreur 
+	if (tokenizer->cmd_i + s > tokenizer->size)
+		return (0);
 	return ((tokenizer->cmd_ptr)[s]);
 }

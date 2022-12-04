@@ -17,6 +17,8 @@ int	token_init(t_token *token, t_token_type type, char *str)
 	if (token->type == Str)
 	{
 		dst = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
+		if (!dst)
+			return (1);
 		str_cpy(str, dst);
 		token->str = dst;
 	}
