@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 12:47:53 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/04 15:43:25 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/04 15:52:47 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_data
 // PIPEX
 
 char    *get_cmd(char *cmd, t_data *data);
-t_data	init(int ac, char **av, char **envp);
+t_data	init_struct(int ac, char **av, char **envp);
 void	get_input_file(t_data *data);
 void	get_output_file(t_data *data);
 void	get_heredoc(t_data *data);
