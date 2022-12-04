@@ -13,21 +13,18 @@ t_parser	*parse_string(char *str)
 		return (parser);
 	if (parser_tokenize_string(parser))
 		return (parser);
-	parser->error = ParserNoError;
+	parser_set_error(parser, ParserNoError);
 	error = 0;
 	if (parser_is_eol(parser))
 		return (parser);
 	while ((!parser_is_eol(parser)) && (!error))
 		error = parse(parser);
 	if (parser->error == ParserNoError && parser->state != pParams)
-		parser->error = ParserSyntaxError;
+		parser_set_error(parser, ParserSyntaxError);
 	if (parser->command)
 	{
 		if (commands_push(parser->commands, parser->command))
-		{
-			parser->error = ParserAllocError;
-			return (parser);
-		}
+			return (parser_set_error(parser, ParserAllocError));
 		parser->command = NULL;
 	}
 	return (parser);
