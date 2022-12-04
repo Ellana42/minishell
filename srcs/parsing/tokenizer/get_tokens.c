@@ -2,8 +2,8 @@
 
 t_token	*tokenizer_get_token(t_tokenizer *tokenizer, int i)
 {
-	int	j;
-	t_list *current_token;
+	int		j;
+	t_list	*current_token;
 
 	j = 0;
 	if (!tokenizer->tokens)

@@ -33,7 +33,7 @@ int	tokenizer_init(t_tokenizer *tokenizer, char *cmd)
 	return (0);
 }
 
-void tokenizer_dispose(t_tokenizer *tokenizer)
+void	tokenizer_dispose(t_tokenizer *tokenizer)
 {
 	free(tokenizer->command);
 	acc_destroy(tokenizer->acc);
@@ -42,7 +42,7 @@ void tokenizer_dispose(t_tokenizer *tokenizer)
 	free(tokenizer->tokens);
 }
 
-void tokenizer_free(t_tokenizer *tokenizer)
+void	tokenizer_free(t_tokenizer *tokenizer)
 {
 	free(tokenizer);
 }

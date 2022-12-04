@@ -6,7 +6,7 @@ t_parser	*parse_string(char *str)
 	int			error;
 	t_parser	*parser;
 
-	parser = parser_alloc();	
+	parser = parser_alloc();
 	if (!parser)
 		return (NULL);
 	if (parser_init(parser, str))

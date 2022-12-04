@@ -12,7 +12,7 @@ void	str_clean(char *str, size_t len)
 	}
 }
 
-int str_cpy(char *str, char *dst)
+int	str_cpy(char *str, char *dst)
 {
 	if (!str)
 		return (1);
@@ -20,7 +20,7 @@ int str_cpy(char *str, char *dst)
 	return (0);
 }
 
-int str_cat(char *str, char *dst)
+int	str_cat(char *str, char *dst)
 {
 	if (!str || !dst)
 		return (0);

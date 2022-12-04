@@ -7,8 +7,8 @@ t_token	*parser_get_token(t_parser *parser)
 
 int	parser_is_eol(t_parser *parser)
 {
-	t_token *token;
-	
+	t_token	*token;
+
 	token = parser_get_token(parser);
 	if (!token)
 		return (1);

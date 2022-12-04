@@ -18,12 +18,12 @@ int	acc_init(t_acc *acc, size_t size)
 	return (0);
 }
 
-void acc_dispose(t_acc *acc)
+void	acc_dispose(t_acc *acc)
 {
 	free(acc->acc);
 }
 
-void acc_free(t_acc *acc)
+void	acc_free(t_acc *acc)
 {
 	free(acc);
 }

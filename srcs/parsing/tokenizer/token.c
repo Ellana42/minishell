@@ -25,12 +25,12 @@ int	token_init(t_token *token, t_token_type type, char *str)
 	return (0);
 }
 
-void token_dispose(t_token *token)
+void	token_dispose(t_token *token)
 {
 	free(token->str);
 }
 
-void token_free(t_token *token)
+void	token_free(t_token *token)
 {
 	free(token);
 }

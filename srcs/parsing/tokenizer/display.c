@@ -8,7 +8,7 @@ void	_token_print(void *content)
 	token_print(token);
 }
 
-void	tokenizer_print_tokens(t_tokenizer *tokenizer)	
+void	tokenizer_print_tokens(t_tokenizer *tokenizer)
 {
 	ft_lstiter(*(tokenizer->tokens), &_token_print);
 }

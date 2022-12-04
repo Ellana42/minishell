@@ -37,10 +37,10 @@ int	tokenizer_push_string(t_tokenizer *tokenizer)
 int	tokenizer_push_eol(t_tokenizer *tokenizer)
 {
 	t_token	*token;
-	if (!token)
-		return (1);
 	t_list	*lst;
 
+	if (!token)
+		return (1);
 	token = token_alloc();
 	if (token_init(token, Eol, NULL))
 		return (1);

@@ -6,13 +6,13 @@ t_parser	*parser_alloc(void)
 
 	parser = (t_parser *)malloc(sizeof(t_parser));
 	if (!parser)
-		parser->error =	ParserUninitialized;
+		parser->error = ParserUninitialized;
 	return (parser);
 }
 
 int	parser_init(t_parser *parser, char *str)
 {
-	t_tokenizer *tokenizer;
+	t_tokenizer	*tokenizer;
 
 	tokenizer = tokenizer_alloc();
 	parser->commands = commands_alloc();
@@ -35,14 +35,14 @@ int	parser_init(t_parser *parser, char *str)
 	return (0);
 }
 
-void parser_dispose(t_parser *parser)
+void	parser_dispose(t_parser *parser)
 {
 	free(parser->command);
 	commands_destroy(parser->commands);
 	tokenizer_destroy(parser->tokenizer);
 }
 
-void parser_free(t_parser *parser)
+void	parser_free(t_parser *parser)
 {
 	free(parser);
 }

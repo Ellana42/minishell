@@ -48,19 +48,3 @@ t_list	**commands_get_i_outa(t_commands *commands, int i)
 	cmd = commands_get_i(commands, i);
 	return (cmd->out_a);
 }
-
-t_list	**commands_get_i_in(t_commands *commands, int i)
-{
-	t_command	*cmd;
-
-	cmd = commands_get_i(commands, i);
-	return (cmd->in);
-}
-
-t_list	**commands_get_i_ina(t_commands *commands, int i)
-{
-	t_command	*cmd;
-
-	cmd = commands_get_i(commands, i);
-	return (cmd->in_a);
-}

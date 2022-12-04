@@ -1,10 +1,9 @@
 #include "parsing.h"
-// TODO. test
 
 int	main(int ac, char **av)
 {
-	char *command = av[1];
-	t_parser *parser;
+	char		*command = av[1];
+	t_parser	*parser;
 
 	printf("\nThe command : %s\n\n", command);
 
