@@ -6,7 +6,6 @@ int	main(int ac, char **av)
 	t_parser	*parser;
 
 	printf("\nThe command : %s\n\n", command);
-
 	parser = parse_string(command);
 	if (parser->error != 0)
 		printf("Error %d\n", parser->error);

@@ -3,6 +3,7 @@
 int	tokenize_quotev(t_tokenizer *tokenizer)
 {
 	char	c;
+	char	*var;
 
 	c = tokenizer_get_char(tokenizer);
 	if (ft_isalnum(c) || c == '_')
@@ -11,7 +12,8 @@ int	tokenize_quotev(t_tokenizer *tokenizer)
 		return (0);
 	}
 	tokenizer->state = Quote;
-	if (tokenizer_acc_concat(tokenizer, getenv(acc_get(tokenizer->acc_var)))) 
+	var = getenv(acc_get(tokenizer->acc_var));
+	if (tokenizer_acc_concat(tokenizer, var))
 		return (1);
 	reset_acc_var(tokenizer);
 	return (0);

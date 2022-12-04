@@ -5,8 +5,8 @@
 
 int	main(int ac, char **av)
 {
-	char *command;
-	t_parser *parser;
+	char		*command;
+	t_parser	*parser;
 
 	while (1)
 	{
@@ -15,7 +15,6 @@ int	main(int ac, char **av)
 		if (!command)
 			return (1);
 		printf("\nThe command : %s\n\n", command);
-
 		parser = parse_string(command);
 		if (parser_get_error(parser) != 0)
 			printf("Error %d\n", parser_get_error(parser));

@@ -1,4 +1,3 @@
-
 #include "tokenize.h"
 
 int	tokenize_single_quote(t_tokenizer *tokenizer)
