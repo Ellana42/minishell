@@ -73,11 +73,11 @@ pwd
 - la tester dans differents directories
 
 Path relatif
-- executer les commandes mais cette fois comme paths relatifs
-- repeter plusieurs fois dans differents directories avec des paths relatifs complexes (beaucoup de ..)
+- executer les commandes mais cette fois comme array_of_paths relatifs
+- repeter plusieurs fois dans differents directories avec des array_of_paths relatifs complexes (beaucoup de ..)
 
 Path d'environnement
-- Executer les commandes mais cette fois sans aucuns paths (ls, wc, awk, etc.)
+- Executer les commandes mais cette fois sans aucuns array_of_paths (ls, wc, awk, etc.)
 - Unset le $PATH et checker si marche toujours
 - Set le $PATH a des repertoires differents (directory1:directory2) et verifier que les repertoires sont checkes
   dans l'odre de gauche a droite

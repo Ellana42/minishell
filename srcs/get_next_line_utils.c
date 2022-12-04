@@ -6,11 +6,11 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:00:35 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/02 15:44:34 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/04 12:53:27 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "pipex.h"
 
 int	contains_newline(const char *s)
 {
@@ -72,7 +72,7 @@ void	*ft_malloc_zero(size_t count, size_t size)
 	return (r);
 }
 
-void	free_strs(char **str1, char **str2, char **str3)
+void	free_strs_three(char **str1, char **str2, char **str3)
 {
 	if (str1 && *str1)
 	{

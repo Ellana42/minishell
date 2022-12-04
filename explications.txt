@@ -1,0 +1,65 @@
+Pipe : rediriger la sortie standard d'un processus vers l'entree standard d'un autre
+
+cat test.txt | wc -l : redirection de la stdout de cat vers la stdin de wc
+
+Normalement cat test.txt affiche le contenu dans la stdout (terminal) mais ici le resultat sera
+envoye dans un tube où wc ira piocher ses donnes plutot que dans la stdin
+
+./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
+< file1 cmd1 | cmd2 | cmd3 ... | cmdn > file2
+
+./pipex here_doc LIMITER cmd cmd1 file
+cmd << LIMITER | cmd1 >> file
+
+-------------------------------------------------------------------------------------------------
+I) Exécuter une commande shell
+
+int execve(const char *pathname, char *const argv[], char *const envp[]);
+
+Execute un programme depuis notre programme actuel.
+Le processus existant est remplacé par le nouveau appelé.
+
+- pathname : path de la commande que l'on veut executer
+- argv[] : arguments possibles de la commande
+- envp[] : pointeur vers les variables d’environnement de notre ordi
+
+Ne retourne rien si succes, sinon (-1)
+
+-------------------------------------------------------------------------------------------------
+II) Trouver les exécutables des commandes
+
+1) Extraire PATH de l'envp
+2) Stocker les différents paths dans un **tableau
+3) Rendre les paths accessibles & executables afin de pouvoir utiliser access()
+4) Retourner le path qui nous intéresse
+
+-------------------------------------------------------------------------------------------------
+III) Gérer le heredoc
+
+Heredoc = string fournie à la stdin qui s'affiche sur la stdout
+
+Dans Pipex, le '<<' est remplacé par here_doc
+
+Le output file n'est pas écrasé s'il existe déjà, on y rajoute le résultat
+--> ouvrir le outputfile différement selon qu'un here_doc est spécifié ou non
+--> si spécifié : O_APPEND au lieu de O_TRUNC
+
+On va utiliser char	*get_next_line(int fd) pour récupérer les lignes entrées par l'user (stdin donc fd[0])
+On va stocker ces lignes dans un fichier temporaire qu'on utlisera par la suite comme fichier d'entrée
+
+Plan :
+1) Ouvrir un fichier temporaire (O_CREAT | O_WRONLY | O_TRUNC, 644)
+2) Lire chaque ligne de la stdin en boucle
+3) Comparer chaque ligne au LIMITER
+	- si ligne == LIMITER --> break ;
+	- si ligne != LIMITER --> la stocker dans le fichier tempo
+4) close fichier tempo
+5) ouvrir le fichier tempo en O_RDONLY
+6) dup2() le fd du fichier tempo sur la stdin
+-------------------------------------------------------------------------------------------------
+IV) Gérer les erreurs
+
+variable errno : int fournissant des informations sur l'échec d'un appel système
+
+char *strerror(int errnum) va nous permettre de traduire le code d'erreur en string.
+On lui fournira errno.

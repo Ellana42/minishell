@@ -87,4 +87,3 @@ char *strerror(int errnum);
 
 On va fournir la variable errno en parametre, et le code d'erreur sera traduit en string.
 Renvoie la string.
-

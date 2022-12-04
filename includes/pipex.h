@@ -1,44 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 16:31:12 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/03 12:20:59 by lsalin           ###   ########.fr       */
+/*   Created: 2022/12/04 12:47:53 by lsalin            #+#    #+#             */
+/*   Updated: 2022/12/04 15:43:25 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef PIPEX_H
+# define PIPEX_H
 
-# include "libft.h"
+//#include "libft.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <sys/wait.h>
-# include <errno.h>
 # include <fcntl.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <sys/wait.h>
+# include <string.h>
+# include <errno.h>
 
-// PIPEX
-
-typedef struct	s_data
+typedef struct s_data
 {
 	int		argc;
-	char	**argv;
-	char	**envp;
-	char	**array_of_paths;
+    char	**argv;
+    char	**envp;
+    char	**array_of_paths;
 	char	*path_ultime;
-	int		*pipefd;
-	int		nbr_commands;
+    int		nbr_commands;
+    int		*pipefd;
+	int		heredoc;
 	int		fd_in;
 	int		fd_out;
 	int		child;
 	int		*pids;
-	int		here_doc;
-}	t_data;
+}		t_data;
+
+// PIPEX
+
+char    *get_cmd(char *cmd, t_data *data);
+t_data	init(int ac, char **av, char **envp);
+void	get_input_file(t_data *data);
+void	get_output_file(t_data *data);
+void	get_heredoc(t_data *data);
+void	error(int error_status, t_data *data);
+int		msg(char *str1, char *str2, char *str3, int erno);
+void	close_fds(t_data *data);
+void	free_strs(char *str, char **strs);
 
 // GNL
 
@@ -59,5 +70,6 @@ char	*get_after_newline(const char *s);
 int		contains_newline(const char *s);
 char	*join_strs(const char *s1, const char *s2);
 void	*ft_malloc_zero(size_t count, size_t size);
+void	free_strs_three(char **str, char **str2, char **str3);
 
 #endif

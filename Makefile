@@ -1,36 +1,56 @@
-CC		= gcc
-CFLAGS	= -Wall -Werror -Wextra
-NAME	= minishell
+NAME		=	pipex
 
-SRC_PATH = srcs/
-OBJ_PATH = obj/
+CC			=	gcc
+CFLAGS		=	-Werror -Wextra -Wall
 
-SRC		= pipex.c \
-		paths.c \
-		utils.c \
+LIBFT_PATH	=	libft/
+LIBFT_NAME	=	libft.a
+LIBFT		=	$(LIBFT_PATH)$(LIBFT_NAME)
 
-SRCS	= $(addprefix $(SRC_PATH), $(SRC))
-OBJ		= $(SRC:.c=.o)
-OBJS	= $(addprefix $(OBJ_PATH), $(OBJ))
-INCS	= -I ./includes/
+INC			=	-I ./includes/\
+				-I ./libft/\
 
-all: $(OBJ_PATH) $(NAME) 
+SRC_PATH	=	srcs/
+
+SRC			=	main.c \
+				get_next_line.c \
+				get_next_line_utils.c \
+				here_doc.c \
+				init.c \
+				main.c \
+				paths.c \
+				utils.c \
+
+SRCS		=	$(addprefix $(SRC_PATH), $(SRC))
+
+OBJ_PATH	=	obj/
+OBJ			=	$(SRC:.c=.o)
+OBJS		=	$(addprefix $(OBJ_PATH), $(OBJ))
+
+all: $(LIBFT) $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCS)
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+
+$(OBJS): $(OBJ_PATH)
 
 $(OBJ_PATH):
-	mkdir $(OBJ_PATH)
+	@mkdir $(OBJ_PATH)
+
+$(LIBFT):
+	@make -sC $(LIBFT_PATH)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INC)
 
 clean:
-	rm -rf $(OBJ_PATH)
+	@rm -rf $(OBJ_PATH)
+	@make clean -C $(LIBFT_PATH)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@rm -f $(LIBFT_PATH)$(LIBFT_NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all re clean fclean

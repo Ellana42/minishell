@@ -6,11 +6,11 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:09:10 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/03 12:40:20 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/04 15:43:32 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "pipex.h"
 
 // Ferme les extremites lecture & ecriture des 2 fds de chaque pipe
 
@@ -20,10 +20,10 @@ void	close_pipe_fds(t_data *data)
 	i = 0;
 
 	while ((i < data->nbr_commands - 1) * 2)
-	(
-		close(data->pipefd[i])
+	{
+		close(data->pipefd[i]);
 		i++;
-	)
+	}
 }
 
 // Ferme tous les fd ouverts
@@ -33,15 +33,14 @@ void	close_fds(t_data *data)
 	if (data->fd_in != -1)
 		close(data->fd_in);
 
-	if (data->fd_in != -1)
+	if (data->fd_out != -1)
 		close(data->fd_out);
 
 	close_pipe_fds(data);
 }
 
 // En cas d'erreur, free & ferme les fds ouverts
-// Détruit le fichier temporaire du heredoc avant que le programme se termine
-// Programme qui se termine = processus "terminé" via fonction exit()
+// Détruit le fichier temporaire du heredoc puis termine le programme
 
 void	error(int error_status, t_data *data)
 {
@@ -59,7 +58,7 @@ void	error(int error_status, t_data *data)
 			free_strs(data->path_ultime, data->array_of_paths);
 	}
 
-	if (data->here_doc == 1)
+	if (data->heredoc == 1)
 		unlink(".heredoc.tmp");
 
 	exit(error_status);
@@ -82,15 +81,15 @@ void	free_strs(char *str, char **strs)
 {
 	int	i;
 
-	if (str)
+	if (str != NULL)
 	{
 		free(str);
 		str = NULL;
 	}
-	if (strs)
+	if (strs != NULL)
 	{
 		i = 0;
-		while (strs[i])
+		while (strs[i] != '\0')
 		{
 			free(strs[i]);
 			i++;
