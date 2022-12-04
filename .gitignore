@@ -56,3 +56,4 @@ minishell
 *.pdf
 *.md
 tags
+*cscope*
