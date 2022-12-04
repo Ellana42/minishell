@@ -22,7 +22,7 @@ int	token_init(t_token *token, t_token_type type, char *str)
 		str_cpy(str, dst);
 		token->str = dst;
 	}
-	return (0); // TODO errors
+	return (0);
 }
 
 void token_dispose(t_token *token)

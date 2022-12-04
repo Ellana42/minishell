@@ -4,7 +4,7 @@ int	parser_tokenize_string(t_parser *parser)
 {
 	while (!tokenizer_eol(parser->tokenizer))
 	{
-		if (tokenize(parser->tokenizer))
+	if (tokenize(parser->tokenizer))
 		{
 			parser->error = ParserAllocError;
 			return (1);
