@@ -53,5 +53,6 @@ int			parse_outa(t_parser *parser);
 int			parse_in(t_parser *parser);
 int			parse_ina(t_parser *parser);
 t_parser	*parser_set_error(t_parser *parser, t_parser_error error);
+int			parser_set_error_return(t_parser *parser, t_parser_error error);
 
 #endif
