@@ -15,7 +15,11 @@ int	parse_start(t_parser *parser)
 	if (token->type == Str) 
 	{
 		command = command_alloc();
-		command_init(command, token->str);
+		if (command_init(command, token->str))
+		{
+			parser->error = ParserAllocError;
+			return (1);
+		}
 		parser->command = command;
 		parser_move_cursor(parser);
 		parser->state = pParams;

@@ -19,7 +19,6 @@ int	tokenize_noquotev(t_tokenizer *tokenizer)
 
 int	tokenize_noquote(t_tokenizer *tokenizer)
 {
-	// TODO split func
 	if (tokenizer_get_char(tokenizer) == '$' && tokenizer_get_next_char(tokenizer, 1) == '?')
 	{
 		// TODO gérer ? attention taille acc 

@@ -13,6 +13,8 @@ int	command_init(t_command *command, char *cmd)
 	char	*cmd_cpy;
 
 	cmd_cpy = (char *)malloc(sizeof(char) * (ft_strlen(cmd) + 1));
+	if (!cmd_cpy)
+		return (1);
 	str_cpy(cmd, cmd_cpy);
 	command->command = cmd_cpy;
 	command->args = ft_lstinit();
@@ -20,7 +22,11 @@ int	command_init(t_command *command, char *cmd)
 	command->out_a = ft_lstinit();
 	command->in = ft_lstinit();
 	command->in_a = ft_lstinit();
-	return (0); // errors
+	if (!command->args || !command->out || !command->in)
+		return (1);
+	if (!command->out_a || !command->in_a)
+		return (1);
+	return (0);
 }
 
 void	_free_string(void *str)
