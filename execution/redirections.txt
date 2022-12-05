@@ -1,0 +1,42 @@
+-------------------------------------------------------------------------------------------------------
+Notions generales
+
+On utilise les redirections pour ouvrir et fermer des fichiers
+
+[n] operateur mot
+
+Les fichiers ouverts sont representes par des chiffres (descripteurs de fichiers)
+
+entrée standard (0) (stdin)
+sortie standard (1) (stdout)
+sortie d'erreur (2) (stderr)
+
+Si echec ouverture/creation fichier --> echec redirection
+
+Lorsqu'on launch/cree un processus, Linux va ouvrir un certain descripteur de fichier pour nous
+
+-------------------------------------------------------------------------------------------------------
+Rediriger l'entree (<)
+
+[n] < mot
+
+Provoque l'ouverture en lecture du fichier mot
+
+-------------------------------------------------------------------------------------------------------
+Rediriger la sortie (>)
+
+[n] > mot
+
+Si pas de n, rediriger sur sortie standard
+
+Si le fichier mot n'existe pas --> creation (et donc creation d'un fd)
+Sinon il est ecrase pour etre un fichier vide apres avoir ete ouvert
+
+-------------------------------------------------------------------------------------------------------
+Rediriger la sortie en mode append (ajoute) (>>)
+
+[n] >> mot
+
+Provoque l'ouverture en lecture du fichier mot.
+Le fichier est ouvert comme si open() etait call avec le O_APPEND
+Cree le fichier s'il n'existe pas

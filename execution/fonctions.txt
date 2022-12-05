@@ -1,0 +1,89 @@
+int execve(const char *file, char *const argv[], char *const envp[]);
+
+Execute un programme depuis notre programme actuel.
+Le processus existant est remplacé par le nouveau appelé.
+
+- pathname : path de la commande qu’on veut executer
+- argv[] : arguments possibles de la commande
+- envp[] : pointeur vers les variables d’environnement de notre ordi
+
+Ne retourne rien si succes, sinon (-1)
+
+-----------------------------------------------------------------------------------------------------
+int access(const char *pathname, int mode);
+
+Verifie l'acces a un fichier.
+- F_OK : teste si le fichier existe
+- R_OK : teste si le fichier est accessible en lecture
+- W_OK : teste si le fichier est accessible en ecriture
+- X_OK : teste si le fichier est accessible pour l'execution
+
+Renvoie 0 si succes, -1 si echec (errno contient le code d'erreur)
+
+-----------------------------------------------------------------------------------------------------
+pid_t fork(void);
+
+Creer un processus fils, clone du processus pere.
+
+Valeur de retour : pid de type int.
+Vaut -1 si echec, retourne 0 chez le fils et retourne le pid du fils au pere si succes
+
+-----------------------------------------------------------------------------------------------------
+pid_t waitpid(pid_t pid, int *status, int options);
+
+Suspend l'execution du processus appelant jusqu'a ce que le fils specifie par le pid change d'etat.
+
+Valeurs possibles du pid :
+• < -1 : attendre la fin de n’importe quel processus fils dont le GID = valeur absolue du PID
+• - 1 : attendre n’importe quel processus fils
+• 0 : attendre la fin de n’importe quel processus fils dont le GID = GID du processus appelant
+• > 0 : attendre la fin du processus numero pid
+
+*status : pointe sur un entier nous permettant de recuperer des infos sur la facon dont s'est termine
+le processus fils
+
+- WIFEXITED(status) renvoie vrai si le fils s'est termine normalement (via retour du main ou code d'erreur)
+- WEXITSTATUS(status) renvoie le code de sortie du fils (indique si tout s'est bien passe ou erreur).
+  N'est evaluee que si WIFEXITED a return vrai.
+
+Renvoie le pid du fils qui s'est termine si succes, sinon renvoie (-1).
+-----------------------------------------------------------------------------------------------------
+int pipe(int pipefd[2]);
+
+Creer un tube de donnes permettant la communication entre deux processus.
+Les donnes ecrites sur l'extremite ecriture du tube sont stockees dans un buffer jusqu'a ce qu'elles soient 
+lues sur l'extremite lecture du tube.
+
+- pipefd[0] : bout lecture
+- pipefd[1] : bout ecriture
+
+Renvoie 0 si succes ou (-1) si echec.
+
+                [========]
+           +--> [  Père  ] -->---------+
+           |    [========]             |
+           |                           |
+           |                           |
+           |    +=================+    |
+pipefd[0]  +<-- |   Tube (Pipe)   | <--+  pipefd[1]
+(lecture)  |    +=================+    |  (écriture)
+           |                           |
+           |                           |
+           |    [========]             |
+           +--> [  Fils  ] -->---------+
+                [========]
+
+-----------------------------------------------------------------------------------------------------
+int dup2(int oldfd, int newfd);
+
+Transforme newfd en une copie de oldfd et renvoie le nouveau fd, ou (-1) si echec 
+(dans ce ca errno contient le code d'erreur).
+
+- Si oldfd pas valide --> appel echoue et newfd n'est pas close
+- Si oldfd valide et que newfd a la meme valeur que oldfd -->dup2() ne fait rien et renvoie newfd
+
+-----------------------------------------------------------------------------------------------------
+char *strerror(int errnum);
+
+On va fournir la variable errno en parametre, et le code d'erreur sera traduit en string.
+Renvoie la string.
