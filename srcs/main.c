@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:37:18 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/04 19:49:55 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/05 11:49:00 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ static void	child(t_data *data)
 		error(msg(data->array_of_paths[0], ": ", strerror(errno), 1), data);
 }
 
-// Attends que les processus fils se terminent
-// Et récupère le statut du dernier fils
+// Attends que les processus fils se terminent et récupère le statut du dernier fils
 // Renvoie le code d'état de sortie du dernier fils
 
 static int	parent(t_data *data)
@@ -67,11 +66,11 @@ static int	parent(t_data *data)
 	while (data->child >= 0)
 	{
 		wpid = waitpid(data->pids[data->child], &status, 0);
-
+		// wpid = pid du child qui s'est terminé
 		if (wpid == data->pids[data->nbr_commands - 1])
 		{
-			if ((data->child == (data->nbr_commands - 1) && WIFEXITED(status)))
-				exit_code = WEXITSTATUS(status);
+			if ((data->child == (data->nbr_commands - 1) && (WIFEXITED(status) != 0)))
+				exit_code = WEXITSTATUS(status); // exit_code = code de sortie du fils
 		}
 		data->child--;
 	}
@@ -81,7 +80,7 @@ static int	parent(t_data *data)
 	return (exit_code);
 }
 
-// Créer un pipe, fork et call la fonction parent() pour attendre que ces processus
+// Créer un pipe, fork et call la fonction parent() pour attendre que les processus
 // fils finissent leurs tâches avant de se terminer
 // Renvoie le code de sortie du dernier fils
 
@@ -120,6 +119,9 @@ static int	pipex(t_data *data)
 
 	return (exit_code);
 }
+
+// Parse les arguments, initialise la structure et launch ./pipex
+// Renvoie le code de sortie du dernier fils, considéré comme le code de sortie de Pipex
 
 int	main(int argc, char **argv, char **envp)
 {

@@ -56,8 +56,65 @@ Plan :
 4) close fichier tempo
 5) ouvrir le fichier tempo en O_RDONLY
 6) dup2() le fd du fichier tempo sur la stdin
+
 -------------------------------------------------------------------------------------------------
-IV) Gérer les erreurs
+IV) Gérer le multipipe
+
+Boucler sur la création de processus fils tant que le nombre de commandes de l'user n'est pas atteint.
+
+Problème : les processus fils étant lancés simultanément, ils vont batailler pour chacun lire et écrire
+dans le pipe.
+L'un d'eux finira par attendre une entrée qui ne vient jamais.
+
+Solution : créer un pipe (= paire de fds) pour chaque processus fils.
+Ainsi, le premier fils va lire dans le inputfile et écrire dans la sortie de son propre pipe.
+Le deuxième fils va lire dans le fd[0] du premier fils et écrire dans sa propre sortie (fd[3]) etc
+
+INDEX FILS	FD LECTURE	FD ECRITURE
+	0			File		1
+	1			0			3
+	2			2			5
+	3			4			File
+
+Tous les fils excepte le 1er lisent depuis le pipefd[2 * index - 2]
+Tous les fils excepte le dernier ecrivent sur le pipedfd[2 * index + 1]
+
+Fichier entrée
+==============
+    |
+    |   +--------+
+    +-->| Fils 0 |---+
+        +--------+   |
+                     |
+  fd 0  +========+   |
+    +---| TUBE 0 |<--+
+    |   +========+  fd 1
+    |
+    |   +--------+
+    +-->| Fils 1 |---+
+        +--------+   |
+                     |
+  fd 2  +========+   |
+    +---| TUBE 1 |<--+
+    |   +========+  fd 3
+    |
+    |   +--------+
+    +-->| Fils 2 |---+
+        +--------+   |
+                     |
+  fd 4  +========+   |
+    +---| TUBE 2 |<--+
+    |   +========+  fd 5
+    |
+    |   +--------+
+    +-->| Fils 3 |---+
+        +--------+   |
+                     |
+                     V
+                ==============
+                Fichier sortie
+-------------------------------------------------------------------------------------------------
+V) Gérer les erreurs
 
 variable errno : int fournissant des informations sur l'échec d'un appel système
 
