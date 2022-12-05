@@ -10,7 +10,7 @@ int	main(int ac, char **av)
 
 	while (1)
 	{
-		command = readline("minishell -> ");
+		command = readline("$> ");
 		add_history(command);
 		if (!command)
 			return (1);
