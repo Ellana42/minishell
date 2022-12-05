@@ -21,15 +21,15 @@ int	tokenize_noquotev(t_tokenizer *tokenizer)
 
 int	tokenize_noquote(t_tokenizer *tokenizer)
 {
-	if (tokenizer_get_char(tokenizer) == '$' && tokenizer_get_next_char(tokenizer, 1) == '?')
-	{
-		// TODO gérer ? attention taille acc 
-		tokenizer_move_cursor(tokenizer);
-		tokenizer_move_cursor(tokenizer);
-		return (0);
-	}
 	if (tokenizer_get_char(tokenizer) == '$')
 	{
+		if (tokenizer_get_next_char(tokenizer, 1) == '?')
+		{
+			// TODO gérer ? attention taille acc 
+			tokenizer_move_cursor(tokenizer);
+			tokenizer_move_cursor(tokenizer);
+			return (0);
+		}
 		tokenizer->state = NoQuoteV;
 		tokenizer_move_cursor(tokenizer);
 		return (0);
@@ -46,8 +46,18 @@ int	tokenize_noquote(t_tokenizer *tokenizer)
 		tokenizer_move_cursor(tokenizer);
 		return (0);
 	}
-	if (tokenizer_get_char(tokenizer) == '|' && tokenizer_is_empty_acc(tokenizer))
+	if (tokenizer_get_char(tokenizer) == '|')
 	{
+		if (tokenizer_is_empty_acc(tokenizer))
+		{
+			if (tokenizer_push_pipe(tokenizer))
+				return (1);
+			tokenizer_move_cursor(tokenizer);
+			return (0);
+		}
+		if (tokenizer_push_string(tokenizer))
+			return (1);
+		reset_acc(tokenizer);
 		if (tokenizer_push_pipe(tokenizer))
 			return (1);
 		tokenizer_move_cursor(tokenizer);
@@ -55,78 +65,71 @@ int	tokenize_noquote(t_tokenizer *tokenizer)
 	}
 	if (tokenizer_get_char(tokenizer) == '|')
 	{
-		if (tokenizer_push_string(tokenizer))
-			return (1);
-		reset_acc(tokenizer);
-		if (tokenizer_push_pipe(tokenizer))
-			return (1);
-		tokenizer_move_cursor(tokenizer);
-		return (0);
-	}
-	if (tokenizer_get_char(tokenizer) == '>' && tokenizer_get_next_char(tokenizer, 1) == '>' && tokenizer_is_empty_acc(tokenizer))
-	{
-		if (tokenizer_push_outa(tokenizer))
-			return (1);
-		tokenizer_move_cursor(tokenizer);
-		tokenizer_move_cursor(tokenizer);
-		return (0);
-	}
-	if (tokenizer_get_char(tokenizer) == '>' && tokenizer_get_next_char(tokenizer, 1) == '>')
-	{
-		if (tokenizer_push_string(tokenizer))
-			return (1);
-		reset_acc(tokenizer);
-		if (tokenizer_push_outa(tokenizer))
-			return (1);
-		tokenizer_move_cursor(tokenizer);
-		tokenizer_move_cursor(tokenizer);
-		return (0);
-	}
-	if (tokenizer_get_char(tokenizer) == '>' && tokenizer_is_empty_acc(tokenizer))
-	{
-		if (tokenizer_push_out(tokenizer))
-			return (1);
-		tokenizer_move_cursor(tokenizer);
-		return (0);
 	}
 	if (tokenizer_get_char(tokenizer) == '>')
 	{
+		if (tokenizer_get_next_char(tokenizer, 1) == '>')
+		{
+			if (tokenizer_is_empty_acc(tokenizer))
+			{
+				if (tokenizer_push_outa(tokenizer))
+					return (1);
+				tokenizer_move_cursor(tokenizer);
+				tokenizer_move_cursor(tokenizer);
+				return (0);
+			}
+			if (tokenizer_push_string(tokenizer))
+				return (1);
+			reset_acc(tokenizer);
+			if (tokenizer_push_outa(tokenizer))
+				return (1);
+			tokenizer_move_cursor(tokenizer);
+			tokenizer_move_cursor(tokenizer);
+			return (0);
+		}
+		if (tokenizer_is_empty_acc(tokenizer))
+		{
+			if (tokenizer_push_out(tokenizer))
+				return (1);
+			tokenizer_move_cursor(tokenizer);
+			return (0);
+		}
 		if (tokenizer_push_string(tokenizer))
 			return (1);
 		reset_acc(tokenizer);
 		if (tokenizer_push_out(tokenizer))
-			return (1);
-		tokenizer_move_cursor(tokenizer);
-		return (0);
-	}
-	if (tokenizer_get_char(tokenizer) == '<' && tokenizer_get_next_char(tokenizer, 1) == '<' && tokenizer_is_empty_acc(tokenizer))
-	{
-		if (tokenizer_push_ina(tokenizer))
-			return (1);
-		tokenizer_move_cursor(tokenizer);
-		tokenizer_move_cursor(tokenizer);
-		return (0);
-	}
-	if (tokenizer_get_char(tokenizer) == '<' && tokenizer_get_next_char(tokenizer, 1) == '<')
-	{
-		if (tokenizer_push_string(tokenizer))
-			return (1);
-		reset_acc(tokenizer);
-		if (tokenizer_push_ina(tokenizer))
-			return (1);
-		tokenizer_move_cursor(tokenizer);
-		tokenizer_move_cursor(tokenizer);
-		return (0);
-	}
-	if (tokenizer_get_char(tokenizer) == '<' && tokenizer_is_empty_acc(tokenizer))
-	{
-		if (tokenizer_push_in(tokenizer))
 			return (1);
 		tokenizer_move_cursor(tokenizer);
 		return (0);
 	}
 	if (tokenizer_get_char(tokenizer) == '<')
 	{
+		if (tokenizer_get_next_char(tokenizer, 1) == '<')
+		{
+			if (tokenizer_is_empty_acc(tokenizer))
+			{
+				if (tokenizer_push_ina(tokenizer))
+					return (1);
+				tokenizer_move_cursor(tokenizer);
+				tokenizer_move_cursor(tokenizer);
+				return (0);
+			}
+			if (tokenizer_push_string(tokenizer))
+				return (1);
+			reset_acc(tokenizer);
+			if (tokenizer_push_ina(tokenizer))
+				return (1);
+			tokenizer_move_cursor(tokenizer);
+			tokenizer_move_cursor(tokenizer);
+			return (0);
+		}
+		if (tokenizer_is_empty_acc(tokenizer))
+		{
+			if (tokenizer_push_in(tokenizer))
+				return (1);
+			tokenizer_move_cursor(tokenizer);
+			return (0);
+		}
 		if (tokenizer_push_string(tokenizer))
 			return (1);
 		reset_acc(tokenizer);
@@ -135,13 +138,13 @@ int	tokenize_noquote(t_tokenizer *tokenizer)
 		tokenizer_move_cursor(tokenizer);
 		return (0);
 	}
-	if (tokenizer_get_char(tokenizer) == ' ' && tokenizer_is_empty_acc(tokenizer))
-	{
-		tokenizer_move_cursor(tokenizer);
-		return (0);
-	}
 	if (tokenizer_get_char(tokenizer) == ' ')
 	{
+		if (tokenizer_is_empty_acc(tokenizer))
+		{
+			tokenizer_move_cursor(tokenizer);
+			return (0);
+		}
 		if (tokenizer_push_string(tokenizer))
 			return (1);
 		reset_acc(tokenizer);
