@@ -3,14 +3,14 @@ NAME		=	pipex
 CC			=	gcc
 CFLAGS		=	-Werror -Wextra -Wall
 
-LIBFT_PATH	=	libft/
+LIBFT_PATH	=	srcs/execution/libft/
 LIBFT_NAME	=	libft.a
 LIBFT		=	$(LIBFT_PATH)$(LIBFT_NAME)
 
 INC			=	-I ./includes/\
 				-I ./libft/\
 
-SRC_PATH	=	srcs/
+SRC_PATH	=	sources/
 
 SRC			=	main.c \
 				get_next_line.c \
