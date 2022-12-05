@@ -27,15 +27,15 @@ int	tokenize_quote(t_tokenizer *tokenizer)
 		tokenizer_move_cursor(tokenizer);
 		return (0);
 	}
-	if (tokenizer_get_char(tokenizer) == '$' && tokenizer_get_next_char(tokenizer, 1) == '?')
-	{
-		// TODO gérer ? attention taille acc 
-		tokenizer_move_cursor(tokenizer);
-		tokenizer_move_cursor(tokenizer);
-		return (0);
-	}
 	if (tokenizer_get_char(tokenizer) == '$')
 	{
+		if (tokenizer_get_next_char(tokenizer, 1) == '?')
+		{
+			// TODO gérer ? attention taille acc 
+			tokenizer_move_cursor(tokenizer);
+			tokenizer_move_cursor(tokenizer);
+			return (0);
+		}
 		tokenizer->state = QuoteV;
 		tokenizer_move_cursor(tokenizer);
 		return (0);
