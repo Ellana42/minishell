@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:37:18 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/05 14:57:38 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/05 15:19:33 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	child(t_data *data)
 	if (data->child == 0) // premier fils (index 0)
 		redirection_in_out(data->fd_in, data->pipefd[1], data);
 
-	else if (data->child = data->nbr_commands - 1)
+	else if (data->child = (data->nbr_commands - 1))
 		redirection_in_out(data->pipefd[2 * data->child - 2], data->fd_out, data);
 
 	else

@@ -14,17 +14,9 @@ cmd << LIMITER | cmd1 >> file
 -------------------------------------------------------------------------------------------------
 I) Exécuter une commande shell
 
-int execve(const char *pathname, char *const argv[], char *const envp[]);
+Chaque commande shell = un programme.
 
-Execute un programme depuis notre programme actuel.
-Le processus existant est remplacé par le nouveau appelé.
-
-- pathname : path de la commande que l'on veut executer
-- argv[] : arguments possibles de la commande
-- envp[] : pointeur vers les variables d’environnement de notre ordi
-
-Ne retourne rien si succes, sinon (-1)
-
+Pour pouvoir executer une commande entree par 
 -------------------------------------------------------------------------------------------------
 II) Trouver les exécutables des commandes
 

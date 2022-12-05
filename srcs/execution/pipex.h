@@ -6,14 +6,14 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 12:47:53 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/05 10:55:56 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/05 15:15:39 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-//#include "libft.h"
+#include "libft.h"
 
 # include <fcntl.h>
 # include <stdlib.h>
