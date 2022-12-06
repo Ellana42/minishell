@@ -8,23 +8,6 @@ t_token	*token_alloc(void)
 	return (token);
 }
 
-int	token_init(t_token *token, t_token_type type, char *str)
-{
-	char	*dst;
-
-	token->type = type;
-	token->str = NULL;
-	if (token->type == Str)
-	{
-		dst = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
-		if (!dst)
-			return (1);
-		str_cpy(str, dst);
-		token->str = dst;
-	}
-	return (0);
-}
-
 void	token_dispose(t_token *token)
 {
 	free(token->str);

@@ -40,6 +40,7 @@ int			tokenizer_move_accumulator(t_tokenizer *tokenizer);
 int			tokenizer_push_pipe(t_tokenizer *tokenizer);
 int			tokenizer_push_string(t_tokenizer *tokenizer);
 char		tokenizer_get_char(t_tokenizer *tokenizer);
+char		tokenizer_get_last_char(t_tokenizer *tokenizer);
 char		tokenizer_get_next_char(t_tokenizer *tokenizer, int s);
 int			tokenizer_eol(t_tokenizer *tokenizer);
 void		reset_acc(t_tokenizer *tokenizer);

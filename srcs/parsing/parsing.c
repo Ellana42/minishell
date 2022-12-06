@@ -19,7 +19,7 @@ t_parser	*parse_string(char *str, int last_err)
 		return (parser);
 	while ((!parser_is_eol(parser)) && (!error))
 		error = parse(parser);
-	if (parser->error == ParserNoError && parser->state != pParams)
+	if (parser_set_error(parser, ParserNoError) && parser->state != pParams)
 		parser_set_error(parser, ParserSyntaxError);
 	if (parser->command)
 	{

@@ -7,25 +7,18 @@ int	parse_start(t_parser *parser)
 
 	token = parser_get_token(parser);
 	if (!token)
-	{
-		parser->error = ParserUnknownError;
-		return (1);
-	}
+		return (parser_set_error_return(parser, ParserUnknownError));
 	if (token->type == Str)
 	{
 		command = command_alloc();
 		if (command_init(command, token->str))
-		{
-			parser->error = ParserAllocError;
-			return (1);
-		}
+			return (parser_set_error_return(parser, ParserAllocError));
 		parser->command = command;
 		parser_move_cursor(parser);
 		parser->state = pParams;
 		return (0);
 	}
-	parser->error = ParserSyntaxError;
-	return (1);
+	return (parser_set_error_return(parser, ParserSyntaxError));
 }
 
 int	parse_params_pipe(t_parser *parser)
@@ -67,8 +60,7 @@ int	parse_params(t_parser *parser)
 		return (parse_params_funnel(parser, pIna));
 	if (token->type == Pipe)
 		return (parse_params_pipe(parser));
-	parser->error = ParserSyntaxError;
-	return (1);
+	return (parser_set_error_return(parser, ParserSyntaxError));
 }
 
 int	parse(t_parser *parser)
@@ -85,6 +77,5 @@ int	parse(t_parser *parser)
 		return (parse_in(parser));
 	if (parser->state == pIna)
 		return (parse_ina(parser));
-	parser->error = ParserUnknownError;
-	return (1);
+	return (parser_set_error_return(parser, ParserUnknownError));
 }
