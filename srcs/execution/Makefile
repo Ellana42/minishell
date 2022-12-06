@@ -1,41 +1,37 @@
-NAME		=	pipex
+NAME	= pipex
 
-CC			=	gcc
-CFLAGS		=	-Werror -Wextra -Wall
+CC		= gcc
+CFLAGS	= -Werror -Wextra -Wall
 
-LIBFT_PATH	=	srcs/execution/libft/
-LIBFT_NAME	=	libft.a
-LIBFT		=	$(LIBFT_PATH)$(LIBFT_NAME)
+LIBFT_PATH	= libft/
+LIBFT_NAME	= libft.a
+LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
 INC			=	-I ./includes/\
 				-I ./libft/\
 
-SRC_PATH	=	sources/
+SRC_PATH = srcs/
+OBJ_PATH = obj/
 
-SRC			=	main.c \
-				get_next_line.c \
-				get_next_line_utils.c \
-				here_doc.c \
-				init.c \
-				main.c \
-				paths.c \
-				utils.c \
+SRC	= main.c \
+	paths.c \
+	utils.c \
+	init.c \
+	here_doc.c \
+	get_next_line.c \
+	get_next_line_utils.c
 
-SRCS		=	$(addprefix $(SRC_PATH), $(SRC))
+SRCS	= $(addprefix $(SRC_PATH), $(SRC))
+OBJ		= $(SRC:.c=.o)
+OBJS	= $(addprefix $(OBJ_PATH), $(OBJ))
 
-OBJ_PATH	=	obj/
-OBJ			=	$(SRC:.c=.o)
-OBJS		=	$(addprefix $(OBJ_PATH), $(OBJ))
+INC		= -I ./includes/
 
 all: $(LIBFT) $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@mkdir -p $(OBJ_PATH) $(OBJ_PATH)get_next_line/
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
-
-$(OBJS): $(OBJ_PATH)
-
-$(OBJ_PATH):
-	@mkdir $(OBJ_PATH)
 
 $(LIBFT):
 	@make -sC $(LIBFT_PATH)

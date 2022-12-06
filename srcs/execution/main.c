@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:37:18 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/05 15:19:33 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/06 18:07:27 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Redirige les fd d'entrée et de sortie transmis vers la stdin et la stdout
 
-static void	redirection_in_out(int input, int output, t_data *data)
+static void	redirect_input_output(int input, int output, t_data *data)
 {
 	if (dup2(input, STDIN_FILENO) == -1)
 		error(1, data);
@@ -31,20 +31,20 @@ static void	redirection_in_out(int input, int output, t_data *data)
 static void	child(t_data *data)
 {
 	if (data->child == 0) // premier fils (index 0)
-		redirection_in_out(data->fd_in, data->pipefd[1], data);
+		redirect_input_output(data->fd_in, data->pipefd[1], data);
 
-	else if (data->child = (data->nbr_commands - 1))
-		redirection_in_out(data->pipefd[2 * data->child - 2], data->fd_out, data);
+	else if (data->child == data->nbr_commands - 1)
+		redirect_input_output(data->pipefd[2 * data->child - 2], data->fd_out, data);
 
 	else
-		redirection_in_out(data->pipefd[2 * data->child - 2], data->pipefd[2 * data->child + 1], data);
+		redirect_input_output(data->pipefd[2 * data->child - 2], data->pipefd[2 * data->child + 1], data);
 
 	close_fds(data);
 
-	if (data->array_of_paths == NULL || data->path_ultime == NULL)
+	if (data->array_of_paths == NULL || data->cmd_path == NULL)
 		error(1, data);
 
-	if (execve(data->path_ultime, data->array_of_paths, data->envp) == -1)
+	if (execve(data->cmd_path, data->array_of_paths, data->envp) == -1)
 		error(msg(data->array_of_paths[0], ": ", strerror(errno), 1), data);
 }
 
@@ -60,20 +60,20 @@ static int	parent(t_data *data)
 	close_fds(data);
 
 	data->child--;
-
 	exit_code = 1;
 
 	while (data->child >= 0)
 	{
 		wpid = waitpid(data->pids[data->child], &status, 0);
-		// wpid = pid du child qui s'est terminé
+
 		if (wpid == data->pids[data->nbr_commands - 1])
 		{
-			if ((data->child == (data->nbr_commands - 1) && (WIFEXITED(status) != 0)))
-				exit_code = WEXITSTATUS(status); // exit_code = code de sortie du fils
+			if ((data->child == (data->nbr_commands - 1)) && WIFEXITED(status))
+				exit_code = WEXITSTATUS(status);
 		}
 		data->child--;
 	}
+	
 	free(data->pipefd);
 	free(data->pids);
 
@@ -86,10 +86,10 @@ static int	parent(t_data *data)
 
 static int	pipex(t_data *data)
 {
-	int	exit_code;
+	int		exit_code;
 
 	if (pipe(data->pipefd) == -1)
-		error(msg("pipe", ":", strerror(errno), 1), data);
+		error(msg("pipe", ": ", strerror(errno), 1), data);
 
 	data->child = 0;
 
@@ -100,7 +100,7 @@ static int	pipex(t_data *data)
 		if (data->array_of_paths == NULL)
 			error(msg("unexpected error", "", "", 1), data);
 
-		data->path_ultime = get_user_cmd(data);
+		data->cmd_path = get_user_cmd(data->array_of_paths[0], data);
 		data->pids[data->child] = fork();
 
 		if (data->pids[data->child] == -1)
@@ -109,14 +109,13 @@ static int	pipex(t_data *data)
 		else if (data->pids[data->child] == 0)
 			child(data);
 
-		free_strs(data->path_ultime, data->array_of_paths);
+		free_strs(data->cmd_path, data->array_of_paths);
 		data->child++;
 	}
 	exit_code = parent(data);
 
 	if (data->heredoc == 1)
 		unlink(".heredoc.tmp");
-
 	return (exit_code);
 }
 
@@ -127,22 +126,20 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 	int		exit_code;
-	
+
 	if (argc < 5)
 	{
-		if (argc >= 2 && !ft_strncmp("here_doc", argv[1], 9))
+		if (argc >= 2 && ft_strncmp("here_doc", argv[1], 9) == 0)
 			return (msg("Usage: ", "./pipex here_doc LIMITER cmd1 cmd2 ... cmdn file2.", "", 1));
 		return (msg("Usage: ", "./pipex file1 cmd1 cmd2 ... cmdn file2.", "", 1));
 	}
-
-	else if (argc < 6 && !ft_strncmp("here_doc", argv[1], 9))
+	else if (argc < 6 && ft_strncmp("here_doc", argv[1], 9) == 0)
 		return (msg("Usage: ", "./pipex here_doc LIMITER cmd1 cmd2 ... cmdn file2.", "", 1));
 
 	if (envp == NULL || envp[0][0] == '\0')
 		error(msg("Unexpected error.", "", "", 1), &data);
 
 	data = init_struct(argc, argv, envp);
-
 	exit_code = pipex(&data);
 	return (exit_code);
 }

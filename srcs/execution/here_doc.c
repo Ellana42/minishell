@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 16:40:28 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/04 15:16:04 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/06 15:11:45 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,21 +67,21 @@ void	get_heredoc(t_data *data)
 
 	if (tmp_fd == -1)
 		error(msg("here_doc", ": ", strerror(errno), 1), data);
-
+		
 	line = "";
-
+	
 	while (1)
 	{
 		ft_putstr_fd("here_doc > ", 1);
 		line = get_next_line(stdin_fd);
-
+		
 		if (line == NULL)
 			break ;
 		// Si la taille du LIMITER == taille de la ligne ET que
 		// ligne == LIMITER
-		if (ft_strlen(data->argv[2]) + 1 == ft_strlen(line) &&
-			(ft_strncmp(line, data->argv[2], ft_strlen(data->argv[2] + 1)) == 0))
+		if (ft_strlen(data->argv[2]) + 1 == ft_strlen(line) && ft_strncmp(line, data->argv[2], ft_strlen(data->argv[2] + 1)) == 0)
 			close(stdin_fd);
+			
 		else
 			ft_putstr_fd(line, tmp_fd); // sinon on stocke la ligne dans le fichier tempo
 

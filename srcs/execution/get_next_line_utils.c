@@ -6,11 +6,11 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:00:35 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/04 12:53:27 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/06 15:03:57 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "get_next_line.h"
 
 int	contains_newline(const char *s)
 {
@@ -52,6 +52,28 @@ char	*join_strs(const char *s1, const char *s2)
 	return (s);
 }
 
+char	*ft_strdup(const char *s1)
+{
+	char	*s2;
+	int		i;
+
+	if (!s1)
+		return (ft_strdup(""));
+	i = 0;
+	while (s1[i])
+		i++;
+	s2 = ft_malloc_zero(i + 1, sizeof * s2);
+	if (!s2)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		s2[i] = s1[i];
+		i++;
+	}
+	return (s2);
+}
+
 void	*ft_malloc_zero(size_t count, size_t size)
 {
 	void			*r;
@@ -72,12 +94,12 @@ void	*ft_malloc_zero(size_t count, size_t size)
 	return (r);
 }
 
-void	free_strs_three(char **str1, char **str2, char **str3)
+void	free_three_strs(char **str, char **str2, char **str3)
 {
-	if (str1 && *str1)
+	if (str && *str)
 	{
-		free(*str1);
-		*str1 = NULL;
+		free(*str);
+		*str = NULL;
 	}
 	if (str2 && *str2)
 	{
