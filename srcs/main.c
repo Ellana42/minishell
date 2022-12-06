@@ -7,7 +7,9 @@ int	main(int ac, char **av)
 {
 	char		*command;
 	t_parser	*parser;
+	int			last_err;
 
+	last_err = 66;
 	while (1)
 	{
 		command = readline("$> ");
@@ -15,7 +17,7 @@ int	main(int ac, char **av)
 		if (!command)
 			return (1);
 		printf("\nThe command : %s\n\n", command);
-		parser = parse_string(command);
+		parser = parse_string(command, last_err);
 		if (parser_get_error(parser) != 0)
 			printf("Error %d\n", parser_get_error(parser));
 		else

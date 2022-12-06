@@ -28,10 +28,11 @@ typedef struct s_tokenizer{
 	t_acc	*acc_var;
 	t_state	state;
 	t_list	**tokens;
+	int		last_err;
 }	t_tokenizer;
 
 t_tokenizer	*tokenizer_alloc(void);
-int			tokenizer_init(t_tokenizer *tokenizer, char *cmd);
+int			tokenizer_init(t_tokenizer *tokenizer, char *cmd, int last_err);
 void		tokenizer_dispose(t_tokenizer *tokenizer);
 void		tokenizer_free(t_tokenizer *tokenizer);
 int			tokenizer_move_cursor(t_tokenizer *tokenizer);
@@ -39,6 +40,7 @@ int			tokenizer_move_accumulator(t_tokenizer *tokenizer);
 int			tokenizer_push_pipe(t_tokenizer *tokenizer);
 int			tokenizer_push_string(t_tokenizer *tokenizer);
 char		tokenizer_get_char(t_tokenizer *tokenizer);
+char		tokenizer_get_last_char(t_tokenizer *tokenizer);
 char		tokenizer_get_next_char(t_tokenizer *tokenizer, int s);
 int			tokenizer_eol(t_tokenizer *tokenizer);
 void		reset_acc(t_tokenizer *tokenizer);

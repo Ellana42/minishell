@@ -8,7 +8,7 @@ int	tokenizer_push_out(t_tokenizer *tokenizer)
 	token = token_alloc();
 	if (!token)
 		return (1);
-	if (token_init(token, Out, NULL))
+	if (token_init_out(token, tokenizer->cmd_i, tokenizer_get_char(tokenizer)))
 		return (1);
 	lst = ft_lstnew((void *)token);
 	if (!lst)
@@ -25,7 +25,7 @@ int	tokenizer_push_outa(t_tokenizer *tokenizer)
 	token = token_alloc();
 	if (!token)
 		return (1);
-	if (token_init(token, Outa, NULL))
+	if (token_init_outa(token, tokenizer->cmd_i, tokenizer_get_char(tokenizer)))
 		return (1);
 	lst = ft_lstnew((void *)token);
 	if (!lst)
@@ -42,7 +42,7 @@ int	tokenizer_push_in(t_tokenizer *tokenizer)
 	token = token_alloc();
 	if (!token)
 		return (1);
-	if (token_init(token, In, NULL))
+	if (token_init_in(token, tokenizer->cmd_i, tokenizer_get_char(tokenizer)))
 		return (1);
 	lst = ft_lstnew((void *)token);
 	if (!lst)
@@ -59,7 +59,7 @@ int	tokenizer_push_ina(t_tokenizer *tokenizer)
 	token = token_alloc();
 	if (!token)
 		return (1);
-	if (token_init(token, Ina, NULL))
+	if (token_init_ina(token, tokenizer->cmd_i, tokenizer_get_char(tokenizer)))
 		return (1);
 	lst = ft_lstnew((void *)token);
 	if (!lst)

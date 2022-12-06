@@ -24,7 +24,7 @@ int	str_cat(char *str, char *dst)
 {
 	if (!str || !dst)
 		return (0);
-	str += ft_strlen(dst);
+	dst += ft_strlen(dst);
 	while (*str)
 	{
 		*dst = *str;

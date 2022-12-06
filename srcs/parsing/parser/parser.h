@@ -28,17 +28,22 @@ typedef enum s_parser_error{
 	ParserUninitialized = -1
 }	t_parser_error;
 
+typedef struct s_parser_err {
+	t_parser_error	error;
+	char			err_char;
+}	t_parser_err;
+
 typedef struct s_parser{
 	t_command		*command;
 	t_commands		*commands;
 	t_parser_state	state;
 	t_tokenizer		*tokenizer;
 	int				token_i;
-	t_parser_error	error;
+	t_parser_err	error;
 }	t_parser;
 
 t_parser	*parser_alloc(void);
-int			parser_init(t_parser *parser, char *str);
+int			parser_init(t_parser *parser, char *str, int last_err);
 void		_free_string(void *str);
 void		_free_command(void *command);
 void		parser_dispose(t_parser *parser);

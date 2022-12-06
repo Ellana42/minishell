@@ -1,5 +1,14 @@
 #include "tokenizer.h"
 
+char	tokenizer_get_last_char(t_tokenizer *tokenizer)
+{
+	if (tokenizer->cmd_i > 0)
+	{
+		return (*(tokenizer->cmd_ptr - 1));
+	}
+	return (0);
+}
+
 char	tokenizer_get_char(t_tokenizer *tokenizer)
 {
 	return (*(tokenizer->cmd_ptr));

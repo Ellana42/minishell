@@ -8,7 +8,7 @@ t_tokenizer	*tokenizer_alloc(void)
 	return (tokenizer);
 }
 
-int	tokenizer_init(t_tokenizer *tokenizer, char *cmd)
+int	tokenizer_init(t_tokenizer *tokenizer, char *cmd, int last_err)
 {
 	char	*cmd_cpy;
 
@@ -30,6 +30,7 @@ int	tokenizer_init(t_tokenizer *tokenizer, char *cmd)
 	tokenizer->tokens = ft_lstinit();
 	if (!tokenizer->tokens)
 		return (1);
+	tokenizer->last_err = last_err;
 	return (0);
 }
 

@@ -1,7 +1,7 @@
 #include "parsing.h"
 #include "parser/parser.h"
 
-t_parser	*parse_string(char *str)
+t_parser	*parse_string(char *str, int last_err)
 {
 	int			error;
 	t_parser	*parser;
@@ -9,7 +9,7 @@ t_parser	*parse_string(char *str)
 	parser = parser_alloc();
 	if (!parser)
 		return (NULL);
-	if (parser_init(parser, str))
+	if (parser_init(parser, str, last_err))
 		return (parser);
 	if (parser_tokenize_string(parser))
 		return (parser);
@@ -19,7 +19,7 @@ t_parser	*parse_string(char *str)
 		return (parser);
 	while ((!parser_is_eol(parser)) && (!error))
 		error = parse(parser);
-	if (parser->error == ParserNoError && parser->state != pParams)
+	if (parser_set_error(parser, ParserNoError) && parser->state != pParams)
 		parser_set_error(parser, ParserSyntaxError);
 	if (parser->command)
 	{
