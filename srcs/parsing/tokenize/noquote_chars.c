@@ -2,9 +2,15 @@
 
 int	tokenize_noquote_dollar(t_tokenizer *tokenizer)
 {
+	char	*err_num;
+
+	err_num = NULL;
 	if (tokenizer_get_next_char(tokenizer, 1) == '?')
 	{
-		// TODO gérer ? attention taille acc 
+		err_num = ft_itoa(tokenizer->last_err);
+		if (tokenizer_acc_concat(tokenizer, err_num))
+			return (1);
+		free(err_num);
 		tokenizer_move_cursor(tokenizer);
 		tokenizer_move_cursor(tokenizer);
 		return (0);
