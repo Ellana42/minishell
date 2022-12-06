@@ -58,3 +58,4 @@ minishell
 tags
 *cscope*
 *.txt
+*.DS_Store
