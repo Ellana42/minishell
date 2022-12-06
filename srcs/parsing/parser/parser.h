@@ -38,7 +38,7 @@ typedef struct s_parser{
 }	t_parser;
 
 t_parser	*parser_alloc(void);
-int			parser_init(t_parser *parser, char *str);
+int			parser_init(t_parser *parser, char *str, int last_err);
 void		_free_string(void *str);
 void		_free_command(void *command);
 void		parser_dispose(t_parser *parser);

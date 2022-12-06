@@ -10,7 +10,7 @@ t_parser	*parser_alloc(void)
 	return (parser);
 }
 
-int	parser_init(t_parser *parser, char *str)
+int	parser_init(t_parser *parser, char *str, int last_err)
 {
 	t_tokenizer	*tokenizer;
 
@@ -21,7 +21,7 @@ int	parser_init(t_parser *parser, char *str)
 		parser->error = ParserAllocError;
 		return (1);
 	}
-	if (tokenizer_init(tokenizer, str))
+	if (tokenizer_init(tokenizer, str, last_err))
 	{
 		parser->error = ParserAllocError;
 		return (1);
