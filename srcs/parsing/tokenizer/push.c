@@ -39,9 +39,9 @@ int	tokenizer_push_eol(t_tokenizer *tokenizer)
 	t_token	*token;
 	t_list	*lst;
 
+	token = token_alloc();
 	if (!token)
 		return (1);
-	token = token_alloc();
 	if (token_init(token, Eol, NULL))
 		return (1);
 	lst = ft_lstnew((void *)token);
