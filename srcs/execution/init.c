@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 16:07:40 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/07 15:29:38 by mkaploun         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:42:01 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_data	init_struct(t_commands *commands, char **envp)
 	/* data.argc = argc; */
 	/* data.argv = argv; */
 
+	data.commands = commands;
 	if (ft_lstsize(*commands_get_i_ina(commands, 0)) > 0) // Si heredoc spécifié (argv[1])
 		data.heredoc = 1;
 

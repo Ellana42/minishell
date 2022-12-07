@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:37:18 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/07 15:55:49 by mkaploun         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:40:26 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ int	pipex_launch(t_commands *commands, char **envp)
 	int		exit_code;
 
 
+	exit_code = 0;
 	/* if (argc < 5) */
 	/* { */
 	/* 	if (argc >= 2 && ft_strncmp("here_doc", argv[1], 9) == 0) */
@@ -146,6 +147,6 @@ int	pipex_launch(t_commands *commands, char **envp)
 		error(msg("Unexpected error.", "", "", 1), &data);
 
 	data = init_struct(commands, envp);
-	exit_code = pipex(&data);
+	/* exit_code = pipex(&data); */
 	return (exit_code);
 }
