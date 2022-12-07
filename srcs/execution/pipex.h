@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 12:47:53 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/06 19:05:42 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/07 11:16:44 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ typedef struct s_data
 	char		**commands_options;
 	char		*cmd_path;
 	t_commands	*commands;
-	
-}		t_data;
+}	t_data;
 
 t_commands	init_struct(t_commands *commands);
 char		*get_user_cmd(char *cmd, t_commands	*commands);
