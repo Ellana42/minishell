@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:37:18 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/07 14:46:52 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/07 15:55:49 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,21 +86,25 @@ static int	parent(t_data *data)
 
 static int	pipex(t_data *data)
 {
-	int		exit_code;
+	int			exit_code;
+	int			i;
+	t_command	*command;
 
 	if (pipe(data->pipefd) == -1)
 		error(msg("pipe", ": ", strerror(errno), 1), data);
 
 	data->child = 0;
 
+	i = 0;
 	while (data->child < data->nbr_commands)
 	{
-		data->commands_options = ft_split(data->argv[data->child + 2 + data->heredoc], ' ');
+		command = commands_get_i(data->commands, i);
+		data->commands_options = command_get_args_table(command);
 
 		if (data->commands_options == NULL)
 			error(msg("unexpected error", "", "", 1), data);
 
-		data->cmd_path = get_user_cmd(data->commands_options[0], data);
+		data->cmd_path = get_user_cmd(command_get_name(command), data);
 		data->pids[data->child] = fork();
 
 		if (data->pids[data->child] == -1)
@@ -109,8 +113,9 @@ static int	pipex(t_data *data)
 		else if (data->pids[data->child] == 0)
 			child(data);
 
-		free_strs(data->cmd_path, data->commands_options);
+		/* free_strs(data->cmd_path, data->commands_options); */ 
 		data->child++;
+		i++;
 	}
 	exit_code = parent(data);
 
@@ -122,24 +127,25 @@ static int	pipex(t_data *data)
 // Parse les arguments, initialise la structure et launch ./pipex
 // Renvoie le code de sortie du dernier fils, considéré comme le code de sortie de Pipex
 
-int	pipex(t_commands *commands)
+int	pipex_launch(t_commands *commands, char **envp)
 {
 	t_data	data;
 	int		exit_code;
 
-	if (argc < 5)
-	{
-		if (argc >= 2 && ft_strncmp("here_doc", argv[1], 9) == 0)
-			return (msg("Usage: ", "./pipex here_doc LIMITER cmd1 cmd2 ... cmdn file2.", "", 1));
-		return (msg("Usage: ", "./pipex file1 cmd1 cmd2 ... cmdn file2.", "", 1));
-	}
-	else if (argc < 6 && ft_strncmp("here_doc", argv[1], 9) == 0)
-		return (msg("Usage: ", "./pipex here_doc LIMITER cmd1 cmd2 ... cmdn file2.", "", 1));
+
+	/* if (argc < 5) */
+	/* { */
+	/* 	if (argc >= 2 && ft_strncmp("here_doc", argv[1], 9) == 0) */
+	/* 		return (msg("Usage: ", "./pipex here_doc LIMITER cmd1 cmd2 ... cmdn file2.", "", 1)); */
+	/* 	return (msg("Usage: ", "./pipex file1 cmd1 cmd2 ... cmdn file2.", "", 1)); */
+	/* } */
+	/* else if (argc < 6 && ft_strncmp("here_doc", argv[1], 9) == 0) */
+	/* 	return (msg("Usage: ", "./pipex here_doc LIMITER cmd1 cmd2 ... cmdn file2.", "", 1)); */
 
 	if (envp == NULL || envp[0][0] == '\0')
 		error(msg("Unexpected error.", "", "", 1), &data);
 
-	data = init_struct(commands);
+	data = init_struct(commands, envp);
 	exit_code = pipex(&data);
 	return (exit_code);
 }

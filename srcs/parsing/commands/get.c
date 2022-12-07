@@ -5,7 +5,13 @@ t_command	*commands_get_i(t_commands *commands, int i)
 	int		j;
 	t_list	*cmd;
 
+	printf("index :%d\n", i);
 	j = 0;
+	if (!cmd)
+	{
+		printf("There is an issue\n");
+		return (NULL);
+	}
 	cmd = *commands;
 	while (j < i)
 	{
@@ -47,4 +53,9 @@ t_list	**commands_get_i_outa(t_commands *commands, int i)
 
 	cmd = commands_get_i(commands, i);
 	return (cmd->out_a);
+}
+
+int	commands_get_size(t_commands *commands)
+{
+	return (ft_lstsize(*commands));
 }

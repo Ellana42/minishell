@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:09:10 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/06 18:07:51 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/07 15:58:57 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	error(int error_status, t_data *data)
 		if (data->pids != NULL)
 			free(data->pids);
 
-		if (data->array_of_paths != NULL || data->cmd_path != NULL)
-			free_strs(data->cmd_path, data->array_of_paths);
+		if (data->commands_options != NULL || data->cmd_path != NULL)
+			free_strs(data->cmd_path, data->commands_options);
 	}
 	if (data->heredoc == 1)
 		unlink(".heredoc.tmp");

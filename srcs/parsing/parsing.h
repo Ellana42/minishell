@@ -2,6 +2,7 @@
 # define PARSING_H
 
 # include "parser/parser.h"
+# include "lstutils/lstutils.h"
 
 t_parser	*parse_string(char *str, int last_err);
 void		parser_destroy(t_parser *parser);

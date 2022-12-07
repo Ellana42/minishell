@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 16:07:40 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/07 14:43:18 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/07 15:29:38 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,22 @@ static void	create_pipes(t_data *data)
 // Initialise la structure en fonction des arguments fournis par l'user
 // Créer les pipes pour chaque processus
 
-t_commands	init_struct(t_commands *commands)
+t_data	init_struct(t_commands *commands, char **envp)
 {
 	t_data	data;
 	data = clean_init_struct();
 
 	data.envp = envp;
-	data.argc = argc;
-	data.argv = argv;
+	/* data.argc = argc; */
+	/* data.argv = argv; */
 
-	if (ft_strncmp("here_doc", argv[1], 9) == 0) // Si heredoc spécifié (argv[1])
+	if (ft_lstsize(*commands_get_i_ina(commands, 0)) > 0) // Si heredoc spécifié (argv[1])
 		data.heredoc = 1;
 
 	get_input_file(&data);
 	get_output_file(&data);
 
-	data.nbr_commands = argc - 3 - data.heredoc; // -3 car ./pipex infile outfile
+	data.nbr_commands = commands_get_size(commands); // -3 car ./pipex infile outfile
 	data.pids = malloc(sizeof * data.pids * data.nbr_commands);
 
 	if (data.pids == 0)

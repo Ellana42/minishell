@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 16:40:28 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/07 11:33:59 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/07 15:27:40 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 void	get_input_file(t_data *data)
 {
+	char	*path_name;
+
+	path_name = NULL;
 	if (data->heredoc == 1) // si un heredoc est spécifié
 	{
 		get_heredoc(data);
@@ -28,7 +31,8 @@ void	get_input_file(t_data *data)
 	}
 	else
 	{
-		data->fd_in = open(data->argv[1], O_RDONLY, 644);
+		path_name = lst_get_i(*commands_get_i_ina(data->commands, 0), 0);
+		data->fd_in = open(path_name, O_RDONLY, 644);
 
 		if (data->fd_in == -1)
 			msg(strerror(errno), ": ", data->argv[1], 1);
@@ -41,11 +45,19 @@ void	get_input_file(t_data *data)
 
 void	get_output_file(t_data *data)
 {
-	if (data->heredoc == 1)
-		data->fd_out = open(data->argv[data->argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+	char	*path_name;
 
+	path_name = NULL;
+	if (data->heredoc == 1)
+	{
+		path_name = lst_get_i(*commands_get_i_out(data->commands, 0), 0); // TODO peut être outa ?
+		data->fd_out = open(path_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	}
 	else
-		data->fd_out = open(data->argv[data->argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	{
+		path_name = lst_get_i(*commands_get_i_out(data->commands, 0), 0);
+		data->fd_out = open(path_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	}
 
 	if (data->fd_out == -1)
 		msg(strerror(errno), ": ", data->argv[data->argc - 1], 1);

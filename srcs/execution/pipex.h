@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 12:47:53 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/07 11:16:44 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/07 15:21:46 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,15 @@ typedef struct s_data
 	t_commands	*commands;
 }	t_data;
 
-t_commands	init_struct(t_commands *commands);
-char		*get_user_cmd(char *cmd, t_commands	*commands);
-void		error(int error_status, t_commands *commands);
+t_data		init_struct(t_commands *commands, char **envp);
+char		*get_user_cmd(char *cmd, t_data	*data);
+void		error(int error_status, t_data *data);
 int			msg(char *str1, char *str2, char *str3, int erno);
-void		close_fds(t_commands *commands);
+void		close_fds(t_data *data);
 void		free_strs(char *str, char **array_of_strs);
-void		get_input_file(t_commands *commands);
-void		get_output_file(t_commands *commands);
-void		get_heredoc(t_commands *commands);
+void		get_input_file(t_data *data);
+void		get_output_file(t_data *data);
+void		get_heredoc(t_data *data);
+int			pipex_launch(t_commands *commands, char **envp);
 
 #endif
