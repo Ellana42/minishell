@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 16:07:40 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/06 15:13:08 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/06 19:06:20 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_data	clean_init_struct(void)
 	data.argc = -1;
 	data.argv = NULL;
 	data.envp = NULL;
-	data.array_of_paths = NULL;
+	data.commands_options = NULL;
 	data.cmd_path = NULL;
 	data.nbr_commands = -1;
 	data.pipefd = NULL;
@@ -54,7 +54,7 @@ static void	create_pipes(t_data *data)
 // Initialise la structure en fonction des arguments fournis par l'user
 // Créer les pipes pour chaque processus
 
-t_data	init_struct(int argc, char **argv, char **envp)
+t_commands	init_struct(t_commands *commands)
 {
 	t_data	data;
 	data = clean_init_struct();

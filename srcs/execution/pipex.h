@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 12:47:53 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/06 18:09:51 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/06 19:05:42 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,36 +22,36 @@
 # include <errno.h>
 
 # include "get_next_line.h"
-# include "/Users/lucas/pipex/libft/includes/ft_printf.h"
-# include "/Users/lucas/pipex/libft/includes/libft.h"
+# include "../../libft/includes/ft_printf.h"
+# include "../../libft/includes/libft.h"
+# include "../parsing/parsing.h"
 
 typedef struct s_data
 {
-	char	**envp;
-	char	**argv;
-	int		argc;
-	int		heredoc;
-	int		fd_in;
-	int		fd_out;
-	int		*pipefd;
-	int		nbr_commands;
-	int		child;
-	int		*pids;
-	char	**array_of_paths;
-	char	*cmd_path;
+	char		**envp;
+	char		**argv;
+	int			argc;
+	int			heredoc;
+	int			fd_in;
+	int			fd_out;
+	int			*pipefd;
+	int			nbr_commands;
+	int			child;
+	int			*pids;
+	char		**commands_options;
+	char		*cmd_path;
+	t_commands	*commands;
+	
 }		t_data;
 
-t_data	init_struct(int argc, char **argv, char **envp);
-
-char	*get_user_cmd(char *cmd, t_data *data);
-
-void	error(int error_status, t_data *data);
-int		msg(char *str1, char *str2, char *str3, int erno);
-void	close_fds(t_data *data);
-void	free_strs(char *str, char **array_of_strs);
-
-void	get_input_file(t_data *data);
-void	get_output_file(t_data *data);
-void	get_heredoc(t_data *data);
+t_commands	init_struct(t_commands *commands);
+char		*get_user_cmd(char *cmd, t_commands	*commands);
+void		error(int error_status, t_commands *commands);
+int			msg(char *str1, char *str2, char *str3, int erno);
+void		close_fds(t_commands *commands);
+void		free_strs(char *str, char **array_of_strs);
+void		get_input_file(t_commands *commands);
+void		get_output_file(t_commands *commands);
+void		get_heredoc(t_commands *commands);
 
 #endif

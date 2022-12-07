@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:37:18 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/06 18:07:27 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/06 19:06:25 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static void	child(t_data *data)
 
 	close_fds(data);
 
-	if (data->array_of_paths == NULL || data->cmd_path == NULL)
+	if (data->commands_options == NULL || data->cmd_path == NULL)
 		error(1, data);
 
-	if (execve(data->cmd_path, data->array_of_paths, data->envp) == -1)
-		error(msg(data->array_of_paths[0], ": ", strerror(errno), 1), data);
+	if (execve(data->cmd_path, data->commands_options, data->envp) == -1)
+		error(msg(data->commands_options[0], ": ", strerror(errno), 1), data);
 }
 
 // Attends que les processus fils se terminent et récupère le statut du dernier fils
@@ -95,12 +95,12 @@ static int	pipex(t_data *data)
 
 	while (data->child < data->nbr_commands)
 	{
-		data->array_of_paths = ft_split(data->argv[data->child + 2 + data->heredoc], ' ');
+		data->commands_options = ft_split(data->argv[data->child + 2 + data->heredoc], ' ');
 
-		if (data->array_of_paths == NULL)
+		if (data->commands_options == NULL)
 			error(msg("unexpected error", "", "", 1), data);
 
-		data->cmd_path = get_user_cmd(data->array_of_paths[0], data);
+		data->cmd_path = get_user_cmd(data->commands_options[0], data);
 		data->pids[data->child] = fork();
 
 		if (data->pids[data->child] == -1)
@@ -109,7 +109,7 @@ static int	pipex(t_data *data)
 		else if (data->pids[data->child] == 0)
 			child(data);
 
-		free_strs(data->cmd_path, data->array_of_paths);
+		free_strs(data->cmd_path, data->commands_options);
 		data->child++;
 	}
 	exit_code = parent(data);
@@ -122,7 +122,7 @@ static int	pipex(t_data *data)
 // Parse les arguments, initialise la structure et launch ./pipex
 // Renvoie le code de sortie du dernier fils, considéré comme le code de sortie de Pipex
 
-int	main(int argc, char **argv, char **envp)
+int	pipex(t_commands *commands)
 {
 	t_data	data;
 	int		exit_code;
@@ -139,7 +139,7 @@ int	main(int argc, char **argv, char **envp)
 	if (envp == NULL || envp[0][0] == '\0')
 		error(msg("Unexpected error.", "", "", 1), &data);
 
-	data = init_struct(argc, argv, envp);
+	data = init_struct(commands);
 	exit_code = pipex(&data);
 	return (exit_code);
 }
