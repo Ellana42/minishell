@@ -1,8 +1,4 @@
-#include "parsing/parsing.h"
-#include "execution/pipex.h"
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+#include "minishell.h"
 
 int	main(int ac, char **av, char **envp)
 {
@@ -10,6 +6,7 @@ int	main(int ac, char **av, char **envp)
 	t_parser	*parser;
 	int			last_err;
 
+	(void ) ac;;
 	last_err = 66;
 	printf("\nThe command : %s\n\n", command);
 	parser = parse_string(command, last_err);
@@ -22,7 +19,16 @@ int	main(int ac, char **av, char **envp)
 	}
 	else
 		commands_print(parser->commands);
-	pipex_launch(parser->commands, envp);
+	/* int i = 0; */
+	/* t_command *cmd = NULL; */
+	/* while (i < commands_get_size(parser->commands)) */
+	/* { */
+	/* 	printf("i : %d\n", i); */
+	/* 	cmd = commands_get_i(parser->commands, i); */
+	/* 	printf("Command %s\n", command_get_name(cmd)); */
+	/* 	i++; */
+	/* } */
+	/* pipex_launch(parser->commands, envp); */
 	parser_destroy(parser);
 	return (0);
 }
