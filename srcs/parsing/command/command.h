@@ -6,12 +6,12 @@
 # include "../utils/utils.h"
 
 typedef struct s_command{
-	char	*command;
+	char	*command; // 
 	t_list	**args;
-	t_list	**out;
-	t_list	**out_a;
-	t_list	**in;
-	t_list	**in_a;
+	t_list	**out; // > ...
+	t_list	**out_a; // >> ...
+	t_list	**in; // < ...
+	t_list	**in_a; // << ...
 }	t_command;
 
 t_command	*command_alloc(void);

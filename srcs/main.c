@@ -22,6 +22,8 @@ int	main(int ac, char **av)
 			printf("Error %d\n", parser_get_error(parser));
 		else
 			commands_print(parser->commands);
+
+		pipex(parser->commands);
 		parser_destroy(parser);
 		free(command);
 	}
