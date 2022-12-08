@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 16:40:28 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/07 15:27:40 by mkaploun         ###   ########.fr       */
+/*   Updated: 2022/12/08 10:36:09 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ void	get_heredoc(t_data *data)
 			break ;
 		// Si la taille du LIMITER == taille de la ligne ET que
 		// ligne == LIMITER
-		if (ft_strlen(data->argv[2]) + 1 == ft_strlen(line) && ft_strncmp(line, data->argv[2], ft_strlen(data->argv[2] + 1)) == 0)
+		// TODO mathilde repalce argv[2] by last heredoc
+		if (ft_strlen(data->argv[2]) + 1 == ft_strlen(line) && ft_strncmp(line, data->argv[2], ft_strlen(data->argv[2] + 1)) == 0) // TODO lucas do ftstrncmp only if line same size
 			close(stdin_fd);
 			
 		else
