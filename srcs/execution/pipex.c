@@ -150,26 +150,61 @@ char	*get_user_cmd(char *cmd, t_data *data)
 int	pipex_launch(t_commands *commands, char **envp)
 {
 	t_data		data;
-	char		*path;
-	char		**argv;
-	t_commands	*cmd;
+	t_command	*cmd;
+	int			pid;
+	int			fd;
+	char		*file_name;
 
 	if (envp == NULL || envp[0][0] == '\0')
 		error(msg("Unexpected error.", "", "", 1), &data);
 
 	data = init_struct(commands, envp);
-	print_struct(data);
+	printf("-----------------------------------------------------\n\n");
+	print_struct(&data);
 
+	cmd = commands_get_i(data.commands, 0);
+
+	fd = -1;
+
+	if (ft_lstsize(*command_get_out(cmd)) > 0)
+	{
+		file_name = lst_get_last(*command_get_out(cmd));
+		fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (fd == -1)
+			printf("Error !\n");
+	}
+
+	pid = fork();
+
+	if (pid == -1)
+		error(msg("Unexpected error.", "", "", 1), &data);
+	
+	if (ft_lstsize(*command_get_out(cmd)) > 0)
+		dup2(fd, STDOUT_FILENO);
+
+	if (pid == 0)
+		execve_fcts(data, cmd);
+	
+	if (fd != -1)
+		close(fd);
+
+	waitpid(-1, NULL, 0);
+	
 	return (0);
-
-	/*cmd = commands_get_i(data->commands, 0);
-	path = get_user_cmd(command_get_name(cmd), data);
-
-	if (execve(path, command_get_args_table(cmd), data->envp) == -1)
-		error(msg(command_get_name(cmd), ": ", strerror(errno), 1), data);*/
 }
 
-void	print_struct(t_data data)
+void	print_struct(t_data *data)
 {
-	commands_print(data.commands);
+	commands_print(data->commands);
 }
+
+void	execve_fcts(t_data data, t_command *cmd)
+{
+	char		*path;
+
+	path = get_user_cmd(command_get_name(cmd), &data);
+
+	if (execve(path, command_get_args_table(cmd), data.envp) == -1)
+		error(msg(command_get_name(cmd), ": ", strerror(errno), 1), &data);
+}
+

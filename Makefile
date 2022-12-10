@@ -49,6 +49,7 @@ SRCS  =  srcs/main.c srcs/parsing/parsing.c \
 			srcs/parsing/tokenizer/token_print.c \
 			srcs/parsing/utils/mem.c \
 			srcs/parsing/utils/str.c \
+			srcs/parsing/utils/table.c \
 			srcs/parsing/lstutils/str_chain.c
 
 OBJS  = ${SRCS:.c=.o}

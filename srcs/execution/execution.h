@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 12:47:53 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/10 15:06:21 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/10 16:28:26 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int			msg(char *str1, char *str2, char *str3, int erno);
 void		close_fds(t_data *data);
 void		free_strs(char *str, char **array_of_strs);
 char		*get_user_cmd(char *cmd, t_data *data);
-void		print_struct(t_data data);
+void		print_struct(t_data *data);
+void		execve_fcts(t_data data, t_command *cmd);
 
 #endif
