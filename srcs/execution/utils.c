@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:09:10 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/10 14:46:52 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/10 17:32:19 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,25 @@
 // En cas d'erreur, free & ferme les fds ouverts
 // Détruit le fichier temporaire du heredoc puis termine le programme
 
-/*void	error(int error_status, t_data *data)
+void	error(int error_status, t_data *data)
 {
-	if (data)
-	{
-		close_fds(data);
+	// if (data)
+	// {
+	// 	close_fds(data);
 
-		if (data->pipefd != NULL)
-			free(data->pipefd);
+	// 	if (data->pipefd != NULL)
+	// 		free(data->pipefd);
 
-		if (data->pids != NULL)
-			free(data->pids);
+	// 	if (data->pids != NULL)
+	// 		free(data->pids);
 
-		if (data->array_of_paths != NULL || data->cmd_path != NULL)
-			free_strs(data->cmd_path, data->array_of_paths);
-	}
-	if (data->heredoc == 1)
-		unlink(".heredoc.tmp");
+	// 	if (data->array_of_paths != NULL || data->cmd_path != NULL)
+	// 		free_strs(data->cmd_path, data->array_of_paths);
+	// }
+	// if (data->heredoc == 1)
+	// 	unlink(".heredoc.tmp");
 	exit(error_status);
-}*/
+}
 
 // Écrit un message d'erreur sur la sortie d'erreur
 // Et retourne le code d'erreur

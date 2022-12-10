@@ -60,3 +60,4 @@ tags
 *.txt
 *.tmp
 *.DS_Store
+*.vscode
