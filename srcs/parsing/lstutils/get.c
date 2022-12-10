@@ -24,6 +24,8 @@ char	*lst_get_last(t_list *lst)
 
 	size = ft_lstsize(lst);
 	j = 0;
+	if (!lst)
+		return (NULL);
 	while (j < size)
 	{
 		lst = lst->next;
