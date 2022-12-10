@@ -154,6 +154,12 @@ int	pipex_launch(t_commands *commands, char **envp)
 	int			pid;
 	int			fd;
 	char		*file_name;
+	int			i;
+	int			outsize;
+	int			*out_table;
+	int			last_fd;
+
+	i = 0;
 
 	if (envp == NULL || envp[0][0] == '\0')
 		error(msg("Unexpected error.", "", "", 1), &data);
@@ -166,29 +172,43 @@ int	pipex_launch(t_commands *commands, char **envp)
 
 	fd = -1;
 
-	if (ft_lstsize(*command_get_out(cmd)) > 0)
+	outsize = ft_lstsize(*command_get_out(cmd));
+	out_table = (int *)malloc(sizeof(int) * outsize);
+
+	while (i < outsize)
 	{
-		file_name = lst_get_last(*command_get_out(cmd));
-		fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		if (fd == -1)
-			printf("Error !\n");
+		file_name = lst_get_i(*command_get_out(cmd), i);
+		out_table[i] = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (out_table[i] == -1)
+			printf("Error !\n"); // TODO gérer erreur
+		i++;
 	}
+
+	last_fd = out_table[i - 1];
 
 	pid = fork();
 
 	if (pid == -1)
 		error(msg("Unexpected error.", "", "", 1), &data);
-	
+
 	if (ft_lstsize(*command_get_out(cmd)) > 0)
-		dup2(fd, STDOUT_FILENO);
+		dup2(last_fd, STDOUT_FILENO);
 
 	if (pid == 0)
 		execve_fcts(data, cmd);
-	
-	if (fd != -1)
-		close(fd);
+
+	i = 0;
+
+	while (i < outsize)
+	{
+		if (out_table[i] != -1)
+			close(out_table[i]);
+		i++;
+	}
 
 	waitpid(-1, NULL, 0);
+
+	free(out_table);
 	
 	return (0);
 }
