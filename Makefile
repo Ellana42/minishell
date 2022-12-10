@@ -1,13 +1,8 @@
 NAME  = minishell
 
 SRCS  =  srcs/main.c srcs/parsing/parsing.c \
-			srcs/execution/get_next_line.c \
-			srcs/execution/get_next_line_utils.c \
-			srcs/execution/here_doc.c \
 			srcs/execution/init.c \
-			srcs/execution/paths.c \
 			srcs/execution/pipex.c \
-			srcs/execution/redirections.c \
 			srcs/execution/utils.c \
 			srcs/parsing/accumulator/get.c \
 			srcs/parsing/accumulator/init.c \

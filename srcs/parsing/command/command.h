@@ -33,6 +33,7 @@ t_list		**command_get_out(t_command *command);
 t_list		**command_get_outa(t_command *command);
 t_list		**command_get_in(t_command *command);
 t_list		**command_get_ina(t_command *command);
-
+void        _free_string(void *str);
+char        *_new_str(char *str);
 
 #endif
