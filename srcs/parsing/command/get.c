@@ -42,8 +42,9 @@ char	**command_get_args_table(t_command *command)
 	table[0] = command_get_name(command);
 	while (i < size_args)
 	{
-		table[i] = lst_get_i(*command_get_args(command), i);
+		table[i] = lst_get_i(*command_get_args(command), i - 1);
 		i++;
 	}
+	table[i] = NULL;
 	return (table);
 }
