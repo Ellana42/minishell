@@ -17,11 +17,9 @@ typedef struct s_command{
 
 t_command	*command_alloc(void);
 int			command_init(t_command *command, char *cmd);
-void		_free_string(void *str);
 void		command_dispose(t_command *command);
 void		command_free(t_command *command);
 void		command_destroy(t_command *command);
-char		*_new_str(char *str);
 int			command_add_arg(t_command *command, char *str);
 int			command_add_out(t_command *command, char *str);
 int			command_add_out_a(t_command *command, char *str);
