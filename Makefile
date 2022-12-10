@@ -5,6 +5,7 @@ SRCS  =  srcs/main.c srcs/parsing/parsing.c \
 			srcs/execution/pipex.c \
 			srcs/execution/utils.c \
 			srcs/execution/process.c \
+			srcs/execution/redirections.c \
 			srcs/parsing/accumulator/get.c \
 			srcs/parsing/accumulator/init.c \
 			srcs/parsing/accumulator/move.c \

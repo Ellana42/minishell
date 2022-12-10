@@ -157,8 +157,6 @@ int	pipex_launch(t_commands *commands, char **envp)
 	int			*out_table;
 	int			last_fd;
 
-	i = 0;
-
 	if (envp == NULL || envp[0][0] == '\0')
 		error(msg("Unexpected error.", "", "", 1), &data);
 
@@ -167,23 +165,11 @@ int	pipex_launch(t_commands *commands, char **envp)
 	print_struct(&data);
 
 	cmd = commands_get_i(data.commands, 0);
-	outsize = ft_lstsize(*command_get_out(cmd));
-	out_table = (int *)malloc(sizeof(int) * outsize);
-
-	last_fd = -1;
-
-	while (i < outsize)
-	{
-		file_name = lst_get_i(*command_get_out(cmd), i);
-		out_table[i] = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		if (out_table[i] == -1)
-			printf("Error !\n"); // TODO gérer erreur
-		last_fd = out_table[i];
-		i++;
-	}
+	last_fd = get_out_table(cmd, &out_table);
 
 	launch_child(data, cmd, last_fd);
 
+	outsize = ft_lstsize(*command_get_out(cmd));
 	i = 0;
 
 	while (i < outsize)
