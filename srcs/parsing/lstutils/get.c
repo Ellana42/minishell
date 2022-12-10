@@ -16,3 +16,18 @@ char	*lst_get_i(t_list *lst, int i)
 	}
 	return ((char *)lst->content);
 }
+
+char	*lst_get_last(t_list *lst)
+{
+	size_t	size;
+	int		j;
+
+	size = ft_lstsize(lst);
+	j = 0;
+	while (j < size)
+	{
+		lst = lst->next;
+		j++;
+	}
+	return ((char *)lst->content);
+}
