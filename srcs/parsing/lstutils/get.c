@@ -26,10 +26,10 @@ char	*lst_get_last(t_list *lst)
 	j = 0;
 	if (!lst)
 		return (NULL);
-	while (j < size)
+	while (j < size - 1)
 	{
 		lst = lst->next;
 		j++;
 	}
-	return ((char *)lst->content);
+	return ((char *)(lst->content));
 }
