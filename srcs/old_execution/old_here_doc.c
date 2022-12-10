@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 16:40:28 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/08 10:36:09 by mkaploun         ###   ########.fr       */
+/*   Updated: 2022/12/08 10:53:35 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 
 void	get_input_file(t_data *data)
 {
-	char	*path_name;
-
-	path_name = NULL;
 	if (data->heredoc == 1) // si un heredoc est spécifié
 	{
 		get_heredoc(data);
@@ -31,8 +28,7 @@ void	get_input_file(t_data *data)
 	}
 	else
 	{
-		path_name = lst_get_i(*commands_get_i_ina(data->commands, 0), 0);
-		data->fd_in = open(path_name, O_RDONLY, 644);
+		data->fd_in = open(data->argv[1], O_RDONLY, 644);
 
 		if (data->fd_in == -1)
 			msg(strerror(errno), ": ", data->argv[1], 1);
@@ -45,19 +41,11 @@ void	get_input_file(t_data *data)
 
 void	get_output_file(t_data *data)
 {
-	char	*path_name;
-
-	path_name = NULL;
 	if (data->heredoc == 1)
-	{
-		path_name = lst_get_i(*commands_get_i_out(data->commands, 0), 0); // TODO peut être outa ?
-		data->fd_out = open(path_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	}
+		data->fd_out = open(data->argv[data->argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+
 	else
-	{
-		path_name = lst_get_i(*commands_get_i_out(data->commands, 0), 0);
-		data->fd_out = open(path_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	}
+		data->fd_out = open(data->argv[data->argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 
 	if (data->fd_out == -1)
 		msg(strerror(errno), ": ", data->argv[data->argc - 1], 1);
@@ -91,8 +79,7 @@ void	get_heredoc(t_data *data)
 			break ;
 		// Si la taille du LIMITER == taille de la ligne ET que
 		// ligne == LIMITER
-		// TODO mathilde repalce argv[2] by last heredoc
-		if (ft_strlen(data->argv[2]) + 1 == ft_strlen(line) && ft_strncmp(line, data->argv[2], ft_strlen(data->argv[2] + 1)) == 0) // TODO lucas do ftstrncmp only if line same size
+		if (ft_strlen(data->argv[2]) + 1 == ft_strlen(line) && ft_strncmp(line, data->argv[2], ft_strlen(data->argv[2] + 1)) == 0)
 			close(stdin_fd);
 			
 		else

@@ -6,15 +6,15 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:09:10 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/10 14:46:52 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/07 15:08:58 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "pipex.h"
 
 // Ferme les extremites lecture & ecriture des 2 fds de chaque pipe
 
-/*static void	close_pipe_fds(t_data *data)
+static void	close_pipe_fds(t_data *data)
 {
 	int	i;
 
@@ -24,12 +24,12 @@
 		close(data->pipefd[i]);
 		i++;
 	}
-}*/
+}
 
 // En cas d'erreur, free & ferme les fds ouverts
 // Détruit le fichier temporaire du heredoc puis termine le programme
 
-/*void	error(int error_status, t_data *data)
+void	error(int error_status, t_data *data)
 {
 	if (data)
 	{
@@ -47,7 +47,7 @@
 	if (data->heredoc == 1)
 		unlink(".heredoc.tmp");
 	exit(error_status);
-}*/
+}
 
 // Écrit un message d'erreur sur la sortie d'erreur
 // Et retourne le code d'erreur
@@ -64,7 +64,7 @@ int	msg(char *str1, char *str2, char *str3, int erno)
 
 // Ferme tous les fd ouverts
 
-/*void	close_fds(t_data *data)
+void	close_fds(t_data *data)
 {
 	if (data->fd_in != -1)
 		close(data->fd_in);
@@ -73,7 +73,7 @@ int	msg(char *str1, char *str2, char *str3, int erno)
 		close(data->fd_out);
 
 	close_pipe_fds(data);
-}*/
+}
 
 void	free_strs(char *str, char **array_of_strs)
 {
