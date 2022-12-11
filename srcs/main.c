@@ -29,7 +29,7 @@ int	main(int ac, char **av, char **envp)
 	/* 	i++; */
 	/* } */
 	last_err = pipex_launch(parser->commands, envp);
-	// parser_destroy(parser);
+	parser_destroy(parser);
 	return (0);
 }
 
