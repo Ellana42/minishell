@@ -1,5 +1,4 @@
 #include "echo.h"
-// TODO return value
 
 int	is_flag(char *arg)
 {
@@ -25,6 +24,19 @@ int	looks_like_flag(char *arg)
 	return (arg[i] == '\0');
 }
 
+int	get_flags(char **args, int *n)
+{
+	int		i;
+
+	i = 1;
+	while (looks_like_flag(args[i]))
+	{
+		*n = 1;
+		i++;
+	}
+	return (i);
+}
+
 int	echo(char **args)
 {
 	int		i;
@@ -41,11 +53,7 @@ int	echo(char **args)
 		printf("\n");
 		return (0);
 	}
-	while (looks_like_flag(args[i]))
-	{
-		n = 1;
-		i++;
-	}
+	i = get_flags(args, &n);
 	while (i < size - 1)
 	{
 		printf("%s ", args[i]);
