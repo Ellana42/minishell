@@ -16,6 +16,7 @@ SRCS  =  srcs/main.c srcs/parsing/parsing.c \
 			srcs/parsing/command/get.c \
 			srcs/parsing/command/init.c \
 			srcs/parsing/command/print.c \
+			srcs/parsing/command/funne.c \
 			srcs/parsing/commands/free.c \
 			srcs/parsing/commands/get.c \
 			srcs/parsing/commands/get_1.c \

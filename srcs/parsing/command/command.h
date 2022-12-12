@@ -5,6 +5,12 @@
 # include "../../../libft/includes/libft.h"
 # include "../utils/utils.h"
 # include "../lstutils/lstutils.h"
+# include "../tokenizer/token.h"
+
+typedef struct s_funnel{
+	char			*filename;
+	t_token_type	type;
+}	t_funnel;
 
 typedef struct s_command{
 	char	*command; // 
@@ -35,5 +41,6 @@ t_list		**command_get_in(t_command *command);
 t_list		**command_get_ina(t_command *command);
 void        _free_string(void *str);
 char        *_new_str(char *str);
+void		print_funnel_chain(t_list *lst);
 
 #endif

@@ -7,7 +7,7 @@ void	command_print(t_command *command)
 	printf("- args : ");
 	print_str_chain(*command->args);
 	printf("\n- out : ");
-	print_str_chain(*command->out);
+	print_funnel_chain(*command->out);
 	printf("\n- outa : ");
 	print_str_chain(*command->out_a);
 	printf("\n- in : ");
