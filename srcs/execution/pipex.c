@@ -168,19 +168,8 @@ int	pipex_launch(t_commands *commands, char **envp)
 	last_fd = get_out_table(cmd, &out_table);
 
 	launch_child(data, cmd, last_fd);
-
-	outsize = ft_lstsize(*command_get_out(cmd));
-	i = 0;
-
-	while (i < outsize)
-	{
-		if (out_table[i] != -1)
-			close(out_table[i]);
-		i++;
-	}
-
+	clean_table(out_table, cmd);
 	waitpid(-1, NULL, 0);
-	free(out_table);
 	return (0);
 }
 
@@ -188,3 +177,4 @@ void	print_struct(t_data *data)
 {
 	commands_print(data->commands);
 }
+

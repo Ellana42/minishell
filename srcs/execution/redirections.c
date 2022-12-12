@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:42:23 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/11 12:46:34 by mkaploun         ###   ########.fr       */
+/*   Updated: 2022/12/12 11:13:01 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,20 @@ int	get_out_table(t_command *cmd, int **out_table)
 	return (last_fd);
 }
 
-int	clean_table(int *out_table)
+int	clean_table(int *out_table, t_command *cmd)
 {
-	
+	int	outsize;
+	int	i;
+
+	outsize = ft_lstsize(*command_get_out(cmd));
+	i = 0;
+
+	while (i < outsize)
+	{
+		if (out_table[i] != -1)
+			close(out_table[i]);
+		i++;
+	}
+	free(out_table);
 	return (0);
 }
