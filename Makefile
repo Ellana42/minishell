@@ -63,7 +63,7 @@ HEADERS	= includes/minishell.h
 
 CC	= clang
 
-CFLAGS	= -g3 -lreadline #-Wall -Wextra -Werror
+CFLAGS	= -g3 #-Wall -Wextra -Werror
 
 LIBFT	= -L libft -lft
 
@@ -72,7 +72,7 @@ VALGRIND = colour-valgrind
 all: 		lib ${NAME} 
 
 ${NAME}: 	${OBJS}
-			${CC} ${CFLAGS} ${OBJS} ${LIBFT} -o ${NAME}
+			${CC} ${CFLAGS} -lreadline ${OBJS} ${LIBFT} -o ${NAME}
 
 .c.o:		
 			${CC} ${CFLAGS} -I${HEADERS} -c $< -o $@

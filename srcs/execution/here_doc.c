@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:05:52 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/12 15:30:05 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/12 17:46:02 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	get_here_doc(char *delimiter)
 		return (-2);
 
 	len_delimiter = ft_strlen(delimiter);
-	tmp_fd = open(".heredoc.tmp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	tmp_fd = open(".heredoc.tmp", O_APPEND | O_CREAT | O_WRONLY , 0644); // TODO protect open
 
 	if (tmp_fd < 0)
 		return (tmp_fd);
@@ -49,5 +49,7 @@ int	get_here_doc(char *delimiter)
 		}
 		free(line);
 	}
+	close(tmp_fd);
+	tmp_fd = open(".heredoc.tmp", O_RDONLY , 0644); // TODO protect open
 	return (tmp_fd);
 }

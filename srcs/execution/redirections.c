@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:42:23 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/12 15:32:24 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/12 18:02:31 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int get_in_table(t_command *cmd, int **in_table, char **file_name)
 	int 			last_fd;
 	int 			i;
 	int				err;
-	int				fd;
 	t_token_type	type;
 
 	i = 0;
@@ -44,10 +43,6 @@ int get_in_table(t_command *cmd, int **in_table, char **file_name)
 		if (type == Ina)
 			(*in_table)[i] = get_here_doc(*file_name);
 
-		if (fd == -1)
-			err = 1;
-
-		(*in_table)[i] = fd;
 		if ((*in_table)[i] == -1)
 			printf("Error !\n"); // TODO gérer erreur
 		last_fd = (*in_table)[i];
@@ -126,7 +121,7 @@ int clean_table_in(int *in_table, t_command *cmd)
 			close(in_table[i]);
 		i++;
 	}
+	unlink(".heredoc.tmp"); // TODO deal with output
 	free(in_table);
 	return (0);
 }
-
