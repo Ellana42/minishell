@@ -25,6 +25,8 @@ int	command_add_out(t_command *command, char *str)
 	t_funnel	*funnel;
 
 	funnel = (t_funnel *)malloc(sizeof(t_funnel));
+	if (!funnel)
+		return (1);
 	funnel->filename = _new_str(str);
 	if (!funnel->filename)
 		return (1);
@@ -35,22 +37,30 @@ int	command_add_out(t_command *command, char *str)
 
 int	command_add_out_a(t_command *command, char *str)
 {
-	char	*tmp;
+	t_funnel	*funnel;
 
-	tmp = _new_str(str);
-	if (!tmp)
+	funnel = (t_funnel *)malloc(sizeof(t_funnel));
+	if (!funnel)
 		return (1);
-	ft_lstadd_back(command->out_a, ft_lstnew(tmp));
+	funnel->filename = _new_str(str);
+	if (!funnel->filename)
+		return (1);
+	funnel->type = Outa;
+	ft_lstadd_back(command->out, ft_lstnew(funnel));
 	return (0);
 }
 
 int	command_add_in(t_command *command, char *str)
 {
-	char	*tmp;
+	t_funnel	*funnel;
 
-	tmp = _new_str(str);
-	if (!tmp)
+	funnel = (t_funnel *)malloc(sizeof(t_funnel));
+	if (!funnel)
 		return (1);
-	ft_lstadd_back(command->in, ft_lstnew(tmp));
+	funnel->filename = _new_str(str);
+	if (!funnel->filename)
+		return (1);
+	funnel->type = In;
+	ft_lstadd_back(command->in, ft_lstnew(funnel));
 	return (0);
 }

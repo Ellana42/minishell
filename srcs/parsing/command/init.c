@@ -19,12 +19,8 @@ int	command_init(t_command *command, char *cmd)
 	command->command = cmd_cpy;
 	command->args = ft_lstinit();
 	command->out = ft_lstinit();
-	command->out_a = ft_lstinit();
 	command->in = ft_lstinit();
-	command->in_a = ft_lstinit();
 	if (!command->args || !command->out || !command->in)
-		return (1);
-	if (!command->out_a || !command->in_a)
 		return (1);
 	return (0);
 }

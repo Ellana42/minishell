@@ -2,11 +2,15 @@
 
 int	command_add_in_a(t_command *command, char *str)
 {
-	char	*tmp;
+	t_funnel	*funnel;
 
-	tmp = _new_str(str);
-	if (!tmp)
+	funnel = (t_funnel *)malloc(sizeof(t_funnel));
+	if (!funnel)
 		return (1);
-	ft_lstadd_back(command->in_a, ft_lstnew(tmp));
+	funnel->filename = _new_str(str);
+	if (!funnel->filename)
+		return (1);
+	funnel->type = Ina;
+	ft_lstadd_back(command->in, ft_lstnew(funnel));
 	return (0);
 }

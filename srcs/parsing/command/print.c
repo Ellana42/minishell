@@ -8,12 +8,8 @@ void	command_print(t_command *command)
 	print_str_chain(*command->args);
 	printf("\n- out : ");
 	print_funnel_chain(*command->out);
-	printf("\n- outa : ");
-	print_str_chain(*command->out_a);
 	printf("\n- in : ");
-	print_str_chain(*command->in);
-	printf("\n- ina : ");
-	print_str_chain(*command->in_a);
+	print_funnel_chain(*command->in);
 	printf("\n");
 	printf("\n");
 }
