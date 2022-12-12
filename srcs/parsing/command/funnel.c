@@ -20,3 +20,17 @@ void	print_funnel_chain(t_list *lst)
 {
 	ft_lstiter(lst, &_funnel_print);
 }
+
+char	*funnel_get_filename(t_funnel *funnel)
+{
+	if (!funnel)
+		return (NULL);
+	return (funnel->filename);
+}
+
+t_token_type	funnel_get_type(t_funnel *funnel)
+{
+	if (!funnel)
+		return (-1);
+	return (funnel->type);
+}
