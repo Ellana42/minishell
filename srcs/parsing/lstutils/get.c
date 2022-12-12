@@ -1,6 +1,6 @@
 #include "lstutils.h"
 
-char	*lst_get_i(t_list *lst, int i)
+void	*lst_get_i(t_list *lst, int i)
 {
 	int	j;
 
