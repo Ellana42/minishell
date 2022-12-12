@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:42:23 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/12 14:52:38 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/12 15:32:24 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,12 @@ int get_in_table(t_command *cmd, int **in_table, char **file_name)
 		funnel = lst_get_i(*command_get_in(cmd), i);
 		*file_name = funnel_get_filename(funnel);
 		type = funnel_get_type(funnel);
-		fd = open(*file_name, O_RDONLY, 0644);
+
+		if (type == In)
+			(*in_table)[i] = open(*file_name, O_RDONLY, 0644); // TODO check si bonnes permissions
+
+		if (type == Ina)
+			(*in_table)[i] = get_here_doc(*file_name);
 
 		if (fd == -1)
 			err = 1;
@@ -76,7 +81,7 @@ int get_out_table(t_command *cmd, int **out_table)
 		type = funnel_get_type(funnel);
 		
 		if (type == Out)
-			(*out_table)[i] = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			(*out_table)[i] = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644); // TODO check si bonnes permissions
 
 		if (type == Outa)
 			(*out_table)[i] = open(file_name, O_WRONLY| O_CREAT | O_APPEND, 0644);
@@ -124,3 +129,4 @@ int clean_table_in(int *in_table, t_command *cmd)
 	free(in_table);
 	return (0);
 }
+

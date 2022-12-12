@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 12:47:53 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/12 14:25:13 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/12 15:25:31 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <sys/wait.h>
 # include <string.h>
 # include <errno.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 # include "../../libft/includes/ft_printf.h"
 # include "../../libft/includes/libft.h"
@@ -48,5 +50,6 @@ int 		get_in_table(t_command *cmd, int **in_table, char **file_name);
 int			get_out_table(t_command *cmd, int **out_table);
 int			clean_table_out(int *out_table, t_command *cmd);
 int 		clean_table_in(int *in_table, t_command *cmd);
+int			get_here_doc(char *delimiter);
 
 #endif

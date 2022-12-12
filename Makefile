@@ -7,6 +7,7 @@ SRCS  =  srcs/main.c srcs/parsing/parsing.c \
 			srcs/execution/process.c \
 			srcs/execution/redirections.c \
 			srcs/execution/paths.c \
+			srcs/execution/here_doc.c \
 			srcs/parsing/accumulator/get.c \
 			srcs/parsing/accumulator/init.c \
 			srcs/parsing/accumulator/move.c \
@@ -62,7 +63,7 @@ HEADERS	= includes/minishell.h
 
 CC	= clang
 
-CFLAGS	= -g3 #-Wall -Wextra -Werror #-lreadline
+CFLAGS	= -g3 -lreadline #-Wall -Wextra -Werror
 
 LIBFT	= -L libft -lft
 
