@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:42:23 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/12 14:27:41 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/12 14:38:24 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int get_in_table(t_command *cmd, int **in_table, char **file_name)
 
 	size = ft_lstsize(*command_get_in(cmd));
 	*in_table = (int *)malloc(sizeof(int) * size);
+	if (size == 0)
+		return (-2);
 
 	last_fd = -1;
 
@@ -70,7 +72,7 @@ int get_out_table(t_command *cmd, int **out_table)
 	while (i < size)
 	{
 		funnel = lst_get_i(*command_get_out(cmd), i);
-		*file_name = funnel_get_filename(funnel);
+		file_name = funnel_get_filename(funnel);
 		type = funnel_get_type(funnel);
 		(*out_table)[i] = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if ((*out_table)[i] == -1)
@@ -91,7 +93,7 @@ int clean_table_out(int *out_table, t_command *cmd)
 
 	while (i < size)
 	{
-		if (out_table[i] != -1)
+		if (out_table[i] >= 0)
 			close(out_table[i]);
 		i++;
 	}
@@ -109,7 +111,7 @@ int clean_table_in(int *in_table, t_command *cmd)
 
 	while (i < size)
 	{
-		if (in_table[i] != -1)
+		if (in_table[i] >= 0)
 			close(in_table[i]);
 		i++;
 	}
