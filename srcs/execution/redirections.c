@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:42:23 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/12 12:34:56 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/12 14:27:41 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 int get_in_table(t_command *cmd, int **in_table, char **file_name)
 {
-	int size;
-	int last_fd;
-	int i;
-	int	err;
-	int	fd;
+	t_funnel		*funnel;
+	int 			size;
+	int 			last_fd;
+	int 			i;
+	int				err;
+	int				fd;
+	t_token_type	type;
 
 	i = 0;
 	err = 0;
@@ -30,7 +32,9 @@ int get_in_table(t_command *cmd, int **in_table, char **file_name)
 
 	while (i < size)
 	{
-		*file_name = lst_get_i(*command_get_in(cmd), i);
+		funnel = lst_get_i(*command_get_in(cmd), i);
+		*file_name = funnel_get_filename(funnel);
+		type = funnel_get_type(funnel);
 		fd = open(*file_name, O_RDONLY, 0644);
 
 		if (fd == -1)
@@ -49,10 +53,12 @@ int get_in_table(t_command *cmd, int **in_table, char **file_name)
 
 int get_out_table(t_command *cmd, int **out_table)
 {
-	int size;
-	int last_fd;
-	int i;
-	char *file_name;
+	t_funnel		*funnel;
+	int 			size;
+	int 			last_fd;
+	int 			i;
+	t_token_type	type;
+	char 			*file_name;
 
 	i = 0;
 
@@ -63,7 +69,9 @@ int get_out_table(t_command *cmd, int **out_table)
 
 	while (i < size)
 	{
-		file_name = lst_get_i(*command_get_out(cmd), i);
+		funnel = lst_get_i(*command_get_out(cmd), i);
+		*file_name = funnel_get_filename(funnel);
+		type = funnel_get_type(funnel);
 		(*out_table)[i] = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if ((*out_table)[i] == -1)
 			printf("Error !\n"); // TODO gérer erreur
