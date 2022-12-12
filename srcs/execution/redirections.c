@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:42:23 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/12 14:38:24 by mkaploun         ###   ########.fr       */
+/*   Updated: 2022/12/12 14:52:38 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,13 @@ int get_out_table(t_command *cmd, int **out_table)
 		funnel = lst_get_i(*command_get_out(cmd), i);
 		file_name = funnel_get_filename(funnel);
 		type = funnel_get_type(funnel);
-		(*out_table)[i] = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		
+		if (type == Out)
+			(*out_table)[i] = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+
+		if (type == Outa)
+			(*out_table)[i] = open(file_name, O_WRONLY| O_CREAT | O_APPEND, 0644);
+
 		if ((*out_table)[i] == -1)
 			printf("Error !\n"); // TODO gérer erreur
 		last_fd = (*out_table)[i];
