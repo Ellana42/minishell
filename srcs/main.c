@@ -45,7 +45,10 @@ int	main(int ac, char **av, char **envp)
 		command = readline("$> ");
 		add_history(command);
 		if (!command)
+		{
+			printf("Left\n");
 			return (1);
+		}
 		/* printf("\nThe command : %s\n\n", command); */
 		parser = parse_string(command, last_err);
 		if (parser_get_error(parser) != 0)

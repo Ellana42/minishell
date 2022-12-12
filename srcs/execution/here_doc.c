@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:05:52 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/12 18:06:47 by mkaploun         ###   ########.fr       */
+/*   Updated: 2022/12/12 21:26:38 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	get_here_doc(char *delimiter)
 
 	while (flag)
 	{
-		line = readline("> ");
+		line = readline("> "); // TODO deal with leaks (rl_clear_history)
 
 		if (line == NULL)
 			break ;

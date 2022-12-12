@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:45:04 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/12 17:49:55 by mkaploun         ###   ########.fr       */
+/*   Updated: 2022/12/12 22:43:11 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	pipex_launch(t_commands *commands, char **envp)
 		error(msg("Unexpected error.", "", "", 1), &data);
 
 	data = init_struct(commands, envp);
-	printf("-----------------------------------------------------\n\n");
-	print_struct(&data);
+	/* printf("-----------------------------------------------------\n\n"); */
+	/* print_struct(&data); */
 
 	cmd = commands_get_i(data.commands, 0);
 	fd[0] = get_in_table(cmd, &in_table, &file_name);
