@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array_of_paths.c                                            :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:45:04 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/03 16:21:20 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/12 13:17:00 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,10 @@ int	pipex_launch(t_commands *commands, char **envp)
 
 	cmd = commands_get_i(data.commands, 0);
 	fd[0] = get_in_table(cmd, &in_table, &file_name);
-	printf("This is fd[0] : %d\n", fd[0]);
 	if (fd[0] == -1)
 		printf("bash: %s: No such file or directory\n", file_name);
 
 	fd[1] = get_out_table(cmd, &out_table);
-	printf("This is fd[1] : %d\n", fd[1]);
-
-	printf("%d %d\n", fd[0], fd[1]);
-	printf("WTF\n");
-	printf("%d %d\n", fd[0], fd[1]);
 
 	launch_child(data, cmd, fd);
 	waitpid(-1, NULL, 0);

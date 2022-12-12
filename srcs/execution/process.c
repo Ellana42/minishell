@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:14:58 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/12 12:48:08 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/12 13:19:31 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,10 @@ int	launch_child(t_data data, t_command *cmd, int fd[2])
 	pid = fork();
 
 	if (pid == -1)
-	{
-		printf("WTF\n");
 		return (1);
-	}
 		 // TODO deal with this
 
 	// TODO deals with pipes
-
-	printf("%d %d", fd[0], fd[1]);
 
 	if (fd[0] != -1)
 		dup2(fd[0], STDIN_FILENO);
@@ -47,11 +42,11 @@ int	launch_child(t_data data, t_command *cmd, int fd[2])
 int	launch_cmd(t_data data, t_command *cmd)
 {
 	char		*path;
+	char		*args_table;
 
 	path = get_user_cmd(command_get_name(cmd), &data);
 
-	if (execve(path, command_get_args_table(cmd), data.envp) == -1)
+	if (execve(path, command_get_args_table(cmd), data.envp) == 0)
 		return (1); // TODO deal with this
-
 	return (0);
 }
