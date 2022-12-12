@@ -6,25 +6,34 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:14:58 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/10 17:34:43 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/12 12:48:08 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-int	launch_child(t_data data, t_command *cmd, int fd)
+int	launch_child(t_data data, t_command *cmd, int fd[2])
 {
 	int	pid;
 	int	error;
 	pid = fork();
 
 	if (pid == -1)
-		return (1); // TODO deal with this
+	{
+		printf("WTF\n");
+		return (1);
+	}
+		 // TODO deal with this
 
 	// TODO deals with pipes
 
-	if (fd != -1)
-		dup2(fd, STDOUT_FILENO);
+	printf("%d %d", fd[0], fd[1]);
+
+	if (fd[0] != -1)
+		dup2(fd[0], STDIN_FILENO);
+
+	if (fd[1] != -1)
+		dup2(fd[1], STDOUT_FILENO);
 
 	if (pid == 0)
 	{

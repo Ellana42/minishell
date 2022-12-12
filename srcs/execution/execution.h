@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 12:47:53 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/12 11:09:30 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/12 11:41:01 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void		free_strs(char *str, char **array_of_strs);
 char		*get_user_cmd(char *cmd, t_data *data);
 void		print_struct(t_data *data);
 int			launch_cmd(t_data data, t_command *cmd);
-int			launch_child(t_data data, t_command *cmd, int fd);
+int			launch_child(t_data data, t_command *cmd, int fd[2]);
+int 		get_in_table(t_command *cmd, int **in_table, char **file_name);
 int			get_out_table(t_command *cmd, int **out_table);
-int			clean_table(int *out_table, t_command *cmd);
+int			clean_table_out(int *out_table, t_command *cmd);
+int 		clean_table_in(int *in_table, t_command *cmd);
 
 #endif
