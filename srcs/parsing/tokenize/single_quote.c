@@ -2,6 +2,7 @@
 
 int	tokenize_single_quote(t_tokenizer *tokenizer)
 {
+	tokenizer_set_not_empty_acc(tokenizer);
 	if (tokenizer_get_char(tokenizer) == '\'')
 	{
 		tokenizer->state = NoQuote;

@@ -33,33 +33,33 @@ int    main(int ac, char **av, char **envp)
     return (0);
 }
 
-// int	main(int ac, char **av, char **envp)
-// {
-// 	char		*command;
-// 	t_parser	*parser;
-// 	int			last_err;
+/* int	main(int ac, char **av, char **envp) */
+/* { */
+/* 	char		*command; */
+/* 	t_parser	*parser; */
+/* 	int			last_err; */
 
-// 	last_err = 66;
-// 	while (1)
-// 	{
-// 		command = readline("$> ");
-// 		add_history(command);
-// 		if (!command)
-// 		{
-// 			printf("Left\n");
-// 			return (1);
-// 		}
-// 		/* printf("\nThe command : %s\n\n", command); */
-// 		parser = parse_string(command, last_err);
-// 		if (parser_get_error(parser) != 0)
-// 			printf("Error %d\n", parser_get_error(parser));
-// 		/* else */
-// 			/* commands_print(parser->commands); */
+/* 	last_err = 66; */
+/* 	while (1) */
+/* 	{ */
+/* 		command = readline("$> "); */
+/* 		add_history(command); */
+/* 		if (!command) */
+/* 		{ */
+/* 			printf("Left\n"); */
+/* 			return (1); */
+/* 		} */
+/* 		/1* printf("\nThe command : %s\n\n", command); *1/ */
+/* 		parser = parse_string(command, last_err); */
+/* 		if (parser_get_error(parser) != 0) */
+/* 			printf("Error %d\n", parser_get_error(parser)); */
+/* 		/1* else *1/ */
+/* 			/1* commands_print(parser->commands); *1/ */
 
-// 		last_err = pipex_launch(parser->commands, envp);
-// 		parser_destroy(parser);
-// 		free(command);
-// 	}
-// 	rl_clear_history();
-// 	return (0);
-// }
+/* 		last_err = pipex_launch(parser->commands, envp); */
+/* 		parser_destroy(parser); */
+/* 		free(command); */
+/* 	} */
+/* 	rl_clear_history(); */
+/* 	return (0); */
+/* } */

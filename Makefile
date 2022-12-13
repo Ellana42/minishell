@@ -9,6 +9,7 @@ SRCS  =  srcs/main.c srcs/parsing/parsing.c \
 			srcs/execution/paths.c \
 			srcs/execution/here_doc.c \
 			srcs/parsing/accumulator/get.c \
+			srcs/parsing/accumulator/set.c \
 			srcs/parsing/accumulator/init.c \
 			srcs/parsing/accumulator/move.c \
 			srcs/parsing/command/add.c \

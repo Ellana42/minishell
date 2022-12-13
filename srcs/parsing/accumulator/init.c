@@ -10,6 +10,7 @@ t_acc	*acc_alloc(void)
 
 int	acc_init(t_acc *acc, size_t size)
 {
+	acc->is_empty = True;
 	acc->size = size;
 	acc->acc = (char *)malloc(sizeof(char) * (acc->size + 1));
 	if (!acc->acc)

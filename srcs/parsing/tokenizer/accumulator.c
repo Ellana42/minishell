@@ -10,6 +10,11 @@ int	tokenizer_is_empty_acc(t_tokenizer *tokenizer)
 	return (acc_is_empty(tokenizer->acc));
 }
 
+int	tokenizer_set_not_empty_acc(t_tokenizer *tokenizer)
+{
+	return (acc_set_not_empty(tokenizer->acc));
+}
+
 int	tokenizer_accumulate(t_tokenizer *tokenizer)
 {
 	acc_accumulate(tokenizer->acc, *(tokenizer->cmd_ptr));

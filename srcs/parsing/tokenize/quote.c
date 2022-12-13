@@ -24,6 +24,7 @@ int	tokenize_quotev(t_tokenizer *tokenizer)
 
 int	tokenize_quote(t_tokenizer *tokenizer)
 {
+	tokenizer_set_not_empty_acc(tokenizer);
 	if (tokenizer_get_char(tokenizer) == '\"')
 	{
 		tokenizer->state = NoQuote;

@@ -60,5 +60,6 @@ int			tokenizer_is_empty_acc_var(t_tokenizer *tokenizer);
 t_token		*tokenizer_get_token(t_tokenizer *tokenizer, int i);
 void		tokenizer_destroy(t_tokenizer *tokenizer);
 int			tokenizer_move_cursor_two(t_tokenizer *tokenizer);
+int			tokenizer_set_not_empty_acc(t_tokenizer *tokenizer);
 
 #endif

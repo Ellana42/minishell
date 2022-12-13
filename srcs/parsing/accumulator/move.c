@@ -19,17 +19,19 @@ void	acc_reset(t_acc *acc)
 	}
 	acc->i = 0;
 	acc->ptr = acc->acc;
+	acc->is_empty = True;
 }
 
 int	acc_is_empty(t_acc *acc)
 {
-	return (acc->i == 0);
+	return (acc->is_empty);
 }
 
 int	acc_accumulate(t_acc *acc, char c)
 {
 	*(acc->ptr) = c;
 	acc_move(acc);
+	acc->is_empty = False;
 	return (0);
 }
 
@@ -40,6 +42,8 @@ int	acc_concat(t_acc *acc, char *str)
 	char	*tmp;
 
 	len_str = ft_strlen(str);
+	if ((!acc_is_empty(acc)) || (len_str > 0))
+		acc->is_empty = False;
 	new_size = acc->size + len_str;
 	tmp = (char *)malloc(sizeof(char) * (new_size + 1));
 	if (!tmp)
