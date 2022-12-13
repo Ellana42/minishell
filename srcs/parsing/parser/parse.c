@@ -1,26 +1,5 @@
 #include "parser.h"
 
-int	parse_start(t_parser *parser)
-{
-	t_token		*token;
-	t_command	*command;
-
-	token = parser_get_token(parser);
-	if (!token)
-		return (parser_set_error_return(parser, ParserUnknownError));
-	if (token->type == Str)
-	{
-		command = command_alloc();
-		if (command_init(command, token->str))
-			return (parser_set_error_return(parser, ParserAllocError));
-		parser->command = command;
-		parser_move_cursor(parser);
-		parser->state = pParams;
-		return (0);
-	}
-	return (parser_set_error_return(parser, ParserSyntaxError));
-}
-
 int	parse_params_pipe(t_parser *parser)
 {
 	parser->state = pStart;
@@ -34,6 +13,33 @@ int	parse_params_funnel(t_parser *parser, t_parser_state funnel_state)
 {
 	parser->state = funnel_state;
 	parser_move_cursor(parser);
+	return (0);
+}
+
+int	parse_start(t_parser *parser)
+{
+	t_token		*token;
+	t_command	*command;
+
+	token = parser_get_token(parser);
+	if (!token)
+		return (parser_set_error_return(parser, ParserUnknownError));
+	if (token->type == Pipe || token->type == Eol)
+		return (parser_set_error_return(parser, ParserSyntaxError));
+	command = command_alloc();
+	if (command_init(command, token->str))
+		return (parser_set_error_return(parser, ParserAllocError));
+	parser->command = command;
+	if (token->type == Out)
+		return (parse_params_funnel(parser, pOut));
+	if (token->type == Outa)
+		return (parse_params_funnel(parser, pOuta));
+	if (token->type == In)
+		return (parse_params_funnel(parser, pIn));
+	if (token->type == Ina)
+		return (parse_params_funnel(parser, pIna));
+	parser_move_cursor(parser);
+	parser->state = pParams;
 	return (0);
 }
 
