@@ -57,3 +57,5 @@ minishell
 *.md
 tags
 *cscope*
+*.txt
+*.tmp
