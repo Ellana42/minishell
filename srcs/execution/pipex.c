@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:45:04 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/13 17:15:55 by mkaploun         ###   ########.fr       */
+/*   Updated: 2022/12/13 22:37:52 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	pipex_launch(t_commands *commands, char **envp)
 
 	data = init_struct(commands, envp);
 
+	cmd = NULL;
 	nbr_commands = commands_get_size(commands);
 	fd[0] = -1;
 	fd[1] = -1;
