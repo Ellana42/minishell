@@ -1,5 +1,31 @@
 #include "tokenize.h"
 
+int	tokenize_quote_dollar(t_tokenizer *tokenizer)
+{
+	char	*err_num;
+	char	c;
+
+	err_num = NULL;
+	if (tokenizer_get_next_char(tokenizer, 1) == '?')
+	{
+		err_num = ft_itoa(tokenizer->last_err);
+		if (tokenizer_acc_concat(tokenizer, err_num))
+			return (1);
+		free(err_num);
+		tokenizer_move_cursor(tokenizer);
+		tokenizer_move_cursor(tokenizer);
+		return (0);
+	}
+	if (!ft_isalnum(tokenizer_get_next_char(tokenizer, 1)))
+	{
+		tokenizer_accumulate(tokenizer);
+		return (0);
+	}
+	tokenizer->state = QuoteV;
+	tokenizer_move_cursor(tokenizer);
+	return (0);
+}
+
 int	tokenize_quotev(t_tokenizer *tokenizer)
 {
 	char	c;
@@ -32,18 +58,7 @@ int	tokenize_quote(t_tokenizer *tokenizer)
 		return (0);
 	}
 	if (tokenizer_get_char(tokenizer) == '$')
-	{
-		if (tokenizer_get_next_char(tokenizer, 1) == '?')
-		{
-			// TODO gérer ? attention taille acc 
-			tokenizer_move_cursor(tokenizer);
-			tokenizer_move_cursor(tokenizer);
-			return (0);
-		}
-		tokenizer->state = QuoteV;
-		tokenizer_move_cursor(tokenizer);
-		return (0);
-	}
+		return (tokenize_quote_dollar(tokenizer));
 	tokenizer_accumulate(tokenizer);
 	return (0);
 }

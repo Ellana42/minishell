@@ -3,6 +3,7 @@
 int	tokenize_noquote_dollar(t_tokenizer *tokenizer)
 {
 	char	*err_num;
+	char	c;
 
 	err_num = NULL;
 	if (tokenizer_get_next_char(tokenizer, 1) == '?')
@@ -13,6 +14,15 @@ int	tokenize_noquote_dollar(t_tokenizer *tokenizer)
 		free(err_num);
 		tokenizer_move_cursor(tokenizer);
 		tokenizer_move_cursor(tokenizer);
+		return (0);
+	}
+	if (!ft_isalnum(tokenizer_get_next_char(tokenizer, 1)))
+	{
+		c = tokenizer_get_next_char(tokenizer, 1);
+		if (c != '\'' && c != '\"')
+			tokenizer_accumulate(tokenizer);
+		else
+			tokenizer_move_cursor(tokenizer);
 		return (0);
 	}
 	tokenizer->state = NoQuoteV;
