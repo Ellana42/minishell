@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:45:04 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/13 12:45:39 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/13 15:02:11 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,20 @@ int	pipex_launch(t_commands *commands, char **envp)
 	/* print_struct(&data); */
 
 	nbr_commands = commands_get_size(commands);
-	i = 0;
 	fd[0] = -1;
 	fd[1] = -1;
-	
+	pipefd[0] = -2;
+	pipefd[1] = -2;
+	i = 0;
+
 	while (i < nbr_commands)
 	{
 		cmd = commands_get_i(data.commands, i);
+		printf("%s\n", command_get_name(cmd));
 
 		fd[0] = get_in_table(cmd, &in_table, &file_name, pipefd);
+		printf("fd[0] = %d\n", fd[0]);
+
 		if (fd[0] == -1)
 			printf("bash: %s: No such file or directory\n", file_name);
 
@@ -53,15 +58,23 @@ int	pipex_launch(t_commands *commands, char **envp)
 			exit(EXIT_FAILURE);
 		}
 
+		printf("%s\n", command_get_name(cmd));
+		printf("pipefd[0] = %d\n", pipefd[0]);
+		printf("pipefd[1] = %d\n", pipefd[1]);
+
+		if (i == nbr_commands - 1)
+			pipefd[0] = STDOUT_FILENO;
+
 		fd[1] = get_out_table(cmd, &out_table, pipefd);
+		printf("fd[1] = %d\n", fd[1]);
 
 		launch_child(data, cmd, fd);
 		waitpid(-1, NULL, 0);
-		clean_table_in(in_table, cmd);
-		clean_table_out(out_table, cmd);
 		i++;
 	}
 
+	clean_table_in(in_table, cmd);
+	clean_table_out(out_table, cmd);
 	return (0);
 }
 

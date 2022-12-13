@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:14:58 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/13 11:48:59 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/13 14:35:25 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	launch_child(t_data data, t_command *cmd, int fd[2])
 
 int	launch_cmd(t_data data, t_command *cmd)
 {
-	char		*path;
-	char		*args_table;
+	char	*path;
+	char	*args_table;
 
 	path = get_user_cmd(command_get_name(cmd), &data);
 

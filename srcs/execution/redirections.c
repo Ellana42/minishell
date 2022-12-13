@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:42:23 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/13 12:59:23 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/13 15:03:26 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ int get_in_table(t_command *cmd, int **in_table, char **file_name, int pipefd[2]
 	size = ft_lstsize(*command_get_in(cmd));
 	*in_table = (int *)malloc(sizeof(int) * size);
 
-	if (size == 0)
-		return (-2);
-
-	last_fd = pipefd[1];
+	last_fd = pipefd[0];
 
 	while (i < size)
 	{
@@ -69,17 +66,14 @@ int get_out_table(t_command *cmd, int **out_table, int pipefd[2])
 	size = ft_lstsize(*command_get_out(cmd));
 	*out_table = (int *)malloc(sizeof(int) * size);
 
-	if (size == 0)
-		return (-2);
-
-	last_fd = pipefd[0];
+	last_fd = pipefd[1];
 
 	while (i < size)
 	{
 		funnel = lst_get_i(*command_get_out(cmd), i);
 		file_name = funnel_get_filename(funnel);
 		type = funnel_get_type(funnel);
-		
+
 		if (type == Out)
 			(*out_table)[i] = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644); // TODO check si bonnes permissions
 
