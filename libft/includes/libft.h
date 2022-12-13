@@ -6,7 +6,7 @@
 /*   By: mkaploun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 19:12:32 by mkaploun          #+#    #+#             */
-/*   Updated: 2022/04/01 14:08:33 by ellana           ###   ########.fr       */
+/*   Updated: 2022/12/13 18:04:27 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ typedef struct s_list {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+typedef enum s_bool{
+	False = 0,
+	True = 1,
+}	t_bool;
 
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
