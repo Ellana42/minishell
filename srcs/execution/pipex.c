@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:45:04 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/13 15:02:11 by lsalin           ###   ########.fr       */
+/*   Updated: 2022/12/13 15:48:54 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,9 @@ int	pipex_launch(t_commands *commands, char **envp)
 	while (i < nbr_commands)
 	{
 		cmd = commands_get_i(data.commands, i);
-		printf("%s\n", command_get_name(cmd));
 
 		fd[0] = get_in_table(cmd, &in_table, &file_name, pipefd);
-		printf("fd[0] = %d\n", fd[0]);
+		printf("pour %s: fd[0] = %d\n", command_get_name(cmd), fd[0]);
 
 		if (fd[0] == -1)
 			printf("bash: %s: No such file or directory\n", file_name);
@@ -58,18 +57,17 @@ int	pipex_launch(t_commands *commands, char **envp)
 			exit(EXIT_FAILURE);
 		}
 
-		printf("%s\n", command_get_name(cmd));
-		printf("pipefd[0] = %d\n", pipefd[0]);
-		printf("pipefd[1] = %d\n", pipefd[1]);
+		printf("%s created pipe between %d -> %d\n", command_get_name(cmd), pipefd[1], pipefd[0]);
 
 		if (i == nbr_commands - 1)
-			pipefd[0] = STDOUT_FILENO;
+			pipefd[1] = STDOUT_FILENO;
 
 		fd[1] = get_out_table(cmd, &out_table, pipefd);
-		printf("fd[1] = %d\n", fd[1]);
+		printf("pour %s: fd[1] = %d\n", command_get_name(cmd), fd[1]);
 
 		launch_child(data, cmd, fd);
 		waitpid(-1, NULL, 0);
+		printf("cmd %s exited normally \n", command_get_name(cmd));
 		i++;
 	}
 
