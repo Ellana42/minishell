@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaploun <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 19:12:32 by mkaploun          #+#    #+#             */
-/*   Updated: 2022/03/12 10:39:15 by ellana           ###   ########.fr       */
+/*   Updated: 2022/12/07 15:01:59 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ int			ft_printf(const char *str, ...);
 t_bilist	*ft_bilstnew(void *content, int size);
 void		*ft_bilstclear(t_bilist **lst, void (*del)(void *));
 t_bilist	*ft_bilstlast(t_bilist *lst);
-void		ft_bilstadd_back(t_bilist **alst, t_bilist *new);
+void		ft_bilstadd_back(t_bilist **alst, t_bilist *newlst);
 
 #endif

@@ -18,5 +18,12 @@ int			commands_push(t_commands *commands, t_command *command);
 int			commands_get_size(t_commands *commands);
 void		commands_print(t_commands *commands);
 t_command	*commands_get_i(t_commands *commands, int i);
+t_list		**commands_get_i_args(t_commands *commands, int i);
+t_list		**commands_get_i_out(t_commands *commands, int i);
+t_list		**commands_get_i_outa(t_commands *commands, int i);
+t_list		**commands_get_i_in(t_commands *commands, int i);
+t_list		**commands_get_i_ina(t_commands *commands, int i);
+int			commands_get_size(t_commands *commands);
+char		*commands_get_i_command(t_commands *commands, int i);
 
 #endif

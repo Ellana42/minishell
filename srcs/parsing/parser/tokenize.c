@@ -28,6 +28,5 @@ int	parser_tokenize_string(t_parser *parser)
 		return (parser_set_error_return(parser, ParserQuotesUnclosed));
 	if (parser->tokenizer->state == SingleQuote)
 		return (parser_set_error_return(parser, ParserQuotesUnclosed));
-	tokenizer_print_tokens(parser->tokenizer);
 	return (0);
 }
