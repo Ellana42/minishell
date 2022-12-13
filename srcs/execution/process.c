@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:14:58 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/13 17:15:24 by mkaploun         ###   ########.fr       */
+/*   Updated: 2022/12/13 23:52:40 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ int	launch_child(t_data data, t_command *cmd, int fd[2])
 		error = launch_cmd(data, cmd);
 		if (error)
 			return (error);
+		if (fd[0] >= 0)
+			close(fd[0]);
+		if (fd[1] >= 0)
+			close(fd[1]);
 	}
 	if (fd[0] >= 0)
 		close(fd[0]);

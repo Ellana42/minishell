@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   redirections.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/10 17:42:23 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/13 22:38:59 by mkaploun         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "execution.h"
 
 int get_in_table(t_command *cmd, int **in_table, char **file_name, int pipefd[2])
@@ -88,7 +76,7 @@ int get_out_table(t_command *cmd, int **out_table, int pipefd[2])
 	return (last_fd);
 }
 
-int clean_table_out(int *out_table, t_command *cmd)
+int clean_table_out(int **out_table, t_command *cmd)
 {
 	int size;
 	int i;
@@ -101,15 +89,15 @@ int clean_table_out(int *out_table, t_command *cmd)
 
 	while (i < size)
 	{
-		if (out_table[i] >= 0)
-			close(out_table[i]);
+		if ((*out_table)[i] >= 0)
+			close((*out_table)[i]);
 		i++;
 	}
-	free(out_table);
+	free(*out_table);
 	return (0);
 }
 
-int clean_table_in(int *in_table, t_command *cmd)
+int clean_table_in(int **in_table, t_command *cmd)
 {
 	int size;
 	int i;
@@ -121,11 +109,11 @@ int clean_table_in(int *in_table, t_command *cmd)
 
 	while (i < size)
 	{
-		if (in_table[i] >= 0)
-			close(in_table[i]);
+		if ((*in_table)[i] >= 0)
+			close((*in_table)[i]);
 		i++;
 	}
 	unlink(".heredoc.tmp"); // TODO deal with output
-	free(in_table);
+	free(*in_table);
 	return (0);
 }
