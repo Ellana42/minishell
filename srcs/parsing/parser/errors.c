@@ -4,10 +4,7 @@ t_parser	*parser_set_error(t_parser *parser, t_parser_error error)
 {
 	parser->error.error = error;
 	if (error == ParserSyntaxError)
-	{
 		parser->error.err_char = parser_get_token(parser)->current_char;
-		printf("the char :%d:\n", (int )parser_get_token(parser)->current_char);
-	}
 	else
 		parser->error.err_char = '\0';
 	return (parser);
