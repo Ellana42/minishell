@@ -6,7 +6,7 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:14:58 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/12 22:39:29 by mkaploun         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:48:59 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	launch_child(t_data data, t_command *cmd, int fd[2])
 
 	// TODO deals with pipes
 
-
 	if (pid == 0)
 	{
 		if (fd[0] != -1 && fd[0] != -2)
@@ -32,6 +31,7 @@ int	launch_child(t_data data, t_command *cmd, int fd[2])
 
 		if (fd[1] != -1 && fd[1] != -2)
 			dup2(fd[1], STDOUT_FILENO); // TODO deals with dup2() errors
+
 		error = launch_cmd(data, cmd);
 		if (error)
 			return (error);

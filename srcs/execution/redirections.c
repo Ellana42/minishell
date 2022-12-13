@@ -6,13 +6,13 @@
 /*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:42:23 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/12 18:02:31 by mkaploun         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:59:23 by lsalin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-int get_in_table(t_command *cmd, int **in_table, char **file_name)
+int get_in_table(t_command *cmd, int **in_table, char **file_name, int pipefd[2])
 {
 	t_funnel		*funnel;
 	int 			size;
@@ -21,15 +21,17 @@ int get_in_table(t_command *cmd, int **in_table, char **file_name)
 	int				err;
 	t_token_type	type;
 
-	i = 0;
-	err = 0;
+	*file_name = NULL;
 
+	i = 1;
+	err = 0;
 	size = ft_lstsize(*command_get_in(cmd));
 	*in_table = (int *)malloc(sizeof(int) * size);
+
 	if (size == 0)
 		return (-2);
 
-	last_fd = -1;
+	last_fd = pipefd[1];
 
 	while (i < size)
 	{
@@ -53,7 +55,7 @@ int get_in_table(t_command *cmd, int **in_table, char **file_name)
 	return (last_fd);
 }
 
-int get_out_table(t_command *cmd, int **out_table)
+int get_out_table(t_command *cmd, int **out_table, int pipefd[2])
 {
 	t_funnel		*funnel;
 	int 			size;
@@ -67,7 +69,10 @@ int get_out_table(t_command *cmd, int **out_table)
 	size = ft_lstsize(*command_get_out(cmd));
 	*out_table = (int *)malloc(sizeof(int) * size);
 
-	last_fd = -1;
+	if (size == 0)
+		return (-2);
+
+	last_fd = pipefd[0];
 
 	while (i < size)
 	{
