@@ -1,10 +1,9 @@
 #include "execution.h"
 
 // TODO probably change return values
-int get_in_table(t_command *cmd, int **in_table, char **file_name)
+int get_in_table(t_command *cmd, int **in_table, char **file_name, int *in_size)
 {
 	t_funnel		*funnel;
-	int 			size;
 	int 			last_fd;
 	int 			i;
 	int				err;
@@ -13,14 +12,14 @@ int get_in_table(t_command *cmd, int **in_table, char **file_name)
 	i = 0;
 	err = 0;
 
-	size = ft_lstsize(*command_get_in(cmd));
-	*in_table = (int *)malloc(sizeof(int) * size);
-	if (size == 0)
+	*in_size = ft_lstsize(*command_get_in(cmd));
+	*in_table = (int *)malloc(sizeof(int) * (*in_size + 1));
+	if (*in_size == 0)
 		return (-2);
 
 	last_fd = -1;
 
-	while (i < size)
+	while (i < *in_size)
 	{
 		funnel = lst_get_i(*command_get_in(cmd), i);
 		*file_name = funnel_get_filename(funnel);
@@ -42,10 +41,9 @@ int get_in_table(t_command *cmd, int **in_table, char **file_name)
 	return (last_fd);
 }
 
-int get_out_table(t_command *cmd, int **out_table)
+int get_out_table(t_command *cmd, int **out_table, int *out_size)
 {
 	t_funnel		*funnel;
-	int 			size;
 	int 			last_fd;
 	int 			i;
 	t_token_type	type;
@@ -53,12 +51,12 @@ int get_out_table(t_command *cmd, int **out_table)
 
 	i = 0;
 
-	size = ft_lstsize(*command_get_out(cmd));
-	*out_table = (int *)malloc(sizeof(int) * size);
+	*out_size = ft_lstsize(*command_get_out(cmd));
+	*out_table = (int *)malloc(sizeof(int) * *out_size);
 
 	last_fd = -1;
 
-	while (i < size)
+	while (i < *out_size)
 	{
 		funnel = lst_get_i(*command_get_out(cmd), i);
 		file_name = funnel_get_filename(funnel);

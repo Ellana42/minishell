@@ -1,24 +1,25 @@
 #include "execution.h"
 
-int get_in_table(t_command *cmd, int **in_table, char **file_name, int pipefd[2])
+// TODO probably change return values
+int get_in_table(t_command *cmd, int **in_table, char **file_name, size_t *in_size)
 {
 	t_funnel		*funnel;
-	int 			size;
 	int 			last_fd;
 	int 			i;
 	int				err;
 	t_token_type	type;
 
-	*file_name = NULL;
-
-	i = 1;
+	i = 0;
 	err = 0;
-	size = ft_lstsize(*command_get_in(cmd));
-	*in_table = (int *)malloc(sizeof(int) * size);
 
-	last_fd = pipefd[0];
+	*in_size = ft_lstsize(*command_get_in(cmd));
+	*in_table = (int *)malloc(sizeof(int) * (*in_size + 1));
+	if (*in_size == 0)
+		return (-2);
 
-	while (i < size)
+	last_fd = -1;
+
+	while (i < *in_size)
 	{
 		funnel = lst_get_i(*command_get_in(cmd), i);
 		*file_name = funnel_get_filename(funnel);
@@ -40,10 +41,9 @@ int get_in_table(t_command *cmd, int **in_table, char **file_name, int pipefd[2]
 	return (last_fd);
 }
 
-int get_out_table(t_command *cmd, int **out_table, int pipefd[2])
+int get_out_table(t_command *cmd, int **out_table, size_t *out_size)
 {
 	t_funnel		*funnel;
-	int 			size;
 	int 			last_fd;
 	int 			i;
 	t_token_type	type;
@@ -51,17 +51,17 @@ int get_out_table(t_command *cmd, int **out_table, int pipefd[2])
 
 	i = 0;
 
-	size = ft_lstsize(*command_get_out(cmd));
-	*out_table = (int *)malloc(sizeof(int) * size);
+	*out_size = ft_lstsize(*command_get_out(cmd));
+	*out_table = (int *)malloc(sizeof(int) * *out_size);
 
-	last_fd = pipefd[1];
+	last_fd = -1;
 
-	while (i < size)
+	while (i < *out_size)
 	{
 		funnel = lst_get_i(*command_get_out(cmd), i);
 		file_name = funnel_get_filename(funnel);
 		type = funnel_get_type(funnel);
-
+		
 		if (type == Out)
 			(*out_table)[i] = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644); // TODO check si bonnes permissions
 

@@ -1,13 +1,22 @@
 NAME  = minishell
 
 SRCS  =  srcs/main.c srcs/parsing/parsing.c \
-			srcs/execution/init.c \
-			srcs/execution/pipex.c \
-			srcs/execution/utils.c \
-			srcs/execution/process.c \
-			srcs/execution/redirections.c \
-			srcs/execution/paths.c \
+			srcs/execution/destroy.c \
+			srcs/execution/executable/destroy.c \
+			srcs/execution/executable/get.c \
+			srcs/execution/executable/init.c \
+			srcs/execution/executable/print.c \
+			srcs/execution/executables/destroy.c \
+			srcs/execution/executables/get.c \
+			srcs/execution/executables/init.c \
+			srcs/execution/executables/print.c \
+			srcs/execution/execute.c \
+			srcs/execution/execution.c \
 			srcs/execution/here_doc.c \
+			srcs/execution/init.c \
+			srcs/execution/pipes.c \
+			srcs/execution/print.c \
+			srcs/execution/redirections.c \
 			srcs/parsing/accumulator/get.c \
 			srcs/parsing/accumulator/set.c \
 			srcs/parsing/accumulator/init.c \

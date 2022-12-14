@@ -28,7 +28,7 @@ int    main(int ac, char **av, char **envp)
     /*     printf("Command %s\n", command_get_name(cmd)); */
     /*     i++; */
     /* } */
-    last_err = pipex_launch(parser->commands, envp);
+    last_err = execution(parser->commands, envp);
     parser_destroy(parser);
     return (0);
 }

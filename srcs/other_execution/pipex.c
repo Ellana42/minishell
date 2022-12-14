@@ -2,43 +2,6 @@
 
 // Parse les arguments, initialise la structure et launch ./pipex
 // Renvoie le code de sortie du dernier fils, considéré comme le code de sortie de Pipex
-int	init_pipes(int ***pipes, int commands_size)
-{
-	int	i;
-	int	pipefd[2];
-
-	(*pipes) = (int **)malloc(sizeof(int *) * (commands_size));
-	if (!pipes)
-		return (1);
-	i = 0;
-	while (i < commands_size - 1)
-	{
-		(*pipes)[i] = (int *)malloc(sizeof(int) * 2);
-		if (!(*pipes)[i])
-			return (1);
-		pipe(pipefd);
-		(*pipes)[i][0] = pipefd[0];
-		(*pipes)[i][1] = pipefd[1];
-		i++;
-	}
-	pipes[i] = NULL;
-	return (0);
-}
-
-void	print_pipes(int **pipes, int commands_size)
-{
-	int	i;
-
-	i = 0;
-	printf("_____________\n");
-	while (pipes[i])
-	{
-		printf("|     |     |\n");
-		printf("|  %d  |  %d  |\n", pipes[i][0], pipes[i][1]);
-		i++;
-	}
-	printf("_____________\n");
-}
 
 int	pipex_launch(t_commands *commands, char **envp)
 {
@@ -56,7 +19,7 @@ int	pipex_launch(t_commands *commands, char **envp)
 	if (envp == NULL || envp[0][0] == '\0')
 		error(msg("Unexpected error.", "", "", 1), &data);
 
-	data = init_struct(commands, envp);
+	data = data_init_struct(commands, envp);
 
 	cmd = NULL;
 	commands_size = commands_get_size(commands);

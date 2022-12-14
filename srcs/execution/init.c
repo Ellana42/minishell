@@ -1,41 +1,33 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lsalin <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/10 14:32:14 by lsalin            #+#    #+#             */
-/*   Updated: 2022/12/10 15:03:08 by lsalin           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "execution.h"
 
-// "Mise à nue" de notre structure
-// On pourra call cette fonction avant d'utiliser les valeurs de notre structure
-// -1 pour les variables qui ne sont pas des strings car 0 est une valeur possible de fd
-
-static t_data	clean_init_struct(void)
+t_execution	*execution_alloc(void)
 {
-	t_data	data;
+	t_execution	*execution;
 
-	data.envp = NULL;
-    data.commands = NULL;
-
-	return (data);
+	execution = (t_execution *)malloc(sizeof(t_execution));
+	return (execution);
 }
 
-// Initialise la structure en fonction des arguments fournis par l'user
-// Créer les pipes pour chaque processus
-
-t_data	init_struct(t_commands *commands, char **envp)
+// TODO init current executable
+int	execution_init(t_execution *execution, t_commands *commands, int index)
 {
-	t_data	data;
-	data = clean_init_struct();
+	size_t	commands_size;
 
-	data.envp = envp;
-    data.commands = commands;
-
-	return (data);
+	commands_size = commands_get_size(commands);
+	execution->executables_size = commands_size;
+	execution->current_executable = NULL;
+	execution->executables = NULL;
+	execution->pids = NULL;
+	init_pipes(&execution->pipes, commands_size);
+	if (execution->executables_size == 0)
+		return (0);
+	execution->executables = executables_alloc(); 
+	if (!execution->executables)
+		return (1);
+	if (executables_init(execution->executables, commands, execution->pipes))
+		return (1);
+	execution->pids = (int *)malloc(sizeof(int) * (commands_size + 1));
+	if (!execution->pids)
+		return (1); // TODO deal with this shit
+	return (0);
 }
