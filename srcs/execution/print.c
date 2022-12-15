@@ -13,9 +13,10 @@ void	execution_print(t_execution *execution)
 	printf("Pipes : \n");
 	print_pipes(execution->pipes, execution->executables_size);
 	printf("Executable size : %d\n", (int )execution->executables_size);
+	printf("Pids : ");
 	while (i < execution->executables_size)
 	{
-		printf("%d - ", execution->pids[i]);
+		printf("%d, ", execution->pids[i]);
 		i++;
 	}
 	printf("\n");
