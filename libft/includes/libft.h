@@ -64,5 +64,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_putstr(char *s);
 int		ft_pow(int base, int exponent);
 t_list	**ft_lstinit(void);
+void	*ft_lstget_i(t_list *lst, int index);
 
 #endif
