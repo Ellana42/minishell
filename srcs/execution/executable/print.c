@@ -13,6 +13,7 @@ void	executable_print(void *executable_ptr)
 	int				i;
 	t_executable	*executable;
 	
+	printf("-----------------\n");
 	executable = (t_executable *)executable_ptr;
 	i = 0;
 	command_print(executable->command);
@@ -21,6 +22,7 @@ void	executable_print(void *executable_ptr)
 	printf("Out pipe : ");
 	print_pipe(executable->out_pipe);
 	printf("Size infiles : %d\n", (int )executable->in_size);
+	printf("Infiles : ");
 	while (i < executable->in_size)
 	{
 		printf("%d - ", executable->in_files[i]);
@@ -28,6 +30,7 @@ void	executable_print(void *executable_ptr)
 	}
 	printf("\n");
 	printf("Size outfiles : %d\n", (int )executable->out_size);
+	printf("Outfiles : ");
 	while (i < executable->out_size)
 	{
 		printf("%d - ", executable->out_files[i]);

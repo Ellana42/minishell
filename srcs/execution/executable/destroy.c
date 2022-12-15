@@ -7,7 +7,9 @@ void	executable_dispose(t_executable *executable)
 }
 
 void	executable_free(t_executable *executable)
-{}
+{
+	free(executable);
+}
 
 void	executable_destroy(t_executable *executable)
 {

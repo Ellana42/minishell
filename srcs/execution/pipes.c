@@ -19,7 +19,7 @@ int	init_pipes(int ***pipes, int commands_size)
 		(*pipes)[i][1] = pipefd[1];
 		i++;
 	}
-	pipes[i] = NULL;
+	(*pipes)[i] = NULL;
 	return (0);
 }
 
