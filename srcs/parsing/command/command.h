@@ -12,6 +12,7 @@ typedef struct s_funnel{
 	t_token_type	type;
 }	t_funnel;
 
+// TODO clean unused fields
 typedef struct s_command{
 	char	*command; // 
 	t_list	**args;
