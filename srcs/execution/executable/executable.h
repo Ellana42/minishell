@@ -27,5 +27,8 @@ void	executable_destroy(t_executable *executable);
 int get_in_table(t_command *cmd, int **in_table, char **file_name, size_t *in_size);
 int get_out_table(t_command *cmd, int **out_table, size_t *out_size);
 void	executable_print(void *executable_ptr);
+int executable_close_infiles(t_executable *executable);
+int executable_close_outfiles(t_executable *executable);
+int	executable_close_files(t_executable *executable);
 
 #endif

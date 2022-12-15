@@ -30,5 +30,7 @@ void	execution_print(t_execution *execution);
 int	execution(t_commands *commands, char **envp);
 void	execution_destroy(t_execution *execution);
 void	free_pipes(int **pipes, int commands_size);
+t_executable *execution_get_executable_i(t_execution *execution, int index);
+int	execution_close(t_execution *execution);
 
 #endif
