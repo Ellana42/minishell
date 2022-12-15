@@ -12,7 +12,9 @@ t_execution	*execution_alloc(void)
 int	execution_init(t_execution *execution, t_commands *commands, int index)
 {
 	size_t	commands_size;
+	int		i;
 
+	i = 0;
 	commands_size = commands_get_size(commands);
 	execution->executables_size = commands_size;
 	execution->current_executable = NULL;
@@ -29,5 +31,10 @@ int	execution_init(t_execution *execution, t_commands *commands, int index)
 	execution->pids = (int *)malloc(sizeof(int) * (commands_size + 1));
 	if (!execution->pids)
 		return (1); // TODO deal with this shit
+	while (i < execution->executables_size)
+	{
+		execution->pids[i] = -2;
+		i++;
+	}
 	return (0);
 }

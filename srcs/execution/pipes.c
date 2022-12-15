@@ -28,6 +28,8 @@ void	print_pipes(int **pipes, int commands_size)
 	int	i;
 
 	i = 0;
+	if (!pipes)
+		return ;
 	printf("_____________\n");
 	while (pipes[i])
 	{

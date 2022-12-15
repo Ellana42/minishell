@@ -28,5 +28,6 @@ t_execution	*execution_alloc(void);
 int	execution_init(t_execution *execution, t_commands *commands, int index);
 void	execution_print(t_execution *execution);
 int	execution(t_commands *commands, char **envp);
+void	execution_destroy(t_execution *execution);
 
 #endif

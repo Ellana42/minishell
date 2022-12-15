@@ -20,9 +20,9 @@ int	executable_init(t_executable *executable, t_command *command, int **pipes, i
 	else
 	    executable->in_pipe = pipes[index - 1];
 	if (index == pipes_get_size(pipes))
-	    executable->out_pipe = NULL;
+		executable->out_pipe = NULL;
 	else
-	    executable->out_pipe = pipes[index];
+		executable->out_pipe = pipes[index];
 	executable->in_files = in_table;
 	get_in_table(command, &in_table, &filename, &executable->in_size);
 	if (!in_table)

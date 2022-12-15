@@ -2,7 +2,10 @@
 
 void	print_pipe(int *pipe)
 {
-	printf("%d <- %d\n", pipe[0], pipe[1]);
+	if (!pipe)
+		printf("None\n");
+	else
+		printf("%d <- %d\n", pipe[0], pipe[1]);
 }
 
 void	executable_print(void *executable_ptr)
@@ -12,7 +15,6 @@ void	executable_print(void *executable_ptr)
 	
 	executable = (t_executable *)executable_ptr;
 	i = 0;
-	printf("Command :\n");
 	command_print(executable->command);
 	printf("In pipe : ");
 	print_pipe(executable->in_pipe);
@@ -32,4 +34,5 @@ void	executable_print(void *executable_ptr)
 		i++;
 	}
 	printf("\n");
+	printf("-----------------\n");
 }
