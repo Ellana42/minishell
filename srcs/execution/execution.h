@@ -29,5 +29,6 @@ int	execution_init(t_execution *execution, t_commands *commands, int index);
 void	execution_print(t_execution *execution);
 int	execution(t_commands *commands, char **envp);
 void	execution_destroy(t_execution *execution);
+void	free_pipes(int **pipes, int commands_size);
 
 #endif

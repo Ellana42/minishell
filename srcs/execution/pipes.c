@@ -23,6 +23,19 @@ int	init_pipes(int ***pipes, int commands_size)
 	return (0);
 }
 
+void	free_pipes(int **pipes, int commands_size)
+{
+	int	i;
+
+	i = 0;
+	while (i < commands_size - 1)
+	{
+		free(pipes[i]);
+		i++;
+	}
+	free(pipes);
+}
+
 void	print_pipes(int **pipes, int commands_size)
 {
 	int	i;

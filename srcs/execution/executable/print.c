@@ -30,6 +30,7 @@ void	executable_print(void *executable_ptr)
 	}
 	printf("\n");
 	printf("Size outfiles : %d\n", (int )executable->out_size);
+	i = 0;
 	printf("Outfiles : ");
 	while (i < executable->out_size)
 	{

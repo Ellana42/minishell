@@ -2,7 +2,7 @@
 
 void	execution_dispose(t_execution *execution)
 {
-	free(execution->pipes);
+	free_pipes(execution->pipes, execution->executables_size);
 	executables_destroy(execution->executables);
 	free(execution->pids);
 }
