@@ -12,6 +12,7 @@
 typedef struct s_execution {
 	t_executable	*current_executable;
 	t_executables	*executables;
+	int				executable_index;
 	int				**pipes;
 	size_t			executables_size;
 	int				*pids;
@@ -37,5 +38,7 @@ int	execution_close_unused_pipes(t_execution *execution, int index);
 int	execution_close_unused(t_execution *execution, int index);
 int	close_pipe(int fd1, int fd2);
 int	close_fd(int fd);
+t_executable *execution_get_current(t_execution *execution);
+void	execution_move(t_execution *execution);
 
 #endif

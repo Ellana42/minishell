@@ -8,15 +8,16 @@ t_execution	*execution_alloc(void)
 	return (execution);
 }
 
-// TODO init current executable
 int	execution_init(t_execution *execution, t_commands *commands, int index)
 {
 	size_t	commands_size;
 	int		i;
+	t_executable	*executable;
 
 	i = 0;
 	commands_size = commands_get_size(commands);
 	execution->executables_size = commands_size;
+	execution->executable_index = 0;
 	execution->current_executable = NULL;
 	execution->executables = NULL;
 	execution->pids = NULL;
@@ -28,6 +29,8 @@ int	execution_init(t_execution *execution, t_commands *commands, int index)
 		return (1);
 	if (executables_init(execution->executables, commands, execution->pipes))
 		return (1);
+	executable = executables_get_i(execution->executables, 0);
+	execution->current_executable = executable;
 	execution->pids = (int *)malloc(sizeof(int) * (commands_size + 1));
 	if (!execution->pids)
 		return (1); // TODO deal with this shit

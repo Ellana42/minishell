@@ -4,6 +4,7 @@ SRCS  =  srcs/main.c srcs/parsing/parsing.c \
 			srcs/execution/destroy.c \
 			srcs/execution/close_utils.c \
 			srcs/execution/get.c \
+			srcs/execution/set.c \
 			srcs/execution/close_fds.c \
 			srcs/execution/executable/destroy.c \
 			srcs/execution/executable/get.c \
@@ -15,7 +16,6 @@ SRCS  =  srcs/main.c srcs/parsing/parsing.c \
 			srcs/execution/executables/get.c \
 			srcs/execution/executables/init.c \
 			srcs/execution/executables/print.c \
-			srcs/execution/execute.c \
 			srcs/execution/execution.c \
 			srcs/execution/here_doc.c \
 			srcs/execution/init.c \

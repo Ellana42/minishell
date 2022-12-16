@@ -1,6 +1,6 @@
 #include "execution.h"
 
-// TODO add executable index and init current executable
+// TODO fix fd closing for first and last command
 int	execution(t_commands *commands, char **envp)
 {
 	t_execution	*execution;
@@ -11,7 +11,8 @@ int	execution(t_commands *commands, char **envp)
 	execution_init(execution, commands, 0);
 	execution_print(execution);
 	
-	executable = executables_get_i(execution->executables, 1);
+	execution_move(execution);		
+	executable = execution_get_current(execution);
 	executable_get_fds_close(executable, fd);
 	execution_close_unused(execution, 1);
 	close(fd[0]);

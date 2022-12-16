@@ -5,9 +5,8 @@ void	execution_print(t_execution *execution)
 	int	i;
 
 	i = 0;
-	// TODO unccomment when current exe init
-	/* printf("Current executable : \n"); */
-	/* executable_print(execution->current_executable); */
+	printf("Current executable : \n");
+	executable_print(execution->current_executable);
 	printf("Executables : \n");
 	executables_print(execution->executables);
 	printf("Pipes : \n");
