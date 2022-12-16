@@ -32,5 +32,9 @@ void	execution_destroy(t_execution *execution);
 void	free_pipes(int **pipes, int commands_size);
 t_executable *execution_get_executable_i(t_execution *execution, int index);
 int	execution_close(t_execution *execution);
+int	execution_close_unused_pipes(t_execution *execution, int index);
+int	execution_close_unused(t_execution *execution, int index);
+int	close_pipe(int fd1, int fd2);
+int	close_fd(int fd);
 
 #endif

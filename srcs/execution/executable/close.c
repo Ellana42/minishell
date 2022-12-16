@@ -7,11 +7,8 @@ int	_close_fd_table(int *table, size_t table_size)
 	i = 0;
 	while (i < table_size)
 	{
-		if (table[i] != -1)
-		{
-			if (close(table[i]) == -1)
-				return (1);
-		}
+		if (close_fd(table[i]))
+			return (1);
 		i++;
 	}
 	return (0);
@@ -25,6 +22,16 @@ int executable_close_infiles(t_executable *executable)
 int executable_close_outfiles(t_executable *executable)
 {
 	return (_close_fd_table(executable->out_files, executable->out_size));
+}
+
+int executable_close_unused_infiles(t_executable *executable)
+{
+	return (_close_fd_table(executable->in_files, executable->in_size - 1));
+}
+
+int executable_close_unused_outfiles(t_executable *executable)
+{
+	return (_close_fd_table(executable->out_files, executable->out_size - 1));
 }
 
 int	executable_close_files(t_executable *executable)

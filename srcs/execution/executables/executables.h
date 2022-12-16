@@ -10,6 +10,6 @@ int	executables_init(t_executables *executables, t_commands *commands, int **pip
 t_executables	*executables_alloc(void);
 void	executables_destroy(t_executables *executables);
 void	executables_print(t_executables *executables);
-t_executable	*executables_get_i(t_executables executables, int index);
+t_executable	*executables_get_i(t_executables *executables, int index);
 
 #endif

@@ -30,5 +30,12 @@ void	executable_print(void *executable_ptr);
 int executable_close_infiles(t_executable *executable);
 int executable_close_outfiles(t_executable *executable);
 int	executable_close_files(t_executable *executable);
+int executable_close_infiles(t_executable *executable);
+int executable_close_outfiles(t_executable *executable);
+int executable_close_unused_infiles(t_executable *executable);
+int executable_close_unused_outfiles(t_executable *executable);
+int	executable_get_fds_close(t_executable *executable, int fd[2]);
+int	close_pipe(int fd1, int fd2);
+int	close_fd(int fd);
 
 #endif
