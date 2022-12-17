@@ -7,9 +7,11 @@ int	close_fd(int fd)
 	return (0);
 }
 
-int	close_pipe(int fd1, int fd2)
+int	close_pipe(int *fd)
 {
-	if (close_fd(fd1))
+	if (!fd)
+		return (0);
+	if (close_fd(fd[0]))
 		return (1);
-	return (close_fd(fd2));
+	return (close_fd(fd[1]));
 }

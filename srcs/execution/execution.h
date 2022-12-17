@@ -27,7 +27,6 @@ int		pipes_get_size(int **pipes);
 void	print_pipe(int *pipe);
 int	get_here_doc(char *delimiter);
 t_execution	*execution_alloc(void);
-int	execution_init(t_execution *execution, t_commands *commands, int index);
 void	execution_print(t_execution *execution);
 int	execution(t_commands *commands, char **envp);
 void	execution_destroy(t_execution *execution);
@@ -36,9 +35,10 @@ t_executable *execution_get_executable_i(t_execution *execution, int index);
 int	execution_close(t_execution *execution);
 int	execution_close_unused_pipes(t_execution *execution, int index);
 int	execution_close_unused(t_execution *execution, int index);
-int	close_pipe(int fd1, int fd2);
 int	close_fd(int fd);
 t_executable *execution_get_current(t_execution *execution);
 void	execution_move(t_execution *execution);
+int	execution_init(t_execution *execution, t_commands *commands);
+int	close_pipe(int *fd);
 
 #endif

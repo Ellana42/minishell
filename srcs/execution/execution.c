@@ -8,13 +8,12 @@ int	execution(t_commands *commands, char **envp)
 	t_executable	*executable;
 
 	execution = execution_alloc();
-	execution_init(execution, commands, 0);
+	execution_init(execution, commands);
 	execution_print(execution);
 	
-	execution_move(execution);		
 	executable = execution_get_current(execution);
 	executable_get_fds_close(executable, fd);
-	execution_close_unused(execution, 1);
+	execution_close_unused(execution, execution->executable_index);
 	close(fd[0]);
 	close(fd[1]);
 	/* execution_close(execution); */

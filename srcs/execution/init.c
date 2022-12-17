@@ -8,7 +8,7 @@ t_execution	*execution_alloc(void)
 	return (execution);
 }
 
-int	execution_init(t_execution *execution, t_commands *commands, int index)
+int	execution_init(t_execution *execution, t_commands *commands)
 {
 	size_t	commands_size;
 	int		i;

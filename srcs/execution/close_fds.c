@@ -19,13 +19,16 @@ int	execution_close_all_pipes(t_execution *execution)
 int	execution_close_unused_pipes(t_execution *execution, int index)
 {
 	int	i;
+	int	pipe[2];
 
 	i = 0;
 	while (i < execution->executables_size - 1)
 	{
 		if (i != index - 1 && i != index)
 		{
-			if (close_pipe(execution->pipes[i][0], execution->pipes[i][1]))
+			pipe[0] = execution->pipes[i][0];
+			pipe[1] = execution->pipes[i][1];
+			if (close_pipe(pipe))
 				return (1);
 		}
 		i++;
