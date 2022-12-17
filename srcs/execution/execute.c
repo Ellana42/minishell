@@ -21,9 +21,12 @@ int	execution_child(t_execution *execution)
 	t_executable	*executable;
 	int	fd[2];
 
+	/* printf("Command : %s\n", command_get_name(execution_get_current_command(execution))); */
 	executable = execution_get_current(execution); 
 	executable_get_fds_close(executable, fd);
 	execution_close_unused(execution, execution->executable_index);
+	/* printf("FD0 : %d\n", fd[0]); */
+	/* printf("FD1 : %d\n", fd[1]); */
 	if (execution_dup_in(fd[0]))
 		return (1);
 	if (execution_dup_out(fd[1]))

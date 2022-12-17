@@ -9,7 +9,7 @@ int	executable_get_in_close(t_executable *executable, int *fd)
 	}
 	if (executable->in_size == 0)
 	{
-		*fd = executable->in_pipe[1];
+		*fd = executable->in_pipe[0];
 		return (executable_close_infiles(executable));
 	}
 	if (close_pipe(executable->in_pipe))	
