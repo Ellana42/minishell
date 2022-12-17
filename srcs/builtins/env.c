@@ -1,9 +1,9 @@
-#include "../execution/execution.h"
+#include "../builtins/builtin.h"
 
 // env : permet de lister les variables d'environnement
 // À gérer sans options ni arguments
 
-int env_builtin(char **args, char **envp) 
+int env_builtin(t_data *data, char **args) 
 {
 	int	i;
 	i = 0;
@@ -11,12 +11,12 @@ int env_builtin(char **args, char **envp)
 	if (args && args[1])
 		return (-1); // TODO message d'erreur genre "too many arguments"
 
-	if (!envp[i])
+	if (!data->env[i])
 		return (EXIT_FAILURE);
 
-	while (envp[i])
+	while (data->env[i])
 	{
-		printf("%s\n", envp[i]); // ou ft_putendl_fd(envp[i++], STDOUT_FILENO);
+		printf("%s\n", data->env[i]); // ou ft_putendl_fd(envp[i++], STDOUT_FILENO);
 		i++;
 	}
   return 0;
