@@ -1,4 +1,8 @@
-#include "../execution/execution.h"
+#ifndef BUILTIN_H
+# define BUILTIN_H
+
+# define PATH_MAX 4096
+# include "../execution/execution.h"
 
 typedef struct s_data
 {
@@ -6,3 +10,4 @@ typedef struct s_data
 	char	**env;
 }	t_data;
 
+#endif

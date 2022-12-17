@@ -5,6 +5,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
+# include <stdbool.h>
 # include "../../libft/includes/libft.h"
 # include "executable/executable.h"
 # include "executables/executables.h"
