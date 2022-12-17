@@ -71,6 +71,32 @@ int	env_var_nbr(char **env)
 	return (i);
 }
 
+// Re-alloue de la memoire pour un nouvel env
+// Retourne un pointeur sur le nouvel env ou NULL
+
+static char	**realloc_env_vars(t_data *data, int size)
+{
+	char	**new_env;
+	int		i;
+
+	new_env = ft_calloc(size + 1, sizeof * new_env);
+
+	if (!new_env)
+		return (NULL);
+
+	i = 0;
+
+	while (data->env[i] && i < size)
+	{
+		new_env[i] = ft_strdup(data->env[i]);
+		free_ptr(data->env[i]);
+		i++;
+	}
+
+	free(data->env);
+	return (new_env);
+}
+
 // Supprime la variable a un certain index de l'environnement
 // Retourne (-1) si succes
 // 0 si mauvais index ou erreur d'allocation memoire
@@ -83,15 +109,15 @@ bool	remove_env_var(t_data *data, int index)
 	if (index > env_var_nbr(data->env))
 		return (false);
 
-	free(data->env[index]);
+	free_ptr(data->env[index]);
 
 	i = index;
 	count = index;
 
 	while (data->env[i + 1])
 	{
-		data->env = ft_strdup(data->env[i + 1]);
-		free(data->env[i + 1]);
+		data->env[i] = ft_strdup(data->env[i + 1]);
+		free_ptr(data->env[i + 1]);
 		count++;
 		i++;
 	}
