@@ -2,13 +2,14 @@
 
 int	close_fd(int fd)
 {
-	if (fd == -1)
+	if (fd == -1 || fd == 0 || fd == 1)
 		return (0);
 	if (close(fd) == -1)	
 	{
 		printf("Failed to close fd %d\n", fd);
 		return (1);
 	}
+	/* printf("Closed %d\n", fd); */
 	return (0);
 }
 

@@ -10,6 +10,8 @@ int	executable_get_in_close(t_executable *executable, int *fd)
 	if (executable->in_size == 0)
 	{
 		*fd = executable->in_pipe[0];
+		if (close_fd(executable->in_pipe[1]))
+			return (1);
 		return (executable_close_infiles(executable));
 	}
 	if (close_pipe(executable->in_pipe))	
@@ -28,6 +30,8 @@ int	executable_get_out_close(t_executable *executable, int *fd)
 	if (executable->out_size == 0)
 	{
 		*fd = executable->out_pipe[1];
+		if (close_fd(executable->out_pipe[0]))
+			return (1);
 		return (executable_close_outfiles(executable));
 	}
 	if (close_pipe(executable->out_pipe))	
