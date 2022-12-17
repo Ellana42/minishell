@@ -1,4 +1,4 @@
-#include "../execution/execution.h"
+#include "../builtins/builtin.h"
 
 // pwd : affiche le chemin absolu du repertoire de travail actuel
 
@@ -10,6 +10,7 @@
 typedef struct s_data
 {
 	char	*working_directory;
+	char	**env;
 }	t_data;
 
 int	pwd_builtin(t_data *data, char **args)
