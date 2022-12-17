@@ -6,6 +6,9 @@ SRCS  =  srcs/main.c srcs/parsing/parsing.c \
 			srcs/execution/get.c \
 			srcs/execution/set.c \
 			srcs/execution/close_fds.c \
+			srcs/execution/paths_utils.c \
+			srcs/execution/get_paths.c \
+			srcs/execution/execute.c \
 			srcs/execution/executable/destroy.c \
 			srcs/execution/executable/get.c \
 			srcs/execution/executable/init.c \

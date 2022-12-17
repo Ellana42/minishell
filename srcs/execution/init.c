@@ -8,7 +8,7 @@ t_execution	*execution_alloc(void)
 	return (execution);
 }
 
-int	execution_init(t_execution *execution, t_commands *commands)
+int	execution_init(t_execution *execution, t_commands *commands, char **envp)
 {
 	size_t	commands_size;
 	int		i;
@@ -21,6 +21,7 @@ int	execution_init(t_execution *execution, t_commands *commands)
 	execution->current_executable = NULL;
 	execution->executables = NULL;
 	execution->pids = NULL;
+	execution->envp = envp;
 	init_pipes(&execution->pipes, commands_size);
 	if (execution->executables_size == 0)
 		return (0);

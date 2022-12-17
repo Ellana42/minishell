@@ -16,6 +16,7 @@ typedef struct s_execution {
 	int				**pipes;
 	size_t			executables_size;
 	int				*pids;
+	char			**envp;
 }	t_execution;
 
 int		init_pipes(int ***pipes, int commands_size);
@@ -38,7 +39,14 @@ int	execution_close_unused(t_execution *execution, int index);
 int	close_fd(int fd);
 t_executable *execution_get_current(t_execution *execution);
 void	execution_move(t_execution *execution);
-int	execution_init(t_execution *execution, t_commands *commands);
 int	close_pipe(int *fd);
+void	error(int error_status);
+int	msg(char *str1, char *str2, char *str3, int erno);
+void	free_strs(char *str, char **array_of_strs);
+char	*get_user_cmd(char *cmd, char **envp);
+t_command *execution_get_current_command(t_execution *execution);
+int	execution_init(t_execution *execution, t_commands *commands, char **envp);
+char **execution_get_env(t_execution *execution);
+int	execution_launch_exec(t_execution *execution);
 
 #endif
