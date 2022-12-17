@@ -9,7 +9,7 @@
 
 // QT_ACCESSIBILITY=1
 
-bool	is_valid_env_var_keys(char *var)
+bool	is_valid_env_var(char *var)
 {
 	int	i;
 	i = 0;
@@ -22,7 +22,7 @@ bool	is_valid_env_var_keys(char *var)
 	while (var[i] && var[i] != '=')
 	{
 		if (ft_isalnum(var[i]) == 0 && var[i] != '_')
-			return(false);
+			return (false);
 		i++;
 	}
 	return (true);
@@ -147,7 +147,7 @@ int	unset(t_data *data, char **args)
 
 	while (args[i])
 	{
-		if (is_valid_env_var_keys(args[i]) == 0 || ft_strchr(args[i], '=') != NULL)
+		if (is_valid_env_var(args[i]) == 0 || ft_strchr(args[i], '=') != NULL)
 		{
 			error_msg("..."); // message d'erreur genre "not a valid identifier"
 			exit = EXIT_FAILURE;
