@@ -48,5 +48,8 @@ t_command *execution_get_current_command(t_execution *execution);
 int	execution_init(t_execution *execution, t_commands *commands, char **envp);
 char **execution_get_env(t_execution *execution);
 int	execution_launch_exec(t_execution *execution);
+int	execution_fork_process(t_execution *execution);
+int	execution_dup_out(int fd_out);
+int	execution_dup_in(int fd_in);
 
 #endif

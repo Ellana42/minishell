@@ -48,7 +48,10 @@ int	execution_close_unused_files(t_execution *execution, int index)
 		{
 			executable = execution_get_executable_i(execution, i);
 			if (executable_close_files(executable))
+			{
+				printf("Failiure in close unused files %d\n", i);
 				return (1);
+			}
 		}
 		i++;
 	}
@@ -65,7 +68,10 @@ int	execution_close_all_files(t_execution *execution)
 	{
 		executable = execution_get_executable_i(execution, i);
 		if (executable_close_files(executable))
+		{
+			printf("Failiure in close all files\n");
 			return (1);
+		}
 		i++;
 	}
 	return (0);

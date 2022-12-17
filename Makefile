@@ -2,6 +2,7 @@ NAME  = minishell
 
 SRCS  =  srcs/main.c srcs/parsing/parsing.c \
 			srcs/execution/destroy.c \
+			srcs/execution/dup.c \
 			srcs/execution/close_utils.c \
 			srcs/execution/get.c \
 			srcs/execution/set.c \

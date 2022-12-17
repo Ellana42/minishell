@@ -41,5 +41,7 @@ int	executable_get_fds_close(t_executable *executable, int fd[2])
 {
 	if (executable_get_in_close(executable, &fd[0]))
 		return (1);
-	return (executable_get_out_close(executable, &fd[1]));
+	if (executable_get_out_close(executable, &fd[1]))
+		return (1);
+	return (0);
 }

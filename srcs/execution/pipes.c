@@ -81,12 +81,12 @@ int	close_unused_fds(int **pipes, int index_cmd, int commands_size)
 	{
 		if (pipes[i][0] != fd_in)
 		{
-			if (close(pipes[i][0]) == -1)
+			if (close_fd(pipes[i][0]))
 				return (1);
 		}
 		if (pipes[i][1] != fd_out)
 		{
-			if (close(pipes[i][1]) == -1)
+			if (close_fd(pipes[i][1]))
 				return (1); // TODO deal with return
 		}
 		i++;
