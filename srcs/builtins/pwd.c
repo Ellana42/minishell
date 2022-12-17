@@ -42,9 +42,9 @@ int	pwd_builtin(t_data *data, char **args)
 
 // void	pwd(void) 
 // {
-// 	char cwd[PATH_MAX];
+//		char cwd[PATH_MAX];
 
-// 	if (getcwd(cwd, sizeof(cwd))
-// 		printf("%s\n", cwd);
-// 	perror("getcwd() error");
-// }
+// 		if (getcwd(cwd, sizeof(cwd))
+// 			printf("%s\n", cwd);
+// 		perror("getcwd() error");
+// 	}
