@@ -10,7 +10,9 @@ int	execution(t_commands *commands, char **envp)
 
 	i = 0;
 	execution = execution_alloc();
-	execution_init(execution, commands, envp);
+	if (execution_init(execution, commands, envp))
+		return (1);
+	execution_print(execution);
 	
 	while (i < execution->executables_size)
 	{

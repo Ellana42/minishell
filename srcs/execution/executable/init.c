@@ -14,6 +14,8 @@ int	executable_init(t_executable *executable, t_command *command, int **pipes, i
 	int		*out_table;
 	char	*filename;
 
+	if (!executable)
+		return (1);
 	executable->command = command;
 	if (index == 0)
 	    executable->in_pipe = NULL;
@@ -24,11 +26,13 @@ int	executable_init(t_executable *executable, t_command *command, int **pipes, i
 	else
 		executable->out_pipe = pipes[index];
 	executable->in_files = in_table;
-	get_in_table(command, &(executable->in_files), &filename, &executable->in_size);
+	if (get_in_table(command, &(executable->in_files), &filename, &executable->in_size))
+		return (1);
 	if (!executable->in_files)
 		return (1);
 	executable->out_files = out_table;
-	get_out_table(command, &(executable->out_files), &executable->out_size);
+	if (get_out_table(command, &(executable->out_files), &executable->out_size))
+		return (1);
 	if (!executable->out_files)
 		return (1);
 	return (0);

@@ -16,7 +16,7 @@ typedef struct s_execution {
 	t_executables	*executables;
 	int				executable_index;
 	int				**pipes;
-	size_t			executables_size;
+	int				executables_size;
 	int				*pids;
 	char			**envp;
 }	t_execution;

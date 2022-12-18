@@ -4,76 +4,54 @@
 int get_in_table(t_command *cmd, int **in_table, char **file_name, size_t *in_size)
 {
 	t_funnel		*funnel;
-	int 			last_fd;
 	int 			i;
-	int				err;
 	t_token_type	type;
 
 	i = 0;
-	err = 0;
-
 	*in_size = ft_lstsize(*command_get_in(cmd));
 	*in_table = (int *)malloc(sizeof(int) * (*in_size + 1));
-	if (*in_size == 0)
-		return (-2);
-
-	last_fd = -1;
-
+	if (!(*in_table))
+		return (1);
 	while (i < *in_size)
 	{
 		funnel = lst_get_i(*command_get_in(cmd), i);
 		*file_name = funnel_get_filename(funnel);
 		type = funnel_get_type(funnel);
-
 		if (type == In)
 			(*in_table)[i] = open(*file_name, O_RDONLY, 0644); // TODO check si bonnes permissions
-
 		if (type == Ina)
-			(*in_table)[i] = get_here_doc(*file_name);
-
+			(*in_table)[i] = get_here_doc(*file_name); // TODO check for return values
 		if ((*in_table)[i] == -1)
-			printf("Error !\n"); // TODO gérer erreur
-		last_fd = (*in_table)[i];
+			return (1); // TODO gérer erreur
 		i++;
 	}
-	if (err)
-		return (-1);
-	return (last_fd);
+	return (0);
 }
 
 int get_out_table(t_command *cmd, int **out_table, size_t *out_size)
 {
 	t_funnel		*funnel;
-	int 			last_fd;
 	int 			i;
 	t_token_type	type;
 	char 			*file_name;
 
 	i = 0;
-
 	*out_size = ft_lstsize(*command_get_out(cmd));
 	*out_table = (int *)malloc(sizeof(int) * *out_size);
-
-	last_fd = -1;
-
 	while (i < *out_size)
 	{
 		funnel = lst_get_i(*command_get_out(cmd), i);
 		file_name = funnel_get_filename(funnel);
 		type = funnel_get_type(funnel);
-		
 		if (type == Out)
 			(*out_table)[i] = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644); // TODO check si bonnes permissions
-
 		if (type == Outa)
 			(*out_table)[i] = open(file_name, O_WRONLY| O_CREAT | O_APPEND, 0644);
-
 		if ((*out_table)[i] == -1)
-			printf("Error !\n"); // TODO gérer erreur
-		last_fd = (*out_table)[i];
+			return (1); // TODO gérer erreur
 		i++;
 	}
-	return (last_fd);
+	return (0);
 }
 
 int clean_table_out(int **out_table, t_command *cmd)

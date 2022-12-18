@@ -5,6 +5,12 @@ t_execution	*execution_alloc(void)
 	t_execution	*execution;
 
 	execution = (t_execution *)malloc(sizeof(t_execution));
+	if (!execution)
+		return (execution);
+	execution->pipes = NULL;
+	execution->executables = NULL;
+	execution->pids = NULL;
+	execution->current_executable = NULL;
 	return (execution);
 }
 
@@ -20,16 +26,10 @@ int	execution_init(t_execution *execution, t_commands *commands, char **envp)
 	commands_size = commands_get_size(commands);
 	execution->executables_size = commands_size;
 	execution->executable_index = 0;
-	/* execution->current_executable = NULL; */
-	/* execution->executables = NULL; */
-	/* execution->pids = NULL; */
 	execution->envp = envp;
-	init_pipes(&execution->pipes, commands_size);
-	if (execution->executables_size == 0)
-		return (0);
-	execution->executables = executables_alloc(); 
-	if (!execution->executables)
+	if (init_pipes(&execution->pipes, commands_size))
 		return (1);
+	execution->executables = executables_alloc(); 
 	if (executables_init(execution->executables, commands, execution->pipes))
 		return (1);
 	executable = executables_get_i(execution->executables, 0);

@@ -5,7 +5,7 @@ int	init_pipes(int ***pipes, int commands_size)
 	int	i;
 	int	pipefd[2];
 
-	(*pipes) = (int **)malloc(sizeof(int *) * (commands_size));
+	(*pipes) = (int **)malloc(sizeof(int *) * (commands_size + 1));
 	if (!pipes)
 		return (1);
 	i = 0;
@@ -13,7 +13,7 @@ int	init_pipes(int ***pipes, int commands_size)
 	{
 		(*pipes)[i] = (int *)malloc(sizeof(int) * 2);
 		if (!(*pipes)[i])
-			return (1); // TODO deal with that
+			return (1); // TODO make sure is freed properly
 		pipe(pipefd);
 		(*pipes)[i][0] = pipefd[0];
 		(*pipes)[i][1] = pipefd[1];
