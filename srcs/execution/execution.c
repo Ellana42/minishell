@@ -11,16 +11,24 @@ int	execution(t_commands *commands, char **envp)
 	i = 0;
 	execution = execution_alloc();
 	if (execution_init(execution, commands, envp))
+	{
+		execution_close(execution);
+		execution_destroy(execution);
 		return (1);
+	}
 	
 	while (i < execution->executables_size)
 	{
-		execution_fork_process(execution);
+		if (execution_fork_process(execution))
+		{
+			execution_close(execution);
+			execution_destroy(execution);
+			return (1);
+		}
 		execution_move(execution);
 		i++;
 	}
-
-	execution_close(execution);
+	execution_close(execution); // TODO deal with close error ?
 	i = 0;
 	while (i < execution->executables_size)
 	{

@@ -14,7 +14,8 @@ int	init_pipes(int ***pipes, int commands_size)
 		(*pipes)[i] = (int *)malloc(sizeof(int) * 2);
 		if (!(*pipes)[i])
 			return (1); // TODO make sure is freed properly
-		pipe(pipefd);
+		if (pipe(pipefd) == -1)
+			return (1);
 		(*pipes)[i][0] = pipefd[0];
 		(*pipes)[i][1] = pipefd[1];
 		i++;
