@@ -32,3 +32,10 @@ char **execution_get_env(t_execution *execution)
 {
 	return (execution->envp);
 }
+
+int	execution_get_pid(t_execution *execution, int index)
+{
+	if (index >= execution->executables_size)
+		return (-2);
+	return (execution->pids[index]);
+}

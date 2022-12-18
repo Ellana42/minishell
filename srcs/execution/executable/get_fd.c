@@ -43,6 +43,8 @@ int	executable_get_out_close(t_executable *executable, int *fd)
 // fd[0] is the input, fd[1] the output
 int	executable_get_fds_close(t_executable *executable, int fd[2])
 {
+	fd[0] = -1;
+	fd[1] = -1;
 	if (executable_get_in_close(executable, &fd[0]))
 		return (1);
 	if (executable_get_out_close(executable, &fd[1]))
