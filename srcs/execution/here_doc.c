@@ -1,6 +1,7 @@
 #include "execution.h"
 
 // TODO redo heredoc with tables
+// TODO add security then
 int	get_here_doc(char *delimiter)
 {
 	int		tmp_fd;
