@@ -41,7 +41,7 @@ void	error(int error_status)
 
 int	msg(char *str1, char *str2, char *str3, int erno)
 {
-	ft_putstr_fd("pipex: ", 2);
+	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(str1, 2);
 	ft_putstr_fd(str2, 2);
 	ft_putendl_fd(str3, 2);

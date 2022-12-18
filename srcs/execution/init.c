@@ -14,13 +14,15 @@ int	execution_init(t_execution *execution, t_commands *commands, char **envp)
 	int		i;
 	t_executable	*executable;
 
+	if (!execution)
+		return (1);
 	i = 0;
 	commands_size = commands_get_size(commands);
 	execution->executables_size = commands_size;
 	execution->executable_index = 0;
-	execution->current_executable = NULL;
-	execution->executables = NULL;
-	execution->pids = NULL;
+	/* execution->current_executable = NULL; */
+	/* execution->executables = NULL; */
+	/* execution->pids = NULL; */
 	execution->envp = envp;
 	init_pipes(&execution->pipes, commands_size);
 	if (execution->executables_size == 0)
