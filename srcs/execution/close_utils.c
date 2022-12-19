@@ -2,7 +2,7 @@
 
 int	close_fd(int fd)
 {
-	if (fd == -1 || fd == 0 || fd == 1)
+	if (fd == -1 || fd == 0 || fd == 1 || fd == -2)
 		return (0);
 	if (close(fd) == -1)	
 		return (1);

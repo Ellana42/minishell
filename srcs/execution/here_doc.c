@@ -1,45 +1,34 @@
 #include "execution.h"
 
-// TODO redo heredoc with tables
-// TODO add security then
-int	get_here_doc(char *delimiter)
+// TODO check for security
+// TODO check heredocs closed properly
+
+int	execution_get_heredoc(char *delimiter, int fd[2])
 {
-	int		tmp_fd;
-	int		len_delimiter;
+	int		end;
 	char	*line;
-	int		flag;
+	int		len_delimiter;
+	char	eof;
 
-	if (!delimiter)
-		return (-2);
-
+	end = 0;
+	eof = 0;
 	len_delimiter = ft_strlen(delimiter);
-	tmp_fd = open(".heredoc.tmp", O_TRUNC | O_CREAT | O_WRONLY , 0644); // TODO protect open
-
-	if (tmp_fd < 0)
-		return (tmp_fd);
-
-	line = "";
-
-	flag = 1;
-
-	while (flag)
+	if (pipe(fd) == -1)
+		fd[0] = -1;
+	while (!end)
 	{
 		line = readline("> "); // TODO deal with leaks (rl_clear_history)
-
 		if (line == NULL)
-			break ;
-		
-		if (!ft_strncmp(line, delimiter, len_delimiter + 1))
-			flag = 0;
-
+			end = 1;
+		else if (!ft_strncmp(line, delimiter, len_delimiter + 1))
+			end = 1;
 		else
 		{
-			ft_putstr_fd(line, tmp_fd); // sinon on stocke la ligne dans le fichier tempo
-			ft_putstr_fd("\n", tmp_fd);
+			ft_putstr_fd(line, fd[1]); // sinon on stocke la ligne dans le fichier tempo
+			ft_putstr_fd("\n", fd[1]);
 		}
 		free(line);
 	}
-	close(tmp_fd);
-	tmp_fd = open(".heredoc.tmp", O_RDONLY , 0644); // TODO protect open
-	return (tmp_fd);
+	write(fd[1], &eof, 1);
+	return (0);
 }

@@ -25,7 +25,10 @@ void	executable_print(void *executable_ptr)
 	printf("Infiles : ");
 	while (i < executable->in_size)
 	{
-		printf("%d - ", executable->in_files[i]);
+		if (executable->in_files[i][1] == -1)
+			printf("%d - ", executable->in_files[i][0]);
+		else
+			printf("(%d <- %d) - ", executable->in_files[i][0], executable->in_files[i][1]);
 		i++;
 	}
 	printf("\n");

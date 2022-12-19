@@ -21,7 +21,7 @@ int	execution_child(t_execution *execution)
 	t_executable	*executable;
 	int	fd[2];
 
-	executable = execution_get_current(execution); 
+	executable = execution_get_current(execution);
 	executable_get_fds_close(executable, fd);
 	execution_close_unused(execution, execution->executable_index);
 	if (execution_dup_in(fd[0]))

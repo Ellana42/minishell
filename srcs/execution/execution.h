@@ -22,6 +22,11 @@ typedef struct s_execution {
 	char			**envp;
 }	t_execution;
 
+typedef struct s_str_table {
+	char	**table;
+	int		size;
+}	t_str_table;
+
 int		init_pipes(int ***pipes, int commands_size);
 void	print_pipes(int **pipes, int commands_size);
 int		get_fd_in(int **pipes, int index_cmd);
@@ -57,5 +62,6 @@ int	execution_dup_in(int fd_in);
 void	execution_store_pid(t_execution *execution, int pid);
 int	execution_get_pid(t_execution *execution, int index);
 int	is_dir(char *path);
+int	execution_get_heredoc(char *delimiter, int fd[2]);
 
 #endif

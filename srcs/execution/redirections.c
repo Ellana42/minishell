@@ -14,8 +14,27 @@ int	init_table(int **table, int size)
 	}
 	return (0);
 }
+
+int	init_in_table(int ***table, int size)
+{
+	int	i;
+
+	i = 0;
+	if (!table)
+		return (0);
+	while (i < size)
+	{
+		(*table)[i] = (int *)malloc(sizeof(int) * 2);
+		if (!(*table)[i])
+			return (1);
+		(*table)[i][0] = -1;
+		(*table)[i][1] = -1;
+		i++;
+	}
+	return (0);
+}
 // TODO probably change return values
-int get_in_table(t_command *cmd, int **in_table, char **file_name, int *in_size)
+int get_in_table(t_command *cmd, int ***in_table, char **file_name, int *in_size)
 {
 	t_funnel		*funnel;
 	int 			i;
@@ -23,20 +42,21 @@ int get_in_table(t_command *cmd, int **in_table, char **file_name, int *in_size)
 
 	i = 0;
 	*in_size = (int )ft_lstsize(*command_get_in(cmd));
-	*in_table = (int *)malloc(sizeof(int) * (*in_size + 1));
+	*in_table = (int **)malloc(sizeof(int *) * (*in_size + 1));
 	if (!(*in_table))
 		return (1);
-	init_table(in_table, *in_size);
+	if (init_in_table(in_table, *in_size))
+		return (1);
 	while (i < *in_size)
 	{
 		funnel = lst_get_i(*command_get_in(cmd), i);
 		*file_name = funnel_get_filename(funnel);
 		type = funnel_get_type(funnel);
 		if (type == In)
-			(*in_table)[i] = open(*file_name, O_RDONLY, 0644); // TODO check si bonnes permissions
+			(*in_table)[i][0] = open(*file_name, O_RDONLY, 0644); // TODO check si bonnes permissions
 		if (type == Ina)
-			(*in_table)[i] = get_here_doc(*file_name); // TODO check for return values
-		if ((*in_table)[i] == -1)
+			execution_get_heredoc(*file_name, (*in_table)[i]);// TODO check for return values
+		if ((*in_table)[i][0] == -1)
 			return (1); // TODO gérer erreur
 		i++;
 	}

@@ -10,7 +10,7 @@ t_executable	*executable_alloc(void)
 
 int	executable_init(t_executable *executable, t_command *command, int **pipes, int index)
 {
-	int		*in_table;
+	int		**in_table;
 	int		*out_table;
 	char	*filename;
 

@@ -7,7 +7,7 @@ char	*executable_get_name(t_executable *exe)
 	return (command_get_name(exe->command));
 }
 
-int	*executable_get_in_files(t_executable *exe)
+int	**executable_get_in_files(t_executable *exe)
 {
 	if (!exe)
 		return (NULL);

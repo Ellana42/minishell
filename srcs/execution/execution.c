@@ -16,6 +16,7 @@ int	execution(t_commands *commands, char **envp)
 		execution_destroy(execution);
 		return (1);
 	}
+	/* execution_print(execution); */
 	
 	while (i < execution->executables_size)
 	{
