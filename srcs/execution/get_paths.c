@@ -98,6 +98,8 @@ static char	*get_valid_path(char *cmd, char **array_of_paths)
 			free_strs(NULL, array_of_paths);
 			error(msg("unexpected error", "", "", 1));
 		}
+		if (is_dir(path_ultime))
+			msg("Is a directory", ": ", cmd, 1);
 		if (access(path_ultime, F_OK | X_OK) == 0)
 			return (path_ultime);
 
@@ -115,6 +117,8 @@ char	*get_user_cmd(char *cmd, char **envp)
 	char	**env_paths;
 	char	*path_ultime;
 
+	if (is_dir(cmd))
+		msg(cmd, ": ", "Is a directory", 1);
 	if (access(cmd, F_OK | X_OK) == 0)
 		return (ft_strdup(cmd));
 		
@@ -126,7 +130,7 @@ char	*get_user_cmd(char *cmd, char **envp)
 	path_ultime = get_valid_path(cmd, env_paths);
 	
 	if (!path_ultime)
-		msg("command not found", ": ", cmd, 1);
+		msg(cmd, ": ", "command not found", 1);
 
 	free_strs(NULL, env_paths);
 	return (path_ultime);

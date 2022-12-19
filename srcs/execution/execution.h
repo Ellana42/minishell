@@ -6,6 +6,7 @@
 # include <readline/history.h>
 # include <limits.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <stdbool.h>
 # include "../../libft/includes/libft.h"
 # include "executable/executable.h"
@@ -55,5 +56,6 @@ int	execution_dup_out(int fd_out);
 int	execution_dup_in(int fd_in);
 void	execution_store_pid(t_execution *execution, int pid);
 int	execution_get_pid(t_execution *execution, int index);
+int	is_dir(char *path);
 
 #endif
