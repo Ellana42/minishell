@@ -129,8 +129,6 @@ int clean_table_in(int **in_table, t_command *cmd)
 			close((*in_table)[i]);
 		i++;
 	}
-	if (unlink(".heredoc.tmp") == -1)
-		return (1); // TODO remove with new heredoc 
 	free(*in_table);
 	return (0);
 }
