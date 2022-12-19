@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+int t_glob;
+
 /* int    main(int ac, char **av, char **envp) */
 /* { */
 /*     char        *command = av[1]; */
@@ -40,6 +42,8 @@ int	run_shell(int last_err, char **envp)
 	int			err;
 
 	command = readline("$> ");
+	if (!command)
+		return (-1);
 	add_history(command);
 	if (!command)
 		return (1);
@@ -56,12 +60,38 @@ int	run_shell(int last_err, char **envp)
 	return (err);
 }
 
+static void	handler(int sig, siginfo_t *si, void *ucontext)
+{
+	(void) si;
+	(void) ucontext;
+	(void) sig;
+	if (sig == SIGINT)
+	{
+		// TODO stop all running programs and exit
+		t_glob = 0;
+	}
+}
+
+int	init_sa(sa *sa_c)
+{
+	sigemptyset(&sa_c->sa_mask);
+	sa_c->sa_flags = SA_SIGINFO;
+	sa_c->sa_sigaction = handler;
+	sigaction(SIGINT, sa_c, NULL);
+	sigaction(SIGQUIT, sa_c, NULL);
+	sigaction(SIGTSTP, sa_c, NULL);
+	return (0);
+}
+
 int	main(int ac, char **av, char **envp)
 {
-	int			last_err;
+	int	last_err;
+	sa	sa_c;
 
-	last_err = 66;
-	while (1)
+	t_glob = 1;
+	last_err = 0;
+	init_sa(&sa_c);
+	while (t_glob && last_err != -1)
 		last_err = run_shell(last_err, envp);
 	rl_clear_history();
 	return (0);

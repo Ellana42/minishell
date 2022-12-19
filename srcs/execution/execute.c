@@ -12,7 +12,6 @@ int	execution_launch_exec(t_execution *execution)
 	path = get_user_cmd(command_get_name(command), env);
 	if (!path)
 		return (1);
-
 	if (execve(path, command_get_args_table(command), env) == 0)
 		return (1);
 	return (0);
@@ -21,8 +20,8 @@ int	execution_launch_exec(t_execution *execution)
 int	execution_child(t_execution *execution)
 {
 	t_executable	*executable;
-	int	fd[2];
-	int	err;
+	int				fd[2];
+	int				err;
 
 	err = 0;
 	executable = execution_get_current(execution);
