@@ -3,7 +3,7 @@
 // env : permet de lister les variables d'environnement
 // À gérer sans options ni arguments
 
-int env_builtin(t_data *data, char **args) 
+int env(t_data *data, char **args)
 {
 	int	i;
 	i = 0;
