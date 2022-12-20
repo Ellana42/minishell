@@ -4,6 +4,7 @@
 # include "parsing/parsing.h"
 # include "execution/execution.h"
 # include <stdio.h>
+# include <termios.h>
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>

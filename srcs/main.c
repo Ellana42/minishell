@@ -60,17 +60,40 @@ int	run_shell(int last_err, char **envp)
 	return (err);
 }
 
+int	init_tty()
+{
+	int	fd;
+	struct termios  config;
+
+	fd = open("/dev/tty", O_RDWR | O_NOCTTY | O_NDELAY); // TODO check device and perms
+	if (fd == -1) 
+	{
+		printf("failed to open port\n");
+		return (1);
+	} 
+	if(!isatty(fd))
+		return (1);
+	if(tcgetattr(fd, &config) < 0)
+		return (1);
+	config.c_lflag &= ~ECHOCTL;
+	if (tcsetattr(0, 0, &config))
+		return (1);
+	return (0);
+}
+
 int	main(int ac, char **av, char **envp)
 {
-	// TODO stop displaying ctrl
 	int	last_err;
 	sa	sa_c;
 
 	t_glob = 1;
 	last_err = 0;
+	if (init_tty())
+		return (1);
 	init_sa(&sa_c);
 	while (t_glob && last_err != -1)
 		last_err = run_shell(last_err, envp);
 	rl_clear_history();
+	close(fd);
 	return (0);
 }

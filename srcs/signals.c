@@ -12,6 +12,11 @@ static void	handler(int sig, siginfo_t *si, void *ucontext)
 		// TODO stop all running programs and exit
 		t_glob = 0;
 	}
+	if (sig == SIGQUIT)
+	{
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
 int	init_sa(sa *sa_c)
