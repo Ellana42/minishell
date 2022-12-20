@@ -13,7 +13,7 @@ typedef struct s_data
 	char	**env;
 }	t_data;
 
-int	pwd_builtin(t_data *data, char **args)
+int	pwd(t_data *data, char **args)
 {
 	char	*buf[PATH_MAX];
 	char	*cwd;
