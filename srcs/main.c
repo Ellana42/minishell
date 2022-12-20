@@ -67,33 +67,41 @@ int	init_tty()
 
 	fd = open("/dev/tty", O_RDWR | O_NOCTTY | O_NDELAY); // TODO check device and perms
 	if (fd == -1) 
-	{
-		printf("failed to open port\n");
-		return (1);
-	} 
+		return (-1);
 	if(!isatty(fd))
-		return (1);
+	{
+		close(fd);
+		return (-1);
+	}
 	if(tcgetattr(fd, &config) < 0)
-		return (1);
+	{
+		close(fd);
+		return (-1);
+	}
 	config.c_lflag &= ~ECHOCTL;
 	if (tcsetattr(0, 0, &config))
-		return (1);
-	return (0);
+	{
+		close(fd);
+		return (-1);
+	}
+	return (fd);
 }
 
 int	main(int ac, char **av, char **envp)
 {
 	int	last_err;
 	sa	sa_c;
+	int	tty;
 
 	t_glob = 1;
 	last_err = 0;
-	if (init_tty())
+	tty = init_tty();
+	if (tty == -1)
 		return (1);
 	init_sa(&sa_c);
 	while (t_glob && last_err != -1)
 		last_err = run_shell(last_err, envp);
 	rl_clear_history();
-	close(fd);
+	close(tty);
 	return (0);
 }
