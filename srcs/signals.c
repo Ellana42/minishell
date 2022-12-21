@@ -1,6 +1,11 @@
 #include "minishell.h"
 
-extern int t_glob;
+extern t_glob *g_glob;
+
+int	interrupt_execution()
+{
+	return (0);
+}
 
 static void	handler(int sig, siginfo_t *si, void *ucontext)
 {
@@ -10,7 +15,7 @@ static void	handler(int sig, siginfo_t *si, void *ucontext)
 	if (sig == SIGINT)
 	{
 		// TODO stop all running programs and exit
-		t_glob = 0;
+		g_glob->activated = 0;
 	}
 	if (sig == SIGQUIT)
 	{

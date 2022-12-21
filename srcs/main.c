@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int t_glob;
+t_glob *g_glob;
 
 /* int    main(int ac, char **av, char **envp) */
 /* { */
@@ -93,13 +93,14 @@ int	main(int ac, char **av, char **envp)
 	sa	sa_c;
 	int	tty;
 
-	t_glob = 1;
 	last_err = 0;
 	tty = init_tty();
+	if (glob_init())
+		return (1);
 	if (tty == -1)
 		return (1);
 	init_sa(&sa_c);
-	while (t_glob && last_err != -1)
+	while (g_glob->activated && last_err != -1)
 		last_err = run_shell(last_err, envp);
 	rl_clear_history();
 	close(tty);

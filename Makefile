@@ -2,6 +2,7 @@ NAME  = minishell
 
 SRCS  =  srcs/main.c \
 			srcs/signals.c \
+			srcs/glob.c \
 			srcs/parsing/parsing.c \
 			srcs/execution/destroy.c \
 			srcs/execution/dup.c \
@@ -12,6 +13,9 @@ SRCS  =  srcs/main.c \
 			srcs/execution/paths_utils.c \
 			srcs/execution/get_paths.c \
 			srcs/execution/execute.c \
+			srcs/execution/int_list/clear.c \
+			srcs/execution/int_list/new.c \
+			srcs/execution/int_list/print.c \
 			srcs/execution/executable/destroy.c \
 			srcs/execution/executable/get.c \
 			srcs/execution/executable/init.c \
