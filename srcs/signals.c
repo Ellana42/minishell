@@ -8,9 +8,8 @@ int	interrupt_execution()
 
 	while (!glob_pop_pid(&pid))
 	{
-		printf("Killing %d\n", pid);
-		kill(pid, SIGINT);
-		printf("Killed %d\n", pid);
+		if (kill(pid, SIGINT) == -1)
+			return (1);
 	}
 	return (0);
 }
@@ -24,11 +23,15 @@ static void	handler(int sig, siginfo_t *si, void *ucontext)
 	{
 		// TODO stop all running programs and exit
 		/* g_glob->activated = 0; */
-		interrupt_execution();
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		if (glob_is_running())
+			interrupt_execution();
+		else
+		{
+			printf("\n");
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
 	}
 	if (sig == SIGQUIT)
 	{

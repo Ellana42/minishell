@@ -15,5 +15,6 @@ int	glob_pop_pid(int *pid);
 t_intlist	**glob_get_pids();
 void	glob_destroy();
 void	glob_set_pids(t_intlist **pids);
+int	glob_is_running();
 
 #endif

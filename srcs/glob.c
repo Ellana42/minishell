@@ -43,6 +43,15 @@ int	glob_pop_pid(int *pid)
 	return (intlst_pop(*g_glob->pids, pid));
 }
 
+int	glob_is_running()
+{
+	if (!glob_get_pids())
+		return (0);
+	if (!*glob_get_pids())
+		return (0);
+	return (1);
+}
+
 void	glob_print()
 {
 	printf("Glob : \n");
