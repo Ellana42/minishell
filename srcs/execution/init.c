@@ -39,6 +39,6 @@ int	execution_init(t_execution *execution, t_commands *commands, char **envp)
 	execution->pids = intlstinit();
 	if (!execution->pids)
 		return (1); // TODO deal with this shit
-	/* glob->pids = execution->pids; */
+	glob_set_pids(execution->pids);
 	return (0);
 }

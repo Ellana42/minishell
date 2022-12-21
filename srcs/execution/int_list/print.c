@@ -16,6 +16,7 @@ void	_int_print(int i)
 
 void	int_lstprint(t_intlist *lst)
 {
-	int_lstiter(lst, &_int_print);
+	if (lst)
+		int_lstiter(lst, &_int_print);
 	printf("\n");
 }

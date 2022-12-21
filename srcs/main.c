@@ -104,5 +104,6 @@ int	main(int ac, char **av, char **envp)
 		last_err = run_shell(last_err, envp);
 	rl_clear_history();
 	close(tty);
+	glob_destroy();
 	return (0);
 }
