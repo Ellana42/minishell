@@ -16,6 +16,9 @@ static void	handler(int sig, siginfo_t *si, void *ucontext)
 	{
 		// TODO stop all running programs and exit
 		g_glob->activated = 0;
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 	if (sig == SIGQUIT)
 	{
