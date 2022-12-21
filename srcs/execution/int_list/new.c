@@ -48,7 +48,7 @@ int	intlst_pop(t_intlist **lst, int *popped)
 
 	if (!lst)
 		return (1);
-	if (!*lst)
+	if (!(*lst))
 		return (1);
 	second_lst = (*lst)->next;
 	content = (*lst)->content;

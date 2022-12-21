@@ -8,6 +8,7 @@ int	execution(t_commands *commands, char **envp)
 	int				pid;
 	int				exit_status;
 
+	exit_status = 0;
 	i = 0;
 	execution = execution_alloc();
 	if (execution_init(execution, commands, envp))

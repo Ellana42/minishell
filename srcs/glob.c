@@ -17,7 +17,7 @@ int	glob_init()
 
 void	glob_destroy()
 {
-	free(g_glob->pids);
+	/* free(g_glob->pids); */
 	free(g_glob);
 }
 
