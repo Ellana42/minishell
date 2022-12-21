@@ -1,5 +1,7 @@
 #include "execution.h"
 
+extern t_glob *glob;
+
 t_execution	*execution_alloc(void)
 {
 	t_execution	*execution;
@@ -34,13 +36,9 @@ int	execution_init(t_execution *execution, t_commands *commands, char **envp)
 		return (1);
 	executable = executables_get_i(execution->executables, 0);
 	execution->current_executable = executable;
-	execution->pids = (int *)malloc(sizeof(int) * (commands_size + 1));
+	execution->pids = intlstinit();
 	if (!execution->pids)
 		return (1); // TODO deal with this shit
-	while (i < execution->executables_size)
-	{
-		execution->pids[i] = -2;
-		i++;
-	}
+	/* glob->pids = execution->pids; */
 	return (0);
 }

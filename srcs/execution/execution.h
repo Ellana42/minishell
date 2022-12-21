@@ -11,6 +11,8 @@
 # include "../../libft/includes/libft.h"
 # include "executable/executable.h"
 # include "executables/executables.h"
+# include "../glob.h"
+# include "int_list/int_list.h"
 
 typedef struct s_execution {
 	t_executable	*current_executable;
@@ -18,7 +20,7 @@ typedef struct s_execution {
 	int				executable_index;
 	int				**pipes;
 	int				executables_size;
-	int				*pids;
+	t_intlist		**pids;
 	char			**envp;
 }	t_execution;
 
@@ -59,9 +61,10 @@ int	execution_launch_exec(t_execution *execution);
 int	execution_fork_process(t_execution *execution);
 int	execution_dup_out(int fd_out);
 int	execution_dup_in(int fd_in);
-void	execution_store_pid(t_execution *execution, int pid);
-int	execution_get_pid(t_execution *execution, int index);
 int	is_dir(char *path);
 int	execution_get_heredoc(char *delimiter, int fd[2]);
+int	execution_store_pid(t_execution *execution, int pid);
+int	execution_pop_pid(t_execution *execution, int *pid);
+int execution_get_pid(t_execution *execution);
 
 #endif

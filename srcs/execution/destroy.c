@@ -4,6 +4,7 @@ void	execution_dispose(t_execution *execution)
 {
 	free_pipes(execution->pipes, execution->executables_size);
 	executables_destroy(execution->executables);
+	int_lstclear(execution->pids);
 	free(execution->pids);
 }
 

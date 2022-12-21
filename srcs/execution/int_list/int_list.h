@@ -15,5 +15,6 @@ int	intlst_pop(t_intlist **lst, int *popped);
 void	int_lstiter(t_intlist *lst, void (*f)(int));
 void	_int_print(int i);
 void	int_lstprint(t_intlist *lst);
+void	int_lstclear(t_intlist **lst);
 
 #endif

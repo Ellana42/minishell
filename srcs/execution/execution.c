@@ -33,8 +33,10 @@ int	execution(t_commands *commands, char **envp)
 	i = 0;
 	while (i < execution->executables_size)
 	{
-		pid = execution_get_pid(execution, i);
+		pid = execution_get_pid(execution);
 		waitpid(pid, &exit_status, 0);
+		if (execution_pop_pid(execution, &pid))
+			return (1);
 		i++;
 	}
 	execution_destroy(execution);
