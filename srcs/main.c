@@ -101,7 +101,9 @@ int	main(int ac, char **av, char **envp)
 		return (1);
 	init_sa(&sa_c);
 	while (g_glob->activated && last_err != -1)
+	{
 		last_err = run_shell(last_err, envp);
+	}
 	rl_clear_history();
 	close(tty);
 	glob_destroy();

@@ -6,12 +6,13 @@ int	execution_launch_exec(t_execution *execution)
 	char		*args_table;
 	t_command	*command;
 	char		**env;
+	char		**argv;
 
 	command = execution_get_current_command(execution);
 	env = execution_get_env(execution);
 	path = get_user_cmd(command_get_name(command), env);
 	if (!path)
-		return (1);
+		return (0); // TODO deal with return values
 	if (execve(path, command_get_args_table(command), env) == 0)
 		return (1);
 	return (0);
@@ -46,8 +47,9 @@ int	execution_fork_process(t_execution *execution)
 		return (1);
 	if (pid == 0)
 	{
-		if (execution_child(execution))
-			return (1);
+		if (execution_child(execution) == 1)
+			exit(1); // TODO deal with error exit status
+		exit(0);
 	}
 	else
 		execution_store_pid(execution, pid);

@@ -99,7 +99,11 @@ static char	*get_valid_path(char *cmd, char **array_of_paths)
 			error(msg("unexpected error", "", "", 1));
 		}
 		if (is_dir(path_ultime))
-			msg("Is a directory", ": ", cmd, 1);
+		{
+			printf("minishell: %s: Is a directory\n", cmd);
+			free_strs(path_ultime, NULL);
+			return (NULL);
+		}
 		if (access(path_ultime, F_OK | X_OK) == 0)
 			return (path_ultime);
 
@@ -118,7 +122,7 @@ char	*get_user_cmd(char *cmd, char **envp)
 	char	*path_ultime;
 
 	if (is_dir(cmd))
-		msg(cmd, ": ", "Is a directory", 1);
+		printf("minishell: %s: Is a directory\n", cmd);
 	if (access(cmd, F_OK | X_OK) == 0)
 		return (ft_strdup(cmd));
 		
@@ -130,7 +134,7 @@ char	*get_user_cmd(char *cmd, char **envp)
 	path_ultime = get_valid_path(cmd, env_paths);
 	
 	if (!path_ultime)
-		msg(cmd, ": ", "command not found", 1);
+		printf("%s: command not found\n", cmd);	
 
 	free_strs(NULL, env_paths);
 	return (path_ultime);

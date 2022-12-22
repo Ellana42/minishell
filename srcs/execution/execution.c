@@ -32,12 +32,16 @@ int	execution(t_commands *commands, char **envp)
 	}
 	execution_close(execution); // TODO deal with close error ?
 	i = 0;
+	pid = -1;
 	while (i < execution->executables_size)
 	{
 		pid = execution_get_pid(execution);
-		waitpid(pid, &exit_status, 0);
-		if (execution_pop_pid(execution, &pid))
-			return (1);
+		if (pid != -1)
+		{
+			waitpid(pid, &exit_status, 0);
+			if (execution_pop_pid(execution, &pid))
+				return (1);
+		}
 		i++;
 	}
 	execution_destroy(execution);
