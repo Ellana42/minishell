@@ -38,11 +38,9 @@ t_parser	*parser_print_error(t_parser *parser)
 		return (parser);
 	if (parser->error.error == 1)
 	{
-		error_char = parser_get_error_char(parser);
-		if (error_char == '\0')
-			printf("bash : syntax error near unexpected token `newline`\n");
-		else
-			printf("bash : syntax error near unexpected token `%c`\n", error_char);
+		printf("minishell : syntax error near unexpected token `");
+		parser_print_error_token(parser);
+		printf("`\n");
 	}
 	else
 		printf("Error %d\n", parser->error.error);

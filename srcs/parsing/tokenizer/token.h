@@ -33,5 +33,6 @@ void	token_dispose(t_token *token);
 void	token_free(t_token *token);
 void	token_destroy(void *token);
 void	token_print(t_token *token);
+void	token_print_literal(t_token *token);
 
 #endif

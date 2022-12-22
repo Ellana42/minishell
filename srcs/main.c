@@ -47,12 +47,10 @@ int	run_shell(int last_err, char **envp)
 	add_history(command);
 	if (!command)
 		return (1);
-	/* printf("\nThe command : %s\n\n", command); */
 	parser = parse(command, last_err);
-	/* else */
-		/* commands_print(parser->commands); */
-
-	err = execution(parser->commands, envp);
+	err = parser_get_error(parser);
+	if (err == 0)
+		err = execution(parser->commands, envp);
 	parser_destroy(parser);
 	free(command);
 	return (err);

@@ -2,17 +2,16 @@
 
 t_parser	*parser_set_error(t_parser *parser, t_parser_error error)
 {
-	char	current_char;
+	t_token	*current_token;
 
 	parser->error.error = error;
 	if (error == ParserSyntaxError)
 	{
-		current_char = parser_get_token(parser)->current_char;
-		printf("Current char %d\n", (int )current_char);
-		parser->error.err_char = current_char;
+		current_token = parser_get_token(parser);
+		parser->error.err_token = current_token;
 	}
 	else
-		parser->error.err_char = '\0';
+		parser->error.err_token = NULL;
 	return (parser);
 }
 
@@ -28,7 +27,12 @@ int	parser_get_error(t_parser *parser)
 }
 
 // TODO deal with translation (newline)
-char	parser_get_error_char(t_parser *parser)
+t_token	*parser_get_error_token(t_parser *parser)
 {
-	return (parser->error.err_char);
+	return (parser->error.err_token);
+}
+
+void	parser_print_error_token(t_parser *parser)
+{
+	token_print_literal(parser->error.err_token);
 }

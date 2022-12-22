@@ -20,3 +20,13 @@ char	tokenizer_get_next_char(t_tokenizer *tokenizer, int s)
 		return (0);
 	return ((tokenizer->cmd_ptr)[s]);
 }
+
+t_token	*tokenizer_get_last_token(t_tokenizer *tokenizer)
+{
+	t_list	*last;
+
+	last = ft_lstlast(*tokenizer->tokens);
+	if (!last)
+		return (NULL);
+	return (last->content);
+}

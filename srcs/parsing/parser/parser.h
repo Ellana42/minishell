@@ -30,7 +30,7 @@ typedef enum s_parser_error{
 
 typedef struct s_parser_err {
 	t_parser_error	error;
-	char			err_char;
+	t_token			*err_token;
 }	t_parser_err;
 
 typedef struct s_parser{
@@ -59,5 +59,6 @@ int			parse_in(t_parser *parser);
 int			parse_ina(t_parser *parser);
 t_parser	*parser_set_error(t_parser *parser, t_parser_error error);
 int			parser_set_error_return(t_parser *parser, t_parser_error error);
+void	parser_print_error_token(t_parser *parser);
 
 #endif
