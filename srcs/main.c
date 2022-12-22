@@ -48,9 +48,7 @@ int	run_shell(int last_err, char **envp)
 	if (!command)
 		return (1);
 	/* printf("\nThe command : %s\n\n", command); */
-	parser = parse_string(command, last_err);
-	if (parser_get_error(parser) != 0)
-		printf("Error %d\n", parser_get_error(parser));
+	parser = parse(command, last_err);
 	/* else */
 		/* commands_print(parser->commands); */
 
@@ -95,9 +93,9 @@ int	main(int ac, char **av, char **envp)
 
 	last_err = 0;
 	tty = init_tty();
-	if (glob_init())
-		return (1);
 	if (tty == -1)
+		return (1);
+	if (glob_init())
 		return (1);
 	init_sa(&sa_c);
 	while (g_glob->activated && last_err != -1)

@@ -69,7 +69,7 @@ int	parse_params(t_parser *parser)
 	return (parser_set_error_return(parser, ParserSyntaxError));
 }
 
-int	parse(t_parser *parser)
+int	parse_tokens(t_parser *parser)
 {
 	if (parser->state == pStart)
 		return (parse_start(parser));

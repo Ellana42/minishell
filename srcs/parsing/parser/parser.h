@@ -51,7 +51,7 @@ void		jparser_free(t_parser *parser);
 t_token		*parser_get_token(t_parser *parser);
 void		parser_move_cursor(t_parser *parser);
 int			parser_is_eol(t_parser *parser);
-int			parse(t_parser *parser);
+int			parse_tokens(t_parser *parser);
 int			parser_tokenize_string(t_parser *parser);
 int			parse_out(t_parser *parser);
 int			parse_outa(t_parser *parser);
