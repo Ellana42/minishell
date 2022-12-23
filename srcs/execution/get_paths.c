@@ -98,7 +98,7 @@ static char	*get_valid_path(char *cmd, char **array_of_paths)
 			free_strs(NULL, array_of_paths);
 			error(msg("unexpected error", "", "", 1));
 		}
-		if (is_dir(path_ultime) && cmd[0] != '\0')
+		if (is_dir(path_ultime))
 			msg("Is a directory", ": ", cmd, 1);
 		if (access(path_ultime, F_OK | X_OK) == 0)
 			return (path_ultime);
