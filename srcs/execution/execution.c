@@ -39,6 +39,8 @@ int	execution(t_commands *commands, char **envp)
 		if (pid != -1)
 		{
 			waitpid(pid, &exit_status, 0);
+			if (WIFEXITED(exit_status))
+				exit_status = WEXITSTATUS(exit_status);
 			if (execution_pop_pid(execution, &pid))
 				return (1);
 		}

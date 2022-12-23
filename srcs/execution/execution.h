@@ -53,7 +53,7 @@ int	close_pipe(int *fd);
 void	error(int error_status);
 int	msg(char *str1, char *str2, char *str3, int erno);
 void	free_strs(char *str, char **array_of_strs);
-char	*get_user_cmd(char *cmd, char **envp);
+char	*get_user_cmd(char *cmd, char **envp, int *errnum);
 t_command *execution_get_current_command(t_execution *execution);
 int	execution_init(t_execution *execution, t_commands *commands, char **envp);
 char **execution_get_env(t_execution *execution);

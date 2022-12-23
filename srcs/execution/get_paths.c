@@ -81,7 +81,7 @@ static char	**fill_array_of_paths(char **envp)
 // Vérifie si le path existe et qu'il est accessible (F_OK) pour être executer (X_OK)
 // Retourne ce fameux path
 
-static char	*get_valid_path(char *cmd, char **array_of_paths)
+static char	*get_valid_path(char *cmd, char **array_of_paths, int *errnum)
 {
 	int		i;
 	char	*path_ultime;
@@ -96,11 +96,17 @@ static char	*get_valid_path(char *cmd, char **array_of_paths)
 		if (!path_ultime)
 		{
 			free_strs(NULL, array_of_paths);
-			error(msg("unexpected error", "", "", 1));
+			{
+				error(msg("unexpected error", "", "", 1));
+				*errnum = 1;
+			}
 		}
 		if (is_dir(path_ultime))
+		{
 			msg("Is a directory", ": ", cmd, 1);
-		if (access(path_ultime, F_OK | X_OK) == 0)
+			*errnum = 126;
+		}
+		else if (access(path_ultime, F_OK | X_OK) == 0)
 			return (path_ultime);
 
 		free_strs(path_ultime, NULL);
@@ -112,13 +118,17 @@ static char	*get_valid_path(char *cmd, char **array_of_paths)
 // Obtient le path de la commande fournie par l'user à partir des variables d'environnement
 // Retourne le path de la commande ou NULL si aucun path n'a été trouvé
 
-char	*get_user_cmd(char *cmd, char **envp)
+char	*get_user_cmd(char *cmd, char **envp, int *errnum)
 {
 	char	**env_paths;
 	char	*path_ultime;
 
 	if (is_dir(cmd))
+	{
 		msg(cmd, ": ", "Is a directory", 1);
+		*errnum = 126;
+		return (NULL);
+	}
 	if (access(cmd, F_OK | X_OK) == 0)
 		return (ft_strdup(cmd));
 		
@@ -127,10 +137,13 @@ char	*get_user_cmd(char *cmd, char **envp)
 	if (!env_paths)
 		return (NULL);
 
-	path_ultime = get_valid_path(cmd, env_paths);
+	path_ultime = get_valid_path(cmd, env_paths, errnum);
 	
 	if (!path_ultime)
+	{
 		printf("%s: command not found\n", cmd);	
+		*errnum = 127;
+	}
 	
 
 	free_strs(NULL, env_paths);

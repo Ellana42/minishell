@@ -7,12 +7,14 @@ int	execution_launch_exec(t_execution *execution)
 	t_command	*command;
 	char		**env;
 	char		**argv;
+	int			errnum;
 
+	errnum = 0;
 	command = execution_get_current_command(execution);
 	env = execution_get_env(execution);
-	path = get_user_cmd(command_get_name(command), env);
+	path = get_user_cmd(command_get_name(command), env, &errnum);
 	if (!path)
-		return (0); // TODO deal with return values
+		return (errnum);
 	if (execve(path, command_get_args_table(command), env) == 0)
 		return (1);
 	return (0);
@@ -41,16 +43,13 @@ int	execution_child(t_execution *execution)
 int	execution_fork_process(t_execution *execution)
 {
 	int	pid;
+	int	err;
 
 	pid = fork();
 	if (pid == -1)
 		return (1);
 	if (pid == 0)
-	{
-		if (execution_child(execution) == 1)
-			exit(1); // TODO deal with error exit status
-		exit(0);
-	}
+		exit(execution_child(execution));
 	else
 		execution_store_pid(execution, pid);
 	return (0);
