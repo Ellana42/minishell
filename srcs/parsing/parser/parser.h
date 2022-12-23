@@ -19,8 +19,8 @@ typedef enum s_parser_state{
 
 typedef enum s_parser_error{
 	ParserNoError = 0,
-	ParserSyntaxError = 1,
-	ParserTokError = 2,
+	ParserTokError = 1,
+	ParserSyntaxError = 2,
 	ParserAllocError = 3,
 	ParserNotTokenized = 4,
 	ParserQuotesUnclosed = 5,

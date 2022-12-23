@@ -36,7 +36,7 @@ t_parser	*parser_print_error(t_parser *parser)
 
     if (parser->error.error == 0)
 		return (parser);
-	if (parser->error.error == 1)
+	if (parser->error.error == ParserSyntaxError)
 	{
 		printf("minishell : syntax error near unexpected token `");
 		parser_print_error_token(parser);
