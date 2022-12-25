@@ -21,16 +21,18 @@ static void	handler(int sig, siginfo_t *si, void *ucontext)
 	(void) sig;
 	if (sig == SIGINT)
 	{
-		// TODO stop all running programs and exit
-		/* g_glob->activated = 0; */
 		if (glob_is_running())
-			interrupt_execution();
+		{
+			interrupt_execution(); // TODO check error
+			glob_set_exit_status(-5);
+		}
 		else
 		{
 			printf("\n");
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			rl_redisplay();
+			glob_set_exit_status(130);
 		}
 	}
 	if (sig == SIGQUIT)

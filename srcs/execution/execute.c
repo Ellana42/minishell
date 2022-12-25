@@ -15,7 +15,7 @@ int	execution_launch_exec(t_execution *execution)
 	path = get_user_cmd(command_get_name(command), env, &errnum);
 	if (!path)
 		return (errnum);
-	if (execve(path, command_get_args_table(command), env) == 0)
+	if (execve(path, command_get_args_table(command), env) == -1)
 		return (1);
 	return (0);
 }

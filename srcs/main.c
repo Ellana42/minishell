@@ -35,7 +35,7 @@ t_glob *g_glob;
 /*     return (0); */
 /* } */
 
-int	run_shell(int last_err, char **envp)
+int	run_shell(char **envp)
 {
 	char		*command;
 	t_parser	*parser;
@@ -47,7 +47,7 @@ int	run_shell(int last_err, char **envp)
 	add_history(command);
 	if (!command)
 		return (1);
-	parser = parse(command, last_err);
+	parser = parse(command, glob_get_exit_status());
 	err = parser_get_error(parser);
 	if (err == 0)
 		err = execution(parser->commands, envp);
@@ -93,12 +93,13 @@ int	main(int ac, char **av, char **envp)
 	tty = init_tty();
 	if (tty == -1)
 		return (1);
-	if (glob_init())
+	if (glob_init(last_err, envp))
 		return (1);
 	init_sa(&sa_c);
-	while (g_glob->activated && last_err != -1)
+	while (glob_get_state() && last_err != -1) // TODO glob is activated
 	{
-		last_err = run_shell(last_err, envp);
+		last_err = run_shell(envp);
+		glob_set_exit_status(last_err);
 	}
 	rl_clear_history();
 	close(tty);
