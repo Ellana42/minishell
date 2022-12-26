@@ -5,7 +5,6 @@ int	tokenize_noquote_dollar(t_tokenizer *tokenizer)
 	char	*err_num;
 	char	c;
 
-	err_num = NULL;
 	if (tokenizer_get_next_char(tokenizer, 1) == '?')
 	{
 		err_num = ft_itoa(tokenizer->last_err);

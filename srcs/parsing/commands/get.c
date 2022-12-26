@@ -58,10 +58,3 @@ t_list	**commands_get_i_outa(t_commands *commands, int i)
 	cmd = commands_get_i(commands, i);
 	return (cmd->out_a);
 }
-
-int	commands_get_size(t_commands *commands)
-{
-	if (!commands)
-		return (-1);
-	return (ft_lstsize(*commands));
-}

@@ -14,12 +14,12 @@ typedef struct s_funnel{
 
 // TODO clean unused fields
 typedef struct s_command{
-	char	*command; // 
+	char	*command;
 	t_list	**args;
-	t_list	**out; // > ...
-	t_list	**out_a; // >> ...
-	t_list	**in; // < ...
-	t_list	**in_a; // << ...
+	t_list	**out;
+	t_list	**out_a;
+	t_list	**in;
+	t_list	**in_a;
 }	t_command;
 
 t_command		*command_alloc(void);
@@ -40,8 +40,8 @@ t_list			**command_get_out(t_command *command);
 t_list			**command_get_outa(t_command *command);
 t_list			**command_get_in(t_command *command);
 t_list			**command_get_ina(t_command *command);
-void	        _free_string(void *str);
-char	        *_new_str(char *str);
+void			_free_string(void *str);
+char			*_new_str(char *str);
 void			print_funnel_chain(t_list *lst);
 char			*funnel_get_filename(t_funnel *funnel);
 t_token_type	funnel_get_type(t_funnel *funnel);

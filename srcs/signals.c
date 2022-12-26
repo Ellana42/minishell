@@ -1,8 +1,8 @@
 #include "minishell.h"
 
-extern t_glob *g_glob;
+extern t_glob	*g_glob;
 
-int	interrupt_execution()
+int	interrupt_execution(void)
 {
 	int	pid;
 
@@ -14,6 +14,7 @@ int	interrupt_execution()
 	return (0);
 }
 
+// TODO check error
 static void	handler(int sig, siginfo_t *si, void *ucontext)
 {
 	(void) si;
@@ -23,7 +24,7 @@ static void	handler(int sig, siginfo_t *si, void *ucontext)
 	{
 		if (glob_is_running())
 		{
-			interrupt_execution(); // TODO check error
+			interrupt_execution();
 			glob_set_exit_status(-5);
 		}
 		else
@@ -42,7 +43,7 @@ static void	handler(int sig, siginfo_t *si, void *ucontext)
 	}
 }
 
-int	init_sa(sa *sa_c)
+int	init_sa(t_sa *sa_c)
 {
 	sigemptyset(&sa_c->sa_mask);
 	sa_c->sa_flags = SA_SIGINFO;

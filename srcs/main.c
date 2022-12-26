@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-t_glob *g_glob;
+t_glob	*g_glob;
 
 /* int    main(int ac, char **av, char **envp) */
 /* { */
@@ -15,7 +15,8 @@ t_glob *g_glob;
 /*     if (parser->error.error != 0) */
 /*     { */
 /*         if (parser->error.error == 1) */
-/*             printf("bash : syntax error near unexpected token `%c`\n", parser_get_error_char(parser)); */
+/*             printf("bash : syntax error near unexpected token `%c`\n", 
+ *             parser_get_error_char(parser)); */
 /*         else */
 /*             printf("Error %d\n", parser->error.error); */
 /*     } */
@@ -56,20 +57,21 @@ int	run_shell(char **envp)
 	return (err);
 }
 
-int	init_tty()
+// TODO check device and perms
+int	init_tty(void)
 {
-	int	fd;
-	struct termios  config;
+	int				fd;
+	struct termios	config;
 
-	fd = open("/dev/tty", O_RDWR | O_NOCTTY | O_NDELAY); // TODO check device and perms
-	if (fd == -1) 
+	fd = open("/dev/tty", O_RDWR | O_NOCTTY | O_NDELAY);
+	if (fd == -1)
 		return (-1);
-	if(!isatty(fd))
+	if (!isatty(fd))
 	{
 		close(fd);
 		return (-1);
 	}
-	if(tcgetattr(fd, &config) < 0)
+	if (tcgetattr(fd, &config) < 0)
 	{
 		close(fd);
 		return (-1);
@@ -83,6 +85,7 @@ int	init_tty()
 	return (fd);
 }
 
+// TODO glob is activated
 int	main(int ac, char **av, char **envp)
 {
 	int	last_err;
@@ -96,7 +99,7 @@ int	main(int ac, char **av, char **envp)
 	if (glob_init(last_err, envp))
 		return (1);
 	init_sa(&sa_c);
-	while (glob_get_state() && last_err != -1) // TODO glob is activated
+	while (glob_get_state() && last_err != -1)
 	{
 		last_err = run_shell(envp);
 		glob_set_exit_status(last_err);

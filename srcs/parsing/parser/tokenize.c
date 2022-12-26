@@ -1,5 +1,15 @@
 #include "parser.h"
 
+int	parser_tokenize_end(t_parser *parser)
+{
+	tokenizer_push_eol(parser->tokenizer);
+	if (parser->tokenizer->state == Quote || parser->tokenizer->state == QuoteV)
+		return (parser_set_error_return(parser, ParserQuotesUnclosed));
+	if (parser->tokenizer->state == SingleQuote)
+		return (parser_set_error_return(parser, ParserQuotesUnclosed));
+	return (0);
+}
+
 int	parser_tokenize_string(t_parser *parser)
 {
 	char	*var;
@@ -23,10 +33,5 @@ int	parser_tokenize_string(t_parser *parser)
 		tokenizer_push_string(parser->tokenizer);
 		reset_acc(parser->tokenizer);
 	}
-	tokenizer_push_eol(parser->tokenizer);
-	if (parser->tokenizer->state == Quote || parser->tokenizer->state == QuoteV)
-		return (parser_set_error_return(parser, ParserQuotesUnclosed));
-	if (parser->tokenizer->state == SingleQuote)
-		return (parser_set_error_return(parser, ParserQuotesUnclosed));
-	return (0);
+	return (parser_tokenize_end(parser));
 }

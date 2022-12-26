@@ -31,7 +31,6 @@ int	tokenizer_init(t_tokenizer *tokenizer, char *cmd, int last_err)
 	if (!tokenizer->tokens)
 		return (1);
 	tokenizer->last_err = last_err;
-	/* printf("Tokenizer error : %d\n", tokenizer->last_err); */
 	return (0);
 }
 

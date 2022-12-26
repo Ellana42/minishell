@@ -8,7 +8,7 @@ void	_free_string(void *str)
 void	_free_funnel(void *funnel)
 {
 	t_funnel	*tmp;
-	
+
 	tmp = (t_funnel *)funnel;
 	free(tmp->filename);
 	free(tmp);

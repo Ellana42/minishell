@@ -62,6 +62,6 @@ void		tokenizer_destroy(t_tokenizer *tokenizer);
 int			tokenizer_move_cursor_two(t_tokenizer *tokenizer);
 int			tokenizer_set_not_empty_acc(t_tokenizer *tokenizer);
 t_token		*tokenizer_get_last_token(t_tokenizer *tokenizer);
-void	_token_print(void *content);
+void		_token_print(void *content);
 
 #endif
