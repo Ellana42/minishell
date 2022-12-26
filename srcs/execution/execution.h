@@ -13,6 +13,7 @@
 # include "executables/executables.h"
 # include "../glob.h"
 # include "int_list/int_list.h"
+# include "../builtins/builtins.h"
 
 typedef struct s_execution {
 	t_executable	*current_executable;
@@ -65,5 +66,7 @@ int				execution_get_heredoc(char *delimiter, int fd[2]);
 int				execution_store_pid(t_execution *execution, int pid);
 int				execution_pop_pid(t_execution *execution, int *pid);
 int				execution_get_pid(t_execution *execution);
+int				execution_launch_builtin(t_execution *execution);
+int				execution_is_builtin(t_execution *execution);
 
 #endif
