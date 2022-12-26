@@ -1,5 +1,20 @@
 #include "utils.h"
 
+void	table_free(char **table)
+{
+	int	i;
+
+	i = 0;
+	if (!table)
+		return ;
+	while (table[i])
+	{
+		free(table[i]);
+		i++;
+	}
+	free(table);
+}
+
 void	table_print(char **table)
 {
 	int	i;

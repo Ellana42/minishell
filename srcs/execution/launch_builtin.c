@@ -14,10 +14,15 @@ int	execution_launch_builtin(t_execution *execution)
 {
 	int			command_number;
 	t_command	*command;
+	char		**args_table;
+	int			err;
 
 	command_number = execution_is_builtin(execution);
 	command = execution_get_current_command(execution);
+	args_table = command_get_args_table(command);
+	err = 0;
 	if (command_number == 1)
-		return (echo(command_get_args_table(command)));
-	return (0);
+		err = echo(args_table);
+	table_free(args_table);
+	return (err);
 }
