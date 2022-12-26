@@ -1,5 +1,6 @@
 #include "execution.h"
 
+// TODO make sure is freed properly
 int	init_pipes(int ***pipes, int commands_size)
 {
 	int	i;
@@ -13,7 +14,7 @@ int	init_pipes(int ***pipes, int commands_size)
 	{
 		(*pipes)[i] = (int *)malloc(sizeof(int) * 2);
 		if (!(*pipes)[i])
-			return (1); // TODO make sure is freed properly
+			return (1);
 		if (pipe(pipefd) == -1)
 			return (1);
 		(*pipes)[i][0] = pipefd[0];
@@ -54,20 +55,7 @@ void	print_pipes(int **pipes, int commands_size)
 	printf("_____________\n");
 }
 
-int	get_fd_in(int **pipes, int index_cmd)
-{
-	if (index_cmd == 0)
-		return (STDIN_FILENO);
-	return (pipes[index_cmd - 1][0]);
-}
-
-int	get_fd_out(int **pipes, int index_cmd, int commands_size)
-{
-	if (index_cmd == commands_size - 1)
-		return (STDOUT_FILENO);
-	return (pipes[index_cmd][1]);
-}
-
+// TODO deal with return
 int	close_unused_fds(int **pipes, int index_cmd, int commands_size)
 {
 	int	fd_in;
@@ -88,11 +76,11 @@ int	close_unused_fds(int **pipes, int index_cmd, int commands_size)
 		if (pipes[i][1] != fd_out)
 		{
 			if (close_fd(pipes[i][1]))
-				return (1); // TODO deal with return
+				return (1);
 		}
 		i++;
 	}
-	return (0);	
+	return (0);
 }
 
 int	pipes_get_size(int **pipes)

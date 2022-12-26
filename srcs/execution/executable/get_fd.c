@@ -14,7 +14,7 @@ int	executable_get_in_close(t_executable *executable, int *fd)
 			return (1);
 		return (executable_close_infiles(executable));
 	}
-	if (close_pipe(executable->in_pipe))	
+	if (close_pipe(executable->in_pipe))
 		return (1);
 	if (close_fd(executable->in_files[executable->in_size - 1][1]))
 		return (1);
@@ -36,7 +36,7 @@ int	executable_get_out_close(t_executable *executable, int *fd)
 			return (1);
 		return (executable_close_outfiles(executable));
 	}
-	if (close_pipe(executable->out_pipe))	
+	if (close_pipe(executable->out_pipe))
 		return (1);
 	*fd = executable->out_files[executable->out_size - 1];
 	return (executable_close_unused_outfiles(executable));

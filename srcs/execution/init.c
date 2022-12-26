@@ -1,6 +1,6 @@
 #include "execution.h"
 
-extern t_glob *glob;
+extern t_glob	*g_glob;
 
 t_execution	*execution_alloc(void)
 {
@@ -16,10 +16,11 @@ t_execution	*execution_alloc(void)
 	return (execution);
 }
 
+// TODO deal with this shit
 int	execution_init(t_execution *execution, t_commands *commands, char **envp)
 {
-	size_t	commands_size;
-	int		i;
+	size_t			commands_size;
+	int				i;
 	t_executable	*executable;
 
 	if (!execution)
@@ -31,14 +32,14 @@ int	execution_init(t_execution *execution, t_commands *commands, char **envp)
 	execution->envp = envp;
 	if (init_pipes(&execution->pipes, commands_size))
 		return (1);
-	execution->executables = executables_alloc(); 
+	execution->executables = executables_alloc();
 	if (executables_init(execution->executables, commands, execution->pipes))
 		return (1);
 	executable = executables_get_i(execution->executables, 0);
 	execution->current_executable = executable;
 	execution->pids = intlstinit();
 	if (!execution->pids)
-		return (1); // TODO deal with this shit
+		return (1);
 	glob_set_pids(execution->pids);
 	return (0);
 }

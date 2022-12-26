@@ -3,9 +3,11 @@
 void	execution_move(t_execution *execution)
 {
 	t_executable	*executable;
+	int				index;
 
 	execution->executable_index++;
-	executable = execution_get_executable_i(execution, execution->executable_index);
+	index = execution->executable_index;
+	executable = execution_get_executable_i(execution, index);
 	execution->current_executable = executable;
 }
 

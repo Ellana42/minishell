@@ -3,7 +3,7 @@
 
 # include "../../parsing/parsing.h"
 
-typedef	int *t_pipe;
+typedef int				*t_pipe;
 
 typedef struct s_executable {
 	t_command	*command;
@@ -15,27 +15,31 @@ typedef struct s_executable {
 	int			*out_files;
 }	t_executable;
 
+typedef t_executable	t_exe;
+
 int				init_pipes(int ***pipes, int commands_size);
 void			print_pipes(int **pipes, int commands_size);
 int				get_fd_in(int **pipes, int index_cmd);
 int				get_fd_out(int **pipes, int index_cmd, int commands_size);
 int				close_unused_fds(int **pipes, int index_cmd, int commands_size);
 int				pipes_get_size(int **pipes);
-int				executable_init(t_executable *executable, t_command *command, int **pipes, int index);
+int				executable_init(t_exe *exe, t_command *cmd, int **pipes, int i);
 t_executable	*executable_alloc(void);
-void	executable_destroy(t_executable *executable);
-int get_out_table(t_command *cmd, int **out_table, int *out_size);
-int get_in_table(t_command *cmd, int ***in_table, char **file_name, int *in_size);
-void	executable_print(void *executable_ptr);
-int executable_close_infiles(t_executable *executable);
-int executable_close_outfiles(t_executable *executable);
-int	executable_close_files(t_executable *executable);
-int executable_close_infiles(t_executable *executable);
-int executable_close_outfiles(t_executable *executable);
-int executable_close_unused_infiles(t_executable *executable);
-int executable_close_unused_outfiles(t_executable *executable);
-int	executable_get_fds_close(t_executable *executable, int fd[2]);
-int	close_pipe(int *fd);
-int	close_fd(int fd);
+void			executable_destroy(t_executable *executable);
+int				get_out_table(t_command *cmd, int **out_table, int *out_size);
+int				get_in_table(t_command *cmd, int ***table, char **name, int *s);
+void			executable_print(void *executable_ptr);
+int				executable_close_infiles(t_executable *executable);
+int				executable_close_outfiles(t_executable *executable);
+int				executable_close_files(t_executable *executable);
+int				executable_close_infiles(t_executable *executable);
+int				executable_close_outfiles(t_executable *executable);
+int				executable_close_unused_infiles(t_executable *executable);
+int				executable_close_unused_outfiles(t_executable *executable);
+int				executable_get_fds_close(t_executable *executable, int fd[2]);
+int				close_pipe(int *fd);
+int				close_fd(int fd);
+int				_close_fd_table(int *table, size_t table_size);
+int				_close_in_fd_table(int **table, size_t table_size);
 
 #endif

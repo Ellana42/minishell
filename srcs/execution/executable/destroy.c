@@ -1,8 +1,9 @@
 #include "executable.h"
 
+// TODO double check
 void	executable_dispose(t_executable *executable)
 {
-	free(executable->in_files); // TODO double check
+	free(executable->in_files);
 	free(executable->out_files);
 }
 

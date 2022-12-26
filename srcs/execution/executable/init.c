@@ -8,32 +8,39 @@ t_executable	*executable_alloc(void)
 	return (executable);
 }
 
-int	executable_init(t_executable *executable, t_command *command, int **pipes, int index)
+int	extecutable_file_init(t_executable *exe, t_command *cmd)
 {
 	int		**in_table;
 	int		*out_table;
 	char	*filename;
 
-	if (!executable)
+	exe->in_files = in_table;
+	if (get_in_table(cmd, &(exe->in_files), &filename, &exe->in_size))
 		return (1);
-	executable->command = command;
+	if (!exe->in_files)
+		return (1);
+	exe->out_files = out_table;
+	if (get_out_table(cmd, &(exe->out_files), &exe->out_size))
+		return (1);
+	if (!exe->out_files)
+		return (1);
+	return (0);
+}
+
+int	executable_init(t_executable *exe, t_command *cmd, int **pipes, int index)
+{
+	if (!exe)
+		return (1);
+	exe->command = cmd;
 	if (index == 0)
-	    executable->in_pipe = NULL;
+		exe->in_pipe = NULL;
 	else
-	    executable->in_pipe = pipes[index - 1];
+		exe->in_pipe = pipes[index - 1];
 	if (index == pipes_get_size(pipes))
-		executable->out_pipe = NULL;
+		exe->out_pipe = NULL;
 	else
-		executable->out_pipe = pipes[index];
-	executable->in_files = in_table;
-	if (get_in_table(command, &(executable->in_files), &filename, &executable->in_size))
-		return (1);
-	if (!executable->in_files)
-		return (1);
-	executable->out_files = out_table;
-	if (get_out_table(command, &(executable->out_files), &executable->out_size))
-		return (1);
-	if (!executable->out_files)
+		exe->out_pipe = pipes[index];
+	if (extecutable_file_init(exe, cmd))
 		return (1);
 	return (0);
 }

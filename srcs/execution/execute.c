@@ -3,10 +3,8 @@
 int	execution_launch_exec(t_execution *execution)
 {
 	char		*path;
-	char		*args_table;
 	t_command	*command;
 	char		**env;
-	char		**argv;
 	int			errnum;
 
 	errnum = 0;
