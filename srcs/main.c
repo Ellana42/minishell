@@ -88,9 +88,9 @@ int	init_tty(void)
 // TODO glob is activated
 int	main(int ac, char **av, char **envp)
 {
-	int	last_err;
-	sa	sa_c;
-	int	tty;
+	int		last_err;
+	t_sa	sa_c;
+	int		tty;
 
 	last_err = 0;
 	tty = init_tty();
