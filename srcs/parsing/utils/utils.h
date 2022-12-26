@@ -8,5 +8,6 @@ int		str_cpy(char *str, char *dst);
 int		str_cat(char *str, char *dst);
 void	mem_clean(char *ptr, size_t mem_size);
 void	table_print(char **table);
+int		table_get_size(char **table);
 
 #endif

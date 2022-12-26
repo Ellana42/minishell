@@ -80,7 +80,8 @@ SRCS  =  srcs/main.c \
 			srcs/parsing/utils/mem.c \
 			srcs/parsing/utils/str.c \
 			srcs/parsing/utils/table.c \
-			srcs/parsing/lstutils/str_chain.c
+			srcs/parsing/lstutils/str_chain.c \
+			srcs/builtins/echo/echo.c
 
 OBJS  = ${SRCS:.c=.o}
 
