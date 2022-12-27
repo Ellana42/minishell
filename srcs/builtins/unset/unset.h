@@ -1,9 +1,8 @@
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#ifndef UNSET_H
+# define UNSET_H
 
-# define PATH_MAX 4096
+# include "../../libft.h"
 # include <stdbool.h>
-# include "../execution/execution.h"
 
 typedef struct s_data
 {
@@ -11,7 +10,6 @@ typedef struct s_data
 	char	**env;
 }	t_data;
 
-// unset
 int		unset(t_data *data, char **args);
 int		get_env_var_index(char **env, char *var);
 int		env_var_nbr(char **env);

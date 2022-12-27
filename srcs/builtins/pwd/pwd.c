@@ -1,4 +1,4 @@
-#include "../builtins/builtin.h"
+#include "../builtins/pwd.h"
 
 // pwd : affiche le chemin absolu du repertoire de travail actuel
 
@@ -6,12 +6,6 @@
 // Recupere le chemin du repertoire de travail courant
 // - buf : pointeur sur tableau de chars, constitue du path
 // - size : taille de buf
-
-typedef struct s_data
-{
-	char	*working_directory;
-	char	**env;
-}	t_data;
 
 int	pwd_builtin(t_data *data, char **args)
 {
