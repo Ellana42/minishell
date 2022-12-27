@@ -3,6 +3,7 @@ NAME  = minishell
 SRCS  =  srcs/main.c \
 	srcs/glob.c \
 	srcs/builtins/echo/echo.c \
+	srcs/builtins/exit/exit.c \
 	srcs/execution/executable/destroy.c \
 	srcs/execution/executable/print.c \
 	srcs/execution/executable/close_unused.c \
