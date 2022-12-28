@@ -3,6 +3,7 @@
 
 # include "../../../libft/includes/libft.h"
 # include <stdbool.h>
+# include "../../parsing/utils/utils.h"
 
 typedef struct s_data
 {
@@ -15,5 +16,6 @@ int		get_env_var_index(char **env, char *var);
 int		env_var_nbr(char **env);
 bool	is_valid_env_var(char *var);
 bool	remove_env_var(t_data *data, int index);
+char	**realloc_env_vars(char **envp);
 
 #endif

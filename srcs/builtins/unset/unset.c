@@ -1,7 +1,6 @@
+#include "unset.h"
 // Supprime une variable ou une fonction de l'environnement
 // Dès lors, cette variable n'est plus accessible
-
-#include "unset.h"
 
 // Check si la cle est un nom valide de variable d'environnement
 // Renvoie vrai si la cle ne contient que des caracteres alphanumeriques ou "_"
@@ -12,13 +11,11 @@
 bool	is_valid_env_var(char *var)
 {
 	int	i;
-	i = 0;
 
+	i = 0;
 	if (ft_isalpha(var[i]) == 0 && var[i] != '_')
 		return (false);
-
 	i++;
-
 	while (var[i] && var[i] != '=')
 	{
 		if (ft_isalnum(var[i]) == 0 && var[i] != '_')
@@ -74,26 +71,26 @@ int	env_var_nbr(char **env)
 // Re-alloue de la memoire pour un nouvel env
 // Retourne un pointeur sur le nouvel env ou NULL
 
-static char	**realloc_env_vars(t_data *data, int size)
+char	**realloc_env_vars(char **envp)
 {
 	char	**new_env;
 	int		i;
 
-	new_env = ft_calloc(size + 1, sizeof * new_env);
-
+	new_env = (char **)malloc(sizeof(char *) * (table_get_size(envp) + 1));
 	if (!new_env)
 		return (NULL);
-
 	i = 0;
-
-	while (data->env[i] && i < size)
+	while (envp[i])
 	{
-		new_env[i] = ft_strdup(data->env[i]);
-		free_ptr(data->env[i]);
+		new_env[i] = ft_strdup(envp[i]);
+		if (!new_env[i])
+		{
+			table_free(new_env);
+			return (NULL);
+		}
 		i++;
 	}
-
-	free(data->env);
+	new_env[i] = NULL;
 	return (new_env);
 }
 
@@ -109,7 +106,7 @@ bool	remove_env_var(t_data *data, int index)
 	if (index > env_var_nbr(data->env))
 		return (false);
 
-	free_ptr(data->env[index]);
+	free(data->env[index]);
 
 	i = index;
 	count = index;
@@ -117,12 +114,12 @@ bool	remove_env_var(t_data *data, int index)
 	while (data->env[i + 1])
 	{
 		data->env[i] = ft_strdup(data->env[i + 1]);
-		free_ptr(data->env[i + 1]);
+		free(data->env[i + 1]);
 		count++;
 		i++;
 	}
 
-	data->env = realloc_env_vars(data, count);
+	/* data->env = realloc_env_vars(data); */
 
 	if (!data->env)
 		return (false);
@@ -149,7 +146,7 @@ int	unset(t_data *data, char **args)
 	{
 		if (is_valid_env_var(args[i]) == 0 || ft_strchr(args[i], '=') != NULL)
 		{
-			error_msg("..."); // message d'erreur genre "not a valid identifier"
+			printf("Not a valid identifier\n");
 			exit = EXIT_FAILURE;
 		}
 		else

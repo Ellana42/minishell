@@ -102,6 +102,7 @@ int	main(int ac, char **av, char **envp)
 	init_sa(&sa_c);
 	while (glob_get_state() && !err)
 	{
+		glob_print(1);
 		err = run_shell(envp, &last_err);
 		glob_set_exit_status(last_err);
 	}

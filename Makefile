@@ -5,6 +5,7 @@ SRCS  =  srcs/main.c \
 	srcs/builtins/echo/echo.c \
 	srcs/builtins/exit/exit.c \
 	srcs/builtins/exit/atoi.c \
+	srcs/builtins/unset/unset.c \
 	srcs/execution/executable/destroy.c \
 	srcs/execution/executable/print.c \
 	srcs/execution/executable/close_unused.c \
