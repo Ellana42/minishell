@@ -71,10 +71,7 @@ int	execution(t_commands *commands, char **envp)
 	if (execution_init(execution, commands, envp))
 		return (execution_finish(execution, 1));
 	if (execution_is_single_builtin(execution))
-	{
-		printf("Detected single builtin\n");
 		exit_status = execution_launch_builtin(execution);
-	}
 	else
 		exit_status = execution_simple(execution);
 	execution_destroy(execution);

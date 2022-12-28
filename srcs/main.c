@@ -85,7 +85,7 @@ int	init_tty(void)
 	return (fd);
 }
 
-// TODO glob is activated
+// TODO check return on school computer
 int	main(int ac, char **av, char **envp)
 {
 	int		last_err;
@@ -107,5 +107,11 @@ int	main(int ac, char **av, char **envp)
 	rl_clear_history();
 	close(tty);
 	glob_destroy();
-	return (0);
+	if (last_err == -1)
+	{
+		printf("Got here\n");
+		last_err = 0;
+		printf("exit\n");
+	}
+	return (last_err);
 }

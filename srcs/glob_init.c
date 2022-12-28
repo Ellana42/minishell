@@ -17,13 +17,14 @@ int	glob_init(int error, char **envp)
 	if (!g_glob->env)
 		return (1);
 	*g_glob->pids = NULL;
-	*g_glob->env = envp;
+	*g_glob->env = envp; // TODO call duplicate env
 	return (0);
 }
 
 // TODO adapt to table
 void	glob_destroy(void)
 {
+	// TODO free env table
 	free(g_glob->env);
 	free(g_glob->pids);
 	free(g_glob);
