@@ -1,8 +1,8 @@
 #ifndef PWD_H
 # define PWD_H
 
-# include "../../libft.h"
-#  define PATH_MAX 4096
+# include "../../../libft/includes/libft.h"
+# define PATH_MAX 4096
 
 typedef struct s_data
 {

@@ -1,7 +1,7 @@
 #ifndef EXPORT_H
 # define EXPORT_H
 
-# include "../libft.h"
+# include "../../../libft/includes/libft.h"
 
 typedef struct s_data
 {
