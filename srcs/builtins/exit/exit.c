@@ -15,7 +15,6 @@ int	is_numeric(char *str)
 	return (1);
 }
 
-// TODO print exit right moment
 int	exit_parse_args(char **args, int *err_num)
 {
 	if (table_get_size(args) > 2)
@@ -31,7 +30,8 @@ int	exit_parse_args(char **args, int *err_num)
 		printf("bash: exit: %s: numeric argument required\n", args[1]);
 		return (0);
 	}
-	*err_num = ft_atoi(args[1]);
+	if (long_long_atoi(args[1], (long long *)err_num))
+		printf("bash: exit: %s: numeric argument required\n", args[1]);
 	return (0);
 }
 
@@ -43,8 +43,6 @@ int	builtin_exit(char **args)
 	printf("exit\n");
 	if (exit_parse_args(args, &err_num))
 		return (1);
-	printf("Got there\n");
-	printf("err num %d\n", err_num);
 	glob_set_state(0);
 	return (err_num);
 }
