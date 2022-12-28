@@ -4,5 +4,7 @@
 # include "echo/echo.h"
 # include "exit/exit.h"
 # include "env/env.h"
+# include "unset/unset.h"
+# include "pwd/pwd.h"
 
 #endif

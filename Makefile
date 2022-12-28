@@ -4,6 +4,7 @@ SRCS  =  srcs/main.c \
 	srcs/glob.c \
 	srcs/builtins/echo/echo.c \
 	srcs/builtins/exit/exit.c \
+	srcs/builtins/pwd/pwd.c \
 	srcs/builtins/env/env.c \
 	srcs/builtins/exit/atoi.c \
 	srcs/builtins/unset/unset.c \
