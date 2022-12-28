@@ -29,19 +29,17 @@ bool	is_valid_env_var(char *var)
 // Retourne l'index de la variable correspondant a la string passee en parametre
 // La string donnee doit etre un nom de variable complet
 // Renvoie (-1) si la string est introuvable dans l'environnement
+// // tmp = QT_ACCESSIBILITY=
 
 int	get_env_var_index(char **env, char *var)
 {
 	char	*tmp;
 	int		i;
 
-	tmp = ft_strjoin(var, "="); // tmp = QT_ACCESSIBILITY=
-
+	tmp = ft_strjoin(var, "=");
 	if (!tmp)
 		return (-1);
-
 	i = 0;
-
 	while (env[i])
 	{
 		if (ft_strncmp(tmp, env[i], ft_strlen(tmp)) == 0)
@@ -61,69 +59,39 @@ int	get_env_var_index(char **env, char *var)
 int	env_var_nbr(char **env)
 {
 	int	i;
-	i = 0;
 
+	i = 0;
 	while (env && env[i])
 		i++;
 	return (i);
-}
-
-// Re-alloue de la memoire pour un nouvel env
-// Retourne un pointeur sur le nouvel env ou NULL
-
-char	**realloc_env_vars(char **envp)
-{
-	char	**new_env;
-	int		i;
-
-	new_env = (char **)malloc(sizeof(char *) * (table_get_size(envp) + 1));
-	if (!new_env)
-		return (NULL);
-	i = 0;
-	while (envp[i])
-	{
-		new_env[i] = ft_strdup(envp[i]);
-		if (!new_env[i])
-		{
-			table_free(new_env);
-			return (NULL);
-		}
-		i++;
-	}
-	new_env[i] = NULL;
-	return (new_env);
 }
 
 // Supprime la variable a un certain index de l'environnement
 // Retourne (-1) si succes
 // 0 si mauvais index ou erreur d'allocation memoire
 
-bool	remove_env_var(t_data *data, int index)
+bool	remove_env_var(char **env, int index)
 {
 	int	i;
 	int	count;
 
-	if (index > env_var_nbr(data->env))
+	if (index > env_var_nbr(env))
 		return (false);
-
-	free(data->env[index]);
-
+	free(env[index]);
 	i = index;
 	count = index;
-
-	while (data->env[i + 1])
+	while (env[i + 1])
 	{
-		data->env[i] = ft_strdup(data->env[i + 1]);
-		free(data->env[i + 1]);
+		env[i] = ft_strdup(env[i + 1]);
+		if (!env[i])
+			return (1);
+		free(env[i + 1]);
 		count++;
 		i++;
 	}
-
-	/* data->env = realloc_env_vars(data); */
-
-	if (!data->env)
+	env[i] = NULL;
+	if (!env)
 		return (false);
-
 	return (true);
 }
 
@@ -133,15 +101,16 @@ bool	remove_env_var(t_data *data, int index)
 // Retourne 0 si tous les arguments ont ete supprimes avec succes
 // Ou 1 si un ou plusieurs arguments n'ont pas pu etre supprimes
 
-int	unset(t_data *data, char **args)
+int	unset(char **args)
 {
-	int	i;
-	int	index;
-	int	exit;
+	int		i;
+	int		index;
+	int		exit;
+	char	**env;
 
 	exit = EXIT_SUCCESS;
 	i = 1;
-
+	env = glob_get_env();
 	while (args[i])
 	{
 		if (is_valid_env_var(args[i]) == 0 || ft_strchr(args[i], '=') != NULL)
@@ -151,10 +120,9 @@ int	unset(t_data *data, char **args)
 		}
 		else
 		{
-			index = get_env_var_index(data->env, args[i]);
-
+			index = get_env_var_index(env, args[i]);
 			if (index != -1)
-				remove_env_var(data, index);
+				remove_env_var(env, index);
 		}
 		i++;
 	}
