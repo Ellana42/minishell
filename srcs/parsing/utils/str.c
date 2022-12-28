@@ -34,3 +34,19 @@ int	str_cat(char *str, char *dst)
 	dst = 0;
 	return (0);
 }
+
+int	str_are_equal(char *str1, char *str2)
+{
+	if (!str1 || !str2)
+		return (-1);
+	while (*str1 && *str2)
+	{
+		if (*str1 != *str2)
+			return (0);
+		str1++;
+		str2++;
+	}
+	if (*str1 != *str2)
+		return (0);
+	return (1);
+}

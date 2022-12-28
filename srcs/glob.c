@@ -2,6 +2,32 @@
 
 extern t_glob	*g_glob;
 
+char	*glob_getenv_var(char *var)
+{
+	char	**env;
+	int		i;
+	char	**split_var;
+	char	*value;
+
+	i = 0;
+	env = glob_get_env();
+	while (env[i])
+	{
+		split_var = ft_split(env[i], '=');
+		if (!split_var)
+			return (NULL);
+		if (str_are_equal(split_var[0], var) == 1)
+		{
+			value = ft_strdup(split_var[1]);
+			table_free(split_var);
+			return (value);
+		}
+		table_free(split_var);
+		i++;
+	}
+	return (NULL);
+}
+
 int	glob_pop_pid(int *pid)
 {
 	if (!*g_glob->pids)

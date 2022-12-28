@@ -2,6 +2,7 @@
 # define TOKENIZE_H
 
 # include "../tokenizer/tokenizer.h"
+# include "../../glob.h"
 
 int	tokenize_noquote(t_tokenizer *tokenizer);
 int	tokenize_noquotev(t_tokenizer *tokenizer);

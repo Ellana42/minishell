@@ -25,5 +25,6 @@ int			glob_get_exit_status(void);
 void		glob_set_exit_status(int exit_status);
 int			glob_get_state(void);
 void		glob_set_state(int state);
+char	*glob_getenv_var(char *var);
 
 #endif
