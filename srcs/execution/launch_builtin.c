@@ -9,6 +9,8 @@ int	execution_is_builtin(t_execution *execution)
 		return (1);
 	if (!ft_strncmp(command_name, "exit", 5))
 		return (2);
+	if (!ft_strncmp(command_name, "env", 4))
+		return (3);
 	return (0);
 }
 
@@ -27,6 +29,8 @@ int	execution_launch_builtin(t_execution *execution)
 		err = echo(args_table);
 	if (command_number == 2)
 		err = builtin_exit(args_table);
+	if (command_number == 3)
+		err = env(args_table);
 	if (!execution_is_single_builtin(execution))
 		table_free(args_table);
 	else

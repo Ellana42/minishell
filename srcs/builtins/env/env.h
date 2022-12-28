@@ -2,13 +2,9 @@
 # define ENV_H
 
 # include "../../../libft/includes/libft.h"
+# include "../../parsing/utils/utils.h"
+# include "../../glob.h"
 
-typedef struct s_data
-{
-	char	*working_directory;
-	char	**env;
-}	t_data;
-
-int env_builtin(t_data *data, char **args);
+int	env(char **args);
 
 #endif
