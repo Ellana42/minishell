@@ -19,7 +19,7 @@ int	exit_parse_args(char **args, int *err_num)
 {
 	if (table_get_size(args) > 2)
 	{
-		printf("bash: exit: too many arguments");
+		printf("minishell: exit: too many arguments");
 		return (1);
 	}
 	if (table_get_size(args) == 1)
@@ -27,11 +27,11 @@ int	exit_parse_args(char **args, int *err_num)
 	if (!is_numeric(args[1]))
 	{
 		*err_num = 2;
-		printf("bash: exit: %s: numeric argument required\n", args[1]);
+		printf("minishell: exit: %s: numeric argument required\n", args[1]);
 		return (0);
 	}
 	if (long_long_atoi(args[1], (long long *)err_num))
-		printf("bash: exit: %s: numeric argument required\n", args[1]);
+		printf("minishell: exit: %s: numeric argument required\n", args[1]);
 	return (0);
 }
 
