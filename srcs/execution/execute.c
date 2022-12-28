@@ -1,6 +1,5 @@
 #include "execution.h"
 
-// TODO get own env
 int	execution_launch_exec(t_execution *execution)
 {
 	char		*path;
@@ -12,7 +11,7 @@ int	execution_launch_exec(t_execution *execution)
 	command = execution_get_current_command(execution);
 	if (execution_is_builtin(execution))
 		return (execution_launch_builtin(execution));
-	env = execution_get_env(execution);
+	env = glob_get_env();
 	path = get_user_cmd(command_get_name(command), env, &errnum);
 	if (!path)
 		return (errnum);
