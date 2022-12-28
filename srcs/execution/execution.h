@@ -68,5 +68,6 @@ int				execution_pop_pid(t_execution *execution, int *pid);
 int				execution_get_pid(t_execution *execution);
 int				execution_launch_builtin(t_execution *execution);
 int				execution_is_builtin(t_execution *execution);
+int	execution_is_single_builtin(t_execution *execution);
 
 #endif

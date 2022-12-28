@@ -27,6 +27,9 @@ int	execution_launch_builtin(t_execution *execution)
 		err = echo(args_table);
 	if (command_number == 2)
 		err = builtin_exit(args_table);
-	table_free(args_table);
+	if (!execution_is_single_builtin(execution))
+		table_free(args_table);
+	else
+		free(args_table);
 	return (err);
 }
