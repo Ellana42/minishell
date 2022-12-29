@@ -6,5 +6,6 @@
 # include "env/env.h"
 # include "unset/unset.h"
 # include "pwd/pwd.h"
+# include "cd/cd.h"
 
 #endif
