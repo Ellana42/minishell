@@ -100,6 +100,7 @@ bool	remove_env_var(char **env, int index)
 // Ne fait rien si la cle n'est pas dans l'environnement
 // Retourne 0 si tous les arguments ont ete supprimes avec succes
 // Ou 1 si un ou plusieurs arguments n'ont pas pu etre supprimes
+// TODO check error print
 
 int	unset(char **args)
 {
@@ -115,7 +116,8 @@ int	unset(char **args)
 	{
 		if (is_valid_env_var(args[i]) == 0 || ft_strchr(args[i], '=') != NULL)
 		{
-			printf("Not a valid identifier\n");
+			if (args[i][0] != '\0')
+				printf("bash: unset: `%s': not a valid identifier\n", args[i]);
 			exit = EXIT_FAILURE;
 		}
 		else
