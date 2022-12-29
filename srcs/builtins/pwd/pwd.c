@@ -19,7 +19,9 @@ int	pwd_builtin(char **args)
 		ft_putendl_fd(cwd, STDOUT_FILENO);
 		return (EXIT_SUCCESS);
 	}
-	// TODO message d'erreur fail pwd avec strerror(erno) par exemple
+	printf("pwd: error retrievng current directory: ");
+	printf("getcwd: cannot access parent directories: ");
+	printf("No such file or directory\n");
 	return (EXIT_FAILURE);
 }
 
