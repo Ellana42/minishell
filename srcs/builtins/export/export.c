@@ -1,78 +1,55 @@
 #include "export.h"
 
-int	str_store(char **dst, char *src, int start, int end)
-{
-	int	i;
+/* int	export_add_var_to_env(t_export_arg *arg) */
+/* { */
+/* 	char	**old_env; */
+/* 	char	**new_env; */
 
-	i = start;
-	*dst = NULL;
-	if (start > end)
+/* 	old_env = glob_get_env(); */
+/* 	if (arg->operator_ == 0) */
+/* 		table_add_line(&old_env, arg->full_arg); */
+/* 	return (0); */
+/* } */
+
+int	export_one_var(char *argument)
+{
+	t_export_arg	arg;
+	int				err;
+
+	arg.full_arg = ft_strdup(argument);
+	if (!arg.full_arg)
 		return (1);
-	if (end > ft_strlen(src))
-		return (1);
-	*dst = (char *)malloc(sizeof(char) * (end - start + 1));
-	while (i < end)
+	arg.value = NULL;
+	arg.variable = NULL;
+	arg.operator_ = 2;
+	printf("Argument : %s\n", argument);
+	err = export_parse_arg(argument, &arg);
+	if (err == 2)
 	{
-		(*dst)[i - start] = src[i];
-		i++;
+		printf("bash: export: memory error\n");
+		export_arg_free(arg);
+		return (1);
 	}
-	return (0);
-}
-
-void	export_arg_free(t_export_arg export_arg)
-{
-	free(export_arg.variable);
-	free(export_arg.value);
-}
-
-void	export_arg_print(t_export_arg export_arg)
-{
-	printf("variable :%s:\n", export_arg.variable);
-	if (export_arg.operator_ == 0)
-		printf("operator =\n");
-	if (export_arg.operator_ == 1)
-		printf("operator +=\n");
-	printf("value :%s:\n", export_arg.value);
-}
-
-int	export_parse_arg(char *arg, t_export_arg *export_arg)
-{
-	int		i;
-
-	i = 0;
-	while (ft_isalnum(arg[i]) || arg[i] == '_')
-		i++;
-	str_store(&(export_arg->variable), arg, 0, i);
-	if (arg[i] == '=')
-		export_arg->operator_ = 0;
-	else if (arg[i] == '+')
-		export_arg->operator_ = 1;
+	else if (err == 1)
+		printf("bash: export: `%s': not a valid identifier\n", argument);
 	else
-		return (1);
-	i++;
-	if (export_arg->operator_ == 1 && arg[i] != '=')
-		return (1);
-	if (export_arg->operator_ == 1)
-		i++;
-	str_store(&(export_arg->value), arg, i, ft_strlen(arg));
+		export_arg_print(arg);
+	export_arg_free(arg);
 	return (0);
 }
 
 int	builtin_export(char **args_table)
 {
-	t_export_arg	arg;
+	int	size;
+	int	i;
 
-	arg.value = NULL;
-	arg.variable = NULL;
-	arg.operator_ = 2;
-	printf("Argument : %s\n", args_table[1]);
-	if (export_parse_arg(args_table[1], &arg))
+	i = 1;
+	size = table_get_size(args_table);
+	while (i < size)
 	{
-		printf("Export arg parsing error\n");
-		export_arg_free(arg);
-		return (1);
+		if (export_one_var(args_table[i]))
+			return (1);
+		i++;
 	}
-	export_arg_print(arg);
-	export_arg_free(arg);
 	return (0);
 }
