@@ -50,3 +50,22 @@ int	str_are_equal(char *str1, char *str2)
 		return (0);
 	return (1);
 }
+
+int	str_store(char **dst, char *src, int start, int end)
+{
+	int	i;
+
+	i = start;
+	*dst = NULL;
+	if (start > end)
+		return (1);
+	if (end > ft_strlen(src))
+		return (1);
+	*dst = (char *)malloc(sizeof(char) * (end - start + 1));
+	while (i < end)
+	{
+		(*dst)[i - start] = src[i];
+		i++;
+	}
+	return (0);
+}
