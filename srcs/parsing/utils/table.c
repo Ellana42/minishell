@@ -78,19 +78,3 @@ int	table_get_size(char **table)
 		i++;
 	return (i);
 }
-
-int	main(int ac, char **av)
-{
-	int	i = 0;
-	char **table;
-
-	table_init(&table);
-	table_print(table);
-	while (i < ac)
-	{
-		table_add_line(&table, av[i]);
-		i++;
-	}
-	table_print(table);
-	table_free(table);
-}

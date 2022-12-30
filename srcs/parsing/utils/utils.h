@@ -12,5 +12,7 @@ int		table_get_size(char **table);
 void	table_free(char **table);
 int		str_are_equal(char *str1, char *str2);
 int		str_store(char **dst, char *src, int start, int end);
+int	table_init(char ***table);
+int	table_add_line(char ***table, char *content);
 
 #endif
