@@ -52,6 +52,8 @@ int	execution_is_single_builtin(t_execution *execution)
 {
 	if (execution->executables_size > 1)
 		return (0);
+	if (execution->executables_size == 0)
+		return (0);
 	if (execution_is_builtin(execution))
 		return (1);
 	return (0);
