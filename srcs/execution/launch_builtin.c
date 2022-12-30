@@ -37,8 +37,8 @@ int	call_builtin(char **args_table, int command_number)
 		err = cd(args_table);
 	if (command_number == 5)
 		err = pwd_builtin(args_table);
-	/* if (command_number == 6) */
-	/* 	err = export(args_table); */
+	if (command_number == 6)
+		err = builtin_export(args_table);
 	if (command_number == 7)
 		err = unset(args_table);
 	return (err);

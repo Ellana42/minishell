@@ -7,5 +7,6 @@
 # include "unset/unset.h"
 # include "pwd/pwd.h"
 # include "cd/cd.h"
+# include "export/export.h"
 
 #endif

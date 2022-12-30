@@ -7,6 +7,7 @@ SRCS  =  srcs/main.c \
 	srcs/builtins/pwd/pwd.c \
 	srcs/builtins/env/env.c \
 	srcs/builtins/cd/cd.c \
+	srcs/builtins/export/export.c \
 	srcs/builtins/exit/atoi.c \
 	srcs/builtins/unset/unset.c \
 	srcs/execution/executable/destroy.c \
