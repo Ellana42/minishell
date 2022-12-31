@@ -5,7 +5,7 @@ void	*lst_get_i(t_list *lst, int i)
 	int	j;
 
 	j = 0;
-	if (i > ft_lstsize(lst))
+	if (i < 0 || i > ft_lstsize(lst))
 		return (NULL);
 	while (j < i)
 	{
@@ -15,6 +15,23 @@ void	*lst_get_i(t_list *lst, int i)
 		j++;
 	}
 	return ((char *)lst->content);
+}
+
+t_list	*lst_get_i_lst(t_list *lst, int i)
+{
+	int	j;
+
+	j = 0;
+	if (i < 0 || i > ft_lstsize(lst))
+		return (NULL);
+	while (j < i)
+	{
+		lst = lst->next;
+		if (!lst)
+			return (NULL);
+		j++;
+	}
+	return (lst);
 }
 
 char	*lst_get_last(t_list *lst)
