@@ -4,7 +4,6 @@ int	glob_env_add_line(char *key, char *value)
 {
 	t_dict			*new_el;
 	t_list			*new_el_lst;
-	t_export_arg	export_arg;
 	int				i;
 
 	i = 0;

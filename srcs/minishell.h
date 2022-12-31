@@ -13,7 +13,6 @@
 
 typedef struct sigaction	t_sa;
 
-static void	handler(int sig, siginfo_t *si, void *ucontext);
 int			init_sa(t_sa *sa_c);
 
 #endif

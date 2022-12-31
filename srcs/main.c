@@ -91,6 +91,8 @@ int	main(int ac, char **av, char **envp)
 	int		tty;
 	int		err;
 
+	(void )ac;
+	(void )av;
 	last_err = 0;
 	err = 0;
 	tty = init_tty();

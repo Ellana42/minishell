@@ -35,7 +35,6 @@ int	realloc_env_var(char *env_line, t_list **new_env)
 {
 	t_dict			*new_el;
 	t_list			*new_el_lst;
-	t_export_arg	export_arg;
 	int				i;
 
 	i = 0;

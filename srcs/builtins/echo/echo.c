@@ -40,7 +40,7 @@ int	get_flags(char **args, int *n)
 int	echo(char **args)
 {
 	int		i;
-	size_t	size;
+	int		size;
 	int		n;
 
 	i = 1;
