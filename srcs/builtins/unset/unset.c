@@ -116,7 +116,10 @@ int	unset(char **args)
 		if (is_valid_env_var(args[i]) == 0 || ft_strchr(args[i], '=') != NULL)
 		{
 			if (args[i][0] != '\0')
-				printf("bash: unset: `%s': not a valid identifier\n", args[i]);
+			{
+				printf("minishell: unset:");
+				printf(" `%s': not a valid identifier\n", args[i]);
+			}
 			exit = EXIT_FAILURE;
 		}
 		else
