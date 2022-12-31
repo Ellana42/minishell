@@ -22,9 +22,8 @@ int	pwd_builtin(char **args)
 		return (EXIT_SUCCESS);
 	}
 	free(buf);
-	printf("pwd: error retrievng current directory: ");
-	printf("getcwd: cannot access parent directories: ");
-	printf("No such file or directory\n");
+	if (glob_env_has_var("PWD"))
+		printf("%s\n", glob_getenv_var("PWD"));
 	return (EXIT_FAILURE);
 }
 
