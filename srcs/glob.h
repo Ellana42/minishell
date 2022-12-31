@@ -48,5 +48,6 @@ t_dict		*glob_env_get_dict_i(int i);
 char		*glob_getenv_var(char *var);
 char		**glob_env_get_table(void);
 int	glob_env_add_line(char *key, char *value);
+int	glob_env_replace_var(char *var, char *new_value);
 
 #endif

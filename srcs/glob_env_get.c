@@ -35,6 +35,8 @@ char	*glob_get_env_line_i(int i)
 
 	key = glob_env_get_key_i(i);
 	value = glob_env_get_val_i(i);
+	if (!value)
+		return (NULL);
 	len_line = ft_strlen(key) + ft_strlen(value) + 1;
 	start_line = ft_strjoin(key, "=");
 	if (!start_line)
@@ -49,6 +51,7 @@ char	**glob_env_get_table(void)
 	int		i;
 	int		env_size;
 	char	**env_table;
+	char	*line;
 
 	i = 0;
 	env_size = ft_lstsize(*glob_get_env());
@@ -57,7 +60,9 @@ char	**glob_env_get_table(void)
 		return (NULL);
 	while (i < env_size)
 	{
-		env_table[i] = glob_get_env_line_i(i);
+		line = glob_get_env_line_i(i);
+		if (line)
+			env_table[i] = line;
 		i++;
 	}
 	env_table[i] = NULL;

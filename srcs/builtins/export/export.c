@@ -1,16 +1,5 @@
 #include "export.h"
 
-/* int	export_add_var_to_env(t_export_arg *arg) */
-/* { */
-/* 	char	**old_env; */
-/* 	char	**new_env; */
-
-/* 	old_env = glob_get_env(); */
-/* 	if (arg->operator_ == 0) */
-/* 		table_add_line(&old_env, arg->full_arg); */
-/* 	return (0); */
-/* } */
-
 void	export_el_print(void *content)
 {
 	t_dict	*dict;
@@ -29,6 +18,34 @@ void	export_print(void)
 	ft_lstiter(*glob_get_env(), &export_el_print);
 }
 
+int	export_push_var(char *var, char *val)
+{
+	printf("Push var\n");
+	if (glob_getenv_var(var))
+		glob_env_replace_var(var, val);
+	else
+		glob_env_add_line(var, val);
+	return (0);
+}
+
+int	export_append_var(char *var, char *val)
+{
+	char	*new_value;
+
+	printf("Append var\n");
+	if (glob_getenv_var(var))
+	{
+		new_value = ft_strjoin(glob_getenv_var(var), val);
+		if (!new_value)
+			return (1);
+		glob_env_replace_var(var, new_value);
+		free(new_value);
+	}
+	else
+		glob_env_add_line(var, val);
+	return (0);
+}
+
 int	export_one_var(char *argument)
 {
 	t_export_arg	arg;
@@ -40,7 +57,6 @@ int	export_one_var(char *argument)
 	arg.value = NULL;
 	arg.variable = NULL;
 	arg.operator_ = 2;
-	printf("Argument : %s\n", argument);
 	err = export_parse_arg(argument, &arg);
 	if (err == 2)
 	{
@@ -50,11 +66,10 @@ int	export_one_var(char *argument)
 	}
 	else if (err == 1)
 		printf("bash: export: `%s': not a valid identifier\n", argument);
+	else if (arg.operator_ == 0)
+		export_push_var(arg.variable, arg.value);
 	else
-	{
-		glob_env_add_line(arg.variable, arg.value);
-		export_arg_print(arg);
-	}
+		export_append_var(arg.variable, arg.value);
 	export_arg_free(arg);
 	return (0);
 }

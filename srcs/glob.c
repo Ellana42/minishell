@@ -2,22 +2,6 @@
 
 extern t_glob	*g_glob;
 
-char	*glob_getenv_var(char *var)
-{
-	int		i;
-	int		env_size;
-
-	i = 0;
-	env_size = ft_lstsize(*glob_get_env());
-	while (i < env_size)
-	{
-		if (str_are_equal(glob_env_get_key_i(i), var) == 1)
-			return (glob_env_get_val_i(i));
-		i++;
-	}
-	return (NULL);
-}
-
 int	glob_pop_pid(int *pid)
 {
 	if (!*g_glob->pids)
