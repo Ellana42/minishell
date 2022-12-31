@@ -74,7 +74,7 @@ int	execution(t_parser *parser, char **envp)
 	if (execution_init(execution, parser, envp))
 		return (execution_finish(execution, 1));
 	if (execution_is_single_builtin(execution))
-		exit_status = execution_launch_builtin(execution);
+		exit_status = execution_launch_builtin_single(execution);
 	else
 		exit_status = execution_simple(execution);
 	execution_destroy(execution);

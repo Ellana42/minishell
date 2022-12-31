@@ -44,7 +44,7 @@ int	call_builtin(char **args_table, int command_number)
 	return (err);
 }
 
-int	launch_builtin(t_execution *execution)
+int	execution_launch_builtin(t_execution *execution)
 {
 	int			command_number;
 	t_command	*command;
@@ -59,7 +59,7 @@ int	launch_builtin(t_execution *execution)
 	return (err);
 }
 
-int	execution_launch_builtin(t_execution *execution)
+int	execution_launch_builtin_single(t_execution *execution)
 {
 	t_executable	*executable;
 	int				fd[2];
@@ -76,7 +76,7 @@ int	execution_launch_builtin(t_execution *execution)
 		return (1);
 	if (execution_dup_out(fd[1]))
 		return (1);
-	err = launch_builtin(execution);
+	err = execution_launch_builtin(execution);
 	close(fd[0]);
 	close(fd[1]);
 	if (execution_dup_in(dup_std[0]))
