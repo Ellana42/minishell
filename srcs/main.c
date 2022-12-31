@@ -50,7 +50,7 @@ int	run_shell(char **envp, int *last_err)
 	parser = parse(command, glob_get_exit_status());
 	*last_err = parser_get_error(parser);
 	if (*last_err == 0)
-		*last_err = execution(parser->commands, envp);
+		*last_err = execution(parser, envp);
 	parser_destroy(parser);
 	free(command);
 	return (0);
@@ -84,7 +84,6 @@ int	init_tty(void)
 	return (fd);
 }
 
-// TODO check return on school computer
 int	main(int ac, char **av, char **envp)
 {
 	int		last_err;

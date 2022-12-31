@@ -16,6 +16,7 @@
 # include "../builtins/builtins.h"
 
 typedef struct s_execution {
+	t_parser		*parser;
 	t_executable	*current_executable;
 	t_executables	*executables;
 	int				executable_index;
@@ -39,7 +40,6 @@ int				pipes_get_size(int **pipes);
 void			print_pipe(int *pipe);
 t_execution		*execution_alloc(void);
 void			execution_print(t_execution *execution);
-int				execution(t_commands *commands, char **envp);
 void			execution_destroy(t_execution *execution);
 void			free_pipes(int **pipes, int commands_size);
 t_executable	*execution_get_executable_i(t_execution *execution, int index);
@@ -55,7 +55,6 @@ int				msg(char *str1, char *str2, char *str3, int erno);
 void			free_strs(char *str, char **array_of_strs);
 char			*get_user_cmd(char *cmd, char **envp, int *errnum);
 t_command		*execution_get_current_command(t_execution *execution);
-int				execution_init(t_execution *exec, t_commands *cmds, char **env);
 char			**execution_get_env(t_execution *execution);
 int				execution_launch_exec(t_execution *execution);
 int				execution_fork_process(t_execution *execution);
@@ -68,6 +67,8 @@ int				execution_pop_pid(t_execution *execution, int *pid);
 int				execution_get_pid(t_execution *execution);
 int				execution_launch_builtin(t_execution *execution);
 int				execution_is_builtin(t_execution *execution);
-int	execution_is_single_builtin(t_execution *execution);
+int				execution_is_single_builtin(t_execution *execution);
+int				execution(t_parser *parser, char **envp);
+int				execution_init(t_execution *exe, t_parser *parser, char **envp);
 
 #endif

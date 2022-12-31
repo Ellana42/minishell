@@ -13,27 +13,30 @@ t_execution	*execution_alloc(void)
 	execution->executables = NULL;
 	execution->pids = NULL;
 	execution->current_executable = NULL;
+	execution->parser = NULL;
 	return (execution);
 }
 
-// TODO deal with this shit
-int	execution_init(t_execution *execution, t_commands *commands, char **envp)
+int	execution_init(t_execution *execution, t_parser *parser, char **envp)
 {
 	size_t			commands_size;
 	int				i;
 	t_executable	*executable;
+	t_commands		*cmds;
 
 	if (!execution)
 		return (1);
 	i = 0;
-	commands_size = commands_get_size(commands);
+	commands_size = commands_get_size(parser->commands);
 	execution->executables_size = commands_size;
 	execution->executable_index = 0;
 	execution->envp = envp;
+	execution->parser = parser;
+	cmds = parser->commands;
 	if (init_pipes(&execution->pipes, commands_size))
 		return (1);
 	execution->executables = executables_alloc();
-	if (executables_init(execution->executables, commands, execution->pipes))
+	if (executables_init(execution->executables, parser->commands, execution->pipes))
 		return (1);
 	executable = executables_get_i(execution->executables, 0);
 	execution->current_executable = executable;

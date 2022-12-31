@@ -60,7 +60,7 @@ int	execution_is_single_builtin(t_execution *execution)
 }
 
 // TODO deal with close error ?
-int	execution(t_commands *commands, char **envp)
+int	execution(t_parser *parser, char **envp)
 {
 	t_execution		*execution;
 	t_executable	*executable;
@@ -70,7 +70,7 @@ int	execution(t_commands *commands, char **envp)
 
 	i = 0;
 	execution = execution_alloc();
-	if (execution_init(execution, commands, envp))
+	if (execution_init(execution, parser, envp))
 		return (execution_finish(execution, 1));
 	if (execution_is_single_builtin(execution))
 		exit_status = execution_launch_builtin(execution);

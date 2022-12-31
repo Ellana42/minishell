@@ -3,7 +3,7 @@
 // Parcourt l'envp pour trouver la variable d'environnement PATH
 // Renvoie la string contenant les différents array_of_paths de PATH
 
-static char	*extract_path(char **envp)
+static char	*extract_path(void)
 {
 	return (glob_getenv_var("PATH"));
 }
@@ -40,8 +40,10 @@ static char	**fill_array_of_paths(char **envp)
 	char	*env_path_str;
 	char	**array_of_paths;
 
-	env_path_str = extract_path(envp);
+	env_path_str = extract_path();
 	if (!env_path_str)
+		return (NULL);
+	if (*env_path_str == '\0')
 		return (NULL);
 	array_of_paths = ft_split(env_path_str, ':');
 	free_strs(env_path_str, NULL);
@@ -106,11 +108,14 @@ char	*get_user_cmd(char *cmd, char **envp, int *errnum)
 		return (ft_strdup(cmd));
 	env_paths = fill_array_of_paths(envp);
 	if (!env_paths)
+	{
+		printf("minishell: %s: No such file or directory\n", cmd);
 		return (NULL);
+	}
 	path_ultime = get_valid_path(cmd, env_paths, errnum);
 	if (!path_ultime)
 	{
-		printf("%s: command not found\n", cmd);
+		printf("minishell: %s: command not found\n", cmd);
 		*errnum = 127;
 	}
 	free_strs(NULL, env_paths);

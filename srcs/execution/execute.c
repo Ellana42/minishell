@@ -18,7 +18,7 @@ int	execution_launch_exec(t_execution *execution)
 	if (!path)
 	{
 		table_free(env);
-		return (errnum);
+		return (0);
 	}
 	if (execve(path, command_get_args_table(command), env) == -1)
 	{
@@ -43,6 +43,9 @@ int	execution_child(t_execution *execution)
 	if (execution_dup_out(fd[1]))
 		return (1);
 	err = execution_launch_exec(execution);
+	parser_destroy(execution->parser);
+	execution_destroy(execution);
+	glob_destroy();
 	close_fd(fd[0]);
 	close_fd(fd[1]);
 	return (err);
