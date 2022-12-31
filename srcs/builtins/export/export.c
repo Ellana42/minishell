@@ -11,6 +11,22 @@
 /* 	return (0); */
 /* } */
 
+void	export_el_print(void *content)
+{
+	t_dict	*dict;
+
+	dict = (t_dict *)content;
+	printf("declare -x ");
+	printf("%s", dict->key);
+	if (dict->value)
+		printf("=\"%s\"\n", dict->value);
+}
+
+void	export_print(void)
+{
+	ft_lstiter(*glob_get_env(), &export_el_print);
+}
+
 int	export_one_var(char *argument)
 {
 	t_export_arg	arg;
@@ -45,6 +61,8 @@ int	builtin_export(char **args_table)
 
 	i = 1;
 	size = table_get_size(args_table);
+	if (size == 0)
+		export_print();
 	while (i < size)
 	{
 		if (export_one_var(args_table[i]))

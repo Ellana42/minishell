@@ -13,13 +13,6 @@ int	env(char **args)
 		printf("minishell: env: too many arguments\n");
 		return (1);
 	}
-	env = glob_get_env();
-	if (!env)
-		return (1);
-	while (env[i])
-	{
-		printf("%s\n", env[i]);
-		i++;
-	}
+	env_print();
 	return (0);
 }

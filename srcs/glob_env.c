@@ -7,8 +7,11 @@ void	env_el_print(void *content)
 	t_dict	*dict;
 
 	dict = (t_dict *)content;
-	printf("%s=", dict->key);
-	printf("%s\n", dict->value);
+	if (dict->value)
+	{
+		printf("%s=", dict->key);
+		printf("%s\n", dict->value);
+	}
 }
 
 void	env_print(void)
