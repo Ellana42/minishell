@@ -29,6 +29,5 @@ int	glob_init(int error, char **envp)
 		return (1);
 	if (!*g_glob->env)
 		return (1);
-	env_print();
 	return (0);
 }
