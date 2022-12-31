@@ -18,7 +18,7 @@ int	execution_wait_processes(t_execution *execution)
 	pid = -1;
 	while (i < execution->executables_size)
 	{
-		pid = execution_get_pid(execution);
+		execution_pop_pid(execution, &pid);
 		if (pid != -1)
 		{
 			waitpid(pid, &exit_status, 0);
