@@ -12,7 +12,7 @@ int	glob_get_exit_status(void)
 	return (g_glob->exit_status);
 }
 
-char	**glob_get_env(void)
+t_list	**glob_get_env(void)
 {
 	return (*(g_glob->env));
 }

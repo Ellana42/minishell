@@ -26,7 +26,6 @@ int	parser_tokenize_string(t_parser *parser)
 		{
 			if (tokenizer_acc_concat(parser->tokenizer, var))
 				return (parser_set_error_return(parser, ParserAllocError));
-			free(var);
 		}
 	}
 	if (!tokenizer_is_empty_acc(parser->tokenizer))

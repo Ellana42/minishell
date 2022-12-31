@@ -17,7 +17,6 @@ int	tokenize_noquotev(t_tokenizer *tokenizer)
 	{
 		if (tokenizer_acc_concat(tokenizer, var))
 			return (1);
-		free(var);
 	}
 	reset_acc_var(tokenizer);
 	return (0);

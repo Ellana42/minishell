@@ -4,25 +4,15 @@ extern t_glob	*g_glob;
 
 char	*glob_getenv_var(char *var)
 {
-	char	**env;
 	int		i;
-	char	**split_var;
-	char	*value;
+	int		env_size;
 
 	i = 0;
-	env = glob_get_env();
-	while (env[i])
+	env_size = ft_lstsize(*glob_get_env());
+	while (i < env_size)
 	{
-		split_var = ft_split(env[i], '=');
-		if (!split_var)
-			return (NULL);
-		if (str_are_equal(split_var[0], var) == 1)
-		{
-			value = ft_strdup(split_var[1]);
-			table_free(split_var);
-			return (value);
-		}
-		table_free(split_var);
+		if (str_are_equal(glob_env_get_key_i(i), var) == 1)
+			return (glob_env_get_val_i(i));
 		i++;
 	}
 	return (NULL);
@@ -55,5 +45,5 @@ void	glob_print(t_bool print_env)
 		int_lstprint(*glob_get_pids());
 	}
 	if (print_env)
-		table_print(*(g_glob->env));
+		env_print();
 }

@@ -4,6 +4,7 @@
 # include "../libft/includes/libft.h"
 # include "execution/int_list/int_list.h"
 # include "parsing/utils/utils.h"
+# include "parsing/lstutils/lstutils.h"
 
 typedef struct s_export_arg{
 	char	*full_arg;
@@ -31,7 +32,6 @@ void		glob_set_pids(t_intlist **pids);
 int			glob_is_running(void);
 int			glob_init(int error, char **envp);
 void		glob_print(t_bool print_env);
-char		**glob_get_env(void);
 void		glob_set_env(char **env);
 int			glob_get_exit_status(void);
 void		glob_set_exit_status(int exit_status);
@@ -41,5 +41,9 @@ char		*glob_getenv_var(char *var);
 void		env_print(void);
 int			realloc_env_vars(char **envp, t_list ***new_env);
 void		env_el_destroy(void *content);
+t_list		**glob_get_env(void);
+char		*glob_env_get_key_i(int i);
+char		*glob_env_get_val_i(int i);
+t_dict		*glob_env_get_dict_i(int i);
 
 #endif

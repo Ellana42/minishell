@@ -43,5 +43,6 @@ int	export_parse_arg(char *arg, t_export_arg *export_arg)
 		i++;
 	if (str_store(&(export_arg->value), arg, i, ft_strlen(arg)))
 		return (2);
+	export_arg_print(*export_arg);
 	return (0);
 }
