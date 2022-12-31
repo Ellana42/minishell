@@ -20,6 +20,8 @@ void	export_el_print(void *content)
 	printf("%s", dict->key);
 	if (dict->value)
 		printf("=\"%s\"\n", dict->value);
+	else
+		printf("\n");
 }
 
 void	export_print(void)
@@ -49,7 +51,10 @@ int	export_one_var(char *argument)
 	else if (err == 1)
 		printf("bash: export: `%s': not a valid identifier\n", argument);
 	else
+	{
+		glob_env_add_line(arg.variable, arg.value);
 		export_arg_print(arg);
+	}
 	export_arg_free(arg);
 	return (0);
 }
@@ -61,7 +66,7 @@ int	builtin_export(char **args_table)
 
 	i = 1;
 	size = table_get_size(args_table);
-	if (size == 0)
+	if (size == 1)
 		export_print();
 	while (i < size)
 	{
