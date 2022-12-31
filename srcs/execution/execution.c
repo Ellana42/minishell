@@ -38,8 +38,11 @@ int	execution_simple(t_execution *execution)
 	i = 0;
 	while (i < execution->executables_size)
 	{
-		if (execution_fork_process(execution))
-			return (execution_finish(execution, 1));
+		if (execution_is_command(execution))
+		{
+			if (execution_fork_process(execution))
+				return (execution_finish(execution, 1));
+		}
 		execution_move(execution);
 		i++;
 	}
@@ -53,6 +56,8 @@ int	execution_is_single_builtin(t_execution *execution)
 	if (execution->executables_size > 1)
 		return (0);
 	if (execution->executables_size == 0)
+		return (0);
+	if (!execution_is_command(execution))
 		return (0);
 	if (execution_is_builtin(execution))
 		return (1);

@@ -70,5 +70,6 @@ int				execution_is_builtin(t_execution *execution);
 int				execution_is_single_builtin(t_execution *execution);
 int				execution(t_parser *parser, char **envp);
 int				execution_init(t_execution *exe, t_parser *parser, char **envp);
+int	execution_is_command(t_execution *execution);
 
 #endif

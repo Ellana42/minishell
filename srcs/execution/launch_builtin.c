@@ -55,9 +55,6 @@ int	execution_launch_builtin(t_execution *execution)
 	command = execution_get_current_command(execution);
 	args_table = command_get_args_table(command);
 	err = call_builtin(args_table, command_number);
-	if (!execution_is_single_builtin(execution))
-		table_free(args_table);
-	else
-		free(args_table);
+	free(args_table);
 	return (err);
 }
