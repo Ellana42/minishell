@@ -2,6 +2,7 @@ NAME  = minishell
 
 SRCS  =  srcs/main.c \
 	srcs/glob.c \
+	srcs/glob_env.c \
 	srcs/builtins/echo/echo.c \
 	srcs/builtins/exit/exit.c \
 	srcs/builtins/pwd/pwd.c \

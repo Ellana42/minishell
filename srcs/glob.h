@@ -5,11 +5,23 @@
 # include "execution/int_list/int_list.h"
 # include "parsing/utils/utils.h"
 
+typedef struct s_export_arg{
+	char	*full_arg;
+	char	*variable;
+	int		operator_;
+	char	*value;
+}	t_export_arg;
+
+typedef struct s_dict {
+	char	*key;
+	char	*value;
+}	t_dict;
+
 typedef struct s_glob {
 	int			activated;
 	t_intlist	***pids;
 	int			exit_status;
-	char		***env;
+	t_list		***env;
 }	t_glob;
 
 int			glob_pop_pid(int *pid);
@@ -25,6 +37,9 @@ int			glob_get_exit_status(void);
 void		glob_set_exit_status(int exit_status);
 int			glob_get_state(void);
 void		glob_set_state(int state);
-char	*glob_getenv_var(char *var);
+char		*glob_getenv_var(char *var);
+void		env_print(void);
+int			realloc_env_vars(char **envp, t_list ***new_env);
+void		env_el_destroy(void *content);
 
 #endif
