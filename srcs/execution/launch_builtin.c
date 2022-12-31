@@ -83,5 +83,7 @@ int	execution_launch_builtin(t_execution *execution)
 		return (1);
 	if (execution_dup_out(dup_std[1]))
 		return (1);
+	close(dup_std[0]);
+	close(dup_std[1]);
 	return (err);
 }
