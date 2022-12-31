@@ -50,5 +50,6 @@ int			glob_env_add_line(char *key, char *value);
 int			glob_env_replace_var(char *var, char *new_value);
 void		glob_set_env(t_list **env);
 int			glob_remove_var(char *var);
+int			glob_env_has_var(char *var);
 
 #endif

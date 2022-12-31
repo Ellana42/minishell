@@ -1,5 +1,21 @@
 #include "glob.h"
 
+int	glob_env_has_var(char *var)
+{
+	int		i;
+	int		env_size;
+
+	i = 0;
+	env_size = ft_lstsize(*glob_get_env());
+	while (i < env_size)
+	{
+		if (str_are_equal(glob_env_get_key_i(i), var) == 1)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 char	*glob_getenv_var(char *var)
 {
 	int		i;
@@ -40,7 +56,10 @@ int	glob_env_replace_var(char *var, char *new_value)
 	index_line_var = glob_getenv_var_index(var);
 	line_env = glob_env_get_dict_i(index_line_var);
 	free(line_env->value);
-	line_env->value = ft_strdup(new_value);
+	if (new_value)
+		line_env->value = ft_strdup(new_value);
+	else
+		line_env->value = NULL;
 	return (0);
 }
 

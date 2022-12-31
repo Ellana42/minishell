@@ -2,8 +2,11 @@
 
 int	export_push_var(char *var, char *val)
 {
-	if (glob_getenv_var(var))
-		glob_env_replace_var(var, val);
+	if (glob_env_has_var(var))
+	{
+		if (val)
+			glob_env_replace_var(var, val);
+	}
 	else
 		glob_env_add_line(var, val);
 	return (0);
@@ -46,10 +49,16 @@ int	export_one_var(char *argument)
 	}
 	else if (err == 1)
 		printf("bash: export: `%s': not a valid identifier\n", argument);
-	else if (arg.operator_ == 0)
-		export_push_var(arg.variable, arg.value);
-	else
+	else if (arg.operator_ == 1)
+	{
 		export_append_var(arg.variable, arg.value);
+		export_arg_print(arg);
+	}
+	else
+	{
+		export_push_var(arg.variable, arg.value);
+		export_arg_print(arg);
+	}
 	export_arg_free(arg);
 	return (0);
 }
