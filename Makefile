@@ -113,7 +113,7 @@ HEADERS	= includes/minishell.h
 
 CC	= clang
 
-CFLAGS	= -g3 -Wall -Wextra -Werror
+CFLAGS	= -g3 #-Wall -Wextra -Werror TODO change before compilation
 
 LIBFT	= -L libft -lft
 
