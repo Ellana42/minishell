@@ -43,3 +43,30 @@ int	glob_env_replace_var(char *var, char *new_value)
 	line_env->value = ft_strdup(new_value);
 	return (0);
 }
+
+int	glob_remove_var(char *var)
+{
+	int		index_line_var;
+	t_list	*line_env;
+	t_list	*previous_line_env;
+	t_list	**current_env;
+
+	index_line_var = glob_getenv_var_index(var);
+	if (index_line_var == -1)
+		return (0);
+	current_env = glob_get_env();
+	line_env = lst_get_i_lst(*current_env, index_line_var);
+	if (index_line_var == 0)
+	{
+		*current_env = line_env->next;
+		glob_set_env(current_env);
+	}
+	else
+	{
+		previous_line_env = lst_get_i_lst(*current_env, index_line_var - 1);
+		previous_line_env->next = line_env->next;
+	}
+	env_el_destroy(line_env->content);
+	free(line_env);
+	return (0);
+}

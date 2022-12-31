@@ -111,7 +111,6 @@ int	unset(char **args)
 
 	exit = EXIT_SUCCESS;
 	i = 1;
-	env = glob_get_env();
 	while (args[i])
 	{
 		if (is_valid_env_var(args[i]) == 0 || ft_strchr(args[i], '=') != NULL)
@@ -122,9 +121,7 @@ int	unset(char **args)
 		}
 		else
 		{
-			index = get_env_var_index(env, args[i]);
-			if (index != -1)
-				remove_env_var(env, index);
+			glob_remove_var(args[i]);
 		}
 		i++;
 	}

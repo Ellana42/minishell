@@ -2,7 +2,7 @@
 
 extern t_glob	*g_glob;
 
-void	glob_set_env(char **env)
+void	glob_set_env(t_list **env)
 {
 	*(g_glob->env) = env;
 }

@@ -32,7 +32,6 @@ void		glob_set_pids(t_intlist **pids);
 int			glob_is_running(void);
 int			glob_init(int error, char **envp);
 void		glob_print(t_bool print_env);
-void		glob_set_env(char **env);
 int			glob_get_exit_status(void);
 void		glob_set_exit_status(int exit_status);
 int			glob_get_state(void);
@@ -47,7 +46,9 @@ char		*glob_env_get_val_i(int i);
 t_dict		*glob_env_get_dict_i(int i);
 char		*glob_getenv_var(char *var);
 char		**glob_env_get_table(void);
-int	glob_env_add_line(char *key, char *value);
-int	glob_env_replace_var(char *var, char *new_value);
+int			glob_env_add_line(char *key, char *value);
+int			glob_env_replace_var(char *var, char *new_value);
+void		glob_set_env(t_list **env);
+int			glob_remove_var(char *var);
 
 #endif
