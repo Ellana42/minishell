@@ -67,5 +67,6 @@ int	str_store(char **dst, char *src, int start, int end)
 		(*dst)[i - start] = src[i];
 		i++;
 	}
+	(*dst)[i - start] = '\0';
 	return (0);
 }
