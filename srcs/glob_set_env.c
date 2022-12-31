@@ -4,9 +4,7 @@ int	glob_env_add_line(char *key, char *value)
 {
 	t_dict			*new_el;
 	t_list			*new_el_lst;
-	int				i;
 
-	i = 0;
 	new_el = (t_dict *)malloc(sizeof(t_dict));
 	if (!new_el)
 		return (1);

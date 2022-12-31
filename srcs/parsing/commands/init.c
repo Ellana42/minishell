@@ -10,6 +10,7 @@ t_commands	*commands_alloc(void)
 
 int	commands_init(t_commands *commands)
 {
+	(void )commands;
 	return (0);
 }
 

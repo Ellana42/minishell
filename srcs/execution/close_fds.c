@@ -3,7 +3,6 @@
 int	execution_close_all_pipes(t_execution *execution)
 {
 	int	i;
-	int	size;
 
 	i = 0;
 	while (i < execution->executables_size - 1)

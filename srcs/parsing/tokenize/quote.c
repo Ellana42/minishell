@@ -3,7 +3,6 @@
 int	tokenize_quote_dollar(t_tokenizer *tokenizer)
 {
 	char	*err_num;
-	char	c;
 
 	err_num = NULL;
 	if (tokenizer_get_next_char(tokenizer, 1) == '?')

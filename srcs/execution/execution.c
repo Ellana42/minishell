@@ -68,12 +68,8 @@ int	execution_is_single_builtin(t_execution *execution)
 int	execution(t_parser *parser, char **envp)
 {
 	t_execution		*execution;
-	t_executable	*executable;
-	int				i;
-	int				pid;
 	int				exit_status;
 
-	i = 0;
 	execution = execution_alloc();
 	if (execution_init(execution, parser, envp))
 		return (execution_finish(execution, 1));

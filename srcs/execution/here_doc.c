@@ -10,6 +10,7 @@ int	get_here_doc(char *delimiter, int fd[2], int len_delimiter)
 	int		end;
 
 	line = readline("> ");
+	end = 0;
 	if (line == NULL)
 		end = 1;
 	else if (!ft_strncmp(line, delimiter, len_delimiter + 1))
@@ -25,7 +26,6 @@ int	get_here_doc(char *delimiter, int fd[2], int len_delimiter)
 
 int	execution_get_heredoc(char *delimiter, int fd[2])
 {
-	char	*line;
 	char	eof;
 	int		len_delimiter;
 	int		end;

@@ -32,8 +32,6 @@ t_parser	*parse_string(char *str, int last_err)
 
 t_parser	*parser_print_error(t_parser *parser)
 {
-	char	error_char;
-
 	if (parser->error.error == 0)
 		return (parser);
 	if (parser->error.error == ParserSyntaxError)

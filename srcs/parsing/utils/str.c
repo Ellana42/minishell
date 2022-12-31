@@ -1,6 +1,6 @@
 #include "utils.h"
 
-void	str_clean(char *str, size_t len)
+void	str_clean(char *str, int len)
 {
 	int	i;
 
@@ -59,7 +59,7 @@ int	str_store(char **dst, char *src, int start, int end)
 	*dst = NULL;
 	if (start > end)
 		return (1);
-	if (end > ft_strlen(src))
+	if (end > (int )ft_strlen(src))
 		return (1);
 	*dst = (char *)malloc(sizeof(char) * (end - start + 1));
 	while (i < end)

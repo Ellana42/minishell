@@ -21,7 +21,7 @@ typedef enum s_state{
 
 typedef struct s_tokenizer{
 	char	*command;
-	size_t	size;
+	int		size;
 	char	*cmd_ptr;
 	int		cmd_i;
 	t_acc	*acc;

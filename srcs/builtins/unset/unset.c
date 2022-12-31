@@ -73,20 +73,17 @@ int	env_var_nbr(char **env)
 bool	remove_env_var(char **env, int index)
 {
 	int	i;
-	int	count;
 
 	if (index > env_var_nbr(env))
 		return (false);
 	free(env[index]);
 	i = index;
-	count = index;
 	while (env[i + 1])
 	{
 		env[i] = ft_strdup(env[i + 1]);
 		if (!env[i])
 			return (1);
 		free(env[i + 1]);
-		count++;
 		i++;
 	}
 	env[i] = NULL;
@@ -105,9 +102,7 @@ bool	remove_env_var(char **env, int index)
 int	unset(char **args)
 {
 	int		i;
-	int		index;
 	int		exit;
-	char	**env;
 
 	exit = EXIT_SUCCESS;
 	i = 1;

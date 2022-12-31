@@ -10,16 +10,12 @@ t_executable	*executable_alloc(void)
 
 int	extecutable_file_init(t_executable *exe, t_command *cmd)
 {
-	int		**in_table;
-	int		*out_table;
 	char	*filename;
 
-	exe->in_files = in_table;
 	if (get_in_table(cmd, &(exe->in_files), &filename, &exe->in_size))
 		return (1);
 	if (!exe->in_files)
 		return (1);
-	exe->out_files = out_table;
 	if (get_out_table(cmd, &(exe->out_files), &exe->out_size))
 		return (1);
 	if (!exe->out_files)

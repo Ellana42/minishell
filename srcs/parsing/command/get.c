@@ -7,7 +7,7 @@ t_list	**command_get_ina(t_command *command)
 
 char	**command_get_args_table(t_command *command)
 {
-	size_t	size_args;
+	int		size_args;
 	char	**table;
 	int		i;
 

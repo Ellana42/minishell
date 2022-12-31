@@ -13,6 +13,8 @@ int	parser_init(t_parser *parser, char *str, int last_err)
 	t_tokenizer		*tokenizer;
 	t_parser_err	err;
 
+	err.error = ParserUninitialized;
+	err.err_token = NULL;
 	parser->error = err;
 	parser_set_error(parser, ParserNotTokenized);
 	tokenizer = tokenizer_alloc();

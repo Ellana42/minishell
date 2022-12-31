@@ -11,7 +11,7 @@ t_executables	*executables_alloc(void)
 int	executables_init(t_executables *executables, t_commands *cmds, int **pipes)
 {
 	int				i;
-	size_t			commands_size;
+	int				commands_size;
 	t_command		*command;
 	t_executable	*new_executable;
 	t_list			*new_executable_list;

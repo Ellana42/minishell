@@ -36,7 +36,7 @@ t_list	*lst_get_i_lst(t_list *lst, int i)
 
 char	*lst_get_last(t_list *lst)
 {
-	size_t	size;
+	int		size;
 	int		j;
 
 	size = ft_lstsize(lst);

@@ -18,7 +18,6 @@ typedef struct s_executable {
 typedef t_executable	t_exe;
 
 int				init_pipes(int ***pipes, int commands_size);
-void			print_pipes(int **pipes, int commands_size);
 int				get_fd_in(int **pipes, int index_cmd);
 int				get_fd_out(int **pipes, int index_cmd, int commands_size);
 int				close_unused_fds(int **pipes, int index_cmd, int commands_size);
@@ -39,7 +38,8 @@ int				executable_close_unused_outfiles(t_executable *executable);
 int				executable_get_fds_close(t_executable *executable, int fd[2]);
 int				close_pipe(int *fd);
 int				close_fd(int fd);
-int				_close_fd_table(int *table, size_t table_size);
-int				_close_in_fd_table(int **table, size_t table_size);
+int				_close_in_fd_table(int **table, int table_size);
+int				_close_fd_table(int *table, int table_size);
+void			print_pipes(int **pipes);
 
 #endif

@@ -35,7 +35,7 @@ static char	**make_executable_paths(char **array_of_paths)
 // via make_executable_paths()
 // Retourne ce tableau de paths
 
-static char	**fill_array_of_paths(char **envp)
+static char	**fill_array_of_paths(void)
 {
 	char	*env_path_str;
 	char	**array_of_paths;
@@ -93,7 +93,7 @@ static char	*get_valid_path(char *cmd, char **array_of_paths, int *errnum)
 // variables d'environnement
 // Retourne le path de la commande ou NULL si aucun path n'a été trouvé
 
-char	*get_user_cmd(char *cmd, char **envp, int *errnum)
+char	*get_user_cmd(char *cmd, int *errnum)
 {
 	char	**env_paths;
 	char	*path_ultime;
@@ -106,7 +106,7 @@ char	*get_user_cmd(char *cmd, char **envp, int *errnum)
 	}
 	if (access(cmd, F_OK | X_OK) == 0)
 		return (ft_strdup(cmd));
-	env_paths = fill_array_of_paths(envp);
+	env_paths = fill_array_of_paths();
 	if (!env_paths)
 	{
 		printf("minishell: %s: No such file or directory\n", cmd);

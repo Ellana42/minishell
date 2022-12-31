@@ -38,7 +38,7 @@ void	free_pipes(int **pipes, int commands_size)
 	free(pipes);
 }
 
-void	print_pipes(int **pipes, int commands_size)
+void	print_pipes(int **pipes)
 {
 	int	i;
 
@@ -61,7 +61,6 @@ int	close_unused_fds(int **pipes, int index_cmd, int commands_size)
 	int	fd_in;
 	int	fd_out;
 	int	i;
-	int	err;
 
 	i = 0;
 	fd_in = get_fd_in(pipes, index_cmd);

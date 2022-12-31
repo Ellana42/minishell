@@ -39,12 +39,10 @@ void	print_files(t_executable *executable)
 
 void	executable_print(void *executable_ptr)
 {
-	int				i;
 	t_executable	*executable;
 
 	printf("-----------------\n");
 	executable = (t_executable *)executable_ptr;
-	i = 0;
 	command_print(executable->command);
 	printf("In pipe : ");
 	print_pipe(executable->in_pipe);

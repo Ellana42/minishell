@@ -18,8 +18,6 @@ int	token_init_str(t_token *token, char *str, int index, char c)
 
 int	token_init_eol(t_token *token, int index, char c)
 {
-	char	*dst;
-
 	token->type = Eol;
 	token->str = NULL;
 	token->current_index = index;
@@ -29,8 +27,6 @@ int	token_init_eol(t_token *token, int index, char c)
 
 int	token_init_pipe(t_token *token, int index, char c)
 {
-	char	*dst;
-
 	token->type = Pipe;
 	token->str = NULL;
 	token->current_index = index;
@@ -40,8 +36,6 @@ int	token_init_pipe(t_token *token, int index, char c)
 
 int	token_init_out(t_token *token, int index, char c)
 {
-	char	*dst;
-
 	token->type = Out;
 	token->str = NULL;
 	token->current_index = index;
@@ -51,8 +45,6 @@ int	token_init_out(t_token *token, int index, char c)
 
 int	token_init_outa(t_token *token, int index, char c)
 {
-	char	*dst;
-
 	token->type = Outa;
 	token->str = NULL;
 	token->current_index = index;

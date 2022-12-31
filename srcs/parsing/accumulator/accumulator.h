@@ -8,7 +8,7 @@ typedef struct s_acc {
 	char	*acc;
 	char	*ptr;
 	int		i;
-	size_t	size;
+	int		size;
 	t_bool	is_empty;
 }	t_acc;
 

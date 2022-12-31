@@ -15,10 +15,8 @@ t_executable	*execution_get_current(t_execution *execution)
 
 t_command	*execution_get_current_command(t_execution *execution)
 {
-	int				index;
 	t_executable	*executable;
 
-	index = execution->executable_index;
 	executable = execution_get_current(execution);
 	return (executable->command);
 }

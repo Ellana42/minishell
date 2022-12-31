@@ -32,7 +32,6 @@ typedef struct s_str_table {
 }	t_str_table;
 
 int				init_pipes(int ***pipes, int commands_size);
-void			print_pipes(int **pipes, int commands_size);
 int				get_fd_in(int **pipes, int index_cmd);
 int				get_fd_out(int **pipes, int index_cmd, int commands_size);
 int				close_unused_fds(int **pipes, int index_cmd, int commands_size);
@@ -53,7 +52,6 @@ int				close_pipe(int *fd);
 void			error(int error_status);
 int				msg(char *str1, char *str2, char *str3, int erno);
 void			free_strs(char *str, char **array_of_strs);
-char			*get_user_cmd(char *cmd, char **envp, int *errnum);
 t_command		*execution_get_current_command(t_execution *execution);
 char			**execution_get_env(t_execution *execution);
 int				execution_launch_exec(t_execution *execution);
@@ -70,6 +68,8 @@ int				execution_is_builtin(t_execution *execution);
 int				execution_is_single_builtin(t_execution *execution);
 int				execution(t_parser *parser, char **envp);
 int				execution_init(t_execution *exe, t_parser *parser, char **envp);
-int	execution_is_command(t_execution *execution);
+int				execution_is_command(t_execution *execution);
+void			print_pipes(int **pipes);
+char			*get_user_cmd(char *cmd, int *errnum);
 
 #endif

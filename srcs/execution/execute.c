@@ -14,7 +14,7 @@ int	execution_launch_exec(t_execution *execution)
 	env = glob_env_get_table();
 	if (!env)
 		return (1);
-	path = get_user_cmd(command_get_name(command), env, &errnum);
+	path = get_user_cmd(command_get_name(command), &errnum);
 	if (!path)
 	{
 		table_free(env);
@@ -54,7 +54,6 @@ int	execution_child(t_execution *execution)
 int	execution_fork_process(t_execution *execution)
 {
 	int	pid;
-	int	err;
 
 	pid = fork();
 	if (pid == -1)

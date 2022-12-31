@@ -20,13 +20,11 @@ t_execution	*execution_alloc(void)
 int	execution_init(t_execution *execution, t_parser *parser, char **envp)
 {
 	size_t			commands_size;
-	int				i;
 	t_executable	*executable;
 	t_commands		*cmds;
 
 	if (!execution)
 		return (1);
-	i = 0;
 	commands_size = commands_get_size(parser->commands);
 	execution->executables_size = commands_size;
 	execution->executable_index = 0;
@@ -36,7 +34,7 @@ int	execution_init(t_execution *execution, t_parser *parser, char **envp)
 	if (init_pipes(&execution->pipes, commands_size))
 		return (1);
 	execution->executables = executables_alloc();
-	if (executables_init(execution->executables, parser->commands, execution->pipes))
+	if (executables_init(execution->executables, cmds, execution->pipes))
 		return (1);
 	executable = executables_get_i(execution->executables, 0);
 	execution->current_executable = executable;

@@ -1,6 +1,6 @@
 #include "utils.h"
 
-void	mem_clean(char *ptr, size_t mem_size)
+void	mem_clean(char *ptr, int mem_size)
 {
 	int	i;
 

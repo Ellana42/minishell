@@ -31,13 +31,11 @@ char	*glob_get_env_line_i(int i)
 	char	*value;
 	char	*start_line;
 	char	*full_line;
-	int		len_line;
 
 	key = glob_env_get_key_i(i);
 	value = glob_env_get_val_i(i);
 	if (!value)
 		return (NULL);
-	len_line = ft_strlen(key) + ft_strlen(value) + 1;
 	start_line = ft_strjoin(key, "=");
 	if (!start_line)
 		return (NULL);

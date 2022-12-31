@@ -1,6 +1,6 @@
 #include "executable.h"
 
-int	_close_fd_table(int *table, size_t table_size)
+int	_close_fd_table(int *table, int table_size)
 {
 	int	i;
 
@@ -14,7 +14,7 @@ int	_close_fd_table(int *table, size_t table_size)
 	return (0);
 }
 
-int	_close_in_fd_table(int **table, size_t table_size)
+int	_close_in_fd_table(int **table, int table_size)
 {
 	int	i;
 
@@ -30,8 +30,6 @@ int	_close_in_fd_table(int **table, size_t table_size)
 
 int	executable_close_infiles(t_executable *executable)
 {
-	printf("Here\n");
-	executable_print(executable);
 	return (_close_in_fd_table(executable->in_files, executable->in_size));
 }
 

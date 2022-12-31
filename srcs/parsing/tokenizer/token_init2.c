@@ -2,8 +2,6 @@
 
 int	token_init_in(t_token *token, int index, char c)
 {
-	char	*dst;
-
 	token->type = In;
 	token->str = NULL;
 	token->current_index = index;
@@ -13,8 +11,6 @@ int	token_init_in(t_token *token, int index, char c)
 
 int	token_init_ina(t_token *token, int index, char c)
 {
-	char	*dst;
-
 	token->type = Ina;
 	token->str = NULL;
 	token->current_index = index;
