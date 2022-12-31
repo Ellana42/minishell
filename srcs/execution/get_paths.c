@@ -5,22 +5,7 @@
 
 static char	*extract_path(char **envp)
 {
-	char	*path;
-	int		i;
-
-	i = 0;
-	path = NULL;
-	while (envp[i] != NULL && envp[i][0] != '\0')
-	{
-		path = ft_strnstr(envp[i], "PATH=", 5);
-		if (path)
-		{
-			path = ft_substr(path, 5, ft_strlen(path));
-			break ;
-		}
-		i++;
-	}
-	return (path);
+	return (glob_getenv_var("PATH"));
 }
 
 // Ajoute un "/" à la fin de chaque paths pour les rendres parcourables 

@@ -11,12 +11,20 @@ int	execution_launch_exec(t_execution *execution)
 	command = execution_get_current_command(execution);
 	if (execution_is_builtin(execution))
 		return (execution_launch_builtin(execution));
-	env = glob_get_env();
+	env = glob_env_get_table();
+	if (!env)
+		return (1);
 	path = get_user_cmd(command_get_name(command), env, &errnum);
 	if (!path)
+	{
+		table_free(env);
 		return (errnum);
+	}
 	if (execve(path, command_get_args_table(command), env) == -1)
+	{
+		table_free(env);
 		return (1);
+	}
 	return (0);
 }
 

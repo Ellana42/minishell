@@ -45,5 +45,7 @@ t_list		**glob_get_env(void);
 char		*glob_env_get_key_i(int i);
 char		*glob_env_get_val_i(int i);
 t_dict		*glob_env_get_dict_i(int i);
+char		*glob_getenv_var(char *var);
+char		**glob_env_get_table(void);
 
 #endif
