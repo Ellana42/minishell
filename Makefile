@@ -13,6 +13,7 @@ SRCS  =  srcs/main.c \
 	srcs/builtins/cd/cd.c \
 	srcs/builtins/export/export.c \
 	srcs/builtins/export/export_arg.c \
+	srcs/builtins/export/export_print.c \
 	srcs/builtins/exit/atoi.c \
 	srcs/builtins/unset/unset.c \
 	srcs/execution/executable/destroy.c \

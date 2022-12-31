@@ -1,26 +1,7 @@
 #include "export.h"
 
-void	export_el_print(void *content)
-{
-	t_dict	*dict;
-
-	dict = (t_dict *)content;
-	printf("declare -x ");
-	printf("%s", dict->key);
-	if (dict->value)
-		printf("=\"%s\"\n", dict->value);
-	else
-		printf("\n");
-}
-
-void	export_print(void)
-{
-	ft_lstiter(*glob_get_env(), &export_el_print);
-}
-
 int	export_push_var(char *var, char *val)
 {
-	printf("Push var\n");
 	if (glob_getenv_var(var))
 		glob_env_replace_var(var, val);
 	else
@@ -32,7 +13,6 @@ int	export_append_var(char *var, char *val)
 {
 	char	*new_value;
 
-	printf("Append var\n");
 	if (glob_getenv_var(var))
 	{
 		new_value = ft_strjoin(glob_getenv_var(var), val);

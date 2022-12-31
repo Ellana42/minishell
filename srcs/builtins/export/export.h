@@ -9,5 +9,6 @@ int		builtin_export(char **args_table);
 void	export_arg_free(t_export_arg export_arg);
 void	export_arg_print(t_export_arg export_arg);
 int		export_parse_arg(char *arg, t_export_arg *export_arg);
+void	export_print(void);
 
 #endif

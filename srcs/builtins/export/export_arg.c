@@ -24,6 +24,8 @@ int	export_parse_arg(char *arg, t_export_arg *export_arg)
 	int		i;
 
 	i = 0;
+	if (ft_isdigit(arg[i]))
+		return (1);
 	while (ft_isalnum(arg[i]) || arg[i] == '_')
 		i++;
 	if (str_store(&(export_arg->variable), arg, 0, i))
