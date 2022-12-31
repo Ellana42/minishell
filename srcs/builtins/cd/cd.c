@@ -1,13 +1,5 @@
 #include "cd.h"
-
-int	path_is_dir(char *path)
-{
-	struct stat	statbuf;
-
-	if (stat(path, &statbuf) != 0)
-		return (0);
-	return (S_ISDIR(statbuf.st_mode));
-}
+#include <errno.h>
 
 int	path_exists(char *path)
 {
@@ -32,12 +24,11 @@ int	cd_check_args(char **args_table)
 		printf("minishell: cd: %s: No such file or directory\n", args_table[1]);
 		return (1);
 	}
-	if (!path_is_dir(args_table[1]))
+	if (chdir(args_table[1]) != 0)
 	{
-		printf("minishell: cd: %s: Not a directory\n", args_table[1]);
-		return (1);
+		printf("minishell: cd: %s: %s\n", args_table[1], strerror(errno));
+		return (errno);
 	}
-	chdir(args_table[1]);
 	return (0);
 }
 
