@@ -50,15 +50,9 @@ int	export_one_var(char *argument)
 	else if (err == 1)
 		printf("bash: export: `%s': not a valid identifier\n", argument);
 	else if (arg.operator_ == 1)
-	{
 		export_append_var(arg.variable, arg.value);
-		export_arg_print(arg);
-	}
 	else
-	{
 		export_push_var(arg.variable, arg.value);
-		export_arg_print(arg);
-	}
 	export_arg_free(arg);
 	return (0);
 }
