@@ -54,7 +54,6 @@ int				msg(char *str1, char *str2, char *str3, int erno);
 void			free_strs(char *str, char **array_of_strs);
 t_command		*execution_get_current_command(t_execution *execution);
 char			**execution_get_env(t_execution *execution);
-int				execution_launch_exec(t_execution *execution);
 int				execution_fork_process(t_execution *execution);
 int				execution_dup_out(int fd_out);
 int				execution_dup_in(int fd_in);
@@ -72,5 +71,6 @@ int				execution_is_command(t_execution *execution);
 void			print_pipes(int **pipes);
 char			*get_user_cmd(char *cmd, int *errnum);
 int				execution_launch_builtin_single(t_execution *execution);
+int				execution_launch_exec(t_execution *execution, char *path);
 
 #endif
