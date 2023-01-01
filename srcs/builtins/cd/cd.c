@@ -3,11 +3,17 @@
 
 static void	update_wd(char *cwd)
 {
+	printf("Updating WDs!\n");
 	if (glob_env_has_var("OLDPWD"))
-		glob_env_replace_var("OLDPWD", glob_getenv_var("PWD"));
+	{
+		if (glob_env_has_var("PWD"))
+			glob_env_replace_var("OLDPWD", glob_getenv_var("PWD"));
+		else
+			glob_env_replace_var("OLDPWD", cwd);
+	}
 	else
 		glob_env_add_line("OLDPWD", cwd);
-	if (glob_env_has_var("OLDPWD"))
+	if (glob_env_has_var("PWD"))
 		glob_env_replace_var("PWD", cwd);
 	else
 		glob_env_add_line("PWD", cwd);
