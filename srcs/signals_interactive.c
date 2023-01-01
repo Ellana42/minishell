@@ -37,6 +37,7 @@ void	set_signals_interactive(void)
 void	signal_print_newline(int signal)
 {
 	(void)signal;
+	glob_set_exit_status(-5);
 	rl_on_new_line();
 }
 

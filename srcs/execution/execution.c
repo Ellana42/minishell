@@ -18,10 +18,11 @@ int	execution_wait_processes(t_execution *execution)
 	pid = -1;
 	while (i < execution->executables_size)
 	{
-		execution_pop_pid(execution, &pid);
+		pid = execution_get_pid(execution);
 		if (pid != -1)
 		{
 			waitpid(pid, &exit_status, 0);
+			execution_pop_pid(execution, &pid);
 			if (WIFEXITED(exit_status))
 				exit_status = WEXITSTATUS(exit_status);
 		}

@@ -8,9 +8,9 @@ int	run_shell(char **envp, int *last_err)
 	char		*expanded_command;
 	t_parser	*parser;
 
-	set_signals_interactive();
+	/* set_signals_interactive(); */
 	command = readline("$> ");
-	set_signals_noninteractive();
+	/* set_signals_noninteractive(); */
 	if (!command)
 		return (1);
 	add_history(command);
