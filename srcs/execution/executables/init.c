@@ -24,7 +24,7 @@ int	executables_init(t_executables *executables, t_commands *cmds, int **pipes)
 	{
 		command = commands_get_i(cmds, i);
 		new_executable = executable_alloc();
-		if (executable_init(new_executable, command, pipes, i))
+		if (executable_init(new_executable, command, pipes, i)) // TODO accept error
 			return (1);
 		new_executable_list = ft_lstnew((void *)new_executable);
 		ft_lstadd_back(executables, new_executable_list);

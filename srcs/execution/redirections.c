@@ -35,9 +35,6 @@ int	init_in_table(int ***table, int size)
 	return (0);
 }
 
-// TODO probably change return values
-// TODO check si bonnes permissions
-// TODO check for return values
 int	get_in_table(t_command *cmd, int ***in_table, char **name, int *in_size)
 {
 	t_funnel		*funnel;
@@ -61,10 +58,7 @@ int	get_in_table(t_command *cmd, int ***in_table, char **name, int *in_size)
 		if (type == Ina)
 			execution_get_heredoc(*name, (*in_table)[i]);
 		if ((*in_table)[i][0] == -1)
-		{
-			printf("minishell: %s: %s\n", *name, strerror(errno));
-			return (1);
-		}
+			return (0 * printf("minishell: %s: %s\n", *name, strerror(errno)));
 		i++;
 	}
 	return (0);
