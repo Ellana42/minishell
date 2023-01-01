@@ -25,6 +25,7 @@ int	execution_wait_processes(t_execution *execution)
 			exit_status = status;
 		continue ;
 	}
+	glob_set_pids(NULL);
 	return (exit_status);
 }
 

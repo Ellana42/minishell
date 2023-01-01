@@ -2,16 +2,6 @@
 
 extern t_glob	*g_glob;
 
-void	interrupt_execution(int pid)
-{
-	kill(pid, SIGINT);
-}
-
-void	interrupt_all(void)
-{
-	int_lstiter(*glob_get_pids(), &interrupt_execution);
-}
-
 // TODO check error
 static void	handler(int sig, siginfo_t *si, void *ucontext)
 {
@@ -21,8 +11,8 @@ static void	handler(int sig, siginfo_t *si, void *ucontext)
 	if (glob_is_running())
 	{
 		/* interrupt_all(); */
-		/* rl_on_new_line(); */
-		/* glob_set_exit_status(-5); */
+		rl_on_new_line();
+		glob_set_exit_status(-5);
 	}
 	else
 	{
@@ -32,7 +22,7 @@ static void	handler(int sig, siginfo_t *si, void *ucontext)
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			rl_redisplay();
-			/* glob_set_exit_status(130); */
+			glob_set_exit_status(130);
 		}
 		if (sig == SIGQUIT)
 		{

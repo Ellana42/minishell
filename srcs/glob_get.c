@@ -6,6 +6,10 @@ int	glob_get_last_pid(void)
 {
 	t_intlist	*lst;
 
+	if (!glob_get_pids())
+		return (-1);
+	if (!*glob_get_pids())
+		return (-1);
 	lst = intlstlast(*glob_get_pids());
 	if (!lst)
 		return (-1);
