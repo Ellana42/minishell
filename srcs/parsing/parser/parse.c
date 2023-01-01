@@ -26,7 +26,7 @@ int	parse_no_command(t_parser *parser)
 		return (parse_params_funnel(parser, pInNoCmd));
 	if (token->type == Ina)
 		return (parse_params_funnel(parser, pInaNoCmd));
-	parser->command->command = token->str;
+	parser->command->command = ft_strdup(token->str);
 	parser_move_cursor(parser);
 	parser->state = pParams;
 	return (0);
