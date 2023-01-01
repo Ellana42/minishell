@@ -5,7 +5,13 @@
 
 static char	*extract_path(void)
 {
-	return (glob_getenv_var("PATH"));
+	char	*path;
+
+	path = glob_getenv_var("PATH");
+	if (!path)
+		return (NULL);
+	path = ft_strdup(path);
+	return (path);
 }
 
 // Ajoute un "/" à la fin de chaque paths pour les rendres parcourables 
