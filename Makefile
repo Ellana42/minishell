@@ -2,6 +2,13 @@ NAME  = minishell
 
 SRCS  =  srcs/main.c \
 	srcs/glob.c \
+	srcs/parsing/expander/acc_var.c \
+	srcs/parsing/expander/accumulator.c \
+	srcs/parsing/expander/check.c \
+	srcs/parsing/expander/expander.c \
+	srcs/parsing/expander/get.c \
+	srcs/parsing/expander/init.c \
+	srcs/parsing/expander/move.c \
 	srcs/glob_env.c \
 	srcs/glob_env_get.c \
 	srcs/glob_set_env.c \

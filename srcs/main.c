@@ -5,6 +5,7 @@ t_glob	*g_glob;
 int	run_shell(char **envp, int *last_err)
 {
 	char		*command;
+	char		*expanded_command;
 	t_parser	*parser;
 
 	command = readline("$> ");
@@ -13,7 +14,14 @@ int	run_shell(char **envp, int *last_err)
 	add_history(command);
 	if (!command)
 		return (1);
-	parser = parse(command, glob_get_exit_status());
+	expanded_command = expand(command, glob_get_exit_status());
+	printf("Expanded command :%s:\n", expanded_command);
+	if (!expanded_command)
+	{
+		printf("minishell: error during variable expansion\n");
+		return (1);
+	}
+	parser = parse(expanded_command, glob_get_exit_status());
 	*last_err = parser_get_error(parser);
 	if (*last_err == 0)
 		*last_err = execution(parser, envp);

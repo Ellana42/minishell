@@ -2,6 +2,7 @@
 # define PARSING_H
 
 # include "parser/parser.h"
+# include "expander/expander.h"
 # include "lstutils/lstutils.h"
 
 t_parser	*parse_string(char *str, int last_err);
