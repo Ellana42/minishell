@@ -80,6 +80,8 @@ char	*expand(char *cmd, int last_err)
 {
 	t_expander	*expander;
 
+	if (!cmd)
+		return (NULL);
 	expander = expander_alloc();
 	if (!expander)
 		return (NULL);

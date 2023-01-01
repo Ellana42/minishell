@@ -1,26 +1,25 @@
 #include "execution.h"
 
-// TODO check for security
-// TODO deal with leaks (rl_clear_history)
-// TODO check heredocs closed properly
-
 int	get_here_doc(char *delimiter, int fd[2], int len_delimiter)
 {
 	char	*line;
+	char	*expanded_line;
 	int		end;
 
 	line = readline("> ");
+	expanded_line = expand(line, glob_get_exit_status());
+	free(line);
 	end = 0;
-	if (line == NULL)
+	if (!expanded_line)
 		end = 1;
-	else if (!ft_strncmp(line, delimiter, len_delimiter + 1))
+	else if (!ft_strncmp(expanded_line, delimiter, len_delimiter + 1))
 		end = 1;
 	else
 	{
-		ft_putstr_fd(line, fd[1]);
+		ft_putstr_fd(expanded_line, fd[1]);
 		ft_putstr_fd("\n", fd[1]);
 	}
-	free(line);
+	free(expanded_line);
 	return (end);
 }
 

@@ -64,7 +64,6 @@ int	execution_is_single_builtin(t_execution *execution)
 	return (0);
 }
 
-// TODO deal with close error ?
 int	execution(t_parser *parser, char **envp)
 {
 	t_execution		*execution;
