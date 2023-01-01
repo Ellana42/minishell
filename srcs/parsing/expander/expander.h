@@ -44,5 +44,9 @@ void		expander_destroy(t_expander *expander);
 int			expander_move_cursor_two(t_expander *expander);
 int			expander_set_not_empty_acc(t_expander *expander);
 char		*expand(char *cmd, int last_err);
+int			expand_errnum(t_expander *expander);
+int			expand_single_dollar(t_expander *expander);
+int			expand_normal(t_expander *expander);
+int			expand_squote(t_expander *expander);
 
 #endif
