@@ -71,6 +71,6 @@ int				execution_init(t_execution *exe, t_parser *parser, char **envp);
 int				execution_is_command(t_execution *execution);
 void			print_pipes(int **pipes);
 char			*get_user_cmd(char *cmd, int *errnum);
-int	execution_launch_builtin_single(t_execution *execution);
+int				execution_launch_builtin_single(t_execution *execution);
 
 #endif

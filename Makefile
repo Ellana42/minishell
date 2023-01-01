@@ -53,6 +53,7 @@ SRCS  =  srcs/main.c \
 	srcs/glob_init.c \
 	srcs/glob_get.c \
 	srcs/parsing/parsing.c \
+	srcs/parsing/parser/parse_funnels_no_cmd.c \
 	srcs/parsing/tokenizer/acc_var.c \
 	srcs/parsing/tokenizer/accumulator.c \
 	srcs/parsing/tokenizer/display.c \

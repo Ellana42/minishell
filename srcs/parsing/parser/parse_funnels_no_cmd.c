@@ -1,6 +1,6 @@
 #include "parser.h"
 
-int	parse_out(t_parser *parser)
+int	parse_out_no_cmd(t_parser *parser)
 {
 	t_token		*token;
 
@@ -11,13 +11,13 @@ int	parse_out(t_parser *parser)
 	{
 		command_add_out(parser->command, token->str);
 		parser_move_cursor(parser);
-		parser->state = pParams;
+		parser->state = pNoCommand;
 		return (0);
 	}
 	return (parser_set_error_return(parser, ParserSyntaxError));
 }
 
-int	parse_outa(t_parser *parser)
+int	parse_outa_no_cmd(t_parser *parser)
 {
 	t_token		*token;
 
@@ -28,13 +28,13 @@ int	parse_outa(t_parser *parser)
 	{
 		command_add_out_a(parser->command, token->str);
 		parser_move_cursor(parser);
-		parser->state = pParams;
+		parser->state = pNoCommand;
 		return (0);
 	}
 	return (parser_set_error_return(parser, ParserSyntaxError));
 }
 
-int	parse_in(t_parser *parser)
+int	parse_in_no_cmd(t_parser *parser)
 {
 	t_token		*token;
 
@@ -45,13 +45,13 @@ int	parse_in(t_parser *parser)
 	{
 		command_add_in(parser->command, token->str);
 		parser_move_cursor(parser);
-		parser->state = pParams;
+		parser->state = pNoCommand;
 		return (0);
 	}
 	return (parser_set_error_return(parser, ParserSyntaxError));
 }
 
-int	parse_ina(t_parser *parser)
+int	parse_ina_no_cmd(t_parser *parser)
 {
 	t_token		*token;
 
@@ -62,15 +62,8 @@ int	parse_ina(t_parser *parser)
 	{
 		command_add_in_a(parser->command, token->str);
 		parser_move_cursor(parser);
-		parser->state = pParams;
+		parser->state = pNoCommand;
 		return (0);
 	}
 	return (parser_set_error_return(parser, ParserSyntaxError));
-}
-
-int	parse_params_funnel(t_parser *parser, t_parser_state funnel_state)
-{
-	parser->state = funnel_state;
-	parser_move_cursor(parser);
-	return (0);
 }

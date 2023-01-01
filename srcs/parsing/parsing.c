@@ -1,9 +1,8 @@
 #include "parsing.h"
 #include "parser/parser.h"
 
-t_parser	*parse_string(char *str, int last_err)
+t_parser	*parser_initialization(char *str, int last_err)
 {
-	int			error;
 	t_parser	*parser;
 
 	parser = parser_alloc();
@@ -14,13 +13,24 @@ t_parser	*parse_string(char *str, int last_err)
 	if (parser_tokenize_string(parser))
 		return (parser);
 	parser_set_error(parser, ParserNoError);
+	return (parser);
+}
+
+t_parser	*parse_string(char *str, int last_err)
+{
+	int			error;
+	t_parser	*parser;
+
 	error = 0;
+	parser = parser_initialization(str, last_err);
 	if (parser_is_eol(parser))
 		return (parser);
 	while ((!parser_is_eol(parser)) && (!error))
 		error = parse_tokens(parser);
-	if (parser_set_error(parser, ParserNoError) && parser->state != pParams)
+	if (parser->state != pNoCommand && parser->state != pParams)
 		parser_set_error(parser, ParserSyntaxError);
+	else
+		parser_set_error(parser, ParserNoError);
 	if (parser->command)
 	{
 		if (commands_push(parser->commands, parser->command))
