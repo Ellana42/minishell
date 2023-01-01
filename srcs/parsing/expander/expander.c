@@ -63,12 +63,6 @@ char	*finish_expansion(t_expander *expander, int err)
 		expander_destroy(expander);
 		return (NULL);
 	}
-	if (expander->state == SQuote)
-	{
-		expander_destroy(expander);
-		printf("minishell: unexpected EOF while looking for matching `\'\'\n");
-		return (NULL);
-	}
 	if (!expander_is_empty_acc_var(expander))
 		acc_expanded_var(expander);
 	expanded_command = ft_strdup(expander->acc->acc);
