@@ -20,14 +20,15 @@ static void	handler(int sig, siginfo_t *si, void *ucontext)
 	(void) si;
 	(void) ucontext;
 	(void) sig;
-	if (sig == SIGINT)
+	if (glob_is_running())
 	{
-		if (glob_is_running())
-		{
-			interrupt_execution();
-			glob_set_exit_status(-5);
-		}
-		else
+		interrupt_execution();
+		printf("\n");
+		glob_set_exit_status(-5);
+	}
+	else
+	{
+		if (sig == SIGINT)
 		{
 			printf("\n");
 			rl_on_new_line();
@@ -35,11 +36,11 @@ static void	handler(int sig, siginfo_t *si, void *ucontext)
 			rl_redisplay();
 			glob_set_exit_status(130);
 		}
-	}
-	if (sig == SIGQUIT)
-	{
-		rl_on_new_line();
-		rl_redisplay();
+		if (sig == SIGQUIT)
+		{
+			rl_on_new_line();
+			rl_redisplay();
+		}
 	}
 }
 

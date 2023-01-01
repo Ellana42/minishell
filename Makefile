@@ -114,8 +114,7 @@ SRCS  =  srcs/main.c \
 	srcs/parsing/tokenize/tokenize.c \
 	srcs/parsing/tokenize/noquote_funnels.c \
 	srcs/glob_set.c \
-	srcs/signals.c \
-	srcs/signals_interactive.c 
+	srcs/signals.c 
 
 OBJS  = ${SRCS:.c=.o}
 
