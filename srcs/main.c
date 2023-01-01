@@ -22,11 +22,11 @@ int	run_shell(char **envp, int *last_err)
 	}
 	free(command);
 	parser = parse(expanded_command, glob_get_exit_status());
+	free(expanded_command);
 	*last_err = parser_get_error(parser);
 	if (*last_err == 0)
 		*last_err = execution(parser, envp);
 	parser_destroy(parser);
-	free(expanded_command);
 	return (0);
 }
 

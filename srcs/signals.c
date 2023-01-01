@@ -10,7 +10,6 @@ static void	handler(int sig, siginfo_t *si, void *ucontext)
 	(void) sig;
 	if (glob_is_running())
 	{
-		/* interrupt_all(); */
 		rl_on_new_line();
 		glob_set_exit_status(-5);
 	}
