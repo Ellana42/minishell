@@ -1,4 +1,5 @@
 #include "execution.h"
+#include <errno.h>
 
 int	init_table(int **table, int size)
 {
@@ -60,7 +61,10 @@ int	get_in_table(t_command *cmd, int ***in_table, char **name, int *in_size)
 		if (type == Ina)
 			execution_get_heredoc(*name, (*in_table)[i]);
 		if ((*in_table)[i][0] == -1)
+		{
+			printf("minishell: %s: %s\n", *name, strerror(errno));
 			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -91,7 +95,10 @@ int	get_out_table(t_command *cmd, int **out_table, int *out_size)
 		if (type == Outa)
 			(*out_table)[i] = open(name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if ((*out_table)[i] == -1)
+		{
+			printf("minishell: %s: %s\n", name, strerror(errno));
 			return (1);
+		}
 		i++;
 	}
 	return (0);
