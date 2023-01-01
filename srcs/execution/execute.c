@@ -38,16 +38,21 @@ int	execution_child(t_execution *execution)
 	executable = execution_get_current(execution);
 	executable_get_fds_close(executable, fd);
 	execution_close_unused(execution, execution->executable_index);
-	if (execution_dup_in(fd[0]))
-		return (1);
-	if (execution_dup_out(fd[1]))
-		return (1);
-	err = execution_launch_exec(execution);
+	if (fd[0] == -1 || fd[0] == -1)
+		err = 1;
+	if (!err)
+	{
+		if (execution_dup_in(fd[0]))
+			return (1);
+		if (execution_dup_out(fd[1]))
+			return (1);
+		err = execution_launch_exec(execution);
+		close_fd(fd[0]);
+		close_fd(fd[1]);
+	}
 	parser_destroy(execution->parser);
 	execution_destroy(execution);
 	glob_destroy();
-	close_fd(fd[0]);
-	close_fd(fd[1]);
 	return (err);
 }
 
