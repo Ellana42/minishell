@@ -70,11 +70,11 @@ int	execution_launch_builtin_single(t_execution *execution)
 	executable = execution_get_current(execution);
 	executable_get_fds_close(executable, fd);
 	execution_close_unused(execution, execution->executable_index);
+	if (fd[0] == -1 || fd[1] == -1)
+		return (1);
 	dup_std[0] = dup(STDIN_FILENO);
 	dup_std[1] = dup(STDOUT_FILENO);
-	if (execution_dup_in(fd[0]))
-		return (1);
-	if (execution_dup_out(fd[1]))
+	if (execution_dup_in(fd[0]) || execution_dup_out(fd[1]))
 		return (1);
 	err = execution_launch_builtin(execution);
 	close(fd[0]);
