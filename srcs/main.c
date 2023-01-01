@@ -20,12 +20,13 @@ int	run_shell(char **envp, int *last_err)
 		printf("minishell: error during variable expansion\n");
 		return (1);
 	}
+	free(command);
 	parser = parse(expanded_command, glob_get_exit_status());
 	*last_err = parser_get_error(parser);
 	if (*last_err == 0)
 		*last_err = execution(parser, envp);
 	parser_destroy(parser);
-	free(command);
+	free(expanded_command);
 	return (0);
 }
 

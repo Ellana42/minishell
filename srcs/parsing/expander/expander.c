@@ -132,11 +132,7 @@ char	*finish_expansion(t_expander *expander, int err)
 	if (!expander_is_empty_acc_var(expander))
 		acc_expanded_var(expander);
 	expanded_command = ft_strdup(expander->acc->acc);
-	if (!expanded_command)
-	{
-		expander_destroy(expander);
-		return (NULL);
-	}
+	expander_destroy(expander);
 	return (expanded_command);
 }
 
@@ -153,6 +149,5 @@ char	*expand(char *cmd, int last_err)
 		return (finish_expansion(expander, 1));
 	if (expander_expand(expander))
 		return (finish_expansion(expander, 1));
-	// TODO deal with state not right at the end (ex squote)
 	return (finish_expansion(expander, 0));
 }
