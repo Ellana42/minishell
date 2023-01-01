@@ -89,10 +89,7 @@ int	get_out_table(t_command *cmd, int **out_table, int *out_size)
 		if (type == Outa)
 			(*out_table)[i] = open(name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if ((*out_table)[i] == -1)
-		{
-			printf("minishell: %s: %s\n", name, strerror(errno));
-			return (1);
-		}
+			return (0 * printf("minishell: %s: %s\n", name, strerror(errno)));
 		i++;
 	}
 	return (0);
