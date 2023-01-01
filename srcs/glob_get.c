@@ -2,6 +2,16 @@
 
 extern t_glob	*g_glob;
 
+int	glob_get_last_pid(void)
+{
+	t_intlist	*lst;
+
+	lst = intlstlast(*glob_get_pids());
+	if (!lst)
+		return (-1);
+	return (lst->content);
+}
+
 int	glob_get_state(void)
 {
 	return (g_glob->activated);

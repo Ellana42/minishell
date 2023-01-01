@@ -1,4 +1,5 @@
 #include "execution.h"
+# include <errno.h>
 
 int	execution_finish(t_execution *execution, int err)
 {
@@ -10,23 +11,19 @@ int	execution_finish(t_execution *execution, int err)
 int	execution_wait_processes(t_execution *execution)
 {
 	int	exit_status;
-	int	i;
+	int	status;
 	int	pid;
 
+	(void )execution;
 	exit_status = 0;
-	i = 0;
-	pid = -1;
-	while (i < execution->executables_size)
+	status = 0;
+	pid = 0;
+	while (pid != -1 || errno != ECHILD)
 	{
-		pid = execution_get_pid(execution);
-		if (pid != -1)
-		{
-			waitpid(pid, &exit_status, 0);
-			execution_pop_pid(execution, &pid);
-			if (WIFEXITED(exit_status))
-				exit_status = WEXITSTATUS(exit_status);
-		}
-		i++;
+		pid = waitpid(-1, &status, 0);
+		if (pid == glob_get_last_pid())
+			exit_status = status;
+		continue ;
 	}
 	return (exit_status);
 }
