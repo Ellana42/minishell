@@ -18,7 +18,7 @@ int	execution_launch_exec(t_execution *execution)
 	if (!path)
 	{
 		table_free(env);
-		return (0);
+		return (errnum);
 	}
 	if (execve(path, command_get_args_table(command), env) == -1)
 	{
