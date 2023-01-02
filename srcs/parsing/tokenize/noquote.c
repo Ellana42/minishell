@@ -1,26 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   noquote.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkaploun <mkaploun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 18:14:28 by mkaploun          #+#    #+#             */
+/*   Updated: 2023/01/02 18:14:43 by mkaploun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "tokenize.h"
-
-/* int	tokenize_noquotev(t_tokenizer *tokenizer) */
-/* { */
-/* 	char	c; */
-/* 	char	*var; */
-
-/* 	c = tokenizer_get_char(tokenizer); */
-/* 	if (ft_isalnum(c) || c == '_') */
-/* 	{ */
-/* 		tokenizer_accumulate_var(tokenizer); */
-/* 		return (0); */
-/* 	} */
-/* 	tokenizer->state = NoQuote; */
-/* 	var = glob_getenv_var(acc_get(tokenizer->acc_var)); */
-/* 	if (var) */
-/* 	{ */
-/* 		if (tokenizer_acc_concat(tokenizer, var)) */
-/* 			return (1); */
-/* 	} */
-/* 	reset_acc_var(tokenizer); */
-/* 	return (0); */
-/* } */
 
 int	tokenize_noquote(t_tokenizer *tokenizer)
 {
