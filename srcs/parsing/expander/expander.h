@@ -50,11 +50,11 @@ int			expand_errnum(t_expander *expander);
 int			expand_single_dollar(t_expander *expander);
 int			expand_normal(t_expander *expander);
 int			expand_squote(t_expander *expander);
-int	expand_dquote(t_expander *expander);
-void	add_quotes(char quote, char **result, int i);
-int	quote_var(char *var, char **result);
-int	acc_expanded_var(t_expander *expander);
-int	acc_expanded_dvar(t_expander *expander);
-int	expand_dvariable(t_expander *expander);
+int			expand_dquote(t_expander *expander);
+void		add_quotes(char quote, char **result, int i);
+int			quote_var(char *var, char **result);
+int			acc_expanded_var(t_expander *expander);
+int			acc_expanded_dvar(t_expander *expander);
+int			expand_dvariable(t_expander *expander);
 
 #endif
