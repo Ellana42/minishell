@@ -6,7 +6,7 @@
 /*   By: ellana <mtmrkaploun@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:02:45 by ellana            #+#    #+#             */
-/*   Updated: 2023/01/02 18:02:56 by ellana           ###   ########.fr       */
+/*   Updated: 2023/01/02 18:29:41 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	run_shell(char **envp, int *last_err)
 	expanded_command = expand(command, glob_get_exit_status());
 	if (!expanded_command)
 	{
-		error_msg("", "error during variable expansion", 0);
-		return (1);
+		*last_err = 1;
+		return (0);
 	}
 	free(command);
 	parser = parse(expanded_command, glob_get_exit_status());

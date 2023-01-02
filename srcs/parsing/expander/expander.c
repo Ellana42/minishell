@@ -6,7 +6,7 @@
 /*   By: mkaploun <mkaploun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:10:49 by mkaploun          #+#    #+#             */
-/*   Updated: 2023/01/02 18:10:49 by mkaploun         ###   ########.fr       */
+/*   Updated: 2023/01/02 18:28:30 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,15 @@ char	*finish_expansion(t_expander *expander, int err)
 	}
 	if (!expander_is_empty_acc_var(expander))
 		acc_expanded_var(expander);
+	if (expander->state == DQuote || expander->state == SQuote)
+	{
+		if (expander->state == DQuote)
+			ft_putstr_fd("unexpected EOF while looking for matching `\"'\n", 2);
+		if (expander->state == SQuote)
+			ft_putstr_fd("unexpected EOF while looking for matching `\''\n", 2);
+		expander_destroy(expander);
+		return (NULL);
+	}
 	expanded_command = ft_strdup(expander->acc->acc);
 	expander_destroy(expander);
 	return (expanded_command);

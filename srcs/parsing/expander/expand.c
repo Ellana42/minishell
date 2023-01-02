@@ -6,7 +6,7 @@
 /*   By: mkaploun <mkaploun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:10:48 by mkaploun          #+#    #+#             */
-/*   Updated: 2023/01/02 18:10:48 by mkaploun         ###   ########.fr       */
+/*   Updated: 2023/01/02 18:22:28 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	expand_errnum(t_expander *expander)
 	return (0);
 }
 
-// TODO check
 int	expand_single_dollar(t_expander *expander)
 {
 	char	c;
