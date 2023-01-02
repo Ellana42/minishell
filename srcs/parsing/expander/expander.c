@@ -5,8 +5,6 @@ int	quote_var(char *var, char **result)
 	int	i;
 
 	i = 0;
-	if (!var)
-		return (1);
 	*result = (char *)malloc(sizeof(char) * (ft_strlen(var) + 1) * 3);
 	if (!(*result))
 		return (1);
@@ -41,6 +39,8 @@ int	acc_expanded_var(t_expander *expander)
 	char	*quoted_var;
 
 	var = glob_getenv_var(acc_get(expander->acc_var));
+	if (!var)
+		return (0);
 	if (quote_var(var, &quoted_var))
 		return (1);
 	if (quoted_var)
