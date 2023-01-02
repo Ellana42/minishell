@@ -6,7 +6,7 @@
 /*   By: ellana <mtmrkaploun@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:02:45 by ellana            #+#    #+#             */
-/*   Updated: 2023/01/02 18:02:56 by ellana           ###   ########.fr       */
+/*   Updated: 2023/01/02 18:19:43 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	builtin_export(char **args_table)
 {
 	int	size;
 	int	i;
-	int ret;
+	int	ret;
 
 	i = 1;
 	ret = 0;

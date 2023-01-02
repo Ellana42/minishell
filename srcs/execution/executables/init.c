@@ -6,7 +6,7 @@
 /*   By: ellana <mtmrkaploun@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:02:48 by ellana            #+#    #+#             */
-/*   Updated: 2023/01/02 18:09:30 by ellana           ###   ########.fr       */
+/*   Updated: 2023/01/02 18:18:50 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	executables_init(t_executables *executables, t_commands *cmds, int **pipes)
 	{
 		command = commands_get_i(cmds, i);
 		new_executable = executable_alloc();
-		if (executable_init(new_executable, command, pipes, i)) // TODO accept error
+		if (executable_init(new_executable, command, pipes, i))
 			return (1);
 		new_executable_list = ft_lstnew((void *)new_executable);
 		ft_lstadd_back(executables, new_executable_list);

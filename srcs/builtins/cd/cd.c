@@ -6,7 +6,7 @@
 /*   By: ellana <mtmrkaploun@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:02:45 by ellana            #+#    #+#             */
-/*   Updated: 2023/01/02 18:09:29 by ellana           ###   ########.fr       */
+/*   Updated: 2023/01/02 18:19:16 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ static int	change_dir(char *path)
 
 	ret = NULL;
 	if (chdir(path) != 0)
-	{
-		error_msg2("cd", path, strerror(errno), 0);
-		return (errno);
-	}
+		return (error_msg2("cd", path, strerror(errno), errno));
 	ret = getcwd(cwd, PATH_MAX);
 	if (!ret)
 	{
@@ -83,7 +80,7 @@ int	cd_check_args(char **args_table)
 	}
 	if (!path_exists(args_table[1]))
 	{
-		error_msg2("cd", args_table[1],  "No such file or directory", 0);
+		error_msg2("cd", args_table[1], "No such file or directory", 0);
 		return (1);
 	}
 	return (change_dir(args_table[1]));
