@@ -44,7 +44,8 @@ int	execution_child(t_execution *execution)
 	if (!execution_is_builtin(execution))
 	{
 		command = command_get_name(execution_get_current_command(execution));
-		path = get_user_cmd(command, &err);
+		if (command)
+			path = get_user_cmd(command, &err);
 	}
 	executable = execution_get_current(execution);
 	executable_get_fds_close(executable, fd);

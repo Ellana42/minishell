@@ -104,7 +104,7 @@ char	*get_user_cmd(char *cmd, int *errnum)
 	char	**env_paths;
 	char	*path_ultime;
 
-	if (is_dir(cmd))
+	if (is_dir(cmd) || cmd[0] == '\0')
 	{
 		msg(cmd, ": ", "Is a directory", 1);
 		*errnum = 126;
