@@ -3,6 +3,7 @@ NAME  = minishell
 SRCS  =  srcs/main.c \
 	srcs/glob.c \
 	srcs/parsing/expander/acc_var.c \
+	srcs/parsing/expander/quote.c \
 	srcs/parsing/expander/accumulator.c \
 	srcs/parsing/expander/check.c \
 	srcs/parsing/expander/expander.c \
