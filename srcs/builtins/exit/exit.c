@@ -19,7 +19,7 @@ int	exit_parse_args(char **args, int *err_num)
 {
 	if (table_get_size(args) > 2)
 	{
-		printf("minishell: exit: too many arguments");
+		printf("minishell: exit: too many arguments\n");
 		return (1);
 	}
 	if (table_get_size(args) == 1)
