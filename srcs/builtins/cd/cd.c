@@ -71,7 +71,7 @@ int	cd_check_args(char **args_table)
 	}
 	if (!path_exists(args_table[1]))
 	{
-		error_msg("cd", "No such file or directory", 0);
+		error_msg2("cd", args_table[1],  "No such file or directory", 0);
 		return (1);
 	}
 	return (change_dir(args_table[1]));
