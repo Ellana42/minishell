@@ -1,14 +1,53 @@
 #include "expander.h"
 
+int	quote_var(char *var, char **result)
+{
+	int	i;
+
+	i = 0;
+	if (!var)
+		return (1);
+	*result = (char *)malloc(sizeof(char) * (ft_strlen(var) + 1) * 3);
+	if (!(*result))
+		return (1);
+	while (*var)
+	{
+		if (*var == '\'')
+		{
+			(*result)[i] = '\"';
+			(*result)[i + 1] = '\'';
+			(*result)[i + 2] = '\"';
+			i += 2;
+		}
+		else if (*var == '\"')
+		{
+			(*result)[i] = '\'';
+			(*result)[i + 1] = '\"';
+			(*result)[i + 2] = '\'';
+			i += 2;
+		}
+		else
+			(*result)[i] = *var;
+		i++;
+		var++;
+	}
+	(*result)[i] = '\0';
+	return (0);
+}
+
 int	acc_expanded_var(t_expander *expander)
 {
 	char	*var;
+	char	*quoted_var;
 
 	var = glob_getenv_var(acc_get(expander->acc_var));
-	if (var)
+	if (quote_var(var, &quoted_var))
+		return (1);
+	if (quoted_var)
 	{
-		if (expander_acc_concat(expander, var))
+		if (expander_acc_concat(expander, quoted_var))
 			return (1);
+		free(quoted_var);
 	}
 	expander_reset_acc_var(expander);
 	return (0);

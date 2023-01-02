@@ -8,9 +8,5 @@ int	tokenize(t_tokenizer *tokenizer)
 		return (tokenize_quote(tokenizer));
 	if (tokenizer->state == SingleQuote)
 		return (tokenize_single_quote(tokenizer));
-	if (tokenizer->state == NoQuoteV)
-		return (tokenize_noquotev(tokenizer));
-	if (tokenizer->state == QuoteV)
-		return (tokenize_quotev(tokenizer));
 	return (0);
 }

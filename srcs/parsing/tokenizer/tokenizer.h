@@ -6,17 +6,10 @@
 # include "token.h"
 # include "../accumulator/accumulator.h"
 
-// NoQuote -> Quote, NoQuoteV, SingleQuote
-// Quote -> NoQuote, QuoteV
-// SingleQuote -> NoQuote
-// NoQuoteV -> NoQuote
-// QuoteV -> Quote
 typedef enum s_state{
 	NoQuote = 0,
 	Quote = 1,
 	SingleQuote = 2,
-	NoQuoteV = 3,
-	QuoteV = 4
 }	t_state;
 
 typedef struct s_tokenizer{

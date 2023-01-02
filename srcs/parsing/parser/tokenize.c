@@ -3,7 +3,7 @@
 int	parser_tokenize_end(t_parser *parser)
 {
 	tokenizer_push_eol(parser->tokenizer);
-	if (parser->tokenizer->state == Quote || parser->tokenizer->state == QuoteV)
+	if (parser->tokenizer->state == Quote)
 		return (parser_set_error_return(parser, ParserQuotesUnclosed));
 	if (parser->tokenizer->state == SingleQuote)
 		return (parser_set_error_return(parser, ParserQuotesUnclosed));
@@ -12,21 +12,10 @@ int	parser_tokenize_end(t_parser *parser)
 
 int	parser_tokenize_string(t_parser *parser)
 {
-	char	*var;
-
 	while (!tokenizer_eol(parser->tokenizer))
 	{
 		if (tokenize(parser->tokenizer))
 			return (parser_set_error_return(parser, ParserAllocError));
-	}
-	if (!tokenizer_is_empty_acc_var(parser->tokenizer))
-	{
-		var = glob_getenv_var(acc_get(parser->tokenizer->acc_var));
-		if (var)
-		{
-			if (tokenizer_acc_concat(parser->tokenizer, var))
-				return (parser_set_error_return(parser, ParserAllocError));
-		}
 	}
 	if (!tokenizer_is_empty_acc(parser->tokenizer))
 	{
