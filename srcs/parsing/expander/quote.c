@@ -46,15 +46,16 @@ int	acc_expanded_var(t_expander *expander)
 	char	*quoted_var;
 
 	var = glob_getenv_var(acc_get(expander->acc_var));
-	if (!var)
-		return (0);
-	if (quote_var(var, &quoted_var))
-		return (1);
-	if (quoted_var)
+	if (var)
 	{
-		if (expander_acc_concat(expander, quoted_var))
+		if (quote_var(var, &quoted_var))
 			return (1);
-		free(quoted_var);
+		if (quoted_var)
+		{
+			if (expander_acc_concat(expander, quoted_var))
+				return (1);
+			free(quoted_var);
+		}
 	}
 	expander_reset_acc_var(expander);
 	return (0);
@@ -65,9 +66,7 @@ int	acc_expanded_dvar(t_expander *expander)
 	char	*var;
 
 	var = glob_getenv_var(acc_get(expander->acc_var));
-	if (!var)
-		return (0);
-	else
+	if (var)
 	{
 		if (expander_acc_concat(expander, var))
 			return (1);
