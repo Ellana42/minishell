@@ -40,8 +40,12 @@ int	execution_child(t_execution *execution)
 	char			*path;
 
 	err = 0;
-	command = command_get_name(execution_get_current_command(execution));
-	path = get_user_cmd(command, &err);
+	path = NULL;
+	if (!execution_is_builtin(execution))
+	{
+		command = command_get_name(execution_get_current_command(execution));
+		path = get_user_cmd(command, &err);
+	}
 	executable = execution_get_current(execution);
 	executable_get_fds_close(executable, fd);
 	execution_close_unused(execution, execution->executable_index);
