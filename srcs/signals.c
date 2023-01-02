@@ -28,6 +28,11 @@ static void	handler(int sig, siginfo_t *si, void *ucontext)
 
 int	init_sa(t_sa *sa_c)
 {
+	struct sigaction	sa_ign;
+
+	ft_memset(&sa_ign, 0, sizeof(sa_ign));
+	sa_ign.sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &sa_ign, NULL);
 	sigemptyset(&sa_c->sa_mask);
 	sa_c->sa_flags = SA_SIGINFO;
 	sa_c->sa_sigaction = handler;
