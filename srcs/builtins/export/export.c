@@ -55,34 +55,38 @@ int	export_one_var(char *argument)
 	err = export_parse_arg(argument, &arg);
 	if (err == 2)
 	{
-		printf("bash: export: memory error\n");
+		error_msg("export", "memory error", 0);
 		export_arg_free(arg);
 		return (1);
 	}
 	else if (err == 1)
-		printf("bash: export: `%s': not a valid identifier\n", argument);
+		error_msg2("export", argument, "not a valid identifier", 0);
 	else if (arg.operator_ == 1)
 		export_append_var(arg.variable, arg.value);
 	else
 		export_push_var(arg.variable, arg.value);
 	export_arg_free(arg);
-	return (0);
+	return (err);
 }
 
 int	builtin_export(char **args_table)
 {
 	int	size;
 	int	i;
+	int ret;
 
 	i = 1;
+	ret = 0;
 	size = table_get_size(args_table);
 	if (size == 1)
 		export_print();
 	while (i < size)
 	{
-		if (export_one_var(args_table[i]))
-			return (1);
+		if (ret == 0)
+			ret = export_one_var(args_table[i]);
+		else
+			export_one_var(args_table[i]);
 		i++;
 	}
-	return (0);
+	return (ret);
 }
