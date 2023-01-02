@@ -17,7 +17,7 @@ int	run_shell(char **envp, int *last_err)
 	expanded_command = expand(command, glob_get_exit_status());
 	if (!expanded_command)
 	{
-		printf("minishell: error during variable expansion\n");
+		error_msg("", "error during variable expansion", 0);
 		return (1);
 	}
 	free(command);

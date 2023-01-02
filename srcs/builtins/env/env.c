@@ -6,7 +6,7 @@ int	env(char **args)
 {
 	if (table_get_size(args) > 1)
 	{
-		printf("minishell: env: too many arguments\n");
+		error_msg("env", "too many arguments", 0);
 		return (1);
 	}
 	env_print();

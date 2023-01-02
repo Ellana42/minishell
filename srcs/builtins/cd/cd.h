@@ -5,6 +5,8 @@
 # include "../../parsing/utils/utils.h"
 # include <sys/stat.h>
 # include "../../glob.h"
+# include "../../error.h"
+# include <errno.h>
 
 # define PATH_MAX 4096
 

@@ -1,6 +1,7 @@
 #ifndef EXECUTION_H
 # define EXECUTION_H
 
+# include "../error.h"
 # include <stdio.h>
 # include <errno.h>
 # include <readline/readline.h>

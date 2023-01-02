@@ -112,8 +112,9 @@ int	unset(char **args)
 		{
 			if (args[i][0] != '\0')
 			{
-				printf("minishell: unset:");
-				printf(" `%s': not a valid identifier\n", args[i]);
+				ft_putstr_fd("minishell: unset: `", 2);
+				ft_putstr_fd("%s", 2);
+				ft_putstr_fd("': not a valid identifier\n", 2);
 			}
 			exit = EXIT_FAILURE;
 		}

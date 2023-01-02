@@ -29,19 +29,19 @@ void	token_print(t_token *token)
 void	token_print_literal(t_token *token)
 {
 	if (token->type == Pipe)
-		printf("|");
+		ft_putstr_fd("|", 2);
 	else if (token->type == Out)
-		printf(">");
+		ft_putstr_fd(">", 2);
 	else if (token->type == Outa)
-		printf(">>");
+		ft_putstr_fd(">>", 2);
 	else if (token->type == In)
-		printf("<");
+		ft_putstr_fd("<", 2);
 	else if (token->type == Ina)
-		printf("<<");
+		ft_putstr_fd("<<", 2);
 	else if (token->type == Str)
-		printf("%s", token->str);
+		ft_putstr_fd(token->str, 2);
 	else if (token->type == Eol)
-		printf("newline");
+		ft_putstr_fd("newline", 2);
 	else
-		printf("unrecognised token");
+		ft_putstr_fd("unrecognised token", 2);
 }

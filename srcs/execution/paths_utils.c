@@ -58,7 +58,7 @@ char	*set_error(int *errnum, int err, char *cmd)
 	}
 	if (err == 127)
 	{
-		printf("minishell: %s: command not found\n", cmd);
+		error_msg(cmd, "command not found", 0);
 		*errnum = 127;
 	}
 	return (NULL);
