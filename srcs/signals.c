@@ -23,11 +23,6 @@ static void	handler(int sig, siginfo_t *si, void *ucontext)
 			rl_redisplay();
 			glob_set_exit_status(130);
 		}
-		if (sig == SIGQUIT)
-		{
-			rl_on_new_line();
-			rl_redisplay();
-		}
 	}
 }
 
