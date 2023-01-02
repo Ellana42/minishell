@@ -53,6 +53,38 @@ int	acc_expanded_var(t_expander *expander)
 	return (0);
 }
 
+int	acc_expanded_dvar(t_expander *expander)
+{
+	char	*var;
+
+	var = glob_getenv_var(acc_get(expander->acc_var));
+	if (!var)
+		return (0);
+	else
+	{
+		if (expander_acc_concat(expander, var))
+			return (1);
+	}
+	expander_reset_acc_var(expander);
+	return (0);
+}
+
+int	expand_dvariable(t_expander *expander)
+{
+	char	c;
+
+	c = expander_get_char(expander);
+	if (ft_isalnum(c) || c == '_')
+	{
+		expander_accumulate_var(expander);
+		return (0);
+	}
+	if (acc_expanded_dvar(expander))
+		return (1);
+	expander->state = DQuote;
+	return (0);
+}
+
 int	expand_variable(t_expander *expander)
 {
 	char	c;
@@ -86,6 +118,16 @@ int	expander_expand(t_expander *expander)
 		if (expander->state == Variable)
 		{
 			if (expand_variable(expander))
+				return (1);
+		}
+		if (expander->state == DQuote)
+		{
+			if (expand_dquote(expander))
+				return (1);
+		}
+		if (expander->state == DVariable)
+		{
+			if (expand_dvariable(expander))
 				return (1);
 		}
 	}

@@ -44,6 +44,12 @@ int	expand_normal(t_expander *expander)
 		expander_accumulate(expander);
 		return (0);
 	}
+	if (expander_get_char(expander) == '\"')
+	{
+		expander->state = DQuote;
+		expander_accumulate(expander);
+		return (0);
+	}
 	expander_accumulate(expander);
 	return (0);
 }
@@ -54,6 +60,28 @@ int	expand_squote(t_expander *expander)
 	{
 		expander->state = Normal;
 		expander_accumulate(expander);
+		return (0);
+	}
+	expander_accumulate(expander);
+	return (0);
+}
+
+int	expand_dquote(t_expander *expander)
+{
+	if (expander_get_char(expander) == '\"')
+	{
+		expander->state = Normal;
+		expander_accumulate(expander);
+		return (0);
+	}
+	if (expander_get_char(expander) == '$')
+	{
+		if (expander_get_next_char(expander, 1) == '?')
+			return (expand_errnum(expander));
+		if (!ft_isalnum(expander_get_next_char(expander, 1)))
+			return (expand_single_dollar(expander));
+		expander->state = DVariable;
+		expander_move_cursor(expander);
 		return (0);
 	}
 	expander_accumulate(expander);

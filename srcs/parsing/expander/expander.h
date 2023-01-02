@@ -10,6 +10,8 @@ typedef enum s_state_expander{
 	Normal = 0,
 	SQuote = 1,
 	Variable = 2,
+	DQuote = 3,
+	DVariable = 4,
 }	t_state_expander;
 
 typedef struct s_expander{
@@ -48,5 +50,6 @@ int			expand_errnum(t_expander *expander);
 int			expand_single_dollar(t_expander *expander);
 int			expand_normal(t_expander *expander);
 int			expand_squote(t_expander *expander);
+int	expand_dquote(t_expander *expander);
 
 #endif
