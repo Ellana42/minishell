@@ -1,4 +1,4 @@
-#include "execution.h" 
+#include "execution.h"
 
 int	is_dir(char *path)
 {
@@ -46,4 +46,20 @@ void	free_strs(char *str, char **array_of_strs)
 		free(array_of_strs);
 		array_of_strs = NULL;
 	}
+}
+
+char	*set_error(int *errnum, int err, char *cmd)
+{
+	if (err == 126)
+	{
+		msg(cmd, ": ", "Is a directory", 1);
+		*errnum = 126;
+		return (NULL);
+	}
+	if (err == 127)
+	{
+		printf("minishell: %s: command not found\n", cmd);
+		*errnum = 127;
+	}
+	return (NULL);
 }

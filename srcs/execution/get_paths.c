@@ -104,12 +104,10 @@ char	*get_user_cmd(char *cmd, int *errnum)
 	char	**env_paths;
 	char	*path_ultime;
 
-	if (is_dir(cmd) || cmd[0] == '\0')
-	{
-		msg(cmd, ": ", "Is a directory", 1);
-		*errnum = 126;
-		return (NULL);
-	}
+	if (is_dir(cmd))
+		return (set_error(errnum, 126, cmd));
+	if (cmd[0] == '\0')
+		return (set_error(errnum, 127, cmd));
 	if (access(cmd, F_OK | X_OK) == 0)
 		return (ft_strdup(cmd));
 	env_paths = fill_array_of_paths();

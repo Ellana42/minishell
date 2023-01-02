@@ -72,5 +72,6 @@ void			print_pipes(int **pipes);
 char			*get_user_cmd(char *cmd, int *errnum);
 int				execution_launch_builtin_single(t_execution *execution);
 int				execution_launch_exec(t_execution *execution, char *path);
+char			*set_error(int *errnum, int err, char *cmd);
 
 #endif
