@@ -16,35 +16,27 @@ int	expand_variable(t_expander *expander)
 	return (0);
 }
 
+int	launch_expander(t_expander *expander)
+{
+	if (expander->state == Normal)
+		return (expand_normal(expander));
+	if (expander->state == SQuote)
+		return (expand_squote(expander));
+	if (expander->state == Variable)
+		return (expand_variable(expander));
+	if (expander->state == DQuote)
+		return (expand_dquote(expander));
+	if (expander->state == DVariable)
+		return (expand_dvariable(expander));
+	return (0);
+}
+
 int	expander_expand(t_expander *expander)
 {
 	while (!expander_eol(expander))
 	{
-		if (expander->state == Normal)
-		{
-			if (expand_normal(expander))
-				return (1);
-		}
-		if (expander->state == SQuote)
-		{
-			if (expand_squote(expander))
-				return (1);
-		}
-		if (expander->state == Variable)
-		{
-			if (expand_variable(expander))
-				return (1);
-		}
-		if (expander->state == DQuote)
-		{
-			if (expand_dquote(expander))
-				return (1);
-		}
-		if (expander->state == DVariable)
-		{
-			if (expand_dvariable(expander))
-				return (1);
-		}
+		if (launch_expander(expander))
+			return (1);
 	}
 	return (0);
 }
