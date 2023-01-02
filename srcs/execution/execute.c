@@ -49,7 +49,7 @@ int	execution_child(t_execution *execution)
 		command = command_get_name(execution_get_current_command(execution));
 		path = get_user_cmd(command, &err);
 	}
-	if (err != 0 && (fd[0] == -1 || fd[1] == -1))
+	if (err == 0 && (fd[0] == -1 || fd[1] == -1))
 		err = 1;
 	if (!err)
 		execution_launch_child(execution, err, fd, path);
