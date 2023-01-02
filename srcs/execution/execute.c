@@ -44,16 +44,16 @@ int	execution_child(t_execution *execution)
 	if (!execution_is_builtin(execution))
 	{
 		command = command_get_name(execution_get_current_command(execution));
-		if (command)
-			path = get_user_cmd(command, &err);
+		path = get_user_cmd(command, &err);
 	}
 	executable = execution_get_current(execution);
 	executable_get_fds_close(executable, fd);
 	execution_close_unused(execution, execution->executable_index);
-	if (fd[0] == -1 || fd[0] == -1)
+	if (fd[0] == -1 || fd[1] == -1)
 		err = 1;
 	if (!err)
 		execution_launch_child(execution, err, fd, path);
+	close_pipe(fd);
 	parser_destroy(execution->parser);
 	execution_destroy(execution);
 	glob_destroy();
