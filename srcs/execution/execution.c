@@ -1,5 +1,4 @@
 #include "execution.h"
-# include <errno.h>
 
 int	execution_finish(t_execution *execution, int err)
 {
@@ -22,7 +21,7 @@ int	execution_wait_processes(t_execution *execution)
 	{
 		pid = waitpid(-1, &status, 0);
 		if (pid == glob_get_last_pid())
-			exit_status = status;
+			exit_status = WEXITSTATUS(status);
 		continue ;
 	}
 	glob_set_pids(NULL);

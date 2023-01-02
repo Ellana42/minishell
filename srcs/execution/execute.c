@@ -49,7 +49,7 @@ int	execution_child(t_execution *execution)
 	executable = execution_get_current(execution);
 	executable_get_fds_close(executable, fd);
 	execution_close_unused(execution, execution->executable_index);
-	if (fd[0] == -1 || fd[1] == -1)
+	if (err != 0 && (fd[0] == -1 || fd[1] == -1))
 		err = 1;
 	if (!err)
 		execution_launch_child(execution, err, fd, path);
