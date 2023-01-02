@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ellana <mtmrkaploun@gmail.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 18:02:44 by ellana            #+#    #+#             */
+/*   Updated: 2023/01/02 18:02:55 by ellana           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unset.h"
 // Supprime une variable ou une fonction de l'environnement
 // Dès lors, cette variable n'est plus accessible
