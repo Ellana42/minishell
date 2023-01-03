@@ -2,6 +2,33 @@
 
 t_glob	*g_glob;
 
+int	init_term(void)
+{
+	int				fd;
+	struct termios	config;
+
+	fd = open("/dev/tty", O_RDWR | O_NOCTTY | O_NDELAY);
+	if (fd == -1)
+		return (-1);
+	if (!isatty(fd))
+	{
+		close(fd);
+		return (-1);
+	}
+	if (tcgetattr(fd, &config) < 0)
+	{
+		close(fd);
+		return (-1);
+	}
+	config.c_lflag &= ~ECHOCTL;
+	if (tcsetattr(0, 0, &config))
+	{
+		close(fd);
+		return (-1);
+	}
+	return (fd);
+}
+
 int	run_shell(char **envp, int *last_err)
 {
 	char		*command;
@@ -35,11 +62,15 @@ int	main(int ac, char **av, char **envp)
 	int		last_err;
 	t_sa	sa_c;
 	int		err;
+	int		term;
 
 	(void )ac;
 	(void )av;
 	last_err = 0;
 	err = 0;
+	term = init_term();
+	if (term == -1)
+		return (1);
 	if (glob_init(last_err, envp))
 		return (1);
 	init_sa(&sa_c);
