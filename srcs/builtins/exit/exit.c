@@ -6,7 +6,7 @@
 /*   By: ellana <mtmrkaploun@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:02:45 by ellana            #+#    #+#             */
-/*   Updated: 2023/01/02 18:02:56 by ellana           ###   ########.fr       */
+/*   Updated: 2023/01/03 14:29:01 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	is_numeric(char *str)
 	return (1);
 }
 
-int	exit_parse_args(char **args, int *err_num)
+int	exit_parse_args(char **args, long long *err_num)
 {
 	if (table_get_size(args) > 2)
 	{
@@ -49,12 +49,12 @@ int	exit_parse_args(char **args, int *err_num)
 
 int	builtin_exit(char **args)
 {
-	int	err_num;
+	long long	err_num;
 
 	err_num = 0;
 	printf("exit\n");
 	if (exit_parse_args(args, &err_num))
 		return (1);
 	glob_set_state(0);
-	return (err_num);
+	return ((int )err_num);
 }
