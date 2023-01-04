@@ -16,13 +16,13 @@ void	sig_nl(int signum)
 	(void)signum;
 	if (glob_is_running())
 	{
+		printf("^C\n");
 		rl_on_new_line();
 		glob_set_exit_status(-5);
 	}
 	else
 	{
-		/* printf("$> ^C\n"); */
-		write(1, "^C\n", 3);
+		printf("^C\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();

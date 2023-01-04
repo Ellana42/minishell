@@ -124,7 +124,7 @@ HEADERS	= includes/minishell.h
 
 CC	= clang
 
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g3 #-fsanitize=address 
 
 LIBFT	= -L libft -lft
 
@@ -133,7 +133,7 @@ VALGRIND = colour-valgrind
 all: 		lib ${NAME} 
 
 ${NAME}: 	${OBJS}
-			${CC} ${CFLAGS} -lreadline ${OBJS} ${LIBFT} -o ${NAME}
+			${CC} ${CFLAGS} -lncurses -lreadline ${OBJS} ${LIBFT} -o ${NAME}
 
 .c.o:		
 			${CC} ${CFLAGS} -I${HEADERS} -c $< -o $@

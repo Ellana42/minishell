@@ -25,6 +25,7 @@ int	init_term(void)
 	/* printf("vintr = %d\n", config.c_cc[VREPRINT]); */
 	/* signal(SIGQUIT, &sig_exit); */
 	config.c_cc[VINTR] = 3;
+	config.c_cc[VQUIT] = 0;
 	signal(SIGINT, &sig_nl);
 	if (tcsetattr(0, 0, &config))
 	{
