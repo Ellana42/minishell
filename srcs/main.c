@@ -20,6 +20,7 @@ int	init_term(void)
 		close(fd);
 		return (-1);
 	}
+	rl_catch_signals = 0;
 	config.c_lflag &= ~ECHOCTL;
 	/* printf("vintr = %d\n", config.c_cc[VREPRINT]); */
 	/* signal(SIGQUIT, &sig_exit); */
