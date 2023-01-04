@@ -1,7 +1,7 @@
 NAME  = minishell
 
 SRCS  =  srcs/main.c \
-	srcs/glob.c \
+	srcs/glob/glob.c \
 	srcs/error_msg.c \
 	srcs/parsing/expander/acc_var.c \
 	srcs/parsing/expander/quote.c \
@@ -12,10 +12,10 @@ SRCS  =  srcs/main.c \
 	srcs/parsing/expander/init.c \
 	srcs/parsing/expander/move.c \
 	srcs/parsing/expander/expand.c \
-	srcs/glob_env.c \
-	srcs/glob_env_get.c \
-	srcs/glob_set_env.c \
-	srcs/glob_env_var.c \
+	srcs/glob/glob_env.c \
+	srcs/glob/glob_env_get.c \
+	srcs/glob/glob_set_env.c \
+	srcs/glob/glob_env_var.c \
 	srcs/builtins/echo/echo.c \
 	srcs/builtins/exit/exit.c \
 	srcs/builtins/pwd/pwd.c \
@@ -60,8 +60,8 @@ SRCS  =  srcs/main.c \
 	srcs/execution/int_list/clear.c \
 	srcs/execution/int_list/new.c \
 	srcs/execution/dup.c \
-	srcs/glob_init.c \
-	srcs/glob_get.c \
+	srcs/glob/glob_init.c \
+	srcs/glob/glob_get.c \
 	srcs/parsing/parsing.c \
 	srcs/parsing/parser/parse_funnels_no_cmd.c \
 	srcs/parsing/tokenizer/acc_var.c \
@@ -115,7 +115,7 @@ SRCS  =  srcs/main.c \
 	srcs/parsing/tokenize/quote.c \
 	srcs/parsing/tokenize/tokenize.c \
 	srcs/parsing/tokenize/noquote_funnels.c \
-	srcs/glob_set.c \
+	srcs/glob/glob_set.c \
 	srcs/signals.c 
 
 OBJS  = ${SRCS:.c=.o}
