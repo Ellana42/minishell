@@ -5,6 +5,7 @@ extern t_glob	*g_glob;
 void	signal_ctrl_slash(int signum)
 {
 	(void)signum;
+	printf("Got there\n");
 	if (glob_is_running())
 	{
 		printf("^\\Quit (Core dumped)\n");
@@ -17,6 +18,7 @@ void	signal_ctrl_slash(int signum)
 void	signal_ctrl_c(int signum)
 {
 	(void)signum;
+	printf("Got here\n");
 	if (glob_is_running())
 	{
 		printf("^C\n");

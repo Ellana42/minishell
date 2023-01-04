@@ -1,6 +1,10 @@
 NAME  = minishell
 
 SRCS  =  srcs/main.c \
+	srcs/minishell_get.c \
+	srcs/minishell_set.c \
+	srcs/minishell_init.c \
+	srcs/minishell_terminals.c \
 	srcs/glob/glob.c \
 	srcs/error_msg.c \
 	srcs/parsing/expander/acc_var.c \

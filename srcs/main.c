@@ -2,36 +2,6 @@
 
 t_glob	*g_glob;
 
-int	init_term(void)
-{
-	int				fd;
-	struct termios	config;
-
-	fd = open("/dev/tty", O_RDWR | O_NOCTTY | O_NDELAY);
-	if (fd == -1)
-		return (-1);
-	if (!isatty(fd))
-	{
-		close(fd);
-		return (-1);
-	}
-	if (tcgetattr(fd, &config) < 0)
-	{
-		close(fd);
-		return (-1);
-	}
-	rl_catch_signals = 0;
-	config.c_lflag &= ~ECHOCTL;
-	signal(SIGINT, &signal_ctrl_c);
-	signal(SIGQUIT, &signal_ctrl_slash);
-	if (tcsetattr(0, 0, &config))
-	{
-		close(fd);
-		return (-1);
-	}
-	return (fd);
-}
-
 int	run_shell(char **envp, int *last_err)
 {
 	char		*command;
@@ -62,17 +32,21 @@ int	run_shell(char **envp, int *last_err)
 
 int	main(int ac, char **av, char **envp)
 {
-	int		last_err;
-	int		err;
-	int		term;
+	int			last_err;
+	int			err;
+	t_minishell	*minishell;
 
 	(void )ac;
 	(void )av;
 	last_err = 0;
 	err = 0;
-	term = init_term();
-	if (term == -1)
+	minishell = minishell_alloc();
+	if (minishell_init(minishell, envp))
 		return (1);
+	minishell_set_terminal(minishell, MINISHELL_TERMINAL);
+	/* rl_catch_signals = 0; */
+	/* signal(SIGINT, &signal_ctrl_c); */
+	/* signal(SIGQUIT, &signal_ctrl_slash); */
 	if (glob_init(last_err, envp))
 		return (1);
 	while (glob_get_state() && !err)
@@ -81,8 +55,8 @@ int	main(int ac, char **av, char **envp)
 		glob_set_exit_status(last_err);
 	}
 	printf("exit\n");
+	minishell_destroy(minishell);
 	rl_clear_history();
 	glob_destroy();
-	close(term);
 	return (last_err);
 }
