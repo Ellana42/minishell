@@ -6,7 +6,7 @@
 /*   By: ellana <mtmrkaploun@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:09:13 by ellana            #+#    #+#             */
-/*   Updated: 2023/01/02 18:09:28 by ellana           ###   ########.fr       */
+/*   Updated: 2023/01/04 17:37:52 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "../../parsing/parsing.h"
 # include <stdio.h>
 
-int	echo(char **args);
+int	builtin_echo(char **args);
 
 #endif

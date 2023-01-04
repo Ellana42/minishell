@@ -6,6 +6,8 @@
 # include "execution/execution.h"
 # include <stdio.h>
 # include <termios.h>
+# include <term.h>
+# include <curses.h>
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -14,10 +16,12 @@
 
 typedef struct sigaction	t_sa;
 
-int			init_sa(t_sa *sa_c);
+/* int			init_sa(t_sa *sa_c); */
 void		signal_reset_prompt(int signo);
 void		set_signals_interactive(void);
 void		signal_print_newline(int signal);
 void		set_signals_noninteractive(void);
+void	sig_exit(int signum);
+void	sig_nl(int signum);
 
 #endif

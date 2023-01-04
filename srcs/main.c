@@ -22,8 +22,8 @@ int	init_term(void)
 	}
 	config.c_lflag &= ~ECHOCTL;
 	/* printf("vintr = %d\n", config.c_cc[VREPRINT]); */
-	/* config.c_cc[VQUIT] = 0; */
-	/* config.c_cc[VEOF] = 3; */
+	/* signal(SIGQUIT, &sig_exit); */
+	signal(SIGINT, &sig_nl);
 	if (tcsetattr(0, 0, &config))
 	{
 		close(fd);
@@ -39,6 +39,7 @@ int	run_shell(char **envp, int *last_err)
 	t_parser	*parser;
 
 	command = readline("$> ");
+	/* printf("command :%s:\n", command); */
 	if (!command)
 		return (1);
 	add_history(command);
@@ -63,7 +64,6 @@ int	run_shell(char **envp, int *last_err)
 int	main(int ac, char **av, char **envp)
 {
 	int		last_err;
-	t_sa	sa_c;
 	int		err;
 	int		term;
 
@@ -76,7 +76,6 @@ int	main(int ac, char **av, char **envp)
 		return (1);
 	if (glob_init(last_err, envp))
 		return (1);
-	init_sa(&sa_c);
 	while (glob_get_state() && !err)
 	{
 		err = run_shell(envp, &last_err);

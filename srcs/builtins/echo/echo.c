@@ -6,7 +6,7 @@
 /*   By: ellana <mtmrkaploun@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:02:44 by ellana            #+#    #+#             */
-/*   Updated: 2023/01/02 18:02:56 by ellana           ###   ########.fr       */
+/*   Updated: 2023/01/04 17:37:36 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	get_flags(char **args, int *n)
 	return (i);
 }
 
-int	echo(char **args)
+int	builtin_echo(char **args)
 {
 	int		i;
 	int		size;

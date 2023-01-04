@@ -28,7 +28,7 @@ int	call_builtin(char **args_table, int command_number)
 
 	err = 0;
 	if (command_number == 1)
-		err = echo(args_table);
+		err = builtin_echo(args_table);
 	if (command_number == 2)
 		err = builtin_exit(args_table);
 	if (command_number == 3)

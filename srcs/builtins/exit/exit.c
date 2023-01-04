@@ -6,7 +6,7 @@
 /*   By: ellana <mtmrkaploun@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:02:45 by ellana            #+#    #+#             */
-/*   Updated: 2023/01/03 14:29:01 by mkaploun         ###   ########.fr       */
+/*   Updated: 2023/01/04 19:24:51 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	builtin_exit(char **args)
 	long long	err_num;
 
 	err_num = 0;
-	printf("exit\n");
 	if (exit_parse_args(args, &err_num))
 		return (1);
 	glob_set_state(0);
