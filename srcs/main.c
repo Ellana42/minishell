@@ -21,6 +21,9 @@ int	init_term(void)
 		return (-1);
 	}
 	config.c_lflag &= ~ECHOCTL;
+	/* printf("vintr = %d\n", config.c_cc[VREPRINT]); */
+	/* config.c_cc[VQUIT] = 0; */
+	/* config.c_cc[VEOF] = 3; */
 	if (tcsetattr(0, 0, &config))
 	{
 		close(fd);
@@ -79,7 +82,9 @@ int	main(int ac, char **av, char **envp)
 		err = run_shell(envp, &last_err);
 		glob_set_exit_status(last_err);
 	}
+	printf("exit\n");
 	rl_clear_history();
 	glob_destroy();
+	close(term);
 	return (last_err);
 }
