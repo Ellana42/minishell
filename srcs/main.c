@@ -44,9 +44,6 @@ int	main(int ac, char **av, char **envp)
 	if (minishell_init(minishell, envp))
 		return (1);
 	minishell_set_terminal(minishell, MINISHELL_TERMINAL);
-	/* rl_catch_signals = 0; */
-	/* signal(SIGINT, &signal_ctrl_c); */
-	/* signal(SIGQUIT, &signal_ctrl_slash); */
 	if (glob_init(last_err, envp))
 		return (1);
 	while (glob_get_state() && !err)

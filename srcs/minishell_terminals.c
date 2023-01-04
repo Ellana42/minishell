@@ -28,8 +28,8 @@ void	minishell_terminals_init(t_minishell *minishell)
 	minishell_terminal = &minishell->terminal[MINISHELL_TERMINAL];
 	heredoc_terminal = &minishell->terminal[HEREDOC_TERMINAL];
 	tcgetattr(STDIN_FILENO, base_terminal);
-	ft_memcpy(base_terminal, minishell_terminal, sizeof(struct termios));
-	ft_memcpy(base_terminal, heredoc_terminal, sizeof(struct termios));
+	ft_memcpy(minishell_terminal, base_terminal, sizeof(struct termios));
+	ft_memcpy(heredoc_terminal, base_terminal, sizeof(struct termios));
 	minishell_minishell_terminal_init(minishell);
 	minishell_heredoc_terminal_init(minishell);
 }

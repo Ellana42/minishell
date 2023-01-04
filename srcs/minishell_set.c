@@ -7,7 +7,6 @@ void	minishell_set_terminal(t_minishell *minishell, int terminal_index)
 	new_terminal = minishell_get_terminal(minishell, terminal_index);
 	if (terminal_index == MINISHELL_TERMINAL)
 	{
-		printf("Here\n");
 		signal(SIGINT, &signal_ctrl_c);
 		signal(SIGQUIT, &signal_ctrl_slash);
 	}
