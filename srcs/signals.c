@@ -7,7 +7,7 @@ void	signal_ctrl_slash(int signum)
 	(void)signum;
 	if (glob_is_running())
 	{
-		printf("^\\Quit: 3\n");
+		printf("^\\Quit (Core dumped)\n");
 		if (rl_line_buffer[0])
 			return ;
 		rl_clear_history();
