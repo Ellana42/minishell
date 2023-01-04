@@ -22,11 +22,8 @@ int	init_term(void)
 	}
 	rl_catch_signals = 0;
 	config.c_lflag &= ~ECHOCTL;
-	/* printf("vintr = %d\n", config.c_cc[VREPRINT]); */
-	/* signal(SIGQUIT, &sig_exit); */
-	config.c_cc[VINTR] = 3;
-	config.c_cc[VQUIT] = 0;
-	signal(SIGINT, &sig_nl);
+	signal(SIGINT, &signal_ctrl_c);
+	signal(SIGQUIT, &signal_ctrl_slash);
 	if (tcsetattr(0, 0, &config))
 	{
 		close(fd);

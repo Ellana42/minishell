@@ -21,7 +21,7 @@ void		signal_reset_prompt(int signo);
 void		set_signals_interactive(void);
 void		signal_print_newline(int signal);
 void		set_signals_noninteractive(void);
-void	sig_exit(int signum);
-void	sig_nl(int signum);
+void		signal_ctrl_c(int signum);
+void		signal_ctrl_slash(int signum);
 
 #endif

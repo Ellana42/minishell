@@ -2,16 +2,19 @@
 
 extern t_glob	*g_glob;
 
-void	sig_exit(int signum)
+void	signal_ctrl_slash(int signum)
 {
 	(void)signum;
-	if (rl_line_buffer[0])
-		return ;
-	rl_clear_history();
-	glob_set_state(0);
+	if (glob_is_running())
+	{
+		printf("^\\Quit :3\n");
+		if (rl_line_buffer[0])
+			return ;
+		rl_clear_history();
+	}
 }
 
-void	sig_nl(int signum)
+void	signal_ctrl_c(int signum)
 {
 	(void)signum;
 	if (glob_is_running())
