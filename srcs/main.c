@@ -23,6 +23,7 @@ int	init_term(void)
 	config.c_lflag &= ~ECHOCTL;
 	/* printf("vintr = %d\n", config.c_cc[VREPRINT]); */
 	/* signal(SIGQUIT, &sig_exit); */
+	config.c_cc[VINTR] = 3;
 	signal(SIGINT, &sig_nl);
 	if (tcsetattr(0, 0, &config))
 	{
