@@ -4,7 +4,7 @@
 # include <stdio.h>
 # include "../../../libft/includes/libft.h"
 # include "../accumulator/accumulator.h"
-# include "../../glob.h"
+# include "../../glob/glob.h"
 
 typedef enum s_state_expander{
 	Normal = 0,

@@ -39,7 +39,6 @@ int	run_shell(char **envp, int *last_err)
 	t_parser	*parser;
 
 	command = readline("$> ");
-	/* printf("command :%s:\n", command); */
 	if (!command)
 		return (1);
 	add_history(command);

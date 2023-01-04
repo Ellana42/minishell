@@ -1,11 +1,11 @@
 #ifndef GLOB_H
 # define GLOB_H
 
-# include "../libft/includes/libft.h"
-# include "execution/int_list/int_list.h"
-# include "parsing/utils/utils.h"
-# include "parsing/lstutils/lstutils.h"
-# include "error.h"
+# include "../../libft/includes/libft.h"
+# include "../execution/int_list/int_list.h"
+# include "../parsing/utils/utils.h"
+# include "../parsing/lstutils/lstutils.h"
+# include "../error.h"
 
 typedef struct s_export_arg{
 	char	*full_arg;

@@ -11,7 +11,7 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "glob.h"
+# include "glob/glob.h"
 # include "../libft/includes/libft.h"
 
 typedef struct sigaction	t_sa;

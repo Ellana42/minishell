@@ -7,7 +7,7 @@
 # include "../tokenize/tokenize.h"
 # include "../command/command.h"
 # include "../commands/commands.h"
-# include "../../glob.h"
+# include "../../glob/glob.h"
 
 typedef enum s_parser_state{
 	pStart = 0,
