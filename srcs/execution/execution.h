@@ -34,7 +34,6 @@ typedef struct s_str_table {
 	int		size;
 }	t_str_table;
 
-int				init_pipes(int ***pipes, int commands_size);
 int				get_fd_in(int **pipes, int index_cmd);
 int				get_fd_out(int **pipes, int index_cmd, int commands_size);
 int				close_unused_fds(int **pipes, int index_cmd, int commands_size);
@@ -77,6 +76,8 @@ int				execution(t_parser *parser, t_minishell *minishell);
 int				execution_init(t_execution *execution, t_parser *parser, \
 		t_minishell *minishell);
 t_minishell		*execution_get_minishell(t_execution *execution);
-void	execution_print_full(t_execution *execution);
+void			execution_print_full(t_execution *execution);
+void			execution_set_terminal(t_execution *execution, int terminal_i);
+int				init_pipes(int ***pipes, int commands_size);
 
 #endif

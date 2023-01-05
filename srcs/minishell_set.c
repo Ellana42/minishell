@@ -14,5 +14,8 @@ void	minishell_set_terminal(t_minishell *minishell, int terminal_index)
 		signal(SIGINT, &exec_signal_ctrl_c);
 		signal(SIGQUIT, &exec_signal_ctrl_slash);
 	}
+	if (terminal_index == BASE_TERMINAL)
+	{
+	}
 	tcsetattr(STDIN_FILENO, TCSANOW, new_terminal);
 }

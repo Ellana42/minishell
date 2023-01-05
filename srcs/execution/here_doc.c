@@ -1,5 +1,13 @@
 #include "execution.h"
 
+void	eof_err(char *delimiter)
+{
+	ft_putstr_fd("warning: here-document delimited by end-of-file", 2);
+	ft_putstr_fd(" (wanted `", 2);
+	ft_putstr_fd(delimiter, 2);
+	ft_putstr_fd("')\n", 2);
+}
+
 int	get_here_doc(char *delimiter, int fd[2], int len_delimiter)
 {
 	char	*line;
@@ -11,7 +19,10 @@ int	get_here_doc(char *delimiter, int fd[2], int len_delimiter)
 	free(line);
 	end = 0;
 	if (!expanded_line)
+	{
+		eof_err(delimiter);
 		end = 1;
+	}
 	else if (!ft_strncmp(expanded_line, delimiter, len_delimiter + 1))
 		end = 1;
 	else

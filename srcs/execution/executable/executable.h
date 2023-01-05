@@ -17,7 +17,6 @@ typedef struct s_executable {
 
 typedef t_executable	t_exe;
 
-int				init_pipes(int ***pipes, int commands_size);
 int				get_fd_in(int **pipes, int index_cmd);
 int				get_fd_out(int **pipes, int index_cmd, int commands_size);
 int				close_unused_fds(int **pipes, int index_cmd, int commands_size);

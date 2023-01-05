@@ -30,6 +30,7 @@ int	execution_init(t_execution *execution, t_parser *parser, t_minishell *m)
 	execution->executable_index = 0;
 	execution->parser = parser;
 	cmds = parser->commands;
+	execution->minishell = m;
 	if (init_pipes(&execution->pipes, commands_size))
 		return (1);
 	execution->executables = executables_alloc();
@@ -40,7 +41,5 @@ int	execution_init(t_execution *execution, t_parser *parser, t_minishell *m)
 	execution->pids = intlstinit();
 	if (!execution->pids)
 		return (1);
-	glob_set_pids(execution->pids);
-	execution->minishell = m;
 	return (0);
 }

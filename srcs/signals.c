@@ -23,3 +23,10 @@ void	exec_signal_ctrl_c(int signum)
 	(void)signum;
 	glob_set_exit_status(-5);
 }
+
+void	heredoc_signal_ctrl_c(int signum)
+{
+	(void)signum;
+	printf("\n");
+	exit(0);
+}

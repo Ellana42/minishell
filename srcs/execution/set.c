@@ -26,3 +26,11 @@ int	execution_pop_pid(t_execution *execution, int *pid)
 {
 	return (intlst_pop(execution->pids, pid));
 }
+
+void	execution_set_terminal(t_execution *execution, int terminal_index)
+{
+	t_minishell	*minishell;
+
+	minishell = execution_get_minishell(execution);
+	minishell_set_terminal(minishell, terminal_index);
+}

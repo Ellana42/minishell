@@ -1,6 +1,5 @@
 #include "execution.h"
 
-// TODO make sure is freed properly
 int	init_pipes(int ***pipes, int commands_size)
 {
 	int	i;
