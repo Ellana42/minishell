@@ -50,12 +50,12 @@ int	main(int ac, char **av, char **envp)
 	while (glob_get_state() && !err)
 	{
 		err = run_shell(envp, &last_err, minishell);
-		glob_set_exit_status(last_err);
 		if (glob_get_exit_status() == -5)
 		{
 			last_err = 130;
 			printf("\n");
 		}
+		glob_set_exit_status(last_err);
 	}
 	printf("exit\n");
 	minishell_destroy(minishell);
