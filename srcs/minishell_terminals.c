@@ -16,6 +16,7 @@ void	minishell_minishell_terminal_init(t_minishell *minishell)
 
 	minishell_terminal = minishell_get_terminal(minishell, MINISHELL_TERMINAL);
 	minishell_terminal->c_lflag &= ~ECHOCTL;
+	minishell_terminal->c_cc[VQUIT] = NO_KEY;
 }
 
 void	minishell_terminals_init(t_minishell *minishell)

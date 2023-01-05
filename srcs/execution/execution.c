@@ -70,7 +70,6 @@ int	execution(t_parser *parser, t_minishell *minishell)
 	execution = execution_alloc();
 	if (execution_init(execution, parser, minishell))
 		return (execution_finish(execution, 1));
-	execution_print_full(execution);
 	if (execution_is_single_builtin(execution))
 		exit_status = execution_launch_builtin_single(execution);
 	else
