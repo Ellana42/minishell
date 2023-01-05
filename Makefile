@@ -2,6 +2,7 @@ NAME  = minishell
 
 SRCS  =  srcs/main.c \
 	srcs/minishell_get.c \
+	srcs/minishell_display.c \
 	srcs/minishell_set.c \
 	srcs/minishell_init.c \
 	srcs/minishell_terminals.c \

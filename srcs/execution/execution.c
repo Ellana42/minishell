@@ -62,14 +62,15 @@ int	execution_is_single_builtin(t_execution *execution)
 	return (0);
 }
 
-int	execution(t_parser *parser, char **envp)
+int	execution(t_parser *parser, t_minishell *minishell)
 {
 	t_execution		*execution;
 	int				exit_status;
 
 	execution = execution_alloc();
-	if (execution_init(execution, parser, envp))
+	if (execution_init(execution, parser, minishell))
 		return (execution_finish(execution, 1));
+	execution_print_full(execution);
 	if (execution_is_single_builtin(execution))
 		exit_status = execution_launch_builtin_single(execution);
 	else

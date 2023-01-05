@@ -17,7 +17,7 @@ t_execution	*execution_alloc(void)
 	return (execution);
 }
 
-int	execution_init(t_execution *execution, t_parser *parser, char **envp)
+int	execution_init(t_execution *execution, t_parser *parser, t_minishell *m)
 {
 	size_t			commands_size;
 	t_executable	*executable;
@@ -28,7 +28,6 @@ int	execution_init(t_execution *execution, t_parser *parser, char **envp)
 	commands_size = commands_get_size(parser->commands);
 	execution->executables_size = commands_size;
 	execution->executable_index = 0;
-	execution->envp = envp;
 	execution->parser = parser;
 	cmds = parser->commands;
 	if (init_pipes(&execution->pipes, commands_size))
@@ -42,5 +41,6 @@ int	execution_init(t_execution *execution, t_parser *parser, char **envp)
 	if (!execution->pids)
 		return (1);
 	glob_set_pids(execution->pids);
+	execution->minishell = m;
 	return (0);
 }

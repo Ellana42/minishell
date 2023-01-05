@@ -16,6 +16,7 @@
 # include "../glob/glob.h"
 # include "int_list/int_list.h"
 # include "../builtins/builtins.h"
+# include "../minishell_struct.h"
 
 typedef struct s_execution {
 	t_parser		*parser;
@@ -25,7 +26,7 @@ typedef struct s_execution {
 	int				**pipes;
 	int				executables_size;
 	t_intlist		**pids;
-	char			**envp;
+	t_minishell		*minishell;
 }	t_execution;
 
 typedef struct s_str_table {
@@ -55,7 +56,6 @@ void			error(int error_status);
 int				msg(char *str1, char *str2, char *str3, int erno);
 void			free_strs(char *str, char **array_of_strs);
 t_command		*execution_get_current_command(t_execution *execution);
-char			**execution_get_env(t_execution *execution);
 int				execution_fork_process(t_execution *execution);
 int				execution_dup_out(int fd_out);
 int				execution_dup_in(int fd_in);
@@ -67,13 +67,16 @@ int				execution_get_pid(t_execution *execution);
 int				execution_launch_builtin(t_execution *execution);
 int				execution_is_builtin(t_execution *execution);
 int				execution_is_single_builtin(t_execution *execution);
-int				execution(t_parser *parser, char **envp);
-int				execution_init(t_execution *exe, t_parser *parser, char **envp);
 int				execution_is_command(t_execution *execution);
 void			print_pipes(int **pipes);
 char			*get_user_cmd(char *cmd, int *errnum);
 int				execution_launch_builtin_single(t_execution *execution);
 int				execution_launch_exec(t_execution *execution, char *path);
 char			*set_error(int *errnum, int err, char *cmd);
+int				execution(t_parser *parser, t_minishell *minishell);
+int				execution_init(t_execution *execution, t_parser *parser, \
+		t_minishell *minishell);
+t_minishell		*execution_get_minishell(t_execution *execution);
+void	execution_print_full(t_execution *execution);
 
 #endif

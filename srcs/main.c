@@ -2,7 +2,7 @@
 
 t_glob	*g_glob;
 
-int	run_shell(char **envp, int *last_err, t_minishell *minishell)
+int	run_shell(int *last_err, t_minishell *minishell)
 {
 	char		*command;
 	char		*expanded_command;
@@ -26,7 +26,7 @@ int	run_shell(char **envp, int *last_err, t_minishell *minishell)
 	free(expanded_command);
 	*last_err = parser_get_error(parser);
 	if (*last_err == 0)
-		*last_err = execution(parser, envp);
+		*last_err = execution(parser, minishell);
 	parser_destroy(parser);
 	return (0);
 }
@@ -48,7 +48,7 @@ int	main(int ac, char **av, char **envp)
 		return (1);
 	while (glob_get_state() && !err)
 	{
-		err = run_shell(envp, &last_err, minishell);
+		err = run_shell(&last_err, minishell);
 		if (glob_get_exit_status() == -5)
 		{
 			last_err = 130;

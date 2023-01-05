@@ -26,7 +26,7 @@ char	*execution_get_current_command_name(t_execution *execution)
 	return (command_get_name(execution_get_current_command(execution)));
 }
 
-char	**execution_get_env(t_execution *execution)
+t_minishell	*execution_get_minishell(t_execution *execution)
 {
-	return (execution->envp);
+	return (execution->minishell);
 }

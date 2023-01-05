@@ -11,3 +11,9 @@ void	execution_print(t_execution *execution)
 	int_lstprint(*execution->pids);
 	printf("\n");
 }
+
+void	execution_print_full(t_execution *execution)
+{
+	execution_print(execution);
+	minishell_print(execution_get_minishell(execution), 1);
+}
