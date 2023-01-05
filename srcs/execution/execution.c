@@ -76,6 +76,6 @@ int	execution(t_parser *parser, char **envp)
 		exit_status = execution_simple(execution);
 	execution_destroy(execution);
 	if (glob_get_exit_status() == -5)
-		return (130);
+		return (-5);
 	return (exit_status);
 }

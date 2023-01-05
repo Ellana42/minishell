@@ -2,33 +2,24 @@
 
 extern t_glob	*g_glob;
 
-void	signal_ctrl_slash(int signum)
+void	minishell_signal_ctrl_c(int signum)
 {
 	(void)signum;
-	if (glob_is_running())
-	{
-		printf("^\\Quit (Core dumped)\n");
-		if (rl_line_buffer[0])
-			return ;
-		rl_clear_history();
-	}
+	printf("^C\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	glob_set_exit_status(130);
 }
 
-void	signal_ctrl_c(int signum)
+void	exec_signal_ctrl_slash(int signum)
 {
 	(void)signum;
-	if (glob_is_running())
-	{
-		printf("^C\n");
-		rl_on_new_line();
-		glob_set_exit_status(-5);
-	}
-	else
-	{
-		printf("^C\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		glob_set_exit_status(130);
-	}
+	write(1, "Quit (core dumped)\n", 19);
+}
+
+void	exec_signal_ctrl_c(int signum)
+{
+	(void)signum;
+	glob_set_exit_status(-5);
 }

@@ -2,13 +2,15 @@
 
 t_glob	*g_glob;
 
-int	run_shell(char **envp, int *last_err)
+int	run_shell(char **envp, int *last_err, t_minishell *minishell)
 {
 	char		*command;
 	char		*expanded_command;
 	t_parser	*parser;
 
+	minishell_set_terminal(minishell, MINISHELL_TERMINAL);
 	command = readline("$> ");
+	minishell_set_terminal(minishell, BASE_TERMINAL);
 	if (!command)
 		return (1);
 	add_history(command);
@@ -43,13 +45,17 @@ int	main(int ac, char **av, char **envp)
 	minishell = minishell_alloc();
 	if (minishell_init(minishell, envp))
 		return (1);
-	minishell_set_terminal(minishell, MINISHELL_TERMINAL);
 	if (glob_init(last_err, envp))
 		return (1);
 	while (glob_get_state() && !err)
 	{
-		err = run_shell(envp, &last_err);
+		err = run_shell(envp, &last_err, minishell);
 		glob_set_exit_status(last_err);
+		if (glob_get_exit_status() == -5)
+		{
+			last_err = 130;
+			printf("\n");
+		}
 	}
 	printf("exit\n");
 	minishell_destroy(minishell);

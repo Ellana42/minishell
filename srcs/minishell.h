@@ -17,6 +17,8 @@
 # define BASE_TERMINAL 0
 # define MINISHELL_TERMINAL 1
 # define HEREDOC_TERMINAL 2
+# define NO_KEY 0
+# define CTRL_C 3
 
 typedef struct s_minishell {
 	struct termios	terminal[3];
@@ -25,19 +27,16 @@ typedef struct s_minishell {
 
 typedef struct sigaction	t_sa;
 
-/* int			init_sa(t_sa *sa_c); */
-void		signal_reset_prompt(int signo);
-void		set_signals_interactive(void);
-void		signal_print_newline(int signal);
-void		set_signals_noninteractive(void);
-void		signal_ctrl_c(int signum);
-void		signal_ctrl_slash(int signum);
-void		minishell_destroy(t_minishell *minishell);
-t_minishell	*minishell_alloc(void);
-int			minishell_init(t_minishell *minishell, char **envp);
-t_list	**minishell_get_env(t_minishell *minishell);
+void			minishell_destroy(t_minishell *minishell);
+t_minishell		*minishell_alloc(void);
+int				minishell_init(t_minishell *minishell, char **envp);
+t_list			**minishell_get_env(t_minishell *minishell);
 struct termios	*minishell_get_terminal(t_minishell *minishell, int term_index);
-void	minishell_set_terminal(t_minishell *minishell, int terminal_index);
-void	minishell_terminals_init(t_minishell *minishell);
+void			minishell_set_terminal(t_minishell *minishell, int term_index);
+void			minishell_terminals_init(t_minishell *minishell);
+void			exec_signal_ctrl_slash(int signum);
+void			exec_signal_ctrl_c(int signum);
+void			minishell_signal_ctrl_c(int signum);
+void			minishell_signal_ctrl_slash(int signum);
 
 #endif
