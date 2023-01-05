@@ -13,9 +13,8 @@ int	run_shell(char **envp, int *last_err, t_minishell *minishell)
 	minishell_set_terminal(minishell, BASE_TERMINAL);
 	if (!command)
 		return (1);
-	add_history(command);
-	if (!command)
-		return (1);
+	if (*command != '\0')
+		add_history(command);
 	expanded_command = expand(command, glob_get_exit_status());
 	if (!expanded_command)
 	{
