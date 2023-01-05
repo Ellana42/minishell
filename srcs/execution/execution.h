@@ -18,17 +18,6 @@
 # include "../builtins/builtins.h"
 # include "../minishell_struct.h"
 
-typedef struct s_execution {
-	t_parser		*parser;
-	t_executable	*current_executable;
-	t_executables	*executables;
-	int				executable_index;
-	int				**pipes;
-	int				executables_size;
-	t_intlist		**pids;
-	t_minishell		*minishell;
-}	t_execution;
-
 typedef struct s_str_table {
 	char	**table;
 	int		size;
@@ -59,7 +48,6 @@ int				execution_fork_process(t_execution *execution);
 int				execution_dup_out(int fd_out);
 int				execution_dup_in(int fd_in);
 int				is_dir(char *path);
-int				execution_get_heredoc(char *delimiter, int fd[2]);
 int				execution_store_pid(t_execution *execution, int pid);
 int				execution_pop_pid(t_execution *execution, int *pid);
 int				execution_get_pid(t_execution *execution);
@@ -79,5 +67,8 @@ t_minishell		*execution_get_minishell(t_execution *execution);
 void			execution_print_full(t_execution *execution);
 void			execution_set_terminal(t_execution *execution, int terminal_i);
 int				init_pipes(int ***pipes, int commands_size);
+int				execution_get_heredoc(t_execution *execution, char *delimiter, \
+		t_executable *executable, int index);
+int				clean_table_in(int **in_table, t_command *cmd);
 
 #endif

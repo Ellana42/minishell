@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "minishell_struct.h"
 
 extern t_glob	*g_glob;
 

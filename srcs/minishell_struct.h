@@ -33,6 +33,7 @@ void			exec_signal_ctrl_slash(int signum);
 void			exec_signal_ctrl_c(int signum);
 void			minishell_signal_ctrl_c(int signum);
 void			minishell_signal_ctrl_slash(int signum);
-void	minishell_print(t_minishell *minishell, t_bool print_env);
+void			minishell_print(t_minishell *minishell, t_bool print_env);
+void			heredoc_signal_ctrl_c(int signum);
 
 #endif

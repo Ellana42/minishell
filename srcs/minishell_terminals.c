@@ -7,7 +7,6 @@ void	minishell_heredoc_terminal_init(t_minishell *minishell)
 	heredoc_terminal = minishell_get_terminal(minishell, HEREDOC_TERMINAL);
 	heredoc_terminal->c_lflag &= ~ECHOCTL;
 	heredoc_terminal->c_cc[VINTR] = NO_KEY;
-	heredoc_terminal->c_cc[VQUIT] = CTRL_C;
 }
 
 void	minishell_minishell_terminal_init(t_minishell *minishell)

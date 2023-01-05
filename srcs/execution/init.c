@@ -34,8 +34,10 @@ int	execution_init(t_execution *execution, t_parser *parser, t_minishell *m)
 	if (init_pipes(&execution->pipes, commands_size))
 		return (1);
 	execution->executables = executables_alloc();
-	if (executables_init(execution->executables, cmds, execution->pipes))
+	execution_set_terminal(execution, HEREDOC_TERMINAL);
+	if (executables_init(execution, cmds))
 		return (1);
+	execution_set_terminal(execution, BASE_TERMINAL);
 	executable = executables_get_i(execution->executables, 0);
 	execution->current_executable = executable;
 	execution->pids = intlstinit();

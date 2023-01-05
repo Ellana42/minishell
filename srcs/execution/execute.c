@@ -54,6 +54,7 @@ int	execution_child(t_execution *execution)
 	if (!err)
 		execution_launch_child(execution, err, fd, path);
 	close_pipe(fd);
+	minishell_destroy(execution->minishell);
 	parser_destroy(execution->parser);
 	execution_destroy(execution);
 	glob_destroy();

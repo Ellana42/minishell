@@ -6,7 +6,7 @@
 
 typedef t_list	*t_executables;
 
-int				executables_init(t_executables *exs, t_commands *cmds, int **p);
+int				executables_init(t_execution *execution, t_commands *cmds);
 t_executables	*executables_alloc(void);
 void			executables_destroy(t_executables *executables);
 void			executables_print(t_executables *executables);
