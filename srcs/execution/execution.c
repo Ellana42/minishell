@@ -24,7 +24,6 @@ int	execution_wait_processes(t_execution *execution)
 			exit_status = WEXITSTATUS(status);
 		continue ;
 	}
-	glob_set_pids(NULL);
 	return (exit_status);
 }
 

@@ -21,15 +21,11 @@ typedef struct s_dict {
 
 typedef struct s_glob {
 	int			activated;
-	t_intlist	***pids;
 	int			exit_status;
 	t_list		***env;
 }	t_glob;
 
-int			glob_pop_pid(int *pid);
-t_intlist	**glob_get_pids(void);
 void		glob_destroy(void);
-void		glob_set_pids(t_intlist **pids);
 int			glob_is_running(void);
 int			glob_init(int error, char **envp);
 void		glob_print(t_bool print_env);
@@ -52,6 +48,5 @@ int			glob_env_replace_var(char *var, char *new_value);
 void		glob_set_env(t_list **env);
 int			glob_remove_var(char *var);
 int			glob_env_has_var(char *var);
-int			glob_get_last_pid(void);
 
 #endif
