@@ -27,6 +27,8 @@ void	exec_signal_ctrl_c(int signum)
 void	heredoc_signal_ctrl_c(int signum)
 {
 	(void)signum;
+	close(glob_get_exit_status());
+	glob_destroy();
 	printf("^C\n");
 	exit(0);
 }

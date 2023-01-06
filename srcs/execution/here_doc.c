@@ -58,8 +58,6 @@ int	execution_get_heredoc(t_execution *execution, char *delimiter, \
 	int		last_exit_status;
 	char	delimiter_str[4096];
 
-	fd[0] = (executable->in_files)[index][0];
-	fd[1] = (executable->in_files)[index][1];
 	last_exit_status = glob_get_exit_status();
 	if (ft_strlen(delimiter) + 1 > 4096)
 	{
@@ -69,22 +67,25 @@ int	execution_get_heredoc(t_execution *execution, char *delimiter, \
 	ft_strlcpy(delimiter_str, delimiter, ft_strlen(delimiter) + 1);
 	if (pipe((executable->in_files)[index]) == -1)
 		(executable->in_files)[index][0] = -1;
+	fd[0] = (executable->in_files)[index][0];
+	fd[1] = (executable->in_files)[index][1];
 	execution_set_terminal(execution, HEREDOC_TERMINAL);
 	pid = fork();
 	if (pid == -1)
 		return (1);
 	if (pid == 0)
 	{
-		close((executable->in_files)[index][0]);
-		close((executable->in_files)[index][1]);
+		glob_set_exit_status(fd[1]);
+		close(fd[0]);
 		clean_table_in(executable->in_files, executable->command);
 		free(executable->in_files);
 		free(executable);
 		minishell_destroy(execution->minishell);
 		parser_destroy(execution->parser);
 		execution_destroy(execution);
-		glob_destroy();
 		status = get_heredoc_loop(delimiter_str, fd, last_exit_status);
+		close(glob_get_exit_status());
+		glob_destroy();
 		exit(status);
 	}
 	else
@@ -94,6 +95,7 @@ int	execution_get_heredoc(t_execution *execution, char *delimiter, \
 		if (pid == glob_get_last_pid())
 			status = WEXITSTATUS(status);
 		execution_set_terminal(execution, BASE_TERMINAL);
+		glob_set_exit_status(last_exit_status);
 	}
 	return (status);
 }
