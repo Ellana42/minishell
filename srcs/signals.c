@@ -16,6 +16,7 @@ void	exec_signal_ctrl_slash(int signum)
 {
 	(void)signum;
 	write(1, "Quit (core dumped)\n", 19);
+	glob_set_exit_status(131);
 }
 
 void	exec_signal_ctrl_c(int signum)
