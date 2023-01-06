@@ -13,7 +13,7 @@ int	expand_errnum(t_expander *expander)
 	return (0);
 }
 
-int	expand_single_dollar(t_expander *expander)
+int	expand_single_dollar_normal(t_expander *expander)
 {
 	char	c;
 
@@ -33,7 +33,7 @@ int	expand_normal(t_expander *expander)
 			return (expand_errnum(expander));
 		if (!ft_isalnum(expander_get_next_char(expander, 1)) \
 				&& !(expander_get_next_char(expander, 1) == '_'))
-			return (expand_single_dollar(expander));
+			return (expand_single_dollar_normal(expander));
 		expander->state = Variable;
 		expander_move_cursor(expander);
 		return (0);
@@ -80,7 +80,10 @@ int	expand_dquote(t_expander *expander)
 			return (expand_errnum(expander));
 		if (!ft_isalnum(expander_get_next_char(expander, 1)) \
 				&& !(expander_get_next_char(expander, 1) == '_'))
-			return (expand_single_dollar(expander));
+		{
+			expander_accumulate(expander);
+			return (0);
+		}
 		expander->state = DVariable;
 		expander_move_cursor(expander);
 		return (0);
