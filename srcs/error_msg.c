@@ -29,3 +29,9 @@ int	error_msg2(char *cmd, char *cmd2, char *issue, int err)
 	ft_putstr_fd("\n", 2);
 	return (err);
 }
+
+int	set_errnum(int *error, int error_value, int return_value)
+{
+	*error = error_value;
+	return (return_value);
+}

@@ -17,10 +17,7 @@ int	run_shell(int *last_err, t_minishell *minishell)
 		add_history(command);
 	expanded_command = expand(command, glob_get_exit_status());
 	if (!expanded_command)
-	{
-		*last_err = 1;
-		return (0);
-	}
+		return (set_errnum(last_err, 1, 0));
 	free(command);
 	parser = parse(expanded_command, glob_get_exit_status());
 	free(expanded_command);
@@ -33,11 +30,26 @@ int	run_shell(int *last_err, t_minishell *minishell)
 	return (0);
 }
 
+int	shell_loop(int *last_err, t_minishell *minishell)
+{
+	int			err;
+
+	err = 0;
+	err = run_shell(last_err, minishell);
+	if (glob_get_exit_status() == -5)
+	{
+		*last_err = 130;
+		printf("\n");
+	}
+	glob_set_exit_status(*last_err);
+	return (err);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	int			last_err;
-	int			err;
 	t_minishell	*minishell;
+	int			err;
 
 	(void )av;
 	last_err = 0;
@@ -50,15 +62,7 @@ int	main(int ac, char **av, char **envp)
 	if (glob_init(last_err, envp))
 		return (1);
 	while (glob_get_state() && !err)
-	{
-		err = run_shell(&last_err, minishell);
-		if (glob_get_exit_status() == -5)
-		{
-			last_err = 130;
-			printf("\n");
-		}
-		glob_set_exit_status(last_err);
-	}
+		err = shell_loop(&last_err, minishell);
 	printf("exit\n");
 	minishell_destroy(minishell);
 	rl_clear_history();
