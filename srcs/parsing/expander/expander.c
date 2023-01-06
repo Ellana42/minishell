@@ -55,10 +55,11 @@ char	*finish_expansion(t_expander *expander, int err)
 		acc_expanded_var(expander);
 	if (expander->state == DQuote || expander->state == SQuote)
 	{
+		ft_putstr_fd("minishell: unexpected EOF while looking for matching", 2);
 		if (expander->state == DQuote)
-			ft_putstr_fd("unexpected EOF while looking for matching `\"'\n", 2);
+			ft_putstr_fd(" `\"'\n", 2);
 		if (expander->state == SQuote)
-			ft_putstr_fd("unexpected EOF while looking for matching `\''\n", 2);
+			ft_putstr_fd(" `\''\n", 2);
 		expander_destroy(expander);
 		return (NULL);
 	}
