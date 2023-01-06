@@ -11,7 +11,6 @@ t_execution	*execution_alloc(void)
 		return (execution);
 	execution->pipes = NULL;
 	execution->executables = NULL;
-	execution->pids = NULL;
 	execution->current_executable = NULL;
 	execution->parser = NULL;
 	return (execution);
@@ -40,8 +39,5 @@ int	execution_init(t_execution *execution, t_parser *parser, t_minishell *m)
 	execution_set_terminal(execution, BASE_TERMINAL);
 	executable = executables_get_i(execution->executables, 0);
 	execution->current_executable = executable;
-	execution->pids = intlstinit();
-	if (!execution->pids)
-		return (1);
 	return (0);
 }

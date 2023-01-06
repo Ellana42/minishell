@@ -32,6 +32,7 @@ int	init_in_table(int ***table, int size)
 		(*table)[i][1] = -1;
 		i++;
 	}
+	(*table)[i] = NULL;
 	return (0);
 }
 
@@ -43,7 +44,7 @@ int	get_in_table(t_executable *exe, t_execution *execution, char **name)
 
 	i = 0;
 	exe->in_size = (int )ft_lstsize(*command_get_in(exe->command));
-	exe->in_files = (int **)malloc(sizeof(int *) * (exe->in_size + 1));
+	exe->in_files = (int **)malloc(sizeof(int *) * (exe->in_size + 2));
 	if (!(exe->in_files))
 		return (1);
 	if (init_in_table(&(exe->in_files), exe->in_size))

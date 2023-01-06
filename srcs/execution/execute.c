@@ -70,7 +70,5 @@ int	execution_fork_process(t_execution *execution)
 		return (1);
 	if (pid == 0)
 		exit(execution_child(execution));
-	else
-		execution_store_pid(execution, pid);
 	return (0);
 }

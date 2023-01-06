@@ -5,6 +5,10 @@ t_executable	*executable_alloc(void)
 	t_executable	*executable;
 
 	executable = (t_executable *)malloc(sizeof(t_executable));
+	if (!executable)
+		return (executable);
+	executable->in_files = NULL;
+	executable->out_files = NULL;
 	return (executable);
 }
 

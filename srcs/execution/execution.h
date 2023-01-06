@@ -69,6 +69,7 @@ void			execution_set_terminal(t_execution *execution, int terminal_i);
 int				init_pipes(int ***pipes, int commands_size);
 int				execution_get_heredoc(t_execution *execution, char *delimiter, \
 		t_executable *executable, int index);
-int				clean_table_in(int **in_table, t_command *cmd);
+int				clean_table_in(int **in_table, t_command *command);
+void			executable_destroy(t_executable *executable);
 
 #endif

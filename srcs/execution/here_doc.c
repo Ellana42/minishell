@@ -77,9 +77,7 @@ int	execution_get_heredoc(t_execution *execution, char *delimiter, \
 	{
 		glob_set_exit_status(fd[1]);
 		close(fd[0]);
-		clean_table_in(executable->in_files, executable->command);
-		free(executable->in_files);
-		free(executable);
+		executable_destroy(executable);
 		minishell_destroy(execution->minishell);
 		parser_destroy(execution->parser);
 		execution_destroy(execution);
@@ -95,6 +93,8 @@ int	execution_get_heredoc(t_execution *execution, char *delimiter, \
 		if (pid == glob_get_last_pid())
 			status = WEXITSTATUS(status);
 		execution_set_terminal(execution, BASE_TERMINAL);
+		close(fd[0]);
+		close(fd[1]);
 		glob_set_exit_status(last_exit_status);
 	}
 	return (status);
