@@ -108,21 +108,21 @@ char	*get_user_cmd(char *cmd, int *errnum)
 		return (set_error(errnum, 126, cmd));
 	if (cmd[0] == '\0')
 		return (set_error(errnum, 127, cmd));
+	if (cmd[0] == '/' && access(cmd, F_OK | X_OK))
+		return (set_error(errnum, 130, cmd));
+	if (ft_strlen(cmd) > 1)
+	{
+		if (cmd[0] == '.' && cmd[1] == '/' && access(cmd, F_OK | X_OK))
+			return (set_error(errnum, 131, cmd));
+	}
 	if (access(cmd, F_OK | X_OK) == 0)
 		return (ft_strdup(cmd));
 	env_paths = fill_array_of_paths();
 	if (!env_paths)
-	{
-		error_msg(cmd, "No such file or directory", 0);
-		*errnum = 127;
-		return (NULL);
-	}
+		return (set_error(errnum, 131, cmd));
 	path_ultime = get_valid_path(cmd, env_paths, errnum);
 	if (!path_ultime)
-	{
-		error_msg(cmd, "command not found", 0);
-		*errnum = 127;
-	}
+		set_error(errnum, 127, cmd);
 	free_strs(NULL, env_paths);
 	return (path_ultime);
 }

@@ -61,5 +61,15 @@ char	*set_error(int *errnum, int err, char *cmd)
 		error_msg(cmd, "command not found", 0);
 		*errnum = 127;
 	}
+	if (err == 130)
+	{
+		error_msg(cmd, "Not a directory", 0);
+		*errnum = 126;
+	}
+	if (err == 131)
+	{
+		error_msg(cmd, "No such file or directory", 0);
+		*errnum = 127;
+	}
 	return (NULL);
 }
