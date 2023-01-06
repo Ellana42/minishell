@@ -8,14 +8,14 @@ void	eof_err(char *delimiter)
 	ft_putstr_fd("')\n", 2);
 }
 
-int	get_here_doc(char *delimiter, int fd[2], int len_delimiter)
+int	get_here_doc(char *delimiter, int fd[2], int len_delimiter, int exit)
 {
 	char	*line;
 	char	*expanded_line;
 	int		end;
 
 	line = readline("> ");
-	expanded_line = expand(line, glob_get_exit_status());
+	expanded_line = expand(line, exit);
 	free(line);
 	end = 0;
 	if (!expanded_line)
@@ -34,7 +34,7 @@ int	get_here_doc(char *delimiter, int fd[2], int len_delimiter)
 	return (end);
 }
 
-int	get_heredoc_loop(char *delimiter, int fd[2])
+int	get_heredoc_loop(char *delimiter, int fd[2], int last_exit_status)
 {
 	char	eof;
 	int		len_delimiter;
@@ -44,7 +44,7 @@ int	get_heredoc_loop(char *delimiter, int fd[2])
 	eof = 0;
 	len_delimiter = ft_strlen(delimiter);
 	while (!end)
-		end = get_here_doc(delimiter, fd, len_delimiter);
+		end = get_here_doc(delimiter, fd, len_delimiter, last_exit_status);
 	write(fd[1], &eof, 1);
 	return (0);
 }
@@ -52,17 +52,29 @@ int	get_heredoc_loop(char *delimiter, int fd[2])
 int	execution_get_heredoc(t_execution *execution, char *delimiter, \
 		t_executable *executable, int index)
 {
-	int	pid;
-	int	status;
+	int		pid;
+	int		status;
+	int		fd[2];
+	int		last_exit_status;
+	char	delimiter_str[4096];
 
+	fd[0] = (executable->in_files)[index][0];
+	fd[1] = (executable->in_files)[index][1];
+	last_exit_status = glob_get_exit_status();
+	if (ft_strlen(delimiter) + 1 > 4096)
+	{
+		printf("Delimiter string too long\n");
+		return (1);
+	}
+	ft_strlcpy(delimiter_str, delimiter, ft_strlen(delimiter) + 1);
 	if (pipe((executable->in_files)[index]) == -1)
 		(executable->in_files)[index][0] = -1;
+	execution_set_terminal(execution, HEREDOC_TERMINAL);
 	pid = fork();
 	if (pid == -1)
 		return (1);
 	if (pid == 0)
 	{
-		status = get_heredoc_loop(delimiter, (executable->in_files)[index]);
 		close((executable->in_files)[index][0]);
 		close((executable->in_files)[index][1]);
 		clean_table_in(executable->in_files, executable->command);
@@ -72,10 +84,12 @@ int	execution_get_heredoc(t_execution *execution, char *delimiter, \
 		parser_destroy(execution->parser);
 		execution_destroy(execution);
 		glob_destroy();
+		status = get_heredoc_loop(delimiter_str, fd, last_exit_status);
 		exit(status);
 	}
 	else
 	{
+		execution_set_terminal(execution, BASE_TERMINAL);
 		pid = waitpid(-1, &status, 0);
 		if (pid == glob_get_last_pid())
 			status = WEXITSTATUS(status);

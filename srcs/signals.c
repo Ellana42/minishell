@@ -27,6 +27,6 @@ void	exec_signal_ctrl_c(int signum)
 void	heredoc_signal_ctrl_c(int signum)
 {
 	(void)signum;
-	printf("\n");
+	printf("^C\n");
 	exit(0);
 }
