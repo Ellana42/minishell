@@ -69,14 +69,11 @@ int	execution_get_heredoc(t_execution *execution, char *delimiter, \
 	int		status;
 	int		fd[2];
 	int		last_exit_status;
-	char	delimiter_str[4096];
+	char	delimiter_str[MAX_DELIMITER];
 
 	last_exit_status = glob_get_exit_status();
-	if (ft_strlen(delimiter) + 1 > 4096)
-	{
-		printf("Delimiter string too long\n");
-		return (1);
-	}
+	if (ft_strlen(delimiter) + 1 > MAX_DELIMITER)
+		return (error_msg3("Delimiter string too long", 1));
 	ft_strlcpy(delimiter_str, delimiter, ft_strlen(delimiter) + 1);
 	if (pipe((executable->in_files)[index]) == -1)
 		(executable->in_files)[index][0] = -1;

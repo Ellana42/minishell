@@ -18,6 +18,8 @@
 # include "../builtins/builtins.h"
 # include "../minishell_struct.h"
 
+# define MAX_DELIMITER 4096
+
 typedef struct s_str_table {
 	char	**table;
 	int		size;
