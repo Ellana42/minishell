@@ -31,7 +31,8 @@ int	expand_normal(t_expander *expander)
 	{
 		if (expander_get_next_char(expander, 1) == '?')
 			return (expand_errnum(expander));
-		if (!ft_isalnum(expander_get_next_char(expander, 1)))
+		if (!ft_isalnum(expander_get_next_char(expander, 1)) \
+				&& !(expander_get_next_char(expander, 1) == '_'))
 			return (expand_single_dollar(expander));
 		expander->state = Variable;
 		expander_move_cursor(expander);
@@ -77,7 +78,8 @@ int	expand_dquote(t_expander *expander)
 	{
 		if (expander_get_next_char(expander, 1) == '?')
 			return (expand_errnum(expander));
-		if (!ft_isalnum(expander_get_next_char(expander, 1)))
+		if (!ft_isalnum(expander_get_next_char(expander, 1)) \
+				&& !(expander_get_next_char(expander, 1) == '_'))
 			return (expand_single_dollar(expander));
 		expander->state = DVariable;
 		expander_move_cursor(expander);
