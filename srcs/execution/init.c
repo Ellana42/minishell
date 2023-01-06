@@ -13,6 +13,7 @@ t_execution	*execution_alloc(void)
 	execution->executables = NULL;
 	execution->current_executable = NULL;
 	execution->parser = NULL;
+	execution->last_pid = 0;
 	return (execution);
 }
 

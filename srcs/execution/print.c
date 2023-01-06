@@ -7,8 +7,7 @@ void	execution_print(t_execution *execution)
 	printf("Pipes : \n");
 	print_pipes(execution->pipes);
 	printf("Executable size : %d\n", (int )execution->executables_size);
-	printf("Pids : ");
-	int_lstprint(*execution->pids);
+	printf("Last pid : %d\n", execution->last_pid);
 	printf("\n");
 }
 

@@ -40,7 +40,6 @@ int	execution_child(t_execution *execution)
 	char			*path;
 
 	err = 0;
-	path = NULL;
 	executable = execution_get_current(execution);
 	executable_get_fds_close(executable, fd);
 	execution_close_unused(execution, execution->executable_index);
@@ -70,5 +69,7 @@ int	execution_fork_process(t_execution *execution)
 		return (1);
 	if (pid == 0)
 		exit(execution_child(execution));
+	else
+		execution->last_pid = pid;
 	return (0);
 }

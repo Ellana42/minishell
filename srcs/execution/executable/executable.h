@@ -26,8 +26,8 @@ typedef struct s_execution {
 	int				executable_index;
 	int				**pipes;
 	int				executables_size;
-	t_intlist		**pids;
 	t_minishell		*minishell;
+	int				last_pid;
 }	t_execution;
 
 int				get_fd_in(int **pipes, int index_cmd);

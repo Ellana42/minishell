@@ -20,7 +20,7 @@ int	execution_wait_processes(t_execution *execution)
 	while (pid != -1 || errno != ECHILD)
 	{
 		pid = waitpid(-1, &status, 0);
-		if (pid == glob_get_last_pid())
+		if (pid == execution->last_pid)
 			exit_status = WEXITSTATUS(status);
 		continue ;
 	}
