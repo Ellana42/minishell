@@ -37,10 +37,11 @@ int	main(int ac, char **av, char **envp)
 	int			err;
 	t_minishell	*minishell;
 
-	(void )ac;
 	(void )av;
 	last_err = 0;
 	err = 0;
+	if (ac > 1)
+		return (error_msg3("Too many arguments", 1));
 	minishell = minishell_alloc();
 	if (minishell_init(minishell, envp))
 		return (1);
