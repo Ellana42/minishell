@@ -70,7 +70,9 @@ int	execution_get_heredoc(t_execution *execution, char *delimiter, \
 	int		fd[2];
 	int		last_exit_status;
 	char	delimiter_str[MAX_DELIMITER];
+	int		i;
 
+	i = 0;
 	last_exit_status = glob_get_exit_status();
 	if (ft_strlen(delimiter) + 1 > MAX_DELIMITER)
 		return (error_msg3("Delimiter string too long", 1));
@@ -87,6 +89,11 @@ int	execution_get_heredoc(t_execution *execution, char *delimiter, \
 	{
 		glob_set_exit_status(fd[1]);
 		close(fd[0]);
+		while (i < pipes_get_size(execution->pipes))
+		{
+			close_pipe(execution->pipes[i]);
+			i++;
+		}
 		close_precedent_infiles(executable, index);
 		executable_destroy(executable);
 		minishell_destroy(execution->minishell);

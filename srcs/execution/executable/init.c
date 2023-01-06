@@ -33,6 +33,8 @@ int	executable_init(t_execution *execution, t_executable *exe, t_command *cmd, \
 	if (!exe)
 		return (1);
 	exe->command = cmd;
+	if (extecutable_file_init(execution, exe))
+		return (1);
 	if (index == 0)
 		exe->in_pipe = NULL;
 	else
@@ -41,7 +43,5 @@ int	executable_init(t_execution *execution, t_executable *exe, t_command *cmd, \
 		exe->out_pipe = NULL;
 	else
 		exe->out_pipe = execution->pipes[index];
-	if (extecutable_file_init(execution, exe))
-		return (1);
 	return (0);
 }
