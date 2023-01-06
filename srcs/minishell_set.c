@@ -18,5 +18,10 @@ void	minishell_set_terminal(t_minishell *minishell, int terminal_index)
 	{
 		signal(SIGINT, &heredoc_signal_ctrl_c);
 	}
+	if (terminal_index == HEREDOC_WAIT_TERMINAL)
+	{
+		signal(SIGINT, &exec_signal_ctrl_c);
+		signal(SIGQUIT, &exec_signal_ctrl_slash);
+	}
 	tcsetattr(STDIN_FILENO, TCSANOW, new_terminal);
 }

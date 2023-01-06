@@ -89,10 +89,11 @@ int	execution_get_heredoc(t_execution *execution, char *delimiter, \
 	}
 	else
 	{
-		execution_set_terminal(execution, BASE_TERMINAL);
+		execution_set_terminal(execution, HEREDOC_WAIT_TERMINAL);
 		pid = waitpid(-1, &status, 0);
 		if (pid == glob_get_last_pid())
 			status = WEXITSTATUS(status);
+		execution_set_terminal(execution, BASE_TERMINAL);
 	}
 	return (status);
 }

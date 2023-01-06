@@ -14,11 +14,12 @@
 # define BASE_TERMINAL 0
 # define MINISHELL_TERMINAL 1
 # define HEREDOC_TERMINAL 2
+# define HEREDOC_WAIT_TERMINAL 3
 # define NO_KEY 0
 # define CTRL_C 3
 
 typedef struct s_minishell {
-	struct termios	terminal[3];
+	struct termios	terminal[4];
 	t_list			***env;
 }	t_minishell;
 
