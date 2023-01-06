@@ -6,7 +6,7 @@
 /*   By: ellana <mtmrkaploun@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:02:45 by ellana            #+#    #+#             */
-/*   Updated: 2023/01/02 18:19:16 by mkaploun         ###   ########.fr       */
+/*   Updated: 2023/01/06 18:34:26 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	cd_check_args(char **args_table)
 	if (table_get_size(args_table) == 1)
 	{
 		error_msg("cd", "No path provided", 0);
-		return (0);
+		return (1);
 	}
 	if (!path_exists(args_table[1]))
 	{
