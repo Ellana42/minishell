@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "minishell_struct.h"
 
 void	minishell_heredoc_terminal_init(t_minishell *minishell)
 {
@@ -29,7 +29,7 @@ void	minishell_heredoc_wait_terminal_init(t_minishell *minishell)
 	terminal->c_cc[VQUIT] = NO_KEY;
 }
 
-void	minishell_terminals_init(t_minishell *minishell)
+int	minishell_terminals_init(t_minishell *minishell)
 {
 	struct termios	*base_terminal;
 	struct termios	*minishell_terminal;
@@ -37,6 +37,11 @@ void	minishell_terminals_init(t_minishell *minishell)
 	struct termios	*heredoc_wait_terminal;
 
 	rl_catch_signals = 0;
+	if (!isatty(STDIN_FILENO))
+	{
+		minishell_destroy(minishell);
+		return (error_msg3("Input is not a tty", 1));
+	}
 	base_terminal = &minishell->terminal[BASE_TERMINAL];
 	minishell_terminal = &minishell->terminal[MINISHELL_TERMINAL];
 	heredoc_terminal = &minishell->terminal[HEREDOC_TERMINAL];
@@ -48,4 +53,5 @@ void	minishell_terminals_init(t_minishell *minishell)
 	minishell_minishell_terminal_init(minishell);
 	minishell_heredoc_terminal_init(minishell);
 	minishell_heredoc_wait_terminal_init(minishell);
+	return (0);
 }

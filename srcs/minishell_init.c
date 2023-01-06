@@ -22,7 +22,8 @@ int	minishell_init(t_minishell *minishell, char **envp)
 		return (1);
 	if (!*minishell->env)
 		return (1);
-	minishell_terminals_init(minishell);
+	if (minishell_terminals_init(minishell))
+		return (1);
 	return (0);
 }
 
