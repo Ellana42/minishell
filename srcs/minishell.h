@@ -14,4 +14,6 @@
 # include "glob/glob.h"
 # include "../libft/includes/libft.h"
 
+# define MAX_PIPES 200
+
 #endif

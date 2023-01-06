@@ -25,6 +25,8 @@ int	run_shell(int *last_err, t_minishell *minishell)
 	parser = parse(expanded_command, glob_get_exit_status());
 	free(expanded_command);
 	*last_err = parser_get_error(parser);
+	if (commands_get_size(parser->commands) > MAX_PIPES)
+		*last_err = error_msg3("Too many pipes", 1);
 	if (*last_err == 0)
 		*last_err = execution(parser, minishell);
 	parser_destroy(parser);
