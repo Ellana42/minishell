@@ -16,6 +16,7 @@ int	run_shell(int *last_err, t_minishell *minishell)
 	if (*command != '\0')
 		add_history(command);
 	expanded_command = expand(command, glob_get_exit_status());
+	glob_set_exit_status(0);
 	if (!expanded_command)
 		return (set_errnum(last_err, 1, 0));
 	free(command);
@@ -36,12 +37,7 @@ int	shell_loop(int *last_err, t_minishell *minishell)
 
 	err = 0;
 	err = run_shell(last_err, minishell);
-	if (glob_get_exit_status() == -5)
-	{
-		*last_err = 130;
-		printf("\n");
-	}
-	glob_set_exit_status(*last_err);
+	*last_err = glob_get_exit_status();
 	return (err);
 }
 

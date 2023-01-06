@@ -20,8 +20,16 @@ int	execution_wait_processes(t_execution *execution)
 	while (pid != -1 || errno != ECHILD)
 	{
 		pid = waitpid(-1, &status, 0);
-		if (pid == execution->last_pid)
+		if (WIFSIGNALED(status))
+			exit_status = 128 + WTERMSIG(status);
+		else if (WIFEXITED(status))
 			exit_status = WEXITSTATUS(status);
+		if (exit_status == 130 && pid != -1)
+			printf("\n");
+		if (pid == execution->last_pid)
+		{
+			glob_set_exit_status(exit_status);
+		}
 		continue ;
 	}
 	return (exit_status);
@@ -74,7 +82,5 @@ int	execution(t_parser *parser, t_minishell *minishell)
 	else
 		exit_status = execution_simple(execution);
 	execution_destroy(execution);
-	if (glob_get_exit_status() == -5)
-		return (-5);
 	return (exit_status);
 }
