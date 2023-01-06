@@ -1,5 +1,18 @@
 #include "execution.h"
 
+void	close_precedent_infiles(t_executable *executable, int index)
+{
+	int	i;
+
+	i = 0;
+	while (i < index)
+	{
+		close_fd((executable->in_files)[i][0]);
+		close_fd((executable->in_files)[i][1]);
+		i++;
+	}
+}
+
 void	eof_err(char *delimiter)
 {
 	ft_putstr_fd("warning: here-document delimited by end-of-file", 2);
@@ -77,6 +90,7 @@ int	execution_get_heredoc(t_execution *execution, char *delimiter, \
 	{
 		glob_set_exit_status(fd[1]);
 		close(fd[0]);
+		close_precedent_infiles(executable, index);
 		executable_destroy(executable);
 		minishell_destroy(execution->minishell);
 		parser_destroy(execution->parser);
@@ -93,8 +107,6 @@ int	execution_get_heredoc(t_execution *execution, char *delimiter, \
 		if (pid == glob_get_last_pid())
 			status = WEXITSTATUS(status);
 		execution_set_terminal(execution, BASE_TERMINAL);
-		close(fd[0]);
-		close(fd[1]);
 		glob_set_exit_status(last_exit_status);
 	}
 	return (status);
