@@ -13,6 +13,26 @@ void	close_precedent_infiles(t_executable *executable, int index)
 	}
 }
 
+// TODO close every fd for executables before current executable
+int	close_everything(t_execution *execution, int index)
+{
+	int				i;
+	t_executable	*executable;
+
+	i = 0;
+	while (i < execution->executables_size)
+	{
+		if (i < index)
+		{
+			executable = execution_get_executable_i(execution, i);
+			if (executable_close_files(executable))
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 void	eof_err(char *delimiter)
 {
 	ft_putstr_fd("warning: here-document delimited by end-of-file", 2);
@@ -95,6 +115,7 @@ int	execution_get_heredoc(t_execution *execution, char *delimiter, \
 			i++;
 		}
 		close_precedent_infiles(executable, index);
+		close_everything(execution, executable->index);
 		executable_destroy(executable);
 		minishell_destroy(execution->minishell);
 		parser_destroy(execution->parser);

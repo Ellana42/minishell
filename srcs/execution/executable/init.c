@@ -32,6 +32,7 @@ int	executable_init(t_execution *execution, t_executable *exe, t_command *cmd, \
 {
 	if (!exe)
 		return (1);
+	exe->index = index;
 	exe->command = cmd;
 	if (extecutable_file_init(execution, exe))
 		return (1);

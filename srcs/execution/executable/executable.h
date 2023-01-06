@@ -14,6 +14,7 @@ typedef struct s_executable {
 	int			out_size;
 	int			**in_files;
 	int			*out_files;
+	int			index;
 }	t_executable;
 
 typedef t_list			*t_executables;
