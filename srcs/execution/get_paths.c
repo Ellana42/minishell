@@ -114,6 +114,7 @@ char	*get_user_cmd(char *cmd, int *errnum)
 	if (!env_paths)
 	{
 		error_msg(cmd, "No such file or directory", 0);
+		*errnum = 127;
 		return (NULL);
 	}
 	path_ultime = get_valid_path(cmd, env_paths, errnum);
