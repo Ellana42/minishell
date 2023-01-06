@@ -30,5 +30,5 @@ void	heredoc_signal_ctrl_c(int signum)
 	close(glob_get_exit_status());
 	glob_destroy();
 	printf("^C\n");
-	exit(0);
+	exit(130);
 }

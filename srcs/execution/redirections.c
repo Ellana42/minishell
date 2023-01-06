@@ -57,7 +57,10 @@ int	get_in_table(t_executable *exe, t_execution *execution, char **name)
 		if (type == In)
 			(exe->in_files)[i][0] = open(*name, O_RDONLY, 0644);
 		if (type == Ina)
-			execution_get_heredoc(execution, *name, exe, i);
+		{
+			if (execution_get_heredoc(execution, *name, exe, i))
+				return (0);
+		}
 		if ((exe->in_files)[i][0] == -1)
 			return (error_msg(*name, strerror(errno), 0));
 		i++;

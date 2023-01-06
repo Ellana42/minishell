@@ -104,10 +104,18 @@ int	execution_get_heredoc(t_execution *execution, char *delimiter, \
 	{
 		execution_set_terminal(execution, HEREDOC_WAIT_TERMINAL);
 		pid = waitpid(-1, &status, 0);
-		if (pid == glob_get_last_pid())
-			status = WEXITSTATUS(status);
+		status = WEXITSTATUS(status);
 		execution_set_terminal(execution, BASE_TERMINAL);
-		glob_set_exit_status(last_exit_status);
+		if (status == 130)
+		{
+			glob_set_exit_status(-5);
+			close(fd[0]);
+			close(fd[1]);
+			(executable->in_files)[index][0] = -1;
+			(executable->in_files)[index][1] = -1;
+		}
+		else
+			glob_set_exit_status(last_exit_status);
 	}
 	return (status);
 }
