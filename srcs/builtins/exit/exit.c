@@ -6,7 +6,7 @@
 /*   By: ellana <mtmrkaploun@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:02:45 by ellana            #+#    #+#             */
-/*   Updated: 2023/01/05 11:06:26 by mkaploun         ###   ########.fr       */
+/*   Updated: 2023/01/06 18:30:55 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	is_numeric(char *str)
 
 int	exit_parse_args(char **args, long long *err_num)
 {
+	char	*arg;
+
 	if (table_get_size(args) > 2)
 	{
 		error_msg("exit", "too many arguments", 0);
@@ -36,14 +38,19 @@ int	exit_parse_args(char **args, long long *err_num)
 	}
 	if (table_get_size(args) == 1)
 		return (0);
-	if (!is_numeric(args[1]))
+	arg = ft_strtrim(args[1], " ");
+	if (!arg)
+		return (1);
+	if (!is_numeric(arg))
 	{
 		*err_num = 2;
 		error_msg2("exit", args[1], "numeric argument required", 0);
+		free(arg);
 		return (0);
 	}
-	if (long_long_atoi(args[1], (long long *)err_num))
+	if (long_long_atoi(arg, (long long *)err_num))
 		error_msg2("exit", args[1], "numeric argument required", 0);
+	free(arg);
 	return (0);
 }
 
