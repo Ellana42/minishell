@@ -36,6 +36,16 @@ int	init_in_table(int ***table, int size)
 	return (0);
 }
 
+int	init(t_executable *exe)
+{
+	exe->in_files = (int **)malloc(sizeof(int *) * (exe->in_size + 2));
+	if (!(exe->in_files))
+		return (1);
+	if (init_in_table(&(exe->in_files), exe->in_size))
+		return (1);
+	return (0);
+}
+
 int	get_in_table(t_executable *exe, t_execution *execution, char **name)
 {
 	t_funnel		*funnel;
@@ -44,10 +54,7 @@ int	get_in_table(t_executable *exe, t_execution *execution, char **name)
 
 	i = 0;
 	exe->in_size = (int )ft_lstsize(*command_get_in(exe->command));
-	exe->in_files = (int **)malloc(sizeof(int *) * (exe->in_size + 2));
-	if (!(exe->in_files))
-		return (1);
-	if (init_in_table(&(exe->in_files), exe->in_size))
+	if (init(exe))
 		return (1);
 	while (i < exe->in_size)
 	{
