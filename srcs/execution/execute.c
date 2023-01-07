@@ -51,7 +51,7 @@ int	execution_child(t_execution *execution)
 	if (err == 0 && (fd[0] == -1 || fd[1] == -1))
 		err = 1;
 	if (!err)
-		execution_launch_child(execution, err, fd, path);
+		err = execution_launch_child(execution, err, fd, path);
 	close_pipe(fd);
 	minishell_destroy(execution->minishell);
 	parser_destroy(execution->parser);
