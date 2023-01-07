@@ -43,6 +43,7 @@ SRCS  =  srcs/main.c \
 	srcs/execution/print.c \
 	srcs/execution/pipes.c \
 	srcs/execution/here_doc.c \
+	srcs/execution/heredoc_close.c \
 	srcs/execution/launch_builtin.c \
 	srcs/execution/close_unused_fds.c \
 	srcs/execution/close_utils.c \
