@@ -9,30 +9,31 @@ int	execution_finish(t_execution *execution, int err)
 
 int	execution_wait_processes(t_execution *execution)
 {
-	int	exit_status;
 	int	status;
 	int	pid;
 
 	(void )execution;
-	exit_status = 0;
 	status = 0;
 	pid = 0;
 	while (pid != -1 || errno != ECHILD)
 	{
 		pid = waitpid(-1, &status, 0);
 		if (WIFSIGNALED(status))
-			exit_status = 128 + WTERMSIG(status);
+			status = 128 + WTERMSIG(status);
 		else if (WIFEXITED(status))
-			exit_status = WEXITSTATUS(status);
-		if (exit_status == 130 && pid != -1)
+			status = WEXITSTATUS(status);
+		if (status == 130 && pid != -1)
 			printf("\n");
 		if (pid == execution->last_pid)
 		{
-			glob_set_exit_status(exit_status);
+			if (glob_get_exit_status() == -5)
+				glob_set_exit_status(130);
+			else
+				glob_set_exit_status(status);
 		}
 		continue ;
 	}
-	return (exit_status);
+	return (status);
 }
 
 int	execution_simple(t_execution *execution)

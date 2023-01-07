@@ -43,16 +43,19 @@ void	launch_heredoc(t_execution *execution, \
 int	heredoc_main(t_execution *execution, \
 		t_executable *executable, int index)
 {
-	int	pid;
 	int	status;
 
 	execution_set_terminal(execution, HEREDOC_WAIT_TERMINAL);
-	pid = waitpid(-1, &status, 0);
-	status = WEXITSTATUS(status); // TODO use same as processes
+	waitpid(-1, &status, 0);
+	if (WIFSIGNALED(status))
+		status = 128 + WTERMSIG(status);
+	else if (WIFEXITED(status))
+		status = WEXITSTATUS(status);
 	execution_set_terminal(execution, BASE_TERMINAL);
 	if (status == 130)
 	{
-		glob_set_exit_status(-5); // TODO deal with err returns
+		if (executable->index == execution->executables_size - 1)
+			glob_set_exit_status(-5);
 		close((executable->in_files)[index][0]);
 		close((executable->in_files)[index][1]);
 		(executable->in_files)[index][0] = -1;
