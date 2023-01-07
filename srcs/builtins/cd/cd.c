@@ -6,7 +6,7 @@
 /*   By: ellana <mtmrkaploun@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:02:45 by ellana            #+#    #+#             */
-/*   Updated: 2023/01/07 11:32:07 by mkaploun         ###   ########.fr       */
+/*   Updated: 2023/01/07 11:39:34 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	change_dir(char *path)
 	else
 		ret = ft_strdup(cwd);
 	update_wd(ret);
-	return (1);
+	return (0);
 }
 
 int	cd_check_args(char **args_table)
