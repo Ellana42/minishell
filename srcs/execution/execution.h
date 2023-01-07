@@ -70,10 +70,10 @@ int				execution_get_heredoc(t_execution *execution, char *delimiter, \
 		t_executable *executable, int index);
 int				clean_table_in(int **in_table, t_command *command);
 void			executable_destroy(t_executable *executable);
-void	close_precedent_infiles(t_executable *executable, int index);
-int	close_everything(t_execution *execution, int index);
-void	close_pipes(t_execution *execution);
-void	eof_err(char *delimiter);
-int	get_here_doc(char *delimiter, int fd[2], int len_delimiter, int exit);
+void			close_precedent_infiles(t_executable *executable, int index);
+int				close_everything(t_execution *execution, int index);
+void			close_pipes(t_execution *execution);
+void			eof_err(char *delimiter);
+int				get_here_doc(char *d, int fd[2], int len_delimiter, int exit);
 
 #endif
