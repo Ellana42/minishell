@@ -6,7 +6,7 @@
 /*   By: ellana <mtmrkaploun@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:02:45 by ellana            #+#    #+#             */
-/*   Updated: 2023/01/07 11:39:34 by mkaploun         ###   ########.fr       */
+/*   Updated: 2023/01/07 11:49:29 by mkaploun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ static int	change_dir(char *path)
 	char	*ret;
 	char	*tmp;
 	char	cwd[PATH_MAX];
-	char	*err;
+	int		err;
 
+	err = 0;
 	ret = NULL;
 	if (chdir(path) != 0)
 		return (error_msg2("cd", path, strerror(errno), errno));
@@ -53,17 +54,18 @@ static int	change_dir(char *path)
 	if (!ret)
 	{
 		error_msg("cd", "error retrieving current directory", 0);
-		err = strerror(errno);
-		error_msg2("getcwd", "error retrieving current directory", err, 0);
+		error_msg2("getcwd", \
+				"error retrieving current directory", strerror(errno), 0);
 		ret = ft_strjoin(glob_getenv_var("PWD"), "/");
 		tmp = ret;
 		ret = ft_strjoin(tmp, path);
 		free(tmp);
+		err = 1;
 	}
 	else
 		ret = ft_strdup(cwd);
 	update_wd(ret);
-	return (0);
+	return (err);
 }
 
 int	cd_check_args(char **args_table)
