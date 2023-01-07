@@ -79,7 +79,10 @@ int	execution(t_parser *parser, t_minishell *minishell)
 	if (execution_init(execution, parser, minishell))
 		return (execution_finish(execution, 1));
 	if (execution_is_single_builtin(execution))
+	{
 		exit_status = execution_launch_builtin_single(execution);
+		glob_set_exit_status(exit_status);
+	}
 	else
 		exit_status = execution_simple(execution);
 	execution_destroy(execution);
