@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell_terminals.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkaploun <mkaploun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/07 11:51:56 by mkaploun          #+#    #+#             */
+/*   Updated: 2023/01/07 11:52:00 by mkaploun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell_struct.h"
 
 void	minishell_heredoc_terminal_init(t_minishell *minishell)
